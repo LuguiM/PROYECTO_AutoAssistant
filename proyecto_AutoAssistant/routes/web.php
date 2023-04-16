@@ -16,7 +16,7 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return view('register');
+    return redirect('/login');
 });
 
 
@@ -45,6 +45,8 @@ Route::get('/google-auth/callback', function () {
 Route::get('/registro', function () {
     return view('registro');
 });
+
+
 
 Route::get('/welcome', function () {
     return view('welcome');
