@@ -109,7 +109,7 @@
     </style>
 </head>
 <body>
-<x-auth-session-status class="mb-4" :status="session('status')" />
+<x-auth-session-status class="alert alert-primary" role="alert" :status="session('status')" />
     <div class="registration-form">
         <form method="POST" action="{{ route('login') }}">
             @csrf   
@@ -121,10 +121,12 @@
                 <h2 class="text-center text-white">INICIAR SESION</h2>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control item" id="correo" placeholder="Correo">
+                <input type="text" class="form-control item" id="email" placeholder="Correo" name="email" :value="old('email')" required autofocus autocomplete="username">
+                <x-input-error :messages="$errors->get('email')" class="alert alert-danger" role="alert"/>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control item" id="contrasena" placeholder="Ingrese Contraseña">
+                <input type="password" class="form-control item" id="password" placeholder="Ingrese Contraseña" name="password" required autocomplete="current-password">
+                <x-input-error :messages="$errors->get('password')" class="alert alert-danger" role="alert" />
             </div>
             <div class="form-group">
                 <x-primary-button class="btn btn-block create-account">
