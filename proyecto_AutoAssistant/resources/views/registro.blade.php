@@ -158,7 +158,7 @@
         <div class="social-media">
             <h5>Registrate con GOOGLE</h5>
             <div class="social-icons">
-                <a href="#"><i class="icon-social-google" title="Google"></i></a>
+                <a href="/google-auth/redirect"><i class="icon-social-google" title="Google"></i></a>
             </div>
         </div>
     </div>
@@ -166,9 +166,9 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script>
         $(document).ready(function(){
-  $('#birth-date').mask('00/00/0000');
-  $('#phone-number').mask('0000-0000');
- })
+        $('#birth-date').mask('00/00/0000');
+        $('#phone-number').mask('0000-0000');
+        }) 
     </script>
 </body>
 </html>

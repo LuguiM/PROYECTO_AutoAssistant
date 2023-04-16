@@ -16,7 +16,7 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('registro');
 });
 
 
@@ -39,12 +39,17 @@ Route::get('/google-auth/callback', function () {
 
     Auth::login($user);
 
-    return view('registro');
+    return redirect('/welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/registro', function () {
+    return view('registro');
+})->middleware(['auth', 'verified'])->name('registro');
+
+Route::get('/welcome', function () {
+    return view('welcome');
+})->middleware(['auth', 'verified'])->name('welcome');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

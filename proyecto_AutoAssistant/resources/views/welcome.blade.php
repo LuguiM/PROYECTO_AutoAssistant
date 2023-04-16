@@ -17,7 +17,7 @@
 <body id="body-pd">
     <header class="header" id="header">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-        <div class="header_img"> <img src="" alt=""> </div>
+        <div class="header_img"> <img src="" alt="{{ Auth::user()->name }}"> </div>
     </header>
     <div class="l-navbar" id="nav-bar">
     
@@ -43,13 +43,19 @@
                 </div>
                 @endif
             </div> 
-                <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="route('logout')" onclick="event.preventDefault();
+                                                this.closest('form').submit();"
+                                                 class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">{{ __('Log Out') }}</span> </a>
+                </form>
+                
         </nav>
         
     </div>
     <!--Container Main start-->
     <div class="height-100 bg-light">
-        <h4>Main Components</h4>
+        <h4>HAS INICIADO SESION, {{ Auth::user()->name }}</h4>
     </div>
     <!--Container Main end-->
 
