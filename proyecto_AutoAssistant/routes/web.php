@@ -16,7 +16,7 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return view('registro');
+    return view('register');
 });
 
 
@@ -44,7 +44,7 @@ Route::get('/google-auth/callback', function () {
 
 Route::get('/registro', function () {
     return view('registro');
-})->middleware(['auth', 'verified'])->name('registro');
+});
 
 Route::get('/welcome', function () {
     return view('welcome');

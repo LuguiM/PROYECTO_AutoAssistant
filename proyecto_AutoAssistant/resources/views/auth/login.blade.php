@@ -112,6 +112,7 @@
 <x-auth-session-status class="mb-4" :status="session('status')" />
     <div class="registration-form">
         <form method="POST" action="{{ route('login') }}">
+            @csrf   
             <div class="form-icon">
                 <span><i class="icon icon-user"></i></span>
              
@@ -126,7 +127,10 @@
                 <input type="password" class="form-control item" id="contrasena" placeholder="Ingrese Contraseña">
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-block create-account">{{ __('Log in') }}</button>
+                <x-primary-button class="btn btn-block create-account">
+                    {{ __('Log in') }}
+                </x-primary-button>    
+            
             </div>
 
             <div class="d-flex mb-5 align-items-center">
@@ -138,7 +142,9 @@
                     <span class="ml-auto">
                         <a href="{{ route('password.request') }}" class="forgot-pass text-white">Forgot Password</a></span> 
                     @endif
+                   
             </div>
+            <span class="ml-auto text-white">¿NO TIENES CUENTA? <a href="{{ route('register') }}" class="forgot-pass ">Crear Cuenta</a></span>
         </form>
         
         <div class="social-media">
