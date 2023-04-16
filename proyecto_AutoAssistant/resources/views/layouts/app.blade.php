@@ -30,7 +30,7 @@
         
         </div>
         <span></span>
-        <span></span>
+        
         {{ $header }} 
        
         <div class="header_img">
@@ -49,7 +49,7 @@
                 <div class="nav_list"> 
                 
                 @auth
-                    <a href="{{url('/welcome')}}" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Menu Principal</span> </a> 
+                    <a href="{{url('/welcome')}}" class="nav_link active"> <i class='bx bx-home nav_icon'></i> <span class="nav_name">Menu Principal</span> </a> 
                     <a href="{{route('profile.edit')}}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">PERFIL</span> </a> 
                     <a href="/google-auth/redirect" class="nav_link"> 
                     <i class='bx bx-car nav_icon'></i>

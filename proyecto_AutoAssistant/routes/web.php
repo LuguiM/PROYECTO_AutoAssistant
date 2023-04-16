@@ -38,15 +38,23 @@ Route::get('/google-auth/callback', function () {
     ]);
 
     Auth::login($user);
-
-    return redirect('/welcome');
+    $googleid = $user::find('google_id');
+    if($googleid){
+        return redirect('/welcome');
+    }
+    else{
+        return redirect('/verify-email');
+    }
+    
 });
 
 Route::get('/registro', function () {
     return view('registro');
 });
 
-
+Route::get('/profile', function () {
+    // Only verified users may access this route...
+})->middleware(['auth', 'verified']);
 
 Route::get('/welcome', function () {
     return view('welcome');
