@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use App\Http\Controllers\PublicacionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,6 +60,11 @@ Route::get('/profile', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 })->middleware(['auth', 'verified'])->name('welcome');
+
+Route::get('/', [PublicacionController::class, 'index'])->name('publicaciones.index');
+Route::get('/publicaciones/create', [PublicacionController::class, 'create'])->name('publicaciones.create');
+Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('publicaciones.store');
+Route::get('/publicaciones/buscar', [PublicacionController::class, 'buscar'])->name('publicaciones.buscar');
 
 
 Route::middleware('auth')->group(function () {

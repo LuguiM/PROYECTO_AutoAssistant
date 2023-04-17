@@ -51,11 +51,11 @@
                 @auth
                     <a href="{{url('/welcome')}}" class="nav_link active"> <i class='bx bx-home nav_icon'></i> <span class="nav_name">Menu Principal</span> </a> 
                     <a href="{{route('profile.edit')}}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">PERFIL</span> </a> 
-                    <a href="/google-auth/redirect" class="nav_link"> 
+                    <a href="{{ route('publicaciones.create') }}" class="nav_link"> 
                     <i class='bx bx-car nav_icon'></i>
                         <span class="nav_name">{{ __('Pilotos(Inconos)') }}</span> </a>
                     
-                    <a href="{{ route('register') }}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bookmark</span> </a> 
+                    <a href="{{ route('publicaciones.index') }}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bookmark</span> </a> 
                     @if (Route::has('register'))
                     <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Files</span> </a>
                     <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> 
