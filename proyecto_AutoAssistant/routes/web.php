@@ -61,10 +61,12 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->middleware(['auth', 'verified'])->name('welcome');
 
-Route::get('/', [PublicacionController::class, 'index'])->name('publicaciones.index');
+Route::get('/publicacion', [PublicacionController::class, 'index'])->name('publicaciones.index');
 Route::get('/publicaciones/create', [PublicacionController::class, 'create'])->name('publicaciones.create');
 Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('publicaciones.store');
 Route::get('/publicaciones/buscar', [PublicacionController::class, 'buscar'])->name('publicaciones.buscar');
+Route::get('/publicaciones/{publicacion}', 'App\Http\Controllers\PublicacionController@show')->name('publicaciones.show');
+
 
 
 Route::middleware('auth')->group(function () {

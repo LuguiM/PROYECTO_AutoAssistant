@@ -15,21 +15,21 @@ class Publicacion extends Model
         'imagen',
         'marca_id',
         'modelo_id',
-        'ano_id',
+        'anio_id',
     ];
 
-    public function marcas()
+    public function marca()
     {
-        return $this->belongsToMany(Marca::class);
+        return $this->belongsTo(Marca::class);
     }
 
-    public function modelos()
+    public function modelo()
     {
-        return $this->belongsToMany(Modelo::class);
+        return $this->belongsTo(Modelo::class);
     }
 
-    public function anios()
+    public function anio()
     {
-        return $this->belongsToMany(Anio::class);
+        return $this->belongsTo(Anio::class);
     }
 }

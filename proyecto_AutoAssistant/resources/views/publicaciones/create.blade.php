@@ -63,58 +63,35 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="marca" class="col-md-4 col-form-label text-md-right">{{ __('Marca') }}</label>
 
-                                <div class="col-md-6">
-                                    <select id="marca" class="form-control @error('marca') is-invalid @enderror" name="marca[]" required multiple>
-                                        @foreach ($marcas as $marca)
-                                            <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
-                                            @endforeach
+                                <label for="marca" class="col-md-4 col-form-label text-md-right">Marca</label>
+
+                                <select class="form-control" id="marca" name="marca_id">
+                                    <option value="">Seleccione una marca</option>
+                                    @foreach($marcas as $marca)
+                                        <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
+                                    @endforeach
                                 </select>
-
-                                @error('marca')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="modelo" class="col-md-4 col-form-label text-md-right">{{ __('Modelo') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="modelo" class="form-control @error('modelo') is-invalid @enderror" name="modelo[]" required multiple>
-                                    @foreach ($modelos as $modelo)
+                            <div class="form-group row">
+                                <label for="modelo" class="col-md-4 col-form-label text-md-right">Modelo</label>
+                                <select class="form-control" id="modelo" name="modelo_id">
+                                    <option value="">Seleccione un modelo</option>
+                                    @foreach($modelos as $modelo)
                                         <option value="{{ $modelo->id }}">{{ $modelo->nombre }}</option>
                                     @endforeach
                                 </select>
-
-                                @error('modelo')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="ano" class="col-md-4 col-form-label text-md-right">{{ __('Año') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="ano" class="form-control @error('ano') is-invalid @enderror" name="ano[]" required multiple>
-                                    @foreach ($anos as $ano)
-                                        <option value="{{ $ano->id }}">{{ $ano->ano }}</option>
+                            <div class="form-group row">
+                                <label for="anio" class="col-md-4 col-form-label text-md-right">Año</label>
+                                <select class="form-control" id="anio" name="anio_id">
+                                    <option value="">Seleccione un año</option>
+                                    @foreach($anios as $anio)
+                                        <option value="{{ $anio->id }}">{{ $anio->nombre }}</option>
                                     @endforeach
                                 </select>
-
-                                @error('ano')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
-                        </div>
+
 
                         <div class="form-group row mb-0">
                         

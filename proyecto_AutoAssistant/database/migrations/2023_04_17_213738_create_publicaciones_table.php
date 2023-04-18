@@ -16,10 +16,14 @@ return new class extends Migration
             $table->string('titulo');
             $table->text('descripcion');
             $table->string('imagen');
-            $table->string('marca_id')->unique();
-            $table->string('modelo_id')->unique();
-            $table->string('ano_id')->unique();
+            $table->unsignedBigInteger('marca_id');
+            $table->unsignedBigInteger('modelo_id');
+            $table->unsignedBigInteger('anio_id');
             $table->timestamps();
+
+            $table->foreign('marca_id')->references('id')->on('marcas');
+            $table->foreign('modelo_id')->references('id')->on('modelos');
+            $table->foreign('anio_id')->references('id')->on('anios');
         });
     }
 
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('publicacions');
+        Schema::dropIfExists('publicaciones');
     }
 };

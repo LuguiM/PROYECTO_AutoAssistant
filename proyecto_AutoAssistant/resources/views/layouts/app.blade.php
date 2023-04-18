@@ -122,4 +122,32 @@
     // Your code to run since DOM is loaded and ready
    });
 </script>
+<script>
+  $(function() {
+    $('#marca').change(function() {
+      var marca_id = $(this).val();
+      $.get('/modelos/' + marca_id, function(data) {
+        $('#modelo').html(data);
+        $('#anio').html('<option value="">Seleccione un año</option>');
+      });
+    });
+
+    $('#modelo').change(function() {
+      var modelo_id = $(this).val();
+      $.get('/anios/' + modelo_id, function(data) {
+        $('#anio').html(data);
+      });
+    });
+
+    $('#buscar').click(function(e) {
+      e.preventDefault();
+      var marca_id = $('#marca').val();
+      var modelo_id = $('#modelo').val();
+      var anio_id = $('#anio').val();
+      $.get('/publicaciones/buscar', {marca_id: marca_id, modelo_id: modelo_id, anio_id: anio_id}, function(data) {
+        $('#publicaciones').html(data);
+      });
+    });
+  });
+</script>
 </html>
