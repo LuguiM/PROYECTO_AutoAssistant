@@ -61,9 +61,16 @@ class PublicacionController extends Controller
         return redirect()->route('publicaciones.index')->with('success', 'Publicación creada correctamente.');
     }
 
-    public function show(Publicacion $publicacion)
+    public function show( $id)
     {
-        return view('publicaciones.show', compact('publicacion'));
+        $publicacion = Publicacion::find($id);
+        $recomendaciones = Publicacion::where('marca_id', '=', $publicacion->marca_id)
+                                        ->orWhere('modelo_id', '=', $publicacion->modelo_id)
+                                        ->orWhere('anio_id', '=', $publicacion->anio_id)
+                                        ->where('id', '!=', $publicacion->id) // Excluimos la publicación actual
+                                        ->limit(4)
+                                        ->get();
+        return view('publicaciones.show', compact('publicacion', 'recomendaciones'));
     }
 
     public function buscar(Request $request)

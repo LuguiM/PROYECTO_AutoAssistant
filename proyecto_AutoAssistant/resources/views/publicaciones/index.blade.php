@@ -58,7 +58,7 @@
                                 <img src="{{ $publicacion->imagen }}" class="card-img-top" alt="{{ $publicacion->titulo }}">
                                 <div class="card-body">
                                 <h5 class="card-title">{{ $publicacion->titulo }}</h5>
-                                <p class="card-text">{{ $publicacion->descripcion }}</p>
+                                
                                 <a href="{{ route('publicaciones.show', $publicacion->id) }}" class="btn btn-primary">Ver detalles</a>
                                 </div>
                                 <div class="card-footer">
