@@ -32,34 +32,36 @@ class PublicacionController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'titulo' => 'required',
-            'descripcion' => 'required',
-            'marca_id' => 'required',
-            'modelo_id' => 'required',
-            'anio_id' => 'required',
-            'imagen' => 'required|image|max:2048'
-        ]);
+{
+    $validator = Validator::make($request->all(), [
+        'titulo' => 'required',
+        'descripcion' => 'required',
+        'marca_id' => 'required',
+        'modelo_id' => 'required',
+        'anio_id' => 'required',
+        'imagen' => 'required|image|max:2048'
+    ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $imagen = $request->file('imagen');
-        $imagen_path = $imagen->store('publicaciones', 'public');
-
-        $publicacion = new Publicacion();
-        $publicacion->titulo = $request->input('titulo');
-        $publicacion->descripcion = $request->input('descripcion');
-        $publicacion->marca_id = $request->input('marca_id');
-        $publicacion->modelo_id = $request->input('modelo_id');
-        $publicacion->anio_id = $request->input('anio_id');
-        $publicacion->imagen = $imagen_path;
-        $publicacion->save();
-
-        return redirect()->route('publicaciones.index')->with('success', 'Publicación creada correctamente.');
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
     }
+
+    $imagen = $request->file('imagen');
+    $imagen_path = 'imagenes/' . time() . '.' . $imagen->getClientOriginalExtension();
+    $imagen->move(public_path('imagenes'), $imagen_path);
+
+    $publicacion = new Publicacion();
+    $publicacion->titulo = $request->input('titulo');
+    $publicacion->descripcion = $request->input('descripcion');
+    $publicacion->marca_id = $request->input('marca_id');
+    $publicacion->modelo_id = $request->input('modelo_id');
+    $publicacion->anio_id = $request->input('anio_id');
+    $publicacion->imagen = $imagen_path;
+    $publicacion->save();
+
+    return redirect()->route('publicaciones.index')->with('success', 'Publicación creada correctamente.');
+}
+
 
     public function show( $id)
     {

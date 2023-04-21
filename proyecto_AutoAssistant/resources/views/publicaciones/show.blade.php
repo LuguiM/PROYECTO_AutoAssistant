@@ -17,15 +17,14 @@
 
                     <div class="panel-body">
                         <h2>{{ $publicacion->titulo }}</h2>
-                        <img src="{{ asset('storage/'.$publicacion->imagen) }}" alt="{{ $publicacion->titulo }}" style="max-width: 500px;">
+                        <img src="{{ asset($publicacion->imagen) }}" alt="{{ $publicacion->titulo }}" style="max-width: 500px;">
+                       
+                        
                         <p><strong>Descripción:</strong> {{ $publicacion->descripcion }}</p>
-                        <p><strong>Precio:</strong> ${{ $publicacion->precio }}</p>
                         <p><strong>Marca:</strong> {{ $publicacion->marca->nombre }}</p>
                         <p><strong>Modelo:</strong> {{ $publicacion->modelo->nombre }}</p>
                         <p><strong>Año:</strong> {{ $publicacion->anio->nombre }}</p>
-                        <p><strong>Imagen:</strong></p>
-                        <img src="{{ asset('storage/'.$publicacion->imagen) }}" alt="{{ $publicacion->titulo }}" style="max-width: 500px;">
-                        <img src="data:image/png;base64,{{ base64_encode($publicacion->imagen) }}" alt="Imagen de la publicación">
+                        <p><strong>SOLUCION:</strong></p>
 
                     </div>
                 </div>
