@@ -39,7 +39,7 @@
                             <select name="anio" class="form-control">
                                 <option value="">Seleccionar año</option>
                                 @foreach ($anios as $anio)
-                                <option value="{{ $anio->id }}">{{ $anio->nombre }}</option>
+                                <option value="{{ $anio->id }}">{{ $anio->anio }}</option>
                                 @endforeach
                             </select>
                             </div>
@@ -62,7 +62,7 @@
                                 <a href="{{ route('publicaciones.show', $publicacion->id) }}" class="btn btn-primary">Ver detalles</a>
                                 </div>
                                 <div class="card-footer">
-                                <small class="text-muted">{{ $publicacion->marca->nombre }} {{ $publicacion->modelo->nombre }} {{ $publicacion->anio->nombre }}</small>
+                                <small class="text-muted">{{ $publicacion->marca->nombre }} {{ $publicacion->modelo->nombre }} {{ $publicacion->anio->anio }}</small>
                                 </div>
                             </div>
                             </div>

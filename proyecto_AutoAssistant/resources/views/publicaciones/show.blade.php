@@ -23,7 +23,7 @@
                         <p><strong>Descripción:</strong> {{ $publicacion->descripcion }}</p>
                         <p><strong>Marca:</strong> {{ $publicacion->marca->nombre }}</p>
                         <p><strong>Modelo:</strong> {{ $publicacion->modelo->nombre }}</p>
-                        <p><strong>Año:</strong> {{ $publicacion->anio->nombre }}</p>
+                        <p><strong>Año:</strong> {{ $publicacion->anio->anio }}</p>
                         <p><strong>SOLUCION:</strong></p>
 
                     </div>

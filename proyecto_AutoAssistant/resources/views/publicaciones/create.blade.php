@@ -87,7 +87,7 @@
                                 <select class="form-control" id="anio" name="anio_id">
                                     <option value="">Seleccione un año</option>
                                     @foreach($anios as $anio)
-                                        <option value="{{ $anio->id }}">{{ $anio->nombre }}</option>
+                                        <option value="{{ $anio->id }}">{{ $anio->anio }}</option>
                                     @endforeach
                                 </select>
                             </div>
