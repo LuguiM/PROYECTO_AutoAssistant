@@ -2,7 +2,7 @@
 <nav  class="nav">
     <div> 
                 
-        <a href="{{url('/welcome')}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">AutoAssistant</span> </a>
+        <a href="{{url('/welcome')}}" class="nav_logo"> <img src="imagenes\LogoAutoAssistant.png" atl="logo" width="30" height="30"></img> <span class="nav_logo-name">AutoAssistant</span> </a>
         @if (Route::has('login'))
         <div class="nav_list"> 
         

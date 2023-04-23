@@ -1,12 +1,14 @@
+/*SECCION DEL MENU DE INICIO*/
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inder&display=swap');
 
 :root {
     --header-height: 3rem;
     --nav-width: 68px;
-    --first-color: #333333;
-    --first-color-light: #f7f6fb;
-    --white-color: #ed3926;
-    --body-font: 'Nunito', sans-serif;
+    --first-color: #000000;
+    --first-color-light: #ed3926;
+    --white-color: #f7f6fb;
+    --body-font: 'Inder', sans-serif;
     --normal-font-size: 1rem;
     --z-fixed: 100
 }
@@ -18,13 +20,16 @@
 }
 
 body {
+    background-color: #32525c;
     position: relative;
     margin: var(--header-height) 0 0 0;
     padding: 0 1rem;
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
     transition: .5s
+    
 }
+
 
 a {
     text-decoration: none
@@ -180,3 +185,65 @@ a {
         padding-left: calc(var(--nav-width) + 188px)
     }
 }
+
+
+/*SECCION DE CARD DE LOS PILOTOS*/
+
+.card_img{
+    height:150px;
+    width:100%;
+  }
+  
+  div [class^="col-"]{
+    padding-left:5px;
+    padding-right:5px;
+  }
+  .card_p{
+    transition:0.5s;
+    cursor:pointer;
+  }
+  .card_title_p{  
+    font-size:15px;
+    transition:1s;
+    cursor:pointer;
+  }
+  .card_title_p i{  
+    font-size:15px;
+    transition:1s;
+    cursor:pointer;
+    color:#ffa710
+  }
+  .card_title_p i:hover{
+    transform: scale(1.25) rotate(100deg); 
+    color:#18d4ca;
+    
+  }
+  .card_p:hover{
+    transform: scale(1.05);
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+  }
+  .card_text_p{
+    height:80px;  
+  }
+  
+  .card_p::before, .card_p::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: scale3d(0, 0, 1);
+    transition: transform .3s ease-out 0s;
+    background: rgba(255, 255, 255, 0.1);
+    content: '';
+    pointer-events: none;
+  }
+  .card_p::before {
+    transform-origin: left top;
+  }
+  .card_p::after {
+    transform-origin: right bottom;
+  }
+  .card_p:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
+    transform: scale3d(1, 1, 1);
+  }

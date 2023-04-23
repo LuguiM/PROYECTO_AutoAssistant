@@ -10,7 +10,7 @@
     
     <style>
         body{
-    background-color: #333333;
+    background-color: #ed3926;
 }
 
 .registration-form{
@@ -18,7 +18,7 @@
 }
 
 .registration-form form{
-    background-color: #1279c1;
+    background-color: #000000;
     max-width: 600px;
     margin: auto;
     padding: 50px 70px;
@@ -29,7 +29,7 @@
 
 .registration-form .form-icon{
 	text-align: center;
-    background-color: #ed3926;
+    background-color: #1279c1;
     border-radius: 50%;
     font-size: 40px;
     color: white;
@@ -51,7 +51,7 @@
     padding: 10px 20px;
     font-size: 18px;
     font-weight: bold;
-    background-color: #ed3926;
+    background-color: #1279c1;
     border: none;
     color: white;
     margin-top: 20px;
@@ -65,7 +65,7 @@
     text-align: center;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-    color: #ed3926;
+    color: #1279c1;
     border-top: 1px solid #dee9ff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
 }
@@ -78,7 +78,7 @@
 .registration-form .social-icons a{
     font-size: 23px;
     margin: 0 3px;
-    color: #ed3926;
+    color: #1279c1;
     border: 1px solid;
     border-radius: 50%;
     width: 45px;
@@ -130,19 +130,19 @@
             </div>
             <div class="form-group">
                 <x-primary-button class="btn btn-block create-account">
-                    {{ __('Log in') }}
+                    {{ __('Iniciar Sesion') }}
                 </x-primary-button>    
             
             </div>
 
             <div class="d-flex mb-5 align-items-center">
-                    <label class="control control--checkbox mb-0"><span class="caption text-white">{{ __('Remember me') }}</span>
+                    <label class="control control--checkbox mb-0"><span class="caption text-white">{{ __('Recuerdame') }}</span>
                       <input type="checkbox" checked="checked"/>
                       <div class="control__indicator"></div>
                     </label>
                     @if (Route::has('password.request'))
                     <span class="ml-auto">
-                        <a href="{{ route('password.request') }}" class="forgot-pass text-white">Forgot Password</a></span> 
+                        <a href="{{ route('password.request') }}" class="forgot-pass text-white">Contraseña Olvidada?</a></span> 
                     @endif
                    
             </div>
