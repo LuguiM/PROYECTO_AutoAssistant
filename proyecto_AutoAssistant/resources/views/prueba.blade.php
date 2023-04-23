@@ -16,141 +16,96 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
         <!-- Scripts -->
        
         <style>
-   nav {
-  display: flex;
-  flex-direction: column;
-  background-color: #f2f2f2;
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  top: 0;
-  left: -200px;
-  transition: left 0.3s ease-in-out;
-}
-
-nav.active {
-  left: 0;
-}
-
-.logo {
-  margin: 20px 0 50px 0;
-  text-align: center;
-}
-
-.logo img {
-  max-width: 100%;
-  height: auto;
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100%;
-}
-
-li {
-  margin-top: 20px;
-}
-
-a {
-  display: flex;
-  align-items: center;
-  color: #333;
-  text-decoration: none;
-  font-size: 16px;
-}
-
-i {
-  font-size: 24px;
-  margin-right: 10px;
-}
-
-a:hover {
-  color: #007bff;
-}
-
-@media screen and (max-width: 768px) {
-  nav {
+  body{
+    background-color: #eee;
+    position: relative;
+    
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    transition: .5s
+  }
+  .header {
     width: 100%;
     height: 50px;
-    top: -50px;
-    left: 0;
-    flex-direction: row;
-    align-items: center;
-  }
-  nav.active {
+    position: fixed;
     top: 0;
-  }
-  .logo {
-    margin: 0 20px;
-    margin-bottom: 0;
-    text-align: left;
-  }
-  ul {
-    flex-direction: row;
-    justify-content: flex-start;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background-color: #3498db;
+    z-index: var(--z-fixed);
+    transition: .5s
+}
+.header_toggle {
+  width: 70px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+   
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.nav {
+  padding:50px 50px 30px 0;;
     height: 100%;
-  }
-  li {
-    margin-top: 0;
-    margin-left: 20px;
-  }
-  ul a {
-    font-size: 18px;
-  }
-  ul i {
-    font-size: 30px;
-  }
+    display: flex;
+    flex-direction: column;
+    
+    overflow: hidden
 }
-
-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50px;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  background-color: red;
-  color: #fff;
-}
-
-#current-page {
-  font-weight: bold;
-  font-size: 18px;
-}
-
+    .nav-link{
+      border-radius:0px !important;transition:all 0.5s;width:100px;display:flex;flex-direction:column}
+      .nav-link small{font-size:12px}
+      .nav-link:hover{background-color: #52525240 !important}
+      .nav-link .fa{transition: all 1s;font-size:20px}
+      .nav-link:hover .fa{transform: rotate(360deg)}
 
         </style>
     </head>
     <body >
-    <header style="background-color: red;">
-  <div id="current-page"></div>
+    <header class="header" id="header">
+    <div class="header_toggle"> <img src="imagenes\LogoAutoAssistant.png" atl="logo" ></img>
+        
+        </div>
+        <span></span>
+        
+ 
+       
+        <div class="header_img">
+        
+        </div>
+        {{ Auth::user()->name }}
+    </header>
 </header>
 <nav class="active">
-  <div class="logo">
-    <a href="#"><img src="logo.png" alt="Logo"></a>
-  </div>
-  <ul>
-    <li><a href="#" class="active"><i class="fas fa-home"></i> Inicio</a></li>
-    <li><a href="#"><i class="fas fa-user"></i> Perfil</a></li>
-    <li><a href="#"><i class="fas fa-envelope"></i> Mensajes</a></li>
-    <li><a href="#"><i class="fas fa-cog"></i> Configuración</a></li>
-    <li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
-  </ul>
-  <div class="toggle">
-    <i class="fas fa-bars"></i>
-  </div>
+<div class="d-flex flex-column flex-shrink-0 bg-light vh-100" style="width: 100px;">
+    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+        <li class="nav-item"> <a href="#" class="nav-link active py-3 border-bottom"> <i class="fa fa-home"></i> Home </a> </li>
+        <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa fa-dashboard"></i> <small>Dashboard</small> </a> </li>
+        <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa fa-first-order"></i> <small>My Orders</small> </a> </li>
+        <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa fa-cog"></i> <small>Settings</small> </a> </li>
+        <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa fa-bookmark"></i> <small>Bookmark</small> </a> </li>
+    </ul>
+    <div class="dropdown border-top"> <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false"> <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle"> </a>
+        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+            <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
+    </div>
+</div>
 </nav>
 
 
