@@ -53,6 +53,10 @@ Route::get('/registro', function () {
     return view('registro');
 });
 
+Route::get('/prueba', function () {
+    return view('prueba');
+});
+
 Route::get('/profile', function () {
     // Only verified users may access this route...
 })->middleware(['auth', 'verified']);
