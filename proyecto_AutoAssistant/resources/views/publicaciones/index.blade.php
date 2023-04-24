@@ -4,20 +4,22 @@
                 {{ __('PILOTOS (ICONOS)') }}
             </h2>
     </x-slot>
+    <br>
     <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    Buscar publicaciones
+            <div class="card ">
+                <div class="card-header text-center">
+                    BUSQUEDA
                 </div>
                 <div class="card-body">
                     <form action="{{ route('publicaciones.buscar') }}" method="GET">
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" name="q" class="form-control" placeholder="Buscar por título" value="{{ request('q') }}">
+                                <input type="text" name="q" class="form-control" placeholder="Buscar por Nombre" value="{{ request('q') }}">
                             </div>
                             <div class="col">
+                                <label  class="form-label">Marca</label>
                                 <select name="marca" class="form-control">
                                     <option value="">Seleccionar marca</option>
                                     @if($marcas && $marcas->count())
@@ -28,6 +30,7 @@
                                 </select>
                             </div>
                             <div class="col">
+                                <label  class="form-label">Modelo</label>
                                 <select name="modelo" class="form-control">
                                     <option value="">Seleccionar modelo</option>
                                     @foreach ($modelos as $modelo)
@@ -36,6 +39,7 @@
                                 </select>
                             </div>
                             <div class="col">
+                                <label  class="form-label">Año</label>
                                 <select name="anio" class="form-control">
                                     <option value="">Seleccionar año</option>
                                     @foreach ($anios as $anio)
@@ -43,9 +47,11 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <br>
                             <div class="col">
                                 <div class="btn-group" role="group">
                                     <button type="submit" class="btn btn-primary">Buscar</button>
+                                  
                                     <a href="{{ route('publicaciones.index') }}" class="btn btn-secondary">Limpiar</a>
                                 </div>
                             </div>

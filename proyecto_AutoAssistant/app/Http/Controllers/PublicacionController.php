@@ -36,6 +36,7 @@ class PublicacionController extends Controller
     $validator = Validator::make($request->all(), [
         'titulo' => 'required',
         'descripcion' => 'required',
+        'solucion' => 'required',
         'marca_id' => 'required',
         'modelo_id' => 'required',
         'anio_id' => 'required',
@@ -53,6 +54,7 @@ class PublicacionController extends Controller
     $publicacion = new Publicacion();
     $publicacion->titulo = $request->input('titulo');
     $publicacion->descripcion = $request->input('descripcion');
+    $publicacion->solucion = $request->input('solucion');
     $publicacion->marca_id = $request->input('marca_id');
     $publicacion->modelo_id = $request->input('modelo_id');
     $publicacion->anio_id = $request->input('anio_id');

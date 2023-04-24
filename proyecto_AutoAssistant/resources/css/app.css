@@ -6,8 +6,8 @@
     --header-height: 3rem;
     --nav-width: 68px;
     --first-color: #000000;
-    --first-color-light: #ed3926;
-    --white-color: #f7f6fb;
+    --first-color-light: #1279c1;
+    --white-color: #1279c1;
     --body-font: 'Inder', sans-serif;
     --normal-font-size: 1rem;
     --z-fixed: 100
@@ -47,11 +47,12 @@ a {
     padding: 0 1rem;
     background-color: var(--white-color);
     z-index: var(--z-fixed);
-    transition: .5s
+    transition: .5s;
+    color:#ffffff;
 }
 
 .header_toggle {
-    color: var(--first-color);
+    color: #ffffff;
     font-size: 1.5rem;
     cursor: pointer
 }
@@ -252,3 +253,13 @@ a {
   .card_p:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
     transform: scale3d(1, 1, 1);
   }
+
+
+ 
+  
+
+  
+
+
+
+  

@@ -12,6 +12,7 @@ class Publicacion extends Model
     protected $fillable = [
         'titulo',
         'descripcion',
+        'solucion',
         'imagen',
         'marca_id',
         'modelo_id',

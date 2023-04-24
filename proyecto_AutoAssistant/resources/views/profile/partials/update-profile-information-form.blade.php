@@ -73,6 +73,14 @@
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600"
                 >{{ __('Guardado.') }}</p>
+
+            @endif
+
+            @if ($isGoogleUser && empty($user->age) && empty($user->license_type) && empty($user->license_number))
+                <div class="alert alert-warning" role="alert">
+                {{ __('Debe completar su edad, tipo de licencia y número de licencia.') }}
+                </div>
+                
             @endif
         </div>
     </form>

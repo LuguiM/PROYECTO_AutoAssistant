@@ -47,6 +47,20 @@
                                     @enderror
                                 </div>
                             </div>
+                            
+                            <div class="form-group row">
+                                <label for="solucion" class="col-md-4 col-form-label text-md-right">{{ __('Solucion') }}</label>
+
+                                <div class="col-md-6">
+                                    <textarea id="solucion" class="form-control @error('solucion') is-invalid @enderror" name="solucion" required autocomplete="solucion">{{ old('solucion') }}</textarea>
+
+                                    @error('solucion')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="imagen" class="col-md-4 col-form-label text-md-right">{{ __('Imagen') }}</label>
