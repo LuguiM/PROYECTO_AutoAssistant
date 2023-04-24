@@ -8,7 +8,7 @@
     <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="card ">
+            <div class="card card_b">
                 <div class="card-header text-center">
                     BUSQUEDA
                 </div>
@@ -16,34 +16,35 @@
                     <form action="{{ route('publicaciones.buscar') }}" method="GET">
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" name="q" class="form-control" placeholder="Buscar por Nombre" value="{{ request('q') }}">
+                                <label  class="form-label">Buscar por Nombre</label>
+                                <input type="text" name="q" class="form-control select_b" placeholder="Buscar por Nombre" value="{{ request('q') }}">
                             </div>
                             <div class="col">
                                 <label  class="form-label">Marca</label>
-                                <select name="marca" class="form-control">
-                                    <option value="">Seleccionar marca</option>
+                                <select name="marca" class="form-control select_b">
+                                    <option value="" class="select_b">Seleccionar marca</option>
                                     @if($marcas && $marcas->count())
                                         @foreach ($marcas as $marca)
-                                            <option value="{{ $marca->id }}" {{ (string) request('marca') === (string) $marca->id ? 'selected' : '' }}>{{ $marca->nombre }}</option>
+                                            <option class="select_b" value="{{ $marca->id }}" {{ (string) request('marca') === (string) $marca->id ? 'selected' : '' }}>{{ $marca->nombre }}</option>
                                         @endforeach
                                     @endif
                                 </select>
                             </div>
                             <div class="col">
                                 <label  class="form-label">Modelo</label>
-                                <select name="modelo" class="form-control">
-                                    <option value="">Seleccionar modelo</option>
+                                <select name="modelo" class="form-control select_b">
+                                    <option value="" class="select_b">Seleccionar modelo</option>
                                     @foreach ($modelos as $modelo)
-                                        <option value="{{ $modelo->id }}" {{ (string) request('modelo') === (string) $modelo->id ? 'selected' : '' }}>{{ $modelo->nombre }}</option>
+                                        <option class="select_b" value="{{ $modelo->id }}" {{ (string) request('modelo') === (string) $modelo->id ? 'selected' : '' }}>{{ $modelo->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col">
                                 <label  class="form-label">Año</label>
-                                <select name="anio" class="form-control">
-                                    <option value="">Seleccionar año</option>
+                                <select name="anio" class="form-control select_b">
+                                    <option class="select_b" value="">Seleccionar año</option>
                                     @foreach ($anios as $anio)
-                                        <option value="{{ $anio->id }}" {{ (string) request('anio') === (string) $anio->id ? 'selected' : '' }}>{{ $anio->anio }}</option>
+                                        <option class="select_b" value="{{ $anio->id }}" {{ (string) request('anio') === (string) $anio->id ? 'selected' : '' }}>{{ $anio->anio }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -71,8 +72,8 @@
                         <div class="card-body">
                             <h5 class="card-title card_title_p">{{ $publicacion->titulo }}</h5>
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="{{ route('publicaciones.show', $publicacion->id) }}" class="btn btn-sm btn-outline-secondary">Ver detalles</a>
+                                <div class="btn-group ">
+                                    <a href="{{ route('publicaciones.show', $publicacion->id) }}" class="btn btn-sm btn-outline-primary">Ver detalles</a>
                                 </div>
                                 <!--<small class="text-muted">{{ $publicacion->created_at->diffForHumans() }}</small>-->
                             </div>

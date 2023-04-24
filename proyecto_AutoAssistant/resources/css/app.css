@@ -20,7 +20,7 @@
 }
 
 body {
-    background-color: #32525c;
+    background-color: #202124;
     position: relative;
     margin: var(--header-height) 0 0 0;
     padding: 0 1rem;
@@ -196,8 +196,8 @@ a {
 /*SECCION DE CARD DE LOS PILOTOS*/
 
 .card_img{
-    height:150px;
-    width:100%;
+    height:171px;
+    width:371px;
   }
   
   div [class^="col-"]{
@@ -207,11 +207,15 @@ a {
   .card_p{
     transition:0.5s;
     cursor:pointer;
+    background-color: #000000;
+    color: #ffffff;
+    
   }
   .card_title_p{  
     font-size:15px;
     transition:1s;
     cursor:pointer;
+    color:#ffffff;
   }
   .card_title_p i{  
     font-size:15px;
@@ -253,9 +257,19 @@ a {
   .card_p:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
     transform: scale3d(1, 1, 1);
   }
-
-
- 
+  .btn_card{
+    background-color: #1279c1;
+    color:#ffffff;
+  }
+  .card_b{
+    
+    background-color: #303134;
+    color: #ffffff;
+  }
+ .select_b{
+    background-color: #3b4043;
+    color:#ffffff;
+ }
   
 
   
