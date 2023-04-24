@@ -10,7 +10,8 @@
     
     <style>
         body{
-    background-color: #333333;
+        background: rgb(0,0,0);
+        background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(182,182,182,1) 100%);
 }
 
 .registration-form{
@@ -18,7 +19,7 @@
 }
 
 .registration-form form{
-    background-color: #1279c1;
+    background-color: #000000;
     max-width: 600px;
     margin: auto;
     padding: 50px 70px;
@@ -29,7 +30,7 @@
 
 .registration-form .form-icon{
 	text-align: center;
-    background-color: #ed3926;
+    background-color: #1279c1;
     border-radius: 50%;
     font-size: 40px;
     color: white;
@@ -51,7 +52,7 @@
     padding: 10px 20px;
     font-size: 18px;
     font-weight: bold;
-    background-color: #ed3926;
+    background-color: #1279c1;
     border: none;
     color: white;
     margin-top: 20px;
@@ -65,7 +66,7 @@
     text-align: center;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-    color: #ed3926;
+    color: #1279c1;
     border-top: 1px solid #dee9ff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
 }
@@ -78,7 +79,7 @@
 .registration-form .social-icons a{
     font-size: 23px;
     margin: 0 3px;
-    color: #ed3926;
+    color: #1279c1;
     border: 1px solid;
     border-radius: 50%;
     width: 45px;
@@ -121,6 +122,11 @@
             </div>
             <div class="form-group">
                 <input id="name"  type="text" class="form-control item" placeholder="Nombre" name="name" :value="old('name')" required autofocus autocomplete="name">
+                @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
                 <x-input-error :messages="$errors->get('name')" class="alert alert-danger" role="alert" />
             </div>
             <div class="form-group">
@@ -130,23 +136,14 @@
             <div class="form-group">
                 <p class="text text-white">¿Cuenta con Licencia?</p>
                 <div class="form-check">
-                    <input id="licencia" class="form-check-input" type="radio" name="licencia"  value="SI" checked required>
+                    <input id="licencia" class="form-check-input" type="checkbox" name="licencia" value="SI" {{ old('licencia') ? 'checked' : '' }}>
                     <label class="form-check-label text-white" for="licencia">
                         SI
                     </label>
-                    <x-input-error :messages="$errors->get('licencia')" class="alert alert-danger" role="alert" />
-                    </div>
-                    <div class="form-check">
-                    <input id="licencia" class="form-check-input" type="radio" name="licencia"  value="NO" required>
-                    <label class="form-check-label text-white" for="licencia">
-                        NO
-                    </label>
-                    <x-input-error :messages="$errors->get('licencia')" class="alert alert-danger" role="alert" />
-                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <input id="numero_licencia" type="text" class="form-control item"  placeholder="Numero de Licencia" name="numero_licencia" :value="old('numero_licencia')" autocomplete="numero_licencia">
-                
+                <input id="numero_licencia" type="text" class="form-control item licencia-input" placeholder="Numero de Licencia" name="numero_licencia" :value="old('numero_licencia')" disabled>
             </div>
             <div class="form-group">
                 <input id="email" type="email" class="form-control item"  placeholder="Correo" name="email" :value="old('email')" required autocomplete="username">
@@ -185,5 +182,35 @@
         $('#phone-number').mask('0000-0000');
         }) 
     </script>
+    <script>
+        const checkboxLicencia = document.querySelector('#licencia');
+        const inputNumeroLicencia = document.querySelector('#numero_licencia');
+
+        checkboxLicencia.addEventListener('change', () => {
+            if (checkboxLicencia.checked) {
+                inputNumeroLicencia.removeAttribute('disabled');
+            } else {
+                inputNumeroLicencia.setAttribute('disabled', '');
+            }
+        });
+    </script>
+
+    <!--<script>
+        $(document).ready(function () {
+            // desactivar el campo numero_licencia al inicio
+            $('#numero_licencia').prop('disabled', true);
+
+            // detectar cambio en el campo licencia
+            $('#licencia').change(function () {
+                if ($(this).is(':checked') && $(this).val() == 'SI') {
+                    // si se selecciona "SI", activar el campo numero_licencia
+                    $('#numero_licencia').prop('disabled', false);
+                } else {
+                    // si se selecciona otra cosa, desactivar el campo numero_licencia
+                    $('#numero_licencia').prop('disabled', true);
+                }
+            });
+        });
+    </script>-->
 </body>
 </html>

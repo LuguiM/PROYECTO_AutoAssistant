@@ -25,11 +25,17 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $credentials = $request->validated();
 
-        $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if (Auth::attempt($credentials, $request->boolean('remember')) && Auth::user()->markEmailAsVerified() ) {
+            $request->session()->regenerate();
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+        
+    
+        return back()->withErrors([
+            'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
+        ]);
     }
 
     /**

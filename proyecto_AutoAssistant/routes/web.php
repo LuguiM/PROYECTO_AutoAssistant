@@ -28,26 +28,27 @@ Route::get('/google-auth/redirect', function () {
  
 Route::get('/google-auth/callback', function () {
     $user_google = Socialite::driver('google')->stateless()->user();
- 
+
     // $user->token
-    $user = User::updateorCreate([
+    $user = User::updateOrCreate([
         'google_id' => $user_google->id,
     ],
     [
         'name' => $user_google->name,
         'email' => $user_google->email,
+        'email_verified_at' => now(), // establece la fecha de verificación del correo electrónico
     ]);
 
     Auth::login($user);
-    $googleid = $user::find('google_id');
-    if($googleid){
+    
+    if($user->email_verified_at){
         return redirect('/welcome');
     }
     else{
         return redirect('/verify-email');
     }
-    
 });
+
 
 Route::get('/registro', function () {
     return view('registro');
