@@ -16,7 +16,7 @@
             </div>
 <br>
             <div class="card">
-                <div class="card-body p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="card-body btn_card">
                     <div class="max-w-xl">
                         @include('profile.partials.update-password-form')
                     </div>
@@ -24,7 +24,7 @@
             </div>
 <br>
             <div class="card">
-                <div class="card-body p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="card-body btn_card">
                     <div class="max-w-xl">
                         @include('profile.partials.delete-user-form')
                     </div>
