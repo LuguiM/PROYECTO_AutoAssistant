@@ -277,8 +277,15 @@ a {
 form input.select_b::placeholder {
     color: #ffffff;
 }
-
-  
+.btn_card_profile{
+    background-color: #000000;
+    color: #ffffff;
+}
+.card_show{
+    background-color: #000000;
+    color: #ffffff;
+    font-size: x-large;
+}
 
   
 
