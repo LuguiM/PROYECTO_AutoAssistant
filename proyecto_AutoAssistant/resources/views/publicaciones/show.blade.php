@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="mb-3">
-                    <a href="{{ url()->previous() }}" class="btn btn-secondary">Regresar</a>
+                    <a href="{{ route('publicaciones.index')}}" class="btn btn-secondary">Regresar</a>
                 </div>
                 <div class="card mb-3">
                     <div class="card-header">
@@ -21,7 +21,11 @@
                         <p class="card-text"><strong>Descripción:</strong> {{ $publicacion->descripcion }}</p>
                         <p class="card-text"><strong>Marca:</strong> {{ $publicacion->marca->nombre }}</p>
                         <p class="card-text"><strong>Modelo:</strong> {{ $publicacion->modelo->nombre }}</p>
-                        <p class="card-text"><strong>Año:</strong> {{ $publicacion->anio->anio }}</p>
+                        <p class="card-text"><strong>Año:</strong> 
+                            @foreach($publicacion->anios as $anio)
+                                {{ $anio->anio }},
+                            @endforeach
+                        </p>
 
                         <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                             <div class="accordion-item">

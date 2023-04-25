@@ -97,14 +97,23 @@
                                 </select>
                             </div>
                             <div class="form-group row">
-                                <label for="anio" class="col-md-4 col-form-label text-md-right">Año</label>
-                                <select class="form-control" id="anio" name="anio_id">
-                                    <option value="">Seleccione un año</option>
+                                <label for="anios" class="col-md-4 col-form-label text-md-right">Año</label>
+                                <select class="form-control" name="anios[]" multiple>
                                     @foreach($anios as $anio)
                                         <option value="{{ $anio->id }}">{{ $anio->anio }}</option>
                                     @endforeach
                                 </select>
                             </div>
+                            
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
 
 
                         <div class="form-group row mb-0">

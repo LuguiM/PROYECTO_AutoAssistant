@@ -45,7 +45,7 @@ Route::get('/google-auth/callback', function () {
         return redirect('/welcome');
     }
     else{
-        return redirect('/verify-email');
+        return redirect('/email/verify');
     }
 });
 

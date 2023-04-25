@@ -10,7 +10,8 @@
     
     <style>
         body{
-    background-color: #333333;
+        background: rgb(0,0,0);
+        background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(182,182,182,1) 100%);
 }
 
 .registration-form{
@@ -18,7 +19,7 @@
 }
 
 .registration-form form{
-    background-color: #1279c1;
+    background-color: #000000;
     max-width: 600px;
     margin: auto;
     padding: 50px 70px;
@@ -29,7 +30,7 @@
 
 .registration-form .form-icon{
 	text-align: center;
-    background-color: #ed3926;
+    background-color: #1279c1;
     border-radius: 50%;
     font-size: 40px;
     color: white;
@@ -51,7 +52,7 @@
     padding: 10px 20px;
     font-size: 18px;
     font-weight: bold;
-    background-color: #ed3926;
+    background-color: #1279c1;
     border: none;
     color: white;
     margin-top: 20px;
@@ -65,7 +66,7 @@
     text-align: center;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-    color: #ed3926;
+    color: #1279c1;
     border-top: 1px solid #dee9ff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
 }
@@ -78,7 +79,7 @@
 .registration-form .social-icons a{
     font-size: 23px;
     margin: 0 3px;
-    color: #ed3926;
+    color: #1279c1;
     border: 1px solid;
     border-radius: 50%;
     width: 45px;
@@ -118,7 +119,7 @@
              
             </div>
             <div class="form-group">
-                <h2 class="text-center text-white"> {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}</h2>
+                <h2 class="text-center text-white"> {{ __('Contraseña Olvidada? No hay problema. Solo avísanos tu dirección de correo electrónico y te enviaremos un enlace para restablecer la contraseña por correo electrónico que te permitirá elegir una nueva..') }}</h2>
             </div>
             <div class="form-group">
                 <input type="text" class="form-control item" id="email" placeholder="Correo" name="email" :value="old('email')" required autofocus>

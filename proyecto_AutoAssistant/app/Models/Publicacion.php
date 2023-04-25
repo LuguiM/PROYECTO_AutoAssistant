@@ -16,7 +16,7 @@ class Publicacion extends Model
         'imagen',
         'marca_id',
         'modelo_id',
-        'anio_id',
+        
     ];
 
     public function marca()
@@ -29,8 +29,14 @@ class Publicacion extends Model
         return $this->belongsTo(Modelo::class);
     }
 
-    public function anio()
-    {
-        return $this->belongsTo(Anio::class);
+    public function anios()
+    {   
+        return $this->belongsToMany(Anio::class, 'publicacion_anio');
+        //return $this->belongsTo(Anio::class);
     }
+    public function publicacionAnios()
+    {
+        return $this->belongsToMany(Anio::class, 'publicacion_anio', 'publicacion_id', 'anio_id');
+    }
+
 }

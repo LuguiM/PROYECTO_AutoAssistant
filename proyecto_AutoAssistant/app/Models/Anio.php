@@ -16,6 +16,10 @@ class Anio extends Model
 
     public function publicacion()
     {
-        return $this->belongsToMany(Publicacion::class);
+        return $this->belongsToMany(Publicacion::class, 'publicacion_anio');
+    }
+    public function publicaciones()
+    {
+        return $this->belongsToMany(Publicacion::class, 'anio_publicacion');
     }
 }
