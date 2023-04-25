@@ -261,6 +261,7 @@ a {
     background-color: #1279c1;
     color:#ffffff;
   }
+
   .card_b{
     
     background-color: #303134;
@@ -270,6 +271,13 @@ a {
     background-color: #3b4043;
     color:#ffffff;
  }
+ .select_b input::placeholder {
+    color: rgb(255, 255, 255);
+}
+form input.select_b::placeholder {
+    color: #ffffff;
+}
+
   
 
   

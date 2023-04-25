@@ -93,14 +93,24 @@ class PublicacionController extends Controller
         $publicaciones = Publicacion::when($request->q, function ($query, $q) {
                 return $query->where('titulo', 'LIKE', '%'.$q.'%');
             })
-            ->when($request->marca, function ($query, $marca) {
-                return $query->where('marca_id', $marca);
+            ->when($request->marca_texto, function ($query, $marca_texto) {
+                $marca = Marca::where('nombre', 'LIKE', '%' . $marca_texto . '%')->first();
+                if($marca){
+                    return $query->where('marca_id', $marca->id);
+                }
+                
             })
-            ->when($request->modelo, function ($query, $modelo) {
-                return $query->where('modelo_id', $modelo);
+            ->when($request->modelo_texto, function ($query, $modelo_texto) {
+                $modelo = Modelo::where('nombre', 'LIKE', '%' . $modelo_texto . '%')->first();
+                if($modelo){
+                    return $query->where('modelo_id', $modelo->id);
+                }
             })
-            ->when($request->anio, function ($query, $anio) {
-                return $query->where('anio_id', $anio);
+            ->when($request->anio_texto, function ($query, $anio_texto) {
+                $anio = Anio::where('anio', 'LIKE', '%' . $anio_texto . '%')->first();
+                if($anio){
+                    return $query->where('modelo_id', $anio->id);
+                }
             })
             ->get();
         
