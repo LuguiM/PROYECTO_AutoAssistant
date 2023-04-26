@@ -28,7 +28,19 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'edad' => ['required', 'string', 'max:255'],
+            'licencia' => ['nullable', 'string', 'max:255'],
+            'numero_licencia' => ['nullable', 'string', 'max:255'],
+        ]);
+        
+        $request->user()->fill([
+            'name' => $request->name,
+            'edad' => $request->edad,
+            'licencia' => $request->licencia,
+            'numero_licencia' => $request->numero_licencia,
+        ]);
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
@@ -38,6 +50,8 @@ class ProfileController extends Controller
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+
+
 
     /**
      * Delete the user's account.

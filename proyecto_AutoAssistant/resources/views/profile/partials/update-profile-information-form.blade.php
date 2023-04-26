@@ -53,12 +53,13 @@
 
         <div>
             <x-input-label for="license" :value="__('Licencia')" />
-            <x-text-input id="licencia" name="licencia" type="text" class="mt-1 block w-full" :value="old('licencia', $user->licencia)" required autocomplete="licencia" />
+            <input id="licencia" name="licencia" type="checkbox" class="mt-1 block w-full" value="SI" {{ old('licencia') ? 'checked' : '' }} />
             <x-input-error class="mt-2" :messages="$errors->get('licencia')" />
         </div>
+
         <div>
             <x-input-label for="license" :value="__('Numero de licencia')" />
-            <x-text-input id="numero_licencia" name="numero_licencia" type="text" class="mt-1 block w-full" :value="old('numero_licencia', $user->numero_licencia)" required autocomplete="numero_licencia" />
+            <x-text-input id="numero_licencia" name="numero_licencia" type="text" class="mt-1 block w-full" :value="old('numero_licencia', $user->numero_licencia)" autocomplete="numero_licencia" />
             <x-input-error class="mt-2" :messages="$errors->get('numero_licencia')" />
         </div>
 
@@ -76,7 +77,7 @@
 
             @endif
 
-            @if ($isGoogleUser && empty($user->age) && empty($user->license_type) && empty($user->license_number))
+            @if ($isGoogleUser && empty($user->edad) && empty($user->licencia) && empty($user->numero_lucencia))
                 <div class="alert alert-warning" role="alert">
                 {{ __('Debe completar su edad, tipo de licencia y número de licencia.') }}
                 </div>

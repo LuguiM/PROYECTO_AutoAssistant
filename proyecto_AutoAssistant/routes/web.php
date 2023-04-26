@@ -40,13 +40,18 @@ Route::get('/google-auth/callback', function () {
     ]);
 
     Auth::login($user);
-    
+    if(Auth::check()){
+        return redirect('/email/verify');
+    }else{
+        return back()->with('error', 'Hubo un error al autenticar al usuario. Por favor, inténtalo de nuevo.');
+    }
+    /*
     if($user->email_verified_at){
         return redirect('/welcome');
     }
     else{
         return redirect('/email/verify');
-    }
+    }*/
 });
 
 

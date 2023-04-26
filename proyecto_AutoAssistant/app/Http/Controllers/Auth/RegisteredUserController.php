@@ -30,6 +30,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        /*Revisar el codigo de registro
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'edad' => ['required', 'string', 'max:255'],
@@ -41,7 +42,18 @@ class RegisteredUserController extends Controller
         [
             'required' =>'El campo :attribute es obligatorio.',
         ]
-        );
+        );*/
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'edad' => ['required', 'string', 'max:255'],
+            'licencia' => ['nullable', 'string', 'max:255'],
+            'numero_licencia' => ['required_if:licencia,si', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'required' =>'El campo :attribute es obligatorio.',
+        ]);
+        
     
         if ($request->input('licencia')) {
             $request->validate([
@@ -64,10 +76,11 @@ class RegisteredUserController extends Controller
     
         event(new Registered($user));
         $user->sendEmailVerificationNotification();
-    
+
+
         Auth::login($user);
         if(Auth::check()){
-            return redirect(RouteServiceProvider::HOME);
+            return redirect('/email/verify');
         }else{
             return back()->with('error', 'Hubo un error al autenticar al usuario. Por favor, inténtalo de nuevo.');
         }

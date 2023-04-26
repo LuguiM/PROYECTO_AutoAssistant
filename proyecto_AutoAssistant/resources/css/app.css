@@ -212,7 +212,7 @@ a {
     
   }
   .card_title_p{  
-    font-size:15px;
+    font-size:25px;
     transition:1s;
     cursor:pointer;
     color:#ffffff;
@@ -234,6 +234,7 @@ a {
   }
   .card_text_p{
     height:80px;  
+    color:#ffffff;
   }
   
   .card_p::before, .card_p::after {

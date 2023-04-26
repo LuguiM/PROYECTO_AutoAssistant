@@ -51,7 +51,7 @@
             @foreach ($publicaciones as $publicacion)
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm card_p">
-                    <img class="card-img-top" src="{{ asset( $publicacion->imagen) }}" alt="{{ $publicacion->titulo }}">
+                    <img class="card-img-top" src="{{ asset( $publicacion->imagen) }}" alt="{{ $publicacion->titulo }}" href="{{ route('publicaciones.show', $publicacion->id) }}">
                     <div class="card-body">
                         <h5 class="card-title card_title_p">{{ $publicacion->titulo }}</h5>
                         <div class="d-flex justify-content-between align-items-center">
