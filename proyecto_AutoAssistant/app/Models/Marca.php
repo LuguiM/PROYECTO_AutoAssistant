@@ -18,4 +18,9 @@ class Marca extends Model
     {
         return $this->belongsToMany(Publicacion::class);
     }
+    public function modelo()
+    {
+        return $this->hasMany(Modelo::class);
+    }
+
 }

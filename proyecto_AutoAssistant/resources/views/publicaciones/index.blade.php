@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('PILOTOS (ICONOS)') }}
+            {{ __('Pilotos/Iconos') }}
         </h2>
     </x-slot>
     <br>
@@ -20,12 +20,24 @@
                                     <input type="text" name="q" class="form-control select_b" placeholder="Nombre del icono" value="{{ request('q') }}">
                                 </div>
                                 <div class="col">
-                                    <label class="form-label">Marca</label>
-                                    <input type="text" name="marca_texto" class="form-control select_b" placeholder="Ingresar marca" value="{{ request('marca_texto') }}">
+                                    <label  class="form-label">Marca</label>
+                                    <select name="marca" class="form-control select_b">
+                                        <option value="" class="select_b">Seleccionar marca</option>
+                                        @if($marcas && $marcas->count())
+                                            @foreach ($marcas as $marca)
+                                                <option class="select_b" value="{{ $marca->id }}" {{ (string) request('marca') === (string) $marca->id ? 'selected' : '' }}>{{ $marca->nombre }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                                 <div class="col">
-                                    <label class="form-label">Modelo</label>
-                                    <input type="text" name="modelo_texto" class="form-control select_b" placeholder="Ingresar modelo" value="{{ request('modelo_texto') }}">
+                                    <label  class="form-label">Modelo</label>
+                                    <select name="modelo" class="form-control select_b">
+                                        <option value="" class="select_b">Seleccionar modelo</option>
+                                        @foreach ($modelos as $modelo)
+                                            <option class="select_b" value="{{ $modelo->id }}" {{ (string) request('modelo') === (string) $modelo->id ? 'selected' : '' }}>{{ $modelo->nombre }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col">
                                     <label class="form-label">Año</label>
@@ -68,8 +80,8 @@
 
                 @endforeach
             @else
-            <div class="col-md-12">
-                <p>No se encontraron publicaciones.</p>
+            <div class="col-md-12 text-white">
+                <p>No se encontraron los pilotos buscados.</p>
             </div>
             @endif
         </div>

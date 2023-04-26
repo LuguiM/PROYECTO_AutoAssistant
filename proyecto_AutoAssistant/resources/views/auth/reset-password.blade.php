@@ -144,7 +144,7 @@
 
             <div class="form-group">
                 <x-primary-button class="btn btn-block create-account">
-                    {{ __('Reset Password') }}
+                    {{ __('Restablecer Contraseña') }}
                 </x-primary-button>
             </div>
         </form>

@@ -30,9 +30,9 @@
         
         
         {{ $header }} 
-        
-        {{ Auth::user()->name }}
-        
+        @if (Route::has('login'))
+            {{ Auth::user()->name }}
+        @endif
         
     </header>
     @endif
@@ -46,13 +46,13 @@
                 <div class="nav_list"> 
                 
                 @auth
-                    <a href="{{url('/welcome')}}" class="nav_link active"> <i class='bx bx-home nav_icon'></i> <span class="nav_name">Menu Principal</span> </a> 
+                    <a href="{{url('/welcome')}}" class="nav_link active"> <i class='bx bx-home nav_icon'></i> <span class="nav_name">INICIO</span> </a> 
                     <a href="{{route('profile.edit')}}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">PERFIL</span> </a> 
                     <a href="{{ route('publicaciones.index') }}" class="nav_link"> 
                     <i class='bx bx-car nav_icon'></i>
-                        <span class="nav_name">{{ __('Pilotos(Iconos)') }}</span> </a>
+                        <span class="nav_name">{{ __('PILOTOS/ICONOS') }}</span> </a>
                     
-                    <a href="{{ route('publicaciones.create') }}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bookmark</span> </a> 
+                    <a href="{{ route('publicaciones.create') }}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Crear Icono</span> </a> 
                     @if (Route::has('register'))
                     
                     @endif
@@ -64,7 +64,7 @@
                     @csrf
                     <a href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();"
-                                                 class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">{{ __('Log Out') }}</span> </a>
+                                                 class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">{{ __('CERRAR SESION') }}</span> </a>
                 </form>
                 
         </nav>

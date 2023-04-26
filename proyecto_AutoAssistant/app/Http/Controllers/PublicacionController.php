@@ -102,18 +102,12 @@ public function show($id)
         $publicaciones = Publicacion::when($request->q, function ($query, $q) {
                 return $query->where('titulo', 'LIKE', '%'.$q.'%');
             })
-            ->when($request->marca_texto, function ($query, $marca_texto) {
-                $marca = Marca::where('nombre', 'LIKE', '%' . $marca_texto . '%')->first();
-                if($marca){
-                    return $query->where('marca_id', $marca->id);
-                }
+            ->when($request->marca, function ($query, $marca) {
+                return $query->where('marca_id', $marca);
                 
             })
-            ->when($request->modelo_texto, function ($query, $modelo_texto) {
-                $modelo = Modelo::where('nombre', 'LIKE', '%' . $modelo_texto . '%')->first();
-                if($modelo){
-                    return $query->where('modelo_id', $modelo->id);
-                }
+            ->when($request->modelo, function ($query, $modelo) {
+                return $query->where('modelo_id', $modelo);
             })
             ->when($request->anio_texto, function ($query, $anio_texto) {
                 return $query->whereHas('publicacionAnios', function ($query) use ($anio_texto) {
@@ -128,6 +122,8 @@ public function show($id)
         $marcas = Marca::all();
         $modelos = Modelo::all();
         $anios = Anio::all();
+
+       
 
         return view('publicaciones.index', compact('publicaciones', 'marcas', 'modelos', 'anios'));
     }

@@ -14,11 +14,25 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+
+    public function show()
+    {
+        $user = auth()->user();
+    
+        // Verificar si el usuario tiene una contraseña establecida
+        $hasPassword = ! is_null($user->password);
+    
+        return view('profile.show', compact('user', 'hasPassword'));
+    }
+
     public function edit(Request $request): View
     {   
         $user = Auth::user();
+
+        $hasPassword = ! is_null($user->password);
+
         $isGoogleUser = $user->google_id !==null;
-        return view('profile.edit', compact('user', 'isGoogleUser'), [
+        return view('profile.edit', compact('user', 'isGoogleUser', 'hasPassword'), [
             'user' => $request->user(),
         ]);
     }
@@ -51,18 +65,22 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-
+    
+    
 
     /**
      * Delete the user's account.
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
         $user = $request->user();
+        $hasPassword = !is_null($user->password);
+
+        if ($hasPassword) {
+            $request->validateWithBag('userDeletion', [
+                'password' => ['required', 'current_password'],
+            ]);
+        }
 
         Auth::logout();
 
@@ -73,4 +91,5 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
 }

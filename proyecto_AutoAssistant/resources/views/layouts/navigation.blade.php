@@ -24,7 +24,7 @@
             @csrf
             <a href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();"
-                                        class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">{{ __('Log Out') }}</span> </a>
+                                        class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">{{ __('Cerrar Sesion') }}</span> </a>
         </form>
     
 </nav>

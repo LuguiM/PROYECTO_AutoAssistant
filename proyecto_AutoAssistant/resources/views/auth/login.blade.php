@@ -30,7 +30,7 @@
 
 .registration-form .form-icon{
 	text-align: center;
-    background-color: #1279c1;
+ 
     border-radius: 50%;
     font-size: 40px;
     color: white;
@@ -107,6 +107,15 @@
         line-height: 70px;
     }
 }
+
+.img_logo{
+    width: 115px;
+    height: 150px;
+    margin: auto;
+    margin-bottom: 50px;
+    
+    line-height: 100px;
+}
     </style>
 </head>
 <body>
@@ -115,7 +124,7 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf   
             <div class="form-icon">
-                <span><i class="icon icon-user"></i></span>
+                <img src="\imagenes\Logo.png" atl="logo" class="img_logo" ></img>
              
             </div>
             <div class="form-group">

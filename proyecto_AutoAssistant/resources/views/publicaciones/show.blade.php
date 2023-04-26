@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="mt-5">
-            <h3 class="card_text_p">Publicaciones recomendadas</h3>
+            <h3 class="card_text_p">Pilotos Relacionados a tu Busqueda</h3>
             <div class="row">
                 @foreach ($recomendaciones as $recomendacion)
                 <div class="col-md-4 mb-3">

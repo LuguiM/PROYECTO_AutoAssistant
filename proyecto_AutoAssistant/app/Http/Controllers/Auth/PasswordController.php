@@ -26,4 +26,14 @@ class PasswordController extends Controller
 
         return back()->with('status', 'password-updated');
     }
+
+    public function show()
+    {
+        $user = auth()->user();
+    
+        // Verificar si el usuario tiene una contraseña establecida
+        $hasPassword = ! is_null($user->password);
+    
+        return view('profile.show', compact('user', 'hasPassword'));
+    }
 }
