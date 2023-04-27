@@ -10,103 +10,112 @@
     
     <style>
         body{
-    background-color: #333333;
-}
+        background: rgb(0,0,0);
+        background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(182,182,182,1) 100%);
+        }
 
-.registration-form{
-	padding: 50px 0;
-    background-color: #1279c1;
-    max-width: 600px;
-    margin: auto;
-    padding: 50px 70px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
-}
+        .registration-form{
+            padding: 50px 0;
+        }
 
-.registration-form form{
-    
-}
+        .registration-form form{
+            background-color: #000000;
+            max-width: 600px;
+            margin: auto;
+            padding: 50px 70px;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+        }
 
-.registration-form .form-icon{
-	text-align: center;
-    background-color: #ed3926;
-    border-radius: 50%;
-    font-size: 40px;
-    color: white;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    margin-bottom: 50px;
-    line-height: 100px;
-}
+        .registration-form .form-icon{
+            text-align: center;
+        
+            border-radius: 50%;
+            font-size: 40px;
+            color: white;
+            width: 100px;
+            height: 100px;
+            margin: auto;
+            margin-bottom: 50px;
+            line-height: 100px;
+        }
 
-.registration-form .item{
-	border-radius: 20px;
-    margin-bottom: 25px;
-    padding: 10px 20px;
-}
+        .registration-form .item{
+            border-radius: 20px;
+            margin-bottom: 25px;
+            padding: 10px 20px;
+        }
 
-.registration-form .create-account{
-    border-radius: 30px;
-    padding: 10px 20px;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: #ed3926;
-    border: none;
-    color: white;
-    margin-top: 20px;
-}
+        .registration-form .create-account{
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #1279c1;
+            border: none;
+            color: white;
+            margin-top: 20px;
+        }
 
-.registration-form .social-media{
-    max-width: 600px;
-    background-color: #fff;
-    margin: auto;
-    padding: 35px 0;
-    text-align: center;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    color: #ed3926;
-    border-top: 1px solid #dee9ff;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
-}
+        .registration-form .social-media{
+            max-width: 600px;
+            background-color: #fff;
+            margin: auto;
+            padding: 35px 0;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            color: #1279c1;
+            border-top: 1px solid #dee9ff;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+        }
 
-.registration-form .social-icons{
-    margin-top: 30px;
-    margin-bottom: 16px;
-}
+        .registration-form .social-icons{
+            margin-top: 30px;
+            margin-bottom: 16px;
+        }
 
-.registration-form .social-icons a{
-    font-size: 23px;
-    margin: 0 3px;
-    color: #ed3926;
-    border: 1px solid;
-    border-radius: 50%;
-    width: 45px;
-    display: inline-block;
-    height: 45px;
-    text-align: center;
-    background-color: #fff;
-    line-height: 45px;
-}
+        .registration-form .social-icons a{
+            font-size: 23px;
+            margin: 0 3px;
+            color: #1279c1;
+            border: 1px solid;
+            border-radius: 50%;
+            width: 45px;
+            display: inline-block;
+            height: 45px;
+            text-align: center;
+            background-color: #fff;
+            line-height: 45px;
+        }
 
-.registration-form .social-icons a:hover{
-    text-decoration: none;
-    opacity: 0.6;
-}
+        .registration-form .social-icons a:hover{
+            text-decoration: none;
+            opacity: 0.6;
+        }
 
-@media (max-width: 576px) {
-    .registration-form form{
-        padding: 50px 20px;
-    }
+        @media (max-width: 576px) {
+            .registration-form form{
+                padding: 50px 20px;
+            }
 
-    .registration-form .form-icon{
-        width: 70px;
-        height: 70px;
-        font-size: 30px;
-        line-height: 70px;
-    }
-}
+            .registration-form .form-icon{
+                width: 70px;
+                height: 70px;
+                font-size: 30px;
+                line-height: 70px;
+            }
+        }
+
+        .img_logo{
+            width: 115px;
+            height: 150px;
+            margin: auto;
+            margin-bottom: 50px;
+            
+            line-height: 100px;
+        }
     </style>
 </head>
 <body>
@@ -121,7 +130,10 @@
             </div>
                 @if (session('status') == 'verification-link-sent')
             <div class="form-group">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+                <div class="alert alert-primary" role="alert">
+                    {{ __('Se ha enviado un nuevo enlace de verificacion a la direccion de correo electronico que proporciono durante el registro.') }}
+                </div>
+                
             </div>
         @endif
 
@@ -137,7 +149,7 @@
             @csrf
 
             <button type="submit" class="btn btn-block create-account">
-                {{ __('Log Out') }}
+                {{ __('Cerrar') }}
             </button>
         </form>
         
