@@ -4,8 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://unpkg.com/vue-select@3.0.0/dist/vue-select.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -50,7 +49,7 @@
                     <a href="{{route('profile.edit')}}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">PERFIL</span> </a> 
                     <a href="{{ route('publicaciones.index') }}" class="nav_link"> 
                     <i class='bx bx-car nav_icon'></i>
-                        <span class="nav_name">{{ __('PILOTOS/ICONOS') }}</span> </a>
+                        <span class="nav_name">{{ __('PILOTOS') }}</span> </a>
                     
                    <!-- <a href="{{ route('publicaciones.create') }}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Crear Icono</span> </a> -->
                     @if (Route::has('register'))

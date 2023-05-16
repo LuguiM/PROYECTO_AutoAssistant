@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Pilotos/Iconos') }}
+            {{ __('Pilotos') }}
         </h2>
     </x-slot>
     <br>
@@ -17,32 +17,9 @@
                             <div class="form-row">
                                 <div class="col">
                                     <label class="form-label">Buscar por Nombre</label>
-                                    <input type="text" name="q" class="form-control select_b" placeholder="Nombre del icono" value="{{ request('q') }}">
+                                    <input type="text" name="q" class="form-control select_b" placeholder="Nombre del piloto" value="{{ request('q') }}">
                                 </div>
-                                <div class="col">
-                                    <label  class="form-label">Marca</label>
-                                    <select name="marca" class="form-control select_b">
-                                        <option value="" class="select_b">Seleccionar marca</option>
-                                        @if($marcas && $marcas->count())
-                                            @foreach ($marcas as $marca)
-                                                <option class="select_b" value="{{ $marca->id }}" {{ (string) request('marca') === (string) $marca->id ? 'selected' : '' }}>{{ $marca->nombre }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <label  class="form-label">Modelo</label>
-                                    <select name="modelo" class="form-control select_b">
-                                        <option value="" class="select_b">Seleccionar modelo</option>
-                                        @foreach ($modelos as $modelo)
-                                            <option class="select_b" value="{{ $modelo->id }}" {{ (string) request('modelo') === (string) $modelo->id ? 'selected' : '' }}>{{ $modelo->nombre }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <label class="form-label">Año</label>
-                                    <input type="text" name="anio_texto" class="form-control select_b" placeholder="Ingresar año" value="{{ request('anio_texto') }}">
-                                </div>
+                               
                                 <br>
                                 <div class="col">
                                     <div class="btn-group" role="group">
