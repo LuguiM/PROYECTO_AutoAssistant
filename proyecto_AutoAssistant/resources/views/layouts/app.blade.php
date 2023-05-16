@@ -52,7 +52,7 @@
                     <i class='bx bx-car nav_icon'></i>
                         <span class="nav_name">{{ __('PILOTOS/ICONOS') }}</span> </a>
                     
-                    <a href="{{ route('publicaciones.create') }}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Crear Icono</span> </a> 
+                   <!-- <a href="{{ route('publicaciones.create') }}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Crear Icono</span> </a> -->
                     @if (Route::has('register'))
                     
                     @endif

@@ -135,7 +135,7 @@
                 <x-input-error :messages="$errors->get('email')" class="alert alert-danger" role="alert"/>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control item" id="password" placeholder="Ingrese Contraseña" name="password" required autocomplete="current-password">
+                <input type="password" class="form-control item" id="password" placeholder="Ingrese Contraseña" name="password" title="La contraseña debe contener 8 caracteres." required pattern="[A-Za-z0-9]{8}" autocomplete="current-password">
                 <x-input-error :messages="$errors->get('password')" class="alert alert-danger" role="alert" />
             </div>
             <div class="form-group">

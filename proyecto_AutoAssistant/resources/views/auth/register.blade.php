@@ -143,18 +143,19 @@
                 </div>
             </div>
             <div class="form-group">
-                <input id="numero_licencia" type="text" class="form-control item licencia-input" placeholder="Numero de Licencia" name="numero_licencia" :value="old('numero_licencia')" disabled>
+                <input id="numero_licencia" type="text" class="form-control item licencia-input" placeholder="Numero de Licencia. Ejemplo: 9999-999999-999-9" name="numero_licencia" :value="old('numero_licencia')" pattern="\d{4}-\d{6}-\d{3}-\d{1}" title="El número de licencia debe tener el formato: 9999-999999-999-9" disabled>
+                <!--<span class="form-text text-muted">El número de licencia debe tener el formato 9999-999999-999-9.</span>-->
             </div>
             <div class="form-group">
                 <input id="email" type="email" class="form-control item"  placeholder="Correo" name="email" :value="old('email')" required autocomplete="username">
                 <x-input-error :messages="$errors->get('email')" class="alert alert-danger" role="alert" />
             </div>
             <div class="form-group">
-                <input id="password" type="password" class="form-control item"  placeholder="Ingrese Contraseña" name="password" required autocomplete="new-password">
+                <input id="password" type="password" class="form-control item"  placeholder="Ingrese Contraseña" name="password" title="La contraseña debe contener 8 caracteres." required pattern="[A-Za-z0-9]{8}" autocomplete="new-password">
                 <x-input-error :messages="$errors->get('password')" class="alert alert-danger" role="alert" />
             </div>
             <div class="form-group">
-                <input id="password_confirmation" type="password" class="form-control item"  placeholder="Confirmar Contraseña" name="password_confirmation" required autocomplete="new-password">
+                <input id="password_confirmation" type="password" class="form-control item"  placeholder="Confirmar Contraseña" name="password_confirmation" title="La contraseña debe contener 8 caracteres." required pattern="[A-Za-z0-9]{8}" autocomplete="new-password">
                 <x-input-error :messages="$errors->get('password_confirmation')" class="alert alert-danger" role="alert" />
             </div>
             <div class="form-group">
