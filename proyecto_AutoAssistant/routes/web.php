@@ -17,7 +17,7 @@ use App\Http\Controllers\PublicacionController;
 */
 
 Route::get('/', function () {
-    return redirect('/login');
+    return view('sitioweb');
 });
 
 
@@ -57,6 +57,10 @@ Route::get('/google-auth/callback', function () {
 
 Route::get('/registro', function () {
     return view('registro');
+});
+
+Route::get('/nosotros', function () {
+    return view('nosotros');
 });
 
 Route::get('/prueba', function () {

@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Hola Mundo</title>
-</head>
-<body>
-    <h1>Hola Mundo</h1>
-</body>
-</html>
+@extends('sitioweb')
+
+@section('content')
+    <p>Esta el la vista de nosotros</p>
+@endsection

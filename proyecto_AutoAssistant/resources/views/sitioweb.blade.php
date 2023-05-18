@@ -1482,17 +1482,7 @@ select option
 									<li><a href="#">Inicio<i class="fas fa-chevron-down"></i></a></li>
 									<li class="hassubs">
 										<a href="{{ ('nosotros') }}">>Nosotros<i class="fas fa-chevron-down"></i></a>
-										<ul>
-											<li>
-												<a href="#"><i class="fas fa-chevron-down"></i></a>
-												<ul>
-													<li><a href="#">Lenovo 1<i class="fas fa-chevron-down"></i></a></li>
-													<li><a href="#">Lenovo 3<i class="fas fa-chevron-down"></i></a></li>
-													<li><a href="#">Lenovo 2<i class="fas fa-chevron-down"></i></a></li>
-												</ul>
-											</li>
-											
-										</ul>
+										
 									</li>
 									<li class="hassubs">
 										<a href="#">Contactos<i class="fas fa-chevron-down"></i></a>
@@ -1625,7 +1615,7 @@ select option
 	
 	<div style="height: 700px">
 		
-
+		@yield('content')
 	</div>
 
 </div>
