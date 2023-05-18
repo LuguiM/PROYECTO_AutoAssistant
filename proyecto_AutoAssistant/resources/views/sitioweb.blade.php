@@ -1442,8 +1442,8 @@ select option
 							<div class="top_bar_menu">
 							<div class="top_bar_user">
 								<div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt=""></div>
-								<div><a href="#">Login</a></div>
-								<div><a href="#">Registro</a></div>
+								<div><a href="{{ route('login') }}">Login</a></div>
+								<div><a href="{{ route('register') }}">Registro</a></div>
 							</div>
 						</div>
 					</div>
@@ -1479,25 +1479,22 @@ select option
 
 							<div class="main_nav_menu">
 								<ul class="standard_dropdown main_nav_dropdown">
-									<li><a href="{{ ('inicio') }}">Inicio<i class="fas fa-chevron-down"></i></a></li>
+                                <li class="hassubs"><a href="{{ ('inicio') }}">Inicio<i class='bx bx-home-alt' ></i></a></li>
 									<li class="hassubs">
-										<a href="{{ ('nosotros') }}">Nosotros<i class="fas fa-chevron-down"></i></a>
-										
+										<a href="{{ ('nosotros') }}">Nosotros<i class='bx bx-group'></i></i></a>
 									</li>
 									<li class="hassubs">
-										<a href="{{ ('contactos') }}">Contactos<i class="fas fa-chevron-down"></i></a>
+										<a href="{{ ('contactos') }}">Contactos<i class='bx bxs-contact' ></i></a>
 										<ul>
 											<li>
-												
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="{{ ('opciones') }}">Opciones<i class="fas fa-chevron-down"></i></a>
+										<a href="{{ ('opciones') }}">Opciones<i class='bx bxs-widget' ></i></a>
 										<ul>
-											
 										</ul>
 									</li>
-									<li><a href="{{ ('funciones') }}">Funciones<i class="fas fa-chevron-down"></i></a></li>
+                                    <li class="hassubs"><a href="{{ ('funciones') }}">Funciones<i class='bx bx-layer' ></i></a></li>
 									
 								</ul>
 							</div>
@@ -1616,6 +1613,6 @@ select option
   
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   </body>
 </html>
