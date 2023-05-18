@@ -1479,31 +1479,25 @@ select option
 
 							<div class="main_nav_menu">
 								<ul class="standard_dropdown main_nav_dropdown">
-									<li><a href="#">Inicio<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="{{ ('inicio') }}">Inicio<i class="fas fa-chevron-down"></i></a></li>
 									<li class="hassubs">
-										<a href="{{ ('nosotros') }}">>Nosotros<i class="fas fa-chevron-down"></i></a>
+										<a href="{{ ('nosotros') }}">Nosotros<i class="fas fa-chevron-down"></i></a>
 										
 									</li>
 									<li class="hassubs">
-										<a href="#">Contactos<i class="fas fa-chevron-down"></i></a>
+										<a href="{{ ('contactos') }}">Contactos<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li>
 												
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="#">Opciones<i class="fas fa-chevron-down"></i></a>
+										<a href="{{ ('opciones') }}">Opciones<i class="fas fa-chevron-down"></i></a>
 										<ul>
-											<li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+											
 										</ul>
 									</li>
-									<li><a href="blog.html">Funciones<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="{{ ('funciones') }}">Funciones<i class="fas fa-chevron-down"></i></a></li>
 									
 								</ul>
 							</div>

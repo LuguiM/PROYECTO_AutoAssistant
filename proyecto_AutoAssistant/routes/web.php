@@ -63,6 +63,22 @@ Route::get('/nosotros', function () {
     return view('nosotros');
 });
 
+Route::get('/contactos', function () {
+    return view('contactos');
+});
+
+Route::get('/opciones', function () {
+    return view('opciones');
+});
+
+Route::get('/inicio', function () {
+    return view('inicio');
+});
+
+Route::get('/funciones', function () {
+    return view('funciones');
+});
+
 Route::get('/prueba', function () {
     return view('prueba');
 });
