@@ -48,11 +48,14 @@
                     <a href="{{url('/welcome')}}" class="nav_link active"> <i class='bx bx-home nav_icon'></i> <span class="nav_name">INICIO</span> </a> 
                     <a href="{{route('profile.edit')}}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">PERFIL</span> </a> 
                     <a href="{{ route('publicaciones.index') }}" class="nav_link"> 
-                    <i class='bx bx-car nav_icon'></i>
-                        <span class="nav_name">{{ __('PILOTOS') }}</span> </a>
-                    
-                   <!-- <a href="{{ route('publicaciones.create') }}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Crear Icono</span> </a> -->
-                    @if (Route::has('register'))
+                        <i class='bx bx-car nav_icon'></i>
+                        <span class="nav_name">{{ __('PILOTOS') }}</span> 
+                    </a>
+                    @if(auth()->user()->hasRole('admin'))
+                   <a href="{{ route('publicaciones.create') }}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Crear Icono</span> </a> 
+                   @endif
+
+                   @if (Route::has('register'))
                     
                     @endif
                     @endauth

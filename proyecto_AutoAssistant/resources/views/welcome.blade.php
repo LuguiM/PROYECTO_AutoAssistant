@@ -27,4 +27,47 @@
             </blockquote>
         </div>
     </div>
+
+@role('admin')
+    <div class="card text-bg-dark mb-3">
+        <div class="card-header">
+            <h1 class="text-center">AUTOASSISTANT</h1>
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+            <h4>ERES UN ADMIN &#128526;<span class="badge bg-primary">{{ Auth::user()->name }}</span></h4>
+            <!--<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>-->
+            </blockquote>
+        </div>
+    </div>
+@endrole
+
+@role('conductor')
+    <div class="card text-bg-dark mb-3">
+        <div class="card-header">
+            <h1 class="text-center">AUTOASSISTANT</h1>
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+            <h4>ERES UN CONDUCTOR &#128526;<span class="badge bg-primary">{{ Auth::user()->name }}</span></h4>
+            <!--<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>-->
+            </blockquote>
+        </div>
+    </div>
+@endrole
+
+@role('futuro_conductor')
+    <div class="card text-bg-dark mb-3">
+        <div class="card-header">
+            <h1 class="text-center">AUTOASSISTANT</h1>
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+            <h4>ERES UN FUTURO CONDUCTOR &#128526;<span class="badge bg-primary">{{ Auth::user()->name }}</span></h4>
+            <!--<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>-->
+            </blockquote>
+        </div>
+    </div>
+@endrole
+
 </x-app-layout>

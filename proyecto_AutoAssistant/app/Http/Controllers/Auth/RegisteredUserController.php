@@ -30,19 +30,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        /*Revisar el codigo de registro
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'edad' => ['required', 'string', 'max:255'],
-            'licencia' => ['nullable', 'string', 'max:255', Rule::requiredIf($request->input('licencia'))],
-            'numero_licencia' => ['string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ],
-        [
-            'required' =>'El campo :attribute es obligatorio.',
-        ]
-        );*/
+        // Validación de los campos del formulario
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'edad' => ['required', 'string', 'max:255'],
@@ -51,16 +39,17 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], [
-            'required' =>'El campo :attribute es obligatorio.',
+            'required' => 'El campo :attribute es obligatorio.',
         ]);
         
-    
+        // Validación adicional para el campo 'numero_licencia' si 'licencia' está presente
         if ($request->input('licencia')) {
             $request->validate([
                 'numero_licencia' => ['required'],
             ]);
         }
-    
+
+        // Creación del nuevo usuario
         $user = User::create([
             'name' => $request->name,
             'edad' => $request->edad,
@@ -70,20 +59,34 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        if(!$user){
-            return back()->with('error','Hubo un error al crear el usuario. Por favor, intentelo de nuevo');
+        // Verificación de que el usuario se haya creado correctamente
+        if (!$user) {
+            return back()->with('error', 'Hubo un error al crear el usuario. Por favor, intentelo de nuevo');
         }
-    
+
+        // Asignación de roles según las condiciones
+        if ($user->edad >= 18 && $user->licencia === 'SI') {
+            $user->assignRole('conductor');
+        } elseif ($user->edad < 18 && empty($user->licencia)) {
+            $user->assignRole('futuro_conductor');
+        } elseif ($user->edad > 18 && empty($user->licencia)) {
+            $user->assignRole('futuro_conductor');
+        }
+
+        // Envío de la notificación de verificación por correo electrónico
         event(new Registered($user));
         $user->sendEmailVerificationNotification();
 
-
+        // Autenticación del usuario recién registrado
         Auth::login($user);
-        if(Auth::check()){
+
+        // Redireccionamiento según el estado de autenticación
+        if (Auth::check()) {
             return redirect('/email/verify');
-        }else{
+        } else {
             return back()->with('error', 'Hubo un error al autenticar al usuario. Por favor, inténtalo de nuevo.');
         }
-        
     }
+
+
 }
