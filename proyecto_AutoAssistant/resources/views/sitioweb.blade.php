@@ -2,16 +2,14 @@
 <html lang="en">
 <head>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-
-
-<Style>
+<style>
   @charset "utf-8";
 /* CSS Document */
 
@@ -25,6 +23,9 @@ body {
     background-color: #eee
 }
 
+.dropdown-menu .dropdown-item {
+        color: black;
+    }
 .header-main {
     position: relative;
     padding-top: 7px;
@@ -60,7 +61,9 @@ body {
     top: -3px;
     right: -10px
 }
-
+.navbar-nav .nav-link {
+  color: #000000; 
+}
 .notify {
     position: absolute;
     top: -4px;
@@ -74,7 +77,16 @@ body {
     color: #fff;
     background-color: #fa3434
 }
+span.register {
+    color: black;
+}
 
+span.login {
+    color: black;
+}
+ul.hassubs a {
+    color: black;
+}
 .mr-3,
 .mx-3 {
     margin-right: 1rem !important
@@ -149,6 +161,7 @@ body {
 .nav-link {
     text-transform: uppercase;
     font-weight: 400
+    
 }
 
 .vl {
@@ -163,15 +176,38 @@ body {
 .login {
     color: white
 }
-  </Style>
+
+.option-box {
+    padding: 0.1px;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+}
+.logo {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 600;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+.small {
+    font-size: 14px; 
+    padding: 4px 8px; 
+}
+
+
+  </style>
   </head>
   <body>
+ 
   <header class="section-header">
     <section class="header-main border-bottom">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-lg-3 col-sm-4 col-md-4 col-5"> <a href="{{ ('inicio') }}" class="brand-wrap" data-abc="true">
-                     <img src="\imagenes\Logo.png" atl="logo"  width="100" height="70" class="top_bar_icon" ></img> </a> </div>
+                     <img src="\imagenes\Logo.png" atl="logo"  width="80" height="80" class="top_bar_icon"><span class="logo">AutoAssistant</span></img></a> </div>
+                    
                 <div class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block">
                     
                 </div>
@@ -184,31 +220,46 @@ body {
                                 </li>
                             </ul>
 							<div class="d-flex justify-content-end">
-							<a class="nav-link nav-user-img" href="{{ route('login') }}" data-toggle="modal" data-target="#login-modal" data-abc="true"><span class="register">Iniciar Seccion</span></a>
-						<span class="vl"></span>
-						<a class="nav-link nav-user-img" href="{{ route('register') }}" data-toggle="modal" data-target="#login-modal" data-abc="true"><span class="login">Registro</span></a>
-			     	</div>
-                </div>
+                            <div class="option-box mr-2">
+                            <a class="nav-link nav-user-img small" href="{{ route('login') }}"><span class="register">Iniciar Sesión</span></a>
+                        </div>
+                        <span class="vl"></span>
+                        <div class="option-box">
+                            <a class="nav-link nav-user-img small" href="{{ route('register') }}"><span class="login">Registro</span></a>
+                        </div>
+                    </div>
             </div>
         </div>
     </section>
     <nav class="navbar navbar-expand-md navbar-main border-bottom">
-        <div class="container-fluid">
-            <form class="d-md-none my-2">
-                <div class="input-group"> <input type="search" name="search" class="form-control" placeholder="Search" required="">
-                    <div class="input-group-append"> <button type="submit" class="btn btn-secondary"> <i class="fa fa-search"></i> </button> </div>
+        
                 </div>
-            </form> <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#dropdown6" aria-expanded="false"> <span class="navbar-toggler-icon"></span> </button>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#dropdown6" aria-expanded="false"><span class="navbar-toggler-icon"></span></button>
             <div class="navbar-collapse collapse" id="dropdown6" style="">
+
                 <ul class="navbar-nav mr-auto">
-                    <ul class="hassubs"><a href="{{ ('inicio') }}">Inicio<i class='bx bx-home-alt'></i></a></ul>
-					<ul class="hassubs"><a href="{{ ('nosotros') }}">Nosotros<i class='bx bx-group'></i></a></ul>
-					<ul class="hassubs"><a href="{{ ('contactos') }}">Contactos<i class='bx bxs-contact'></i></a></ul>
-					<ul class="hassubs"><a href="{{ ('opciones') }}">Opciones<i class='bx bxs-widget'></i></a></ul>
-                    <ul class="hassubs"><a href="{{ ('funciones') }}">Funciones<i class='bx bx-layer'></i></a></ul>
-									
-								</ul>
-							</div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ ('inicio') }}">Inicio<i class='bx bx-home-alt'></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ ('nosotros') }}">Nosotros<i class='bx bx-group'></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ ('contactos') }}">Contactos<i class='bx bxs-contact'></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ ('opciones') }}">Opciones<i class='bx bxs-widget'></i></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="functionsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Servicios que ofrece
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="functionsDropdown">
+                            <a class="dropdown-item" href="inicio">Pilotos</a>
+                            <a class="dropdown-item" href="#">Talleres mecánicos</a>
+                            <a class="dropdown-item" href="#">Contratar servicios</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -221,15 +272,27 @@ body {
 		
 		@yield('content')
 	</div>
-
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $('.navbar-toggler').click(function() {
+                var target = $(this).data('target');
+                $(target).toggleClass('show');
+            });
+        });
+                $(document).ready(function() {
+            $('.dropdown-toggle').dropdown();
+        });
+    </script>
 </div>
   
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-  </body>
+</body>
+ 
 </html>
