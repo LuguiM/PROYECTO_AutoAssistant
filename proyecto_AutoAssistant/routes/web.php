@@ -56,7 +56,7 @@ Route::get('/google-auth/callback', function () {
 
 
 Route::get('/registro', function () {
-    return view('registro');
+    return view('registerA');
 });
 
 Route::get('/nosotros', function () {
