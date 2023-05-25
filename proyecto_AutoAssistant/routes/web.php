@@ -78,7 +78,9 @@ Route::get('/inicio', function () {
 Route::get('/funciones', function () {
     return view('funciones');
 });
-
+Route::get('/lol', function () {
+    return view('lol');
+});
 Route::get('/prueba', function () {
     return view('prueba');
 });

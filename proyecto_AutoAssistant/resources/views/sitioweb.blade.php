@@ -21,6 +21,10 @@
 
 body {
     background-color: #eee
+    padding-bottom: 200px;
+    height: 5000px;
+    
+
 }
 
 .dropdown-menu .dropdown-item {
@@ -195,7 +199,38 @@ ul.hassubs a {
     font-size: 14px; 
     padding: 4px 8px; 
 }
+footer {
+  background-color: #32525C;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
 
+footer p {
+  margin: 0;
+}
+.footer-logo {
+  width: 120px; /* Ajusta el ancho del logo según tus necesidades */
+  height: 120px; /* Ajusta la altura del logo según tus necesidades */
+  margin-right: 100px;
+}
+
+.logo-text {
+  font-size: 40px; /* Cambia el tamaño del texto del logo según tus necesidades */
+  color: #fff;
+  margin-left: 10px; /* Espacio entre el logo y el texto */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+.mail-option {
+      color: #D9D9D9; /* Cambia el color aquí */
+}
+.footer-content {
+background-color: #32525C; /* Cambia el color aquí */
+}
 
   </style>
   </head>
@@ -244,12 +279,6 @@ ul.hassubs a {
                     <li class="nav-item">
                         <a class="nav-link" href="{{ ('nosotros') }}">Nosotros<i class='bx bx-group'></i></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ ('contactos') }}">Contactos<i class='bx bxs-contact'></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ ('opciones') }}">Opciones<i class='bx bxs-widget'></i></a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="functionsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Servicios que ofrece
@@ -268,7 +297,7 @@ ul.hassubs a {
 
 	</header>
 	
-	<div style="height: 700px">
+	<div style="height: 5000px">
 		
 		@yield('content')
 	</div>
@@ -293,6 +322,55 @@ ul.hassubs a {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js">
 
+<footer>
+<div class="container">
+    <div class="footer-content">
+      <div class="logo-container">
+        <span class="logo-text">AutoAssistant</span>
+        <img src="/imagenes/Logo.png" alt="Logo" class="footer-logo">
+      </div>
+      <p ></p>
+      <div class="row mb-4">
+        <div class="col-md-6">
+        <p class="text-left">CONTACTOS</p>
+        </div>
+        <div class="col-md-6">
+          <p class="text-left">OPCIONES DE INGRESO</p>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <p class="text-left mail-option">AutoAssitant@gmail.com</p>
+        </div>
+        <div class="col-md-6">
+          <p class="text-left mail-option">Taller Mecanico</p>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <p class="text-left">Sevicio al Cliente</p>
+        </div>
+        <div class="col-md-6">
+          <p class="text-left mail-option">Mecanico Independiente</p>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <p class="text-left mail-option">7890-6798</p>
+        </div>
+        <div class="col-md-6">
+          <p class="text-left mail-option">Conductor y Futuro conductor</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-content">
+      <!-- Contenido del pie de página -->
+      <p class="text-center">&copy; 2023 AutoAssistant by DragonDevs. Todos los derechos reservados. <a href="lol">Términos y condiciones</a></p>
+    </div>
+  </div>
+</footer>
 </body>
- 
+
 </html>
