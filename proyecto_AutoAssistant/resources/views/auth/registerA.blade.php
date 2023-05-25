@@ -19,7 +19,7 @@
                 padding: 50px 0;
             }
             .registration-form form{
-                background-color: #000000;
+                background-color: #242424;
                 max-width: 600px;
                 margin: auto;
                 padding: 50px 70px;

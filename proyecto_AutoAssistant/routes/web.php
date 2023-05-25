@@ -17,7 +17,7 @@ use App\Http\Controllers\PublicacionController;
 */
 
 Route::get('/', function () {
-    return view('sitioweb');
+    return view('inicio');
 });
 
 
