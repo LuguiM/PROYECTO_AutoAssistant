@@ -165,7 +165,7 @@
                     <x-input-error :messages="$errors->get('email')" class="alert alert-danger" role="alert" />
                 </div>
                 <div class="form-group">
-                    <input id="password" type="password" class="form-control item" placeholder="Contraseña" name="password" title="La contraseña debe contener 8 caracteres." required pattern="[A-Za-z0-9]{8}" autocomplete="new-password">
+                    <input id="password" type="password" class="form-control item" placeholder="Contraseña" name="password" title="La contraseña debe contener mas de 8 caracteres." required pattern="[A-Za-z0-9]{8,}" autocomplete="new-password">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -174,7 +174,7 @@
                     <x-input-error :messages="$errors->get('password')" class="alert alert-danger" role="alert" />
                 </div>
                 <div class="form-group">
-                    <input id="password_confirmation" type="password" class="form-control item" placeholder="Confirmar Contraseña" name="password_confirmation" title="La contraseña debe contener 8 caracteres." required pattern="[A-Za-z0-9]{8}" autocomplete="new-password">
+                    <input id="password_confirmation" type="password" class="form-control item" placeholder="Confirmar Contraseña" name="password_confirmation" title="La contraseña debe contener mas de 8 caracteres." required pattern="[A-Za-z0-9]{8,}" autocomplete="new-password">
                     @error('password_confirmation')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

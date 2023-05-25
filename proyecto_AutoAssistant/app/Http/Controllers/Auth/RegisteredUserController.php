@@ -33,7 +33,7 @@ class RegisteredUserController extends Controller
         // Validación de los campos del formulario
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'edad' => ['required', 'string', 'max:255'],
+            'edad' => ['required', 'numeric', 'max:255'],
             'licencia' => ['nullable', 'string', 'max:255'],
             'numero_licencia' => ['required_if:licencia,si', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
