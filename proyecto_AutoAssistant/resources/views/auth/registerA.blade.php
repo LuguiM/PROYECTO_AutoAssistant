@@ -189,6 +189,13 @@
                 </div>
                 <span class="ml-auto text-white">¿YA TIENES CUENTA? <a href="{{ route('login') }}" class="forgot-pass ">INICIA SESION</a></span>
             </form>
+
+            <div class="social-media">
+                <h5>REGISTRATE CON GOOGLE</h5>
+                <div class="social-icons">
+                    <a href="/google-auth/redirect"><i class="icon-social-google" title="Google"></i></a>
+                </div>
+            </div>
         </div>
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

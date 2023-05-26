@@ -189,7 +189,7 @@
         
 
         <div class="social-media">
-            <h5>Registrate con GOOGLE</h5>
+            <h5>REGISTRATE CON GOOGLE</h5>
             <div class="social-icons">
                 <a href="/google-auth/redirect"><i class="icon-social-google" title="Google"></i></a>
             </div>
@@ -216,22 +216,5 @@
         });
     </script>
 
-    <!--<script>
-        $(document).ready(function () {
-            // desactivar el campo numero_licencia al inicio
-            $('#numero_licencia').prop('disabled', true);
-
-            // detectar cambio en el campo licencia
-            $('#licencia').change(function () {
-                if ($(this).is(':checked') && $(this).val() == 'SI') {
-                    // si se selecciona "SI", activar el campo numero_licencia
-                    $('#numero_licencia').prop('disabled', false);
-                } else {
-                    // si se selecciona otra cosa, desactivar el campo numero_licencia
-                    $('#numero_licencia').prop('disabled', true);
-                }
-            });
-        });
-    </script>-->
 </body>
 </html>
