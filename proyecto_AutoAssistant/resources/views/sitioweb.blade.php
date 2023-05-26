@@ -22,7 +22,7 @@
 body {
     background-color: #eee
     padding-bottom: 200px;
-    height: 5000px;
+    height: 3000px;
     
 
 }
@@ -204,6 +204,7 @@ footer {
   color: #fff;
   padding: 20px;
   text-align: center;
+  margin-top: 600px;
 }
 
 footer p {
@@ -212,13 +213,13 @@ footer p {
 .footer-logo {
   width: 120px; /* Ajusta el ancho del logo según tus necesidades */
   height: 120px; /* Ajusta la altura del logo según tus necesidades */
-  margin-right: 100px;
+  margin-right: 0px;
 }
 
 .logo-text {
   font-size: 40px; /* Cambia el tamaño del texto del logo según tus necesidades */
   color: #fff;
-  margin-left: 10px; /* Espacio entre el logo y el texto */
+  margin-left: 0px; /* Espacio entre el logo y el texto */
 }
 
 .logo-container {
@@ -230,6 +231,10 @@ footer p {
 }
 .footer-content {
 background-color: #32525C; /* Cambia el color aquí */
+}
+.footer-contente {
+    display: flex;
+  align-items: center;
 }
 
   </style>
@@ -277,10 +282,10 @@ background-color: #32525C; /* Cambia el color aquí */
                         <a class="nav-link" href="{{ ('inicio') }}">Inicio<i class='bx bx-home-alt'></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ ('nosotros') }}">Nosotros<i class='bx bx-group'></i></a>
+                        <a class="nav-link" href="#nosotros">Nosotros<i class='bx bx-group'></i></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="functionsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="functionsDropdown"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Servicios que ofrece
                         </a>
                         <div class="dropdown-menu" aria-labelledby="functionsDropdown">
@@ -297,7 +302,7 @@ background-color: #32525C; /* Cambia el color aquí */
 
 	</header>
 	
-	<div style="height: 5000px">
+	<div style="height: 3000px;">
 		
 		@yield('content')
 	</div>
@@ -315,15 +320,33 @@ background-color: #32525C; /* Cambia el color aquí */
                 $(document).ready(function() {
             $('.dropdown-toggle').dropdown();
         });
-    </script>
-</div>
-  
+       
+       
+        $(document).ready(function() {
+            $('.navbar-toggler').click(function() {
+                var target = $(this).data('target');
+                $(target).toggleClass('show');
+            });
 
+            $('#pepe').on('click', function(e) {
+                var target = $(this).attr('href');
+                if (target === '#') {
+                    e.preventDefault();
+                    $(this).on('dblclick', function(e) {
+                        e.preventDefault();
+                        // Aquí puedes poner la función que se ejecutará en el doble clic
+                        console.log('id="functionsDropdown"');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
 
 <footer>
 <div class="container">
     <div class="footer-content">
-      <div class="logo-container">
+      <div class="footer-content">
         <span class="logo-text">AutoAssistant</span>
         <img src="/imagenes/Logo.png" alt="Logo" class="footer-logo">
       </div>
@@ -367,6 +390,7 @@ background-color: #32525C; /* Cambia el color aquí */
       <!-- Contenido del pie de página -->
       <p class="text-center">&copy; 2023 AutoAssistant by DragonDevs. Todos los derechos reservados. <a href="lol">Términos y condiciones</a></p>
     </div>
+  </div>
   </div>
 </footer>
 </body>
