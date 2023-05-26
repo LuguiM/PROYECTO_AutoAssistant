@@ -43,7 +43,7 @@ class RegisteredMController extends Controller
             'min' => 'Debe ser mayor de 18 años para crear una cuenta como mecanico independiente o taller mecanico.',
             'in' => 'El valor seleccionado para el campo :attribute es inválido.',
             'email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
-        'unique' => 'El correo electrónico ya existe en nuestros datos. Por favor, seleccione otro.',
+            'unique' => 'El correo electrónico ya existe en nuestros datos. Por favor, seleccione otro.',
         ]);
 
         //Creacion del nuevo mecanico

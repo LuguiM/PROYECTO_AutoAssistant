@@ -1,10 +1,8 @@
 @extends('sitioweb')
 
 @section('content')
-<html>
-<head>
-    <title>AutoAssistant</title>
-    <link rel="stylesheet" href="{{ asset('css/ani.css') }}">
+
+    
     <style>
          body {
             background-image: url('/imagenes/fondo3.png');
@@ -46,7 +44,7 @@
         border: 2px solid #000;
         }
     </style>
-</head>
+
 <body style="background: url('/imagenes/fondo3.png') no-repeat center center fixed; background-size: cover;">
     <div style="text-align: center;">
         <div style="display: inline-block;">
@@ -100,5 +98,5 @@
         </div>
     </div>
 </body>
-</html>
+
 @endsection

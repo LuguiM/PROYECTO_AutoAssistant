@@ -184,7 +184,7 @@
                 </div>
                 <div class="form-group">
                     <x-primary-button class="btn btn-block create-account">
-                        {{ __('registrar')}}
+                        {{ __('Registrar')}}
                     </x-primary-button>
                 </div>
                 <span class="ml-auto text-white">¿YA TIENES CUENTA? <a href="{{ route('login') }}" class="forgot-pass ">INICIA SESION</a></span>

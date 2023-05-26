@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="stylesheet" href="{{ asset('build/assets/ani.css') }}">
+
+
 <style>
   @charset "utf-8";
 /* CSS Document */
@@ -300,48 +303,14 @@ background-color: #32525C; /* Cambia el color aquí */
     </nav>
 </header>
 
-	</header>
 	
-	<div style="height: 3000px;">
+	<main >
 		
 		@yield('content')
-	</div>
+	</main>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
-    <script>
-        $(document).ready(function() {
-            $('.navbar-toggler').click(function() {
-                var target = $(this).data('target');
-                $(target).toggleClass('show');
-            });
-        });
-                $(document).ready(function() {
-            $('.dropdown-toggle').dropdown();
-        });
-       
-       
-        $(document).ready(function() {
-            $('.navbar-toggler').click(function() {
-                var target = $(this).data('target');
-                $(target).toggleClass('show');
-            });
 
-            $('#pepe').on('click', function(e) {
-                var target = $(this).attr('href');
-                if (target === '#') {
-                    e.preventDefault();
-                    $(this).on('dblclick', function(e) {
-                        e.preventDefault();
-                        // Aquí puedes poner la función que se ejecutará en el doble clic
-                        console.log('id="functionsDropdown"');
-                    });
-                }
-            });
-        });
-    </script>
-</body>
 
 <footer>
 <div class="container">
@@ -393,6 +362,41 @@ background-color: #32525C; /* Cambia el color aquí */
   </div>
   </div>
 </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $('.navbar-toggler').click(function() {
+                var target = $(this).data('target');
+                $(target).toggleClass('show');
+            });
+        });
+                $(document).ready(function() {
+            $('.dropdown-toggle').dropdown();
+        });
+       
+       
+        $(document).ready(function() {
+            $('.navbar-toggler').click(function() {
+                var target = $(this).data('target');
+                $(target).toggleClass('show');
+            });
+
+            $('#pepe').on('click', function(e) {
+                var target = $(this).attr('href');
+                if (target === '#') {
+                    e.preventDefault();
+                    $(this).on('dblclick', function(e) {
+                        e.preventDefault();
+                        // Aquí puedes poner la función que se ejecutará en el doble clic
+                        console.log('id="functionsDropdown"');
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

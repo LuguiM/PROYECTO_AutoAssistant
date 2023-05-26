@@ -36,16 +36,22 @@ class RegisteredUserController extends Controller
             'edad' => ['required', 'numeric', 'max:255'],
             'licencia' => ['nullable', 'string', 'max:255'],
             'numero_licencia' => ['required_if:licencia,si', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'email', Rule::unique('users')],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], [
             'required' => 'El campo :attribute es obligatorio.',
+            'numeric' => 'El campo :attribute debe ser un número.',
+            'email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
+            'unique' => 'El correo electrónico ya existe en nuestros datos. Por favor, seleccione otro.',
+            'confirmed' => 'Los campos de contraseña no coinciden',
         ]);
         
         // Validación adicional para el campo 'numero_licencia' si 'licencia' está presente
         if ($request->input('licencia')) {
             $request->validate([
-                'numero_licencia' => ['required'],
+                'numero_licencia' => ['required','numeric'],
+            ],[
+                'numeric' => 'El campo :attribute debe ser un número.',
             ]);
         }
 
