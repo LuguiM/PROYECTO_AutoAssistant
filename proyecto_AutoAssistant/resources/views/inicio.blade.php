@@ -56,7 +56,7 @@
     <div class="container">
         <div class="box1" style="background-color: transparent;margin-top: 300px">
         <p style="text-align: center; font-size: 2.25rem; font-weight: 300; line-height: 1.2; color: #FFF">| Descripción de la aplicación Autoassistant |</p>
-            <h2 style="font-size: 30px; color: #1279C1;">Autoassistant tu mecanico virtual, con las funciones que te ayudaran a solucionar las problemáticas de tu vehículo, brindándote funciones en las que puedas acceder a la información que brinda para los conductores y  el registro o ingreso para talleres mecánicos o mecánicos independientes para que puedan inscribirse y poder ofrecer servicios a los conductores.</h2>
+            <h2 style="font-size: 30px; color: #1279C1;">Autoassistant tu mecánico virtual, con las funciones que te ayudaran a solucionar las problemáticas de tu vehículo, brindándote funciones en las que puedas acceder a la información que brinda para los conductores y el registro o ingreso para talleres mecánicos o mecánicos independientes para que puedan inscribirse y poder ofrecer servicios a los conductores.</h2>
         </div>
     </div>
     <div  style="text-align: center; margin-top: 40px;">
@@ -65,36 +65,36 @@
     <div class="container">
     <p style="text-align: center; font-size: 2.25rem; font-weight: 300; line-height: 1.2; color: #FFF">| SOBRE NOSOTROS |</p>
         <div class="box1 animated fadeIn" style="margin-bottom: 200px; background-color:  transparent;">
-            <h2 style="font-size: 30px; color: #1279C1;">Somos Dragon Devs desarroyadores de la aplicación AutoAssistant, como equipo multifuncional con conocimientos en las diferentes areas para la creacion de esta aplicación usando estos conocimientos para el mejor desempeño de la aplicación, utilizando todas nuestras destresas y fortalezas para hacer su experiencia agradable.</h2>
+            <h2 style="font-size: 30px; color: #1279C1;">Somos Dragon Devs desarrolladores de la aplicación AutoAssistant, como equipo multifuncional con conocimientos en las diferentes áreas para la creación de esta aplicación usando estos conocimientos para el mejor desempeño de la aplicación, utilizando todas nuestras destrezas y fortalezas para hacer su experiencia agradable.</h2>
         </div>
     </div>
     <div style="text-align: center; margin-top: 300px;">
-        <p  id="pepe" style="font-size: 2.25rem; font-weight: 300; line-height: 1.2; color: #FFF">| FUNCIONES |</p>
+        <p  id="ofrece" style="font-size: 2.25rem; font-weight: 300; line-height: 1.2; color: #FFF">| FUNCIONES |</p>
         <div class="box-container2" style="margin-top: 100px; display: flex; flex-wrap: wrap; justify-content: center;">
             <div class="box2" style="margin: 10px; flex: 1 1 300px; max-width: 300px;">
                 <img src="\imagenes\tallermecanicos.png"  width="80" height="80"></img></p>
                 <span style="font-size: 2.5rem; color: #1279C1">Talleres Mecanicos</span>
-                <p style="color: #000">Descripcion: En esta función los talleres mecánicos y mecánicos independientes podrán observar los requisitos que necesitan al inscribir sus servicios.</p>
+                <p style="color: #000">Descripción: En esta función los talleres mecánicos y mecánicos independientes podrán observar los requisitos que necesitan al inscribir sus servicios.</p>
             </div>
             <div class="box" style="margin: 10px; flex: 1 1 300px; max-width: 300px;">
                 <img src="\imagenes\pilotos1.png"  width="80" height="80"></img></p>
                 <span style="font-size: 2.5rem; color: #1279C1">Pilotos</span>
-                <p style="color: #000">Descripcion:  Esta función te ayudara a encontrar el piloto del que usted necesite información y una posible solución</p>
+                <p style="color: #000">Descripción: Esta función te ayudará a encontrar el piloto del que usted necesite información y una posible solución.</p>
             </div>
             <div class="box3" style="margin: 10px; flex: 1 1 300px; max-width: 300px;">
                 <img src="\imagenes\contratar.png"  width="80" height="80"></img></p>
                 <span style="font-size: 2.5rem; color: #1279C1">Contratar servicios </span>
-                <p style="color: #000">Descripcion: En esta función los conductores y futuros conductores podrán contratar el servicio que necesita.</p>
+                <p style="color: #000">Descripción: En esta función los conductores y futuros conductores podrán contratar el servicio que necesita.</p>
             </div>
             <div class="box3" style="margin: 10px; flex: 1 1 300px; max-width: 300px;">
                 <img src="\imagenes\serviciosme.png"  width="80" height="80"></img></p>
                 <span style="font-size: 2.5rem; color: #1279C1">Servicios  mecánicos </span>
-                <p style="color: #000">Descripcion: Esta función le servirá al conductor a ver todos los servicios mecánicos que la aplicación ofrece </p>
+                <p style="color: #000">Descripción: Esta función le servirá al conductor a ver todos los servicios mecánicos que la aplicación ofrece.</p>
             </div>
             <div class="box3" style="margin: 10px; flex: 1 1 300px; max-width: 300px;">
                 <img src="\imagenes\inscripcion1.png"  width="80" height="80"></img></p>
                 <span style="font-size: 2.5rem; color: #1279C1">Inscripcion de servicios </span>
-                <p style="color: #000">Descripcion: Esta función es para que los talleres mecánicos y los mecánicos independientes puedan inscribir sus servicios dentro de la aplicación.</p>
+                <p style="color: #000">Descripción: Esta función es para que los talleres mecánicos y los mecánicos independientes puedan inscribir sus servicios dentro de la aplicación.</p>
             </div>
         </div>
     </div>

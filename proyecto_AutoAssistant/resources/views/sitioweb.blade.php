@@ -287,9 +287,12 @@ background-color: #32525C; /* Cambia el color aquí */
                     <li class="nav-item">
                         <a class="nav-link" href="#nosotros">Nosotros<i class='bx bx-group'></i></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ofrece">Servicios que ofrece<i class='bx bx-loader'></i></a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="functionsDropdown"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Servicios que ofrece
+                            Servicios
                         </a>
                         <div class="dropdown-menu" aria-labelledby="functionsDropdown">
                             <a class="dropdown-item" href="inicio">Pilotos</a>
