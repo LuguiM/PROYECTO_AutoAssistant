@@ -85,6 +85,11 @@ Route::get('/prueba', function () {
     return view('prueba');
 });
 
+
+Route::get('/requisitos', function () {
+    return view('serviciosMecanicos.requisitos');
+});
+
 Route::get('/profile', function () {
     // Only verified users may access this route...
 })->middleware(['auth', 'verified']);

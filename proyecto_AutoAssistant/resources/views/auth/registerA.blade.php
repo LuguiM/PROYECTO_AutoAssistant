@@ -11,9 +11,15 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inder&display=swap');
             body{
                 background: rgb(0,0,0);
                 background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(182,182,182,1) 100%);
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-attachment: fixed;
+                background-size: cover;
+                font-family:'Inder', sans-serif;
             }
             .registration-form{
                 padding: 50px 0;

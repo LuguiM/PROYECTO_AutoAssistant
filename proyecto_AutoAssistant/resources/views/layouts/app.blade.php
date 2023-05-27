@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 
+    <link rel="icon" type="image/png" href="/imagenes/Logo.png"/>
 
     <title>{{ config('app.name', 'AutoAssistant') }}</title>
 
@@ -48,22 +49,30 @@
                 <div class="nav_list">
 
                     @auth
-                    <a href="{{url('/welcome')}}" class="nav_link active"> <i class='bx bx-home nav_icon'></i> <span
-                            class="nav_name">INICIO</span> </a>
-                    <a href="{{route('profile.edit')}}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
-                            class="nav_name">PERFIL</span> </a>
-                    <a href="{{ route('publicaciones.index') }}" class="nav_link">
-                        <i class='bx bx-car nav_icon'></i>
-                        <span class="nav_name">{{ __('PILOTOS') }}</span>
-                    </a>
-                    @if(auth()->user()->hasRole('admin'))
-                    <a href="{{ route('publicaciones.create') }}" class="nav_link"> <i
-                            class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Crear Icono</span> </a>
-                    @endif
+                        <a href="{{url('/welcome')}}" class="nav_link active"> <i class='bx bx-home nav_icon'></i> <span
+                                class="nav_name">INICIO</span> </a>
+                        <a href="{{route('profile.edit')}}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
+                                class="nav_name">PERFIL</span> </a>
 
-                    @if (Route::has('register'))
+                        @if(auth()->user()->hasAnyRole('conductor', 'futuro_conductor'))  
+                        <a href="{{ route('publicaciones.index') }}" class="nav_link">
+                            <i class='bx bx-car nav_icon'></i>
+                            <span class="nav_name">{{ __('PILOTOS') }}</span>
+                        </a>
+                        @endif
+                        @if(auth()->user()->hasRole('admin'))
+                        <a href="{{ route('publicaciones.create') }}" class="nav_link"> <i
+                                class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Crear Icono</span> </a>
+                        @endif
 
-                    @endif
+                        @if(auth()->user()->hasAnyRole('taller_mecanico', 'mecanico_independiente'))
+                        <a href="{{ url('/requisitos') }}" class="nav_link"> 
+                            <i class='bx bx-folder-plus nav_icon'></i> <span class="nav_name">InscripcionServicios</span> </a>
+                        @endif
+
+                        @if (Route::has('register'))
+
+                        @endif
                     @endauth
                 </div>
                 @endif
