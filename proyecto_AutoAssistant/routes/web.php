@@ -85,10 +85,16 @@ Route::get('/prueba', function () {
     return view('prueba');
 });
 
-
+//Inscripcion de servicios mecanicos
 Route::get('/requisitos', function () {
     return view('serviciosMecanicos.requisitos');
 });
+
+Route::get('/inscripcion', function () {
+    return view('serviciosMecanicos.inscripcion');
+});
+
+
 
 Route::get('/profile', function () {
     // Only verified users may access this route...

@@ -54,7 +54,7 @@
                         <a href="{{route('profile.edit')}}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
                                 class="nav_name">PERFIL</span> </a>
 
-                        @if(auth()->user()->hasAnyRole('conductor', 'futuro_conductor'))  
+                        @if(auth()->user()->hasAnyRole('conductor', 'futuro_conductor', 'admin'))  
                         <a href="{{ route('publicaciones.index') }}" class="nav_link">
                             <i class='bx bx-car nav_icon'></i>
                             <span class="nav_name">{{ __('PILOTOS') }}</span>
@@ -65,9 +65,9 @@
                                 class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Crear Icono</span> </a>
                         @endif
 
-                        @if(auth()->user()->hasAnyRole('taller_mecanico', 'mecanico_independiente'))
+                        @if(auth()->user()->hasAnyRole('taller_mecanico', 'mecanico_independiente', 'admin'))
                         <a href="{{ url('/requisitos') }}" class="nav_link"> 
-                            <i class='bx bx-folder-plus nav_icon'></i> <span class="nav_name">InscripcionServicios</span> </a>
+                            <i class='bx bx-folder-plus nav_icon'></i> <span class="nav_name">ServiciosMecanicos</span> </a>
                         @endif
 
                         @if (Route::has('register'))

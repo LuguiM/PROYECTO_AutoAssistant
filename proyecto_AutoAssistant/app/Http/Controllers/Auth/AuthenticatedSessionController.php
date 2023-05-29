@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Database\QueryException;
+use Illuminate\Auth\Events\Verified;
+
 
 class AuthenticatedSessionController extends Controller
 {
@@ -27,20 +29,24 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-
         try {
             $credentials = $request->validated();
-    
-            if (Auth::attempt($credentials, $request->boolean('remember')) && Auth::user()->markEmailAsVerified()) {
-                $request->session()->regenerate();
-                return redirect()->intended(RouteServiceProvider::HOME);
+
+            if (Auth::attempt($credentials, $request->boolean('remember'))) {
+                $user = Auth::user();
+
+                if ($user->hasVerifiedEmail()) {
+                    $request->session()->regenerate();
+                    return redirect()->intended(RouteServiceProvider::HOME);
+                } else {
+                    $user->sendEmailVerificationNotification();
+                    return redirect()->route('verification.notice');
+                }
             }
 
             return back()->withErrors([
                 'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
             ]);
-    
-            
         } catch (QueryException $e) {
             Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
             return redirect()->back();
@@ -49,6 +55,9 @@ class AuthenticatedSessionController extends Controller
             return redirect()->back();
         }
     }
+
+
+
 
     /**
      * Destroy an authenticated session.
