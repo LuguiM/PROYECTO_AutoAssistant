@@ -32,7 +32,7 @@ body {
 
 .dropdown-menu .dropdown-item {
         color: black;
-    }
+}
 .header-main {
     position: relative;
     padding-top: 7px;
@@ -268,7 +268,7 @@ background-color: #32525C; /* Cambia el color aquí */
                         </div>
                         <span class="vl"></span>
                         <div class="option-box">
-                            <a class="nav-link nav-user-img small" href="{{ route('register') }}"><span class="login">Registro</span></a>
+                            <a class="nav-link nav-user-img small" href="mario"><span class="login">Registro</span></a>
                         </div>
                     </div>
             </div>
