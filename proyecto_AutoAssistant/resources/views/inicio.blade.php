@@ -5,7 +5,6 @@
     
     <style>
          body {
-            background-image: url('/imagenes/fondo3.png');
             background-repeat: no-repeat;
             background-position: center center;
             background-attachment: fixed;

@@ -195,10 +195,10 @@ a {
 
 /*SECCION DE CARD DE LOS PILOTOS*/
 
-.card_img{
-    height:171px;
-    width:371px;
-  }
+.card_img {
+    max-height: 150px; /* Ajusta la altura máxima de la imagen dentro del cuadro */
+    object-fit: cover; /* Ajusta el recorte de la imagen para que se ajuste al tamaño */
+}
   
   div [class^="col-"]{
     padding-left:5px;
