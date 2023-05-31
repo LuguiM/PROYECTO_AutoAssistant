@@ -24,6 +24,7 @@ class User extends Authenticatable
         'licencia',
         'numero_licencia',
         'email',
+        'rol',
         'password',
         'google_id',
     ];

@@ -97,7 +97,9 @@ Route::get('/inscripcion', function () {
     return view('serviciosMecanicos.inscripcion');
 });
 
-
+Route::get('/serviciosMecanicos', function () {
+    return view('serviciosMecanicos.servicioM');
+});
 
 Route::get('/profile', function () {
     // Only verified users may access this route...

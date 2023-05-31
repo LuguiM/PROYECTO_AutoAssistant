@@ -38,7 +38,7 @@
                     <x-input-error :messages="$errors->get('propietario')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="form-floating col-md-6">
-                    <input type="date" class="form-control" id="horario" name="horario" placeholder="Horario de Atencion" aria-label="Last name">
+                    <textarea class="form-control" id="horario" name="horario" placeholder="Horario de Atencion" aria-label="Last name"></textarea>
                     <label for="horario">Horario de Atencion</label>
                     <x-input-error :messages="$errors->get('horario')" class="alert alert-danger" role="alert"/>
                 </div>
@@ -80,9 +80,9 @@
                     <label for="direccion">Direccion del Taller</label>
                     <x-input-error :messages="$errors->get('direccion')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="form-floating col-12">
-                    <input type="text" class="form-control" id="acreditaciones"  name="acreditaciones" placeholder="Acreditaciones" aria-label="Last name">
-                    <label for="acreditaciones">Acreditaciones</label>
+                <div class="col-12">
+                    <label for="acreditaciones" class="form-label text-white">Acreditaciones</label>
+                    <input type="file" class="form-control" id="acreditaciones"  name="acreditaciones" placeholder="Acreditaciones" aria-label="Last name">
                     <x-input-error :messages="$errors->get('acreditaciones')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="col-12 d-flex justify-content-between">

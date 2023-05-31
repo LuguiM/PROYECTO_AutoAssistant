@@ -49,10 +49,21 @@ class RegisteredUserController extends Controller
         // Validación adicional para el campo 'numero_licencia' si 'licencia' está presente
         if ($request->input('licencia')) {
             $request->validate([
-                'numero_licencia' => ['required','numeric'],
+                'numero_licencia' => ['required','string'],
             ],[
                 'numeric' => 'El campo :attribute debe ser un número.',
             ]);
+        }
+
+        // Asignación de roles según las condiciones
+        if ($request->edad >= 18 && $request->licencia === 'SI') {
+            $rol = 'conductor';
+        } elseif ($request->edad >= 18 && empty($request->licencia)) {
+            $rol = 'futuro_conductor';
+        } elseif ($request->edad < 18 && empty($request->licencia)) {
+            $rol = 'futuro_conductor';
+        } else {
+            $rol = 'rol_predeterminado';
         }
 
         // Creación del nuevo usuario
@@ -63,6 +74,8 @@ class RegisteredUserController extends Controller
             'numero_licencia' => $request->numero_licencia,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'rol' => $rol,
+
         ]);
 
         // Verificación de que el usuario se haya creado correctamente
@@ -70,14 +83,16 @@ class RegisteredUserController extends Controller
             return back()->with('error', 'Hubo un error al crear el usuario. Por favor, intentelo de nuevo');
         }
 
-        // Asignación de roles según las condiciones
+        /* Asignación de roles según las condiciones
         if ($user->edad >= 18 && $user->licencia === 'SI') {
             $user->assignRole('conductor');
         } elseif ($user->edad < 18 && empty($user->licencia)) {
             $user->assignRole('futuro_conductor');
         } elseif ($user->edad > 18 && empty($user->licencia)) {
             $user->assignRole('futuro_conductor');
-        }
+        }*/
+        
+        $user->assignRole($rol);
 
         // Envío de la notificación de verificación por correo electrónico
         event(new Registered($user));

@@ -52,6 +52,7 @@ class RegisteredMController extends Controller
             'edad' => $request->edad,
             'email'=> $request->email,
             'password' => Hash::make($request->password),
+            'rol' => $request->rol,
         
         ]);
 

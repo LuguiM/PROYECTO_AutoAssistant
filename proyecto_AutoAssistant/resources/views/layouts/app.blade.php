@@ -55,10 +55,14 @@
                                 class="nav_name">PERFIL</span> </a>
 
                         @if(auth()->user()->hasAnyRole('conductor', 'futuro_conductor', 'admin'))  
-                        <a href="{{ route('publicaciones.index') }}" class="nav_link">
-                            <i class='bx bx-car nav_icon'></i>
-                            <span class="nav_name">{{ __('PILOTOS') }}</span>
-                        </a>
+                            <a href="{{ route('publicaciones.index') }}" class="nav_link">
+                                <i class='bx bx-car nav_icon'></i>
+                                <span class="nav_name">{{ __('PILOTOS') }}</span>
+                            </a>
+                            <a href="{{ url('/serviciosMecanicos') }}" class="nav_link">
+                                <i class='bx bx-wrench nav_icon' ></i>
+                                <span class="nav_name">{{ __('ServiciosMecanicos') }}</span>
+                            </a>
                         @endif
                         @if(auth()->user()->hasRole('admin'))
                         <a href="{{ route('publicaciones.create') }}" class="nav_link"> <i
