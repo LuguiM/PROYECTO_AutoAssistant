@@ -107,7 +107,7 @@
                     </div>
                 </details>
                 <div class="row">
-                    <a href="{{url('/inscripcion')}}" class="btn btn-primary btn-lg">Inscribir servicio</a>
+                    <a href="{{ route('servicios-mecanicos.create') }}" class="btn btn-primary btn-lg">Inscribir servicio mecanico</a>
                 </div>
             </div>
         </div>
@@ -159,7 +159,7 @@
                     </div>
                 </details>
                 <div class="row">
-                    <a href="{{url('/inscripcion')}}" class="btn btn-primary btn-lg">Inscribir servicio</a>
+                    <a href="{{ route('servicios-mecanicos.create') }}" class="btn btn-primary btn-lg">Inscribir servicio mecanico</a>
                 </div>
             </div>
         </div>       
@@ -169,6 +169,12 @@
     <br>
 
     <div class="row">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <h2 class="title text-white">No se encuentran servicios inscritos actualmente</h2>
     </div>
 

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use App\Http\Controllers\PublicacionController;
+use App\Http\Controllers\ServicioMecanicoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,9 +94,9 @@ Route::get('/requisitos', function () {
     return view('serviciosMecanicos.requisitos');
 });
 
-Route::get('/inscripcion', function () {
+/*Route::get('/inscripcion', function () {
     return view('serviciosMecanicos.inscripcion');
-});
+});*/
 
 Route::get('/serviciosMecanicos', function () {
     return view('serviciosMecanicos.servicioM');
@@ -109,11 +110,20 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->middleware(['auth', 'verified'])->name('welcome');
 
+
+//Rutas para pilotos
 Route::get('/publicacion', [PublicacionController::class, 'index'])->name('publicaciones.index');
 Route::get('/publicaciones/create', [PublicacionController::class, 'create'])->name('publicaciones.create');
 Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('publicaciones.store');
 Route::get('/publicaciones/buscar', [PublicacionController::class, 'buscar'])->name('publicaciones.buscar');
 Route::get('/publicaciones/{publicacion}', 'App\Http\Controllers\PublicacionController@show')->name('publicaciones.show');
+
+//Rutas para servicios mecanicos
+Route::get('/servicios-mecanicos', [ServicioMecanicoController::class, 'index'])->name('servicios-mecanicos.index');
+Route::get('/servicios-mecanicos/create', [ServicioMecanicoController::class, 'create'])->name('servicios-mecanicos.create');
+Route::post('/servicios-mecanicos', [ServicioMecanicoController::class, 'store'])->name('servicios-mecanicos.store');
+Route::get('/servicios-mecanicos/buscar', [ServicioMecanicoController::class, 'buscar'])->name('servicios-mecanicos.buscar');
+Route::get('/servicios-mecanicos/{servicio}', [ServicioMecanicoController::class, 'show'])->name('servicios-mecanicos.show');
 
 
 
