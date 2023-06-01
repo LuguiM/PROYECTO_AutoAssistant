@@ -19,7 +19,8 @@ class ServicioMecanicoController extends Controller
      */
     public function index()
     {
-        return view('serviciosMecanicos.requisitos');
+        $serviciosMecanicos = ServicioMecanico::all();
+        return view('serviciosMecanicos.requisitos', compact('serviciosMecanicos'));
         
     }
 
@@ -111,7 +112,7 @@ class ServicioMecanicoController extends Controller
                 'numeroContacto' => $request->numeroContacto,
                 'logo' => $logo_path,
                 'rubro' => $request->rubro,
-                'servicio' => $request->servicio,
+                'servicio' => $request->servicios,
                 'descripcion' => $request->descripcion,
                 'direccion' => $request->direccion,
                 'tipoServicio' => $request->tipoServicio,
@@ -147,17 +148,92 @@ class ServicioMecanicoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ServicioMecanico $servicioMecanico)
+    public function edit($id)
     {
-        //
+        $servicioMecanico = ServicioMecanico::find($id);
+    
+        // Verificar si el servicio mecánico existe
+        if (!$servicioMecanico) {
+            return redirect()->route('servicios-mecanicos.index')->with('error', 'El servicio mecánico no existe.');
+        }
+        
+        // Verificar si el servicio mecánico pertenece al usuario actual
+        if ($servicioMecanico->id_user != Auth::id()) {
+            return redirect()->route('servicios-mecanicos.index')->with('error', 'No tienes permiso para editar este servicio mecánico.');
+        }
+        
+        return view('serviciosMecanicos.edit', compact('servicioMecanico'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ServicioMecanico $servicioMecanico)
+    public function update(Request $request, ServicioMecanico $servicioMecanico, $id)
     {
-        //
+       
+    // Validar los datos del formulario
+        $validator = Validator::make($request->all(), [
+            'representante' => 'required',
+            'horario' => 'required',
+            'numeroContacto' => 'required',
+            'descripcion' => 'required',
+            'rubro' => 'required',
+            'servicio' => 'required',
+            'direccion' => 'required',
+            'acreditaciones' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'acreditaciones2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'acreditaciones3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'acreditaciones4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Obtener el servicio a actualizar
+        $servicio = $servicioMecanico::findOrFail($id);
+
+        // Actualizar los campos del servicio con los datos del formulario
+        $servicio->representante = $request->input('representante');
+        $servicio->horario = $request->input('horario');
+        $servicio->numeroContacto = $request->input('numeroContacto');
+        $servicio->descripcion = $request->input('descripcion');
+        $servicio->rubro = $request->input('rubro');
+        $servicio->servicios = $request->input('servicio');
+        $servicio->direccion = $request->input('direccion');
+
+        // Subir las acreditaciones si se proporcionaron
+        if ($request->hasFile('acreditaciones')) {
+            $acreditaciones = $request->file('acreditaciones');
+            // Guardar el archivo y obtener su ruta
+            $rutaAcreditaciones = $acreditaciones->store('acreditaciones');
+            $servicio->acreditaciones = $rutaAcreditaciones;
+        }
+
+        if ($request->hasFile('acreditaciones2')) {
+            $acreditaciones2 = $request->file('acreditaciones2');
+            $rutaAcreditaciones2 = $acreditaciones2->store('acreditaciones');
+            $servicio->acreditaciones2 = $rutaAcreditaciones2;
+        }
+
+        if ($request->hasFile('acreditaciones3')) {
+            $acreditaciones3 = $request->file('acreditaciones3');
+            $rutaAcreditaciones3 = $acreditaciones3->store('acreditaciones');
+            $servicio->acreditaciones3 = $rutaAcreditaciones3;
+        }
+
+        if ($request->hasFile('acreditaciones4')) {
+            $acreditaciones4 = $request->file('acreditaciones4');
+            $rutaAcreditaciones4 = $acreditaciones4->store('acreditaciones');
+            $servicio->acreditaciones4 = $rutaAcreditaciones4;
+        }
+
+        // Guardar los cambios en el servicio
+        $servicio->save();
+
+        // Redireccionar a la página de visualización del servicio actualizado
+        return redirect()->route('servicios-mecanicos.show', $servicio->id)->with('success', 'El servicio se ha actualizado correctamente.');
+
     }
 
     /**

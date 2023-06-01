@@ -36,6 +36,9 @@
   padding: 10px;
 }
 
+.cardo{
+    background-color: #d9d9d9;
+}
 
 </style>
 
@@ -56,52 +59,81 @@
                         <ol class="list-group list-group-numbered requirements">
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
-                                <div class="fw-bold">Licencia de Actividad</div>
-                                Content for list item
-                                </div>
-                                <span class="badge bg-danger rounded-pill">Obligatorio</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                <div class="fw-bold">Razon Social</div>
-                                Content for list item
-                                </div>
-                                <span class="badge bg-success rounded-pill">Opcional</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                <div class="fw-bold">Rubro</div>
-                                Content for list item
+                                <div class="fw-bold">Nombre del taller</div>
+                                Nombre del taller mecanico para identificarse.
                                 </div>
                                 <span class="badge bg-danger rounded-pill">Obligatorio</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
                                 <div class="fw-bold">Dueño o representante</div>
-                                Content for list item
+                                Nombre del dueño o un representante del taller.
                                 </div>
                                 <span class="badge bg-danger rounded-pill">Obligatorio</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
-                                <div class="fw-bold">Categoria</div>
-                                Content for list item
+                                <div class="fw-bold">Rubro</div>
+                                Area en la que trabajaran.
+                                </div>
+                                <span class="badge bg-danger rounded-pill">Obligatorio</span>
+                            </li>
+                            
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                <div class="fw-bold">Direccion</div>
+                                Direccion del taller mecanico y funtos de referencias.
+                                </div>
+                                <span class="badge bg-danger rounded-pill">Obligatorio</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                <div class="fw-bold">Servicios que ofrecen</div>
+                                Nombre del servicio que ofrece el taller.
+                                </div>
+                                <span class="badge bg-danger rounded-pill">Obligatorio</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                <div class="fw-bold">Descripcion del servicio</div>
+                                Breve descripcion sobre el servicio que se brinda.
                                 </div>
                                 <span class="badge bg-success rounded-pill">Opcional</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                <div class="fw-bold">Tipo de servicio</div>
+                                El tipo de servicio que ofrecera ya sea adomicilio o con citas previas.
+                                </div>
+                                <span class="badge bg-danger rounded-pill">Obligatorio</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                <div class="fw-bold">Horario de atencion</div>
+                                Horarios de atencion a clientes.
+                                </div>
+                                <span class="badge bg-danger rounded-pill">Obligatorio</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                <div class="fw-bold">Numero de contacto</div>
+                                Numero telefonico para contactar.
+                                </div>
+                                <span class="badge bg-success rounded-pill">Opcional</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                <div class="fw-bold">Logo o imagen del servicio</div>
+                                Logotipo que represente el taller o una imagen que represente el servicio.
+                                </div>
+                                <span class="badge bg-danger rounded-pill">Obligatorio</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
                                 <div class="fw-bold">Acreditaciones</div>
-                                Content for list item
+                                Imagenes de certificaciones, especializaciones o reconocimientos, MAXIMO 4. 
                                 </div>
                                 <span class="badge bg-success rounded-pill">Opcional</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                <div class="fw-bold">Logo</div>
-                                Content for list item
-                                </div>
-                                <span class="badge bg-danger rounded-pill">Obligatorio</span>
                             </li>
                         </ol>
                     </div>
@@ -122,38 +154,66 @@
                         <ol class="list-group list-group-numbered requirements">
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
+                                <div class="fw-bold">Representante</div>
+                                Nombre del mecanico para identificarse.
+                                </div>
+                                <span class="badge bg-danger rounded-pill">Obligatorio</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
                                 <div class="fw-bold">Rubro</div>
-                                Content for list item
+                                Tipo de area en la que trabajara.
                                 </div>
                                 <span class="badge bg-danger rounded-pill">Obligatorio</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
-                                <div class="fw-bold">Dueño o representante</div>
-                                Content for list item
+                                <div class="fw-bold">Tipo de servicio</div>
+                                El tipo de servicio que ofrecera ya sea adomicilio o con citas previas.
                                 </div>
                                 <span class="badge bg-danger rounded-pill">Obligatorio</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
-                                <div class="fw-bold">Categoria</div>
-                                Content for list item
+                                <div class="fw-bold">Servicio que ofrece</div>
+                                Nombre del servicio que ofrecera.
+                                </div>
+                                <span class="badge bg-danger rounded-pill">Obligatorio</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                <div class="fw-bold">Descripcion del servicio</div>
+                                Breve descripcion del servicio que brindara.
+                                </div>
+                                <span class="badge bg-success rounded-pill">Opcional</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                <div class="fw-bold">Horario de Atencion</div>
+                                Horarios de atencion para clientes.
+                                </div>
+                                <span class="badge bg-danger rounded-pill">Obligatorio</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                <div class="fw-bold">Numero de contacto</div>
+                                Numero telefonico para contactar.
+                                </div>
+                                <span class="badge bg-success rounded-pill">Opcional</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                <div class="fw-bold">Logo o imagen del servicio</div>
+                                Logotipo que represente al mecanico o una imagen que represente al servicio.
                                 </div>
                                 <span class="badge bg-success rounded-pill">Opcional</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
                                 <div class="fw-bold">Acreditaciones</div>
-                                Content for list item
+                                Imagenes de certificaciones, especializaciones o reconocimientos, MAXIMO 4.
                                 </div>
                                 <span class="badge bg-success rounded-pill">Opcional</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                <div class="fw-bold">Logo</div>
-                                Content for list item
-                                </div>
-                                <span class="badge bg-danger rounded-pill">Obligatorio</span>
                             </li>
                         </ol>
                     </div>
@@ -166,17 +226,63 @@
     @endif
     
 
-    <br>
-
-    <div class="row">
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+    @if(Auth::check())
+        <div class="row">
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            <div class="container">
+                <h2 class="title text-white">Servicios Inscritos</h2>
+                <div class="d-flex flex-column">
+                    @if($serviciosMecanicos->isEmpty())
+                        <div class="col-md-12">
+                            <div class="alert alert-info" role="alert">
+                                No tienes ningún servicio mecánico inscrito.
+                            </div>
+                        </div>
+                    @else
+                        @php
+                            $hasServices = false;
+                        @endphp
+                        @foreach($serviciosMecanicos as $servicioMecanico)
+                            @if(Auth::id() == $servicioMecanico->id_user)
+                                @php
+                                    $hasServices = true;
+                                @endphp
+                                <div class="card m-2">
+                                    <img src="{{ $servicioMecanico->logo }}" class="card-img-top" alt="Imagen del servicio mecánico">
+                                    <div class="card-body cardo">
+                                        <h5 class="card-title">{{ $servicioMecanico->servicios }}</h5>
+                                        <p class="card-text">Creado el: {{ $servicioMecanico->created_at->format('d/m/Y') }}</p>
+                                        <div class="d-flex justify-content-between">
+                                            <a href="{{ route('servicios-mecanicos.edit', $servicioMecanico->id) }}" class="btn btn-primary">Modificar</a>
+                                            <form action="{{ route('servicios-mecanicos.destroy', $servicioMecanico->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                        @if(!$hasServices)
+                            <div class="col-md-12">
+                                <div class="alert alert-info" role="alert">
+                                    No tienes ningún servicio mecánico inscrito.
+                                </div>
+                            </div>
+                        @endif
+                    @endif
+                </div>
             </div>
-        @endif
+        </div>
+    @endif
 
-        <h2 class="title text-white">No se encuentran servicios inscritos actualmente</h2>
-    </div>
+
+    
 
 </x-app-layout>
 <script>

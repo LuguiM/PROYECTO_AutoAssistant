@@ -70,7 +70,7 @@
                         @endif
 
                         @if(auth()->user()->hasAnyRole('taller_mecanico', 'mecanico_independiente', 'admin'))
-                        <a href="{{ url('/requisitos') }}" class="nav_link"> 
+                        <a href="{{ route('servicios-mecanicos.index') }}" class="nav_link"> 
                             <i class='bx bx-folder-plus nav_icon'></i> <span class="nav_name">ServiciosMecanicos</span> </a>
                         @endif
 

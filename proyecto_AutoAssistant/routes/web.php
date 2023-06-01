@@ -89,10 +89,10 @@ Route::get('/mario', function () {
     return view('mario');
 });
 
-//Inscripcion de servicios mecanicos
+/*Inscripcion de servicios mecanicos
 Route::get('/requisitos', function () {
     return view('serviciosMecanicos.requisitos');
-});
+});*/
 
 /*Route::get('/inscripcion', function () {
     return view('serviciosMecanicos.inscripcion');
@@ -124,6 +124,10 @@ Route::get('/servicios-mecanicos/create', [ServicioMecanicoController::class, 'c
 Route::post('/servicios-mecanicos', [ServicioMecanicoController::class, 'store'])->name('servicios-mecanicos.store');
 Route::get('/servicios-mecanicos/buscar', [ServicioMecanicoController::class, 'buscar'])->name('servicios-mecanicos.buscar');
 Route::get('/servicios-mecanicos/{servicio}', [ServicioMecanicoController::class, 'show'])->name('servicios-mecanicos.show');
+Route::get('/servicios-mecanicos/{servicio}/edit', [ServicioMecanicoController::class, 'edit'])->name('servicios-mecanicos.edit');
+Route::delete('/servicios-mecanicos/{servicio}', [ServicioMecanicoController::class, 'destroy'])->name('servicios-mecanicos.destroy');
+Route::put('/servicios-mecanicos/{id}', [ServicioMecanicoController::class, 'update'])->name('servicios-mecanicos.update');
+
 
 
 

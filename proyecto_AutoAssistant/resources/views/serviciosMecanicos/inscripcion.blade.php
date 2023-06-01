@@ -131,7 +131,7 @@
 
                 <div class="col-12 d-flex justify-content-between">
                     <button type="submit" class="btn btn-primary">Inscribir servicio</button>
-                    <a href="{{ url()->previous() }}" class="btn btn-danger">Cancelar</a>
+                    <a href="{{ route('servicios-mecanicos.index') }}" class="btn btn-danger">Cancelar</a>
                 </div>
 
             </div>
@@ -215,7 +215,7 @@
                 </div>
                 <div class="col-12 d-flex justify-content-between">
                     <button type="submit" class="btn btn-primary">Inscribir Servicio</button>
-                    <a href="{{url('/requisitos')}}" class="btn btn-danger">Cancelar</a>
+                    <a href="{{ route('servicios-mecanicos.index') }}" class="btn btn-danger">Cancelar</a>
                 </div>
             <div>
         </form>     
