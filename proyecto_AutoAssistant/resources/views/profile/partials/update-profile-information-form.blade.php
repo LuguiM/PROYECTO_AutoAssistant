@@ -17,14 +17,14 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Nombre')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-input-label for="name" :value="__('Nombre:')" />
+            <x-text-input style="margin-left: 85px;" id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
-
+        <p></p>
         <div>
-            <x-input-label for="email" :value="__('Correo Electrónico')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
+            <x-input-label for="email" :value="__('Correo Electrónico:')" />
+            <x-text-input style="margin-left: 5px;"  id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
@@ -45,24 +45,29 @@
                 </div>
             @endif
         </div>
-        <div>
-            <x-input-label for="edad" :value="__('Edad')" />
-            <x-text-input id="edad" name="edad" type="number" class="mt-1 block w-full" :value="old('edad', $user->edad)" required autocomplete="edad" />
-            <x-input-error class="mt-2" :messages="$errors->get('edad')" />
+        <p></p>
+        <div class="float-right ml-8">
+        <x-input-label for="edad" :value="__('Edad:')" />
+        <x-text-input style="margin-left: 106px;"  id="edad" name="edad" type="number" class="mt-1 block w-full" :value="old('edad', $user->edad)" required autocomplete="edad" />
+        <x-input-error class="mt-2" :messages="$errors->get('edad')" />
         </div>
-
+        
+        <p></p>
         <div>
-            <x-input-label for="license" :value="__('Licencia')" />
-            <input id="licencia" name="licencia" type="checkbox" class="mt-1 block w-full" value="SI" {{ old('licencia') ? 'checked' : '' }} />
-            <x-input-error class="mt-2" :messages="$errors->get('licencia')" />
-        </div>
-
+    <x-input-label for="license" :value="__('Licencia:')" />
+    <select style="margin-left: 85px;" id="licencia" name="licencia" class="mt-1 block w-full">
+        <option value="SI" {{ old('licencia') == 'SI' ? 'selected' : '' }}>Sí</option>
+        <option value="NO" {{ old('licencia') == 'NO' ? 'selected' : '' }}>No</option>
+    </select>
+    <x-input-error class="mt-2" :messages="$errors->get('licencia')" />
+</div>
+<p></p>
         <div>
-            <x-input-label for="license" :value="__('Numero de licencia')" />
+            <x-input-label for="license" :value="__('Numero de licencia:')" />
             <x-text-input id="numero_licencia" name="numero_licencia" type="text" class="mt-1 block w-full" :value="old('numero_licencia', $user->numero_licencia)" autocomplete="numero_licencia" />
             <x-input-error class="mt-2" :messages="$errors->get('numero_licencia')" />
         </div>
-
+        <p></p>
         <div class="flex items-center gap-4">
             <x-primary-button class="btn_card_profile">{{ __('Guardar') }}</x-primary-button>
 

@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ejemplo de cuadro con botones grandes</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <style>
-     @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900|Rubik:300,400,500,700,900');
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900|Rubik:300,400,500,700,900');
     html, body {
       height: 100%;
       display: flex;
@@ -20,7 +20,7 @@
       justify-content: center;
     }
     body {
-      background-image: url('/imagenes/fondo4.jpg');
+      background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(182,182,182,1) 100%);
       background-repeat: no-repeat;
       background-position: center center;
       background-attachment: fixed;
@@ -30,23 +30,28 @@
       padding: 20px; /* Agrega un espacio de relleno alrededor del contenido */
     }
     .card-container {
-      max-width: 600px;
+     
+      
+    max-width: 600px;
+    
+   
     }
     .card {
       border-radius: 1rem;
       font-size: 40px;
     }
+    .card-body{
+      border-radius: 1rem;
+    background-color: black;
+    }
     .card-text {
+      color: #FFFFFF;
       margin-bottom: 50px;
       margin-top: 0px;
     }
-    .option-box {
-      padding: 0.1px;
-      background-color: #f8f9fa;
-      border: 1px solid #ccc;
-      border-radius: 1rem; /* Redondear todos los lados */
-    }
+    .option-box,
     .option-box1 {
+      font-size: 25px; 
       padding: 0.1px;
       background-color: #f8f9fa;
       border: 1px solid #ccc;
@@ -54,9 +59,10 @@
     }
     
     .nav-link {
+      background-color: #0d6efd;
       display: block;
       padding:  0.5rem;
-      color: #0d6efd;
+      color: #FFFFFF;
       text-decoration: none;
       transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
       border-radius: 1rem; /* Redondear todos los lados */
@@ -87,7 +93,15 @@
         </div>
         <p></p>
         <div class="option-box1">
+          <a class="nav-link nav-user-img small" href="#"><span class="login">Futuro Conductor</span></a>
+        </div>
+        <p></p>
+        <div class="option-box1">
           <a class="nav-link nav-user-img small" href="#"><span class="login">Taller Mecanico</span></a>
+        </div>
+        <p></p>
+        <div class="option-box1">
+          <a class="nav-link nav-user-img small" href="#"><span class="login">Mecanico independiente</span></a>
         </div>
       </div>
     </div>
@@ -96,5 +110,3 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-

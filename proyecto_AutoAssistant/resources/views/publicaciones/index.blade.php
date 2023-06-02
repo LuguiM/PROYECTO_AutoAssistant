@@ -1,19 +1,34 @@
 <style>
-   .card_p {
-        max-width: 200px; /* Ajusta el ancho máximo del cuadro de la publicación */
-        margin: 0 auto; /* Centra el cuadro horizontalmente */
+    .card_p {
+        max-width: 200px;
+        margin: 0 auto;
+        filter: brightness(50%);
+        transition: filter 0.3s;
+        border-radius: 10px; /* Ajusta el radio de las esquinas */
     }
 
     .card_img {
-        width: 100%; /* Ajusta el ancho de la imagen al 100% del cuadro */
-        height: 150px; /* Ajusta la altura fija del cuadro de la imagen */
-        object-fit: cover; /* Ajusta el recorte de la imagen para que se ajuste al tamaño del cuadro */
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px; /* Ajusta el radio de las esquinas */
     }
 
     .card_title_p {
-        font-size: 16px; /* Ajusta el tamaño de fuente del título */
-        margin-bottom: 5px; /* Ajusta el margen inferior del título */
+        font-size: 16px;
+        margin-bottom: 5px;
+        
     }
+
+    /* Estilos para volver a la apariencia normal al pasar el mouse */
+    .card_p:hover {
+        filter: brightness(100%); /* Restaura el nivel de brillo normal */
+    }
+
+    .card_p:hover .card_title_p {
+        color: initial; /* Restaura el color del texto normal */
+    }
+   
 </style>
 <x-app-layout>
     <x-slot name="header">
@@ -55,7 +70,7 @@
         <div class="container">
     <div class="row">
         @if($publicaciones && $publicaciones->count() > 0)
-            @foreach ($publicaciones->take(10) as $publicacion)
+            @foreach ($publicaciones->take(40) as $publicacion)
                 <div class="col-md-2">
                     <div class="card mb-4 shadow-sm card_p">
                         <img class="card-img-top card_img" src="{{ asset($publicacion->imagen) }}" alt="{{ $publicacion->titulo }}" href="{{ route('publicaciones.show', $publicacion->id) }}">
