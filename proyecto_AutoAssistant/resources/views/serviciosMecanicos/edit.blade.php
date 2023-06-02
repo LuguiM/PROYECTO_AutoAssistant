@@ -13,6 +13,13 @@
     label{
         font-size:16px;
     }
+    img{
+    max-width: 100%;
+    max-height: 160px; 
+    display: block;
+    margin: 0 auto; 
+    object-fit: contain; 
+    }
 </style>
 
 <x-app-layout>
@@ -43,7 +50,7 @@
                     <x-input-error :messages="$errors->get('representante')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="form-floating col-md-6">
-                    <textarea class="form-control" id="horario" name="horario" placeholder="Horario de Atencion" value="{{ $servicioMecanico->horario }}"></textarea>
+                    <textarea class="form-control" id="horario" name="horario" placeholder="Horario de Atencion" value="">{{ $servicioMecanico->horario }}</textarea>
                     <label for="horario">Horario de Atencion</label>
                     <x-input-error :messages="$errors->get('horario')" class="alert alert-danger" role="alert"/>
                 </div>
@@ -52,14 +59,15 @@
                     <label for="numeroContacto">Numero de Contacto</label>
                     <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="form-floating col-12">
-                    <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion">{{ $servicioMecanico->descripcion }}</textarea>
-                    <label for="descripcion">Descripcion</label>
-                    <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert"/>
-                </div>
+                
                 <div class="col-12">
-                    <label for="logo" class="form-label text-white">Logo</label>
-                    <input type="file" class="form-control" placeholder="Logo" id="logo" name="logo" accept=".png, .jpg, .jpeg">
+                    <label for="logo" class="text-white">Logo:</label>
+                    <input type="file" name="logo" id="logo" class="form-control" >
+                    @if ($servicioMecanico->logo)
+                        <img id="logo-preview" src="{{ asset($servicioMecanico->logo) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
+                    @else
+                        <img id="logo-preview" src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+                    @endif
                     <small class="form-text text-muted">Selecciona una nueva imagen para el logo del servicio mecánico.</small>
                     @error('logo')
                         <span class="invalid-feedback" role="alert">
@@ -67,6 +75,11 @@
                         </span>
                     @enderror
                     <x-input-error :messages="$errors->get('logo')" class="alert alert-danger" role="alert"/>
+                </div>
+                <div class="form-floating col-12">
+                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion/Adomicilio" aria-label="Last name" value="{{ $servicioMecanico->direccion }}">
+                    <label for="direccion">Direccion del Taller</label>
+                    <x-input-error :messages="$errors->get('direccion')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="form-floating col-12">
                     <select id="rubro" name="rubro" class="form-select">
@@ -87,14 +100,18 @@
                     <label for="servicio">Servicio que Ofrece</label>
                     <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert"/>
                 </div>
-
                 <div class="form-floating col-12">
-                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion/Adomicilio" aria-label="Last name" value="{{ $servicioMecanico->direccion }}">
-                    <label for="direccion">Direccion del Taller</label>
-                    <x-input-error :messages="$errors->get('direccion')" class="alert alert-danger" role="alert"/>
+                    <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion">{{ $servicioMecanico->descripcion }}</textarea>
+                    <label for="descripcion">Descripcion</label>
+                    <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="col-12">
+                <div class="col-md-6">
                     <label for="acreditacion_1" class="form-label text-white">Acreditaciones</label>
+                    @if ($servicioMecanico->acreditacion_1)
+                        <img id="acreditacion_1" src="{{ asset($servicioMecanico->acreditacion_1) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
+                    @else
+                        <img id="acreditacion_1 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+                    @endif
                     <input type="file" class="form-control" id="acreditacion_1"  name="acreditacion_1" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
                     <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 1.</small>
                     @error('acreditacion_1')
@@ -105,9 +122,14 @@
                     <x-input-error :messages="$errors->get('acreditacion_1')" class="alert alert-danger" role="alert"/>
                 </div>
 
-                <div class="col-12">
+                <div class="col-md-6">
                     <label for="acreditacion_2" class="form-label text-white">Acreditación 2</label>
                     <input type="file" class="form-control" id="acreditacion_2"  name="acreditacion_2" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
+                    @if ($servicioMecanico->acreditacion_2)
+                        <img id="acreditacion_2" src="{{ asset($servicioMecanico->acreditacion_2) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
+                    @else
+                        <img id="acreditacion_2 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+                    @endif
                     <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 2.</small>
                     @error('acreditacion_2')
                         <span class="invalid-feedback" role="alert">
@@ -117,9 +139,14 @@
                     <x-input-error :messages="$errors->get('acreditacion_2')" class="alert alert-danger" role="alert"/>
                 </div>
 
-                <div class="col-12">
+                <div class="col-md-6">
                     <label for="acreditacion_3" class="form-label text-white">Acreditación 3</label>
                     <input type="file" class="form-control" id="acreditacion_3"  name="acreditacion_3" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
+                    @if ($servicioMecanico->acreditacion_3)
+                        <img id="acreditacion_3" src="{{ asset($servicioMecanico->acreditacion_3) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
+                    @else
+                        <img id="acreditacion_3 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+                    @endif
                     <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 3.</small>
                     @error('acreditacion_3')
                         <span class="invalid-feedback" role="alert">
@@ -129,9 +156,14 @@
                     <x-input-error :messages="$errors->get('acreditacion_3')" class="alert alert-danger" role="alert"/>
                 </div>
 
-                <div class="col-12">
+                <div class="col-md-6">
                     <label for="acreditacion_4" class="form-label text-white">Acreditación 4</label>
                     <input type="file" class="form-control" id="acreditacion_4"  name="acreditacion_4" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
+                    @if ($servicioMecanico->acreditacion_4)
+                        <img id="acreditacion_4" src="{{ asset($servicioMecanico->acreditacion_4) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
+                    @else
+                        <img id="acreditacion_4 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+                    @endif
                     <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 4.</small>
                     @error('acreditacion_4')
                         <span class="invalid-feedback" role="alert">
@@ -190,16 +222,16 @@
                 <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert"/>
             </div>
 
-            <div class="form-floating col-md-6">
-                <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion">{{ $servicioMecanico->descripcion }}</textarea>
-                <label for="descripcion">Descripcion del Servicio</label>
-                <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert"/>
-            </div>
-
             <div class="col-12">
                 <label for="logo" class="form-label text-white">Logo o Imagen del Servicio</label>
                 <input type="file" class="form-control" id="logo" name="logo">
                 <x-input-error :messages="$errors->get('logo')" class="alert alert-danger" role="alert"/>
+            </div>
+
+            <div class="form-floating col-12">
+                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion/Adomicilio" aria-label="Last name" value="{{ $servicioMecanico->direccion }}">
+                <label for="direccion">Direccion del Taller</label>
+                <x-input-error :messages="$errors->get('direccion')" class="alert alert-danger" role="alert"/>
             </div>
 
             <div class="form-floating col-12">
@@ -223,34 +255,79 @@
             </div>
 
             <div class="form-floating col-12">
-                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion/Adomicilio" aria-label="Last name" value="{{ $servicioMecanico->direccion }}">
-                <label for="direccion">Direccion del Taller</label>
-                <x-input-error :messages="$errors->get('direccion')" class="alert alert-danger" role="alert"/>
+                <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion">{{ $servicioMecanico->descripcion }}</textarea>
+                <label for="descripcion">Descripcion del Servicio</label>
+                <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert"/>
             </div>
 
-            <div class="col-12">
-                <label for="acreditaciones" class="form-label text-white">Acreditacion 1</label>
-                <input type="file" class="form-control" id="acreditaciones" name="acreditaciones" placeholder="Acreditaciones" aria-label="Last name">
-                <x-input-error :messages="$errors->get('acreditaciones')" class="alert alert-danger" role="alert"/>
-            </div>
 
-            <div class="col-12">
-                <label for="acreditaciones2" class="form-label text-white">Acreditacion 2</label>
-                <input type="file" class="form-control" id="acreditaciones2" name="acreditaciones2" placeholder="Acreditaciones" aria-label="Last name">
-                <x-input-error :messages="$errors->get('acreditaciones2')" class="alert alert-danger" role="alert"/>
-            </div>
+            <div class="col-md-6">
+                    <label for="acreditacion_1" class="form-label text-white">Acreditaciones</label>
+                    @if ($servicioMecanico->acreditacion_1)
+                        <img id="acreditacion_1" src="{{ asset($servicioMecanico->acreditacion_1) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
+                    @else
+                        <img id="acreditacion_1 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+                    @endif
+                    <input type="file" class="form-control" id="acreditacion_1"  name="acreditacion_1" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
+                    <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 1.</small>
+                    @error('acreditacion_1')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <x-input-error :messages="$errors->get('acreditacion_1')" class="alert alert-danger" role="alert"/>
+                </div>
 
-            <div class="col-12">
-                <label for="acreditaciones3" class="form-label text-white">Acreditacion 3</label>
-                <input type="file" class="form-control" id="acreditaciones3" name="acreditaciones3" placeholder="Acreditaciones" aria-label="Last name">
-                <x-input-error :messages="$errors->get('acreditaciones3')" class="alert alert-danger" role="alert"/>
-            </div>
+                <div class="col-md-6">
+                    <label for="acreditacion_2" class="form-label text-white">Acreditación 2</label>
+                    <input type="file" class="form-control" id="acreditacion_2"  name="acreditacion_2" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
+                    @if ($servicioMecanico->acreditacion_2)
+                        <img id="acreditacion_2" src="{{ asset($servicioMecanico->acreditacion_2) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
+                    @else
+                        <img id="acreditacion_2 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+                    @endif
+                    <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 2.</small>
+                    @error('acreditacion_2')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <x-input-error :messages="$errors->get('acreditacion_2')" class="alert alert-danger" role="alert"/>
+                </div>
 
-            <div class="col-12">
-                <label for="acreditaciones4" class="form-label text-white">Acreditacion 4</label>
-                <input type="file" class="form-control" id="acreditaciones4" name="acreditaciones4" placeholder="Acreditaciones" aria-label="Last name">
-                <x-input-error :messages="$errors->get('acreditaciones4')" class="alert alert-danger" role="alert"/>
-            </div>
+                <div class="col-md-6">
+                    <label for="acreditacion_3" class="form-label text-white">Acreditación 3</label>
+                    <input type="file" class="form-control" id="acreditacion_3"  name="acreditacion_3" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
+                    @if ($servicioMecanico->acreditacion_3)
+                        <img id="acreditacion_3" src="{{ asset($servicioMecanico->acreditacion_3) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
+                    @else
+                        <img id="acreditacion_3 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+                    @endif
+                    <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 3.</small>
+                    @error('acreditacion_3')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <x-input-error :messages="$errors->get('acreditacion_3')" class="alert alert-danger" role="alert"/>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="acreditacion_4" class="form-label text-white">Acreditación 4</label>
+                    <input type="file" class="form-control" id="acreditacion_4"  name="acreditacion_4" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
+                    @if ($servicioMecanico->acreditacion_4)
+                        <img id="acreditacion_4" src="{{ asset($servicioMecanico->acreditacion_4) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
+                    @else
+                        <img id="acreditacion_4 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+                    @endif
+                    <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 4.</small>
+                    @error('acreditacion_4')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <x-input-error :messages="$errors->get('acreditacion_4')" class="alert alert-danger" role="alert"/>
+                </div>
 
             <div class="col-12 d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary">Actualizar Servicio</button>
@@ -262,6 +339,13 @@
     @endif
     
     
+
+
+
+
+
+
+
 
     <br>
 

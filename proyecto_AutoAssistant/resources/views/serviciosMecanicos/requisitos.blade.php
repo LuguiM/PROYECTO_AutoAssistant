@@ -1,45 +1,51 @@
 <style>
-.container {
-  
-  padding: 20px;
-  color: #242424;
-}
+    .container {
+    
+    padding: 20px;
+    color: #242424;
+    }
 
-.title {
-  margin-bottom: 20px;
-}
+    .title {
+    margin-bottom: 20px;
+    }
 
-.requirements {
-  font-size: 19px;
-  list-style: none;
-  padding-left: 0;
-  color: #242424;
-}
+    .requirements {
+    font-size: 19px;
+    list-style: none;
+    padding-left: 0;
+    color: #242424;
+    }
 
-.requirements li{
+    .requirements li{
+        background-color: #d9d9d9;
+    }
+
+    .accordion {
+    margin-bottom: 20px;
+    }
+
+    .accordion-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    }
+
+    .accordion-content {
     background-color: #d9d9d9;
-}
+    padding: 10px;
+    }
 
-.accordion {
-  margin-bottom: 20px;
-}
-
-.accordion-header {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.accordion-content {
-  background-color: #d9d9d9;
-  padding: 10px;
-}
-
-.cardo{
-    background-color: #d9d9d9;
-}
-
+    .cardo{
+        background-color: #d9d9d9;
+    }
+    img{
+    max-width: 100%;
+    max-height: 160px; 
+    display: block;
+    margin: 0 auto; 
+    object-fit: contain; 
+    }
 </style>
 
 <x-app-layout>

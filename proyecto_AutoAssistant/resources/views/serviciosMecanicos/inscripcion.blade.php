@@ -50,11 +50,6 @@
                     <label for="numeroContacto">Numero de Contacto</label>
                     <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="form-floating col-12">
-                    <textarea  class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" aria-label="Last name"></textarea>
-                    <label for="descripcion">Descripcion</label>
-                    <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert"/>
-                </div>
                 <div class="col-12">
                     <label for="logo" class="form-label text-white">Logo</label>
                     <input type="file" class="form-control" placeholder="Logo" id="logo" name="logo" accept=".png, .jpg, .jpeg">
@@ -64,6 +59,11 @@
                         </span>
                     @enderror
                     <x-input-error :messages="$errors->get('logo')" class="alert alert-danger" role="alert"/>
+                </div>
+                <div class="form-floating col-12">
+                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion/Adomicilio" aria-label="Last name">
+                    <label for="direccion">Direccion del Taller</label>
+                    <x-input-error :messages="$errors->get('direccion')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="form-floating col-12">
                     <select id="rubro" name="rubro" class="form-select">
@@ -84,6 +84,11 @@
                     <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="form-floating col-12">
+                    <textarea  class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" aria-label="Last name"></textarea>
+                    <label for="descripcion">Descripcion del servicio</label>
+                    <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert"/>
+                </div>
+                <div class="form-floating col-12">
                     <select id="tipoServicio" name="tipoServicio" class="form-select">
                         <option selected>Tipo Servicio...</option>
                         <option value="Adomicilio">Adomicilio</option>
@@ -92,27 +97,22 @@
                     <label for="rubro">Selecciona un Tipo de Servicio</label>
                     <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="form-floating col-12">
-                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion/Adomicilio" aria-label="Last name">
-                    <label for="direccion">Direccion del Taller</label>
-                    <x-input-error :messages="$errors->get('direccion')" class="alert alert-danger" role="alert"/>
-                </div>
-                <div class="col-12">
-                    <label for="acreditacion_1" class="form-label text-white">Acreditaciones</label>
+                <div class="col-md-6">
+                    <label for="acreditacion_1" class="form-label text-white">Acreditacion 1</label>
                     <input type="file" class="form-control" id="acreditacion_1"  name="acreditacion_1" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
                     <x-input-error :messages="$errors->get('acreditacion_1')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="col-12">
+                <div class="col-md-6">
                     <label for="acreditacion_2" class="form-label text-white">Acreditacion 2</label>
                     <input type="file" class="form-control" id="acreditacion_2"  name="acreditacion_2" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
                     <x-input-error :messages="$errors->get('acreditacion_2')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="col-12">
+                <div class="col-md-6">
                     <label for="acreditacion_3" class="form-label text-white">Acreditacion 3</label>
                     <input type="file" class="form-control" id="acreditacion_3"  name="acreditacion_3" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
                     <x-input-error :messages="$errors->get('acreditacion_3')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="col-12">
+                <div class="col-md-6">
                     <label for="acreditacion_4" class="form-label text-white">Acreditacion 4</label>
                     <input type="file" class="form-control" id="acreditacion_4"  name="acreditacion_4" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
                     <x-input-error :messages="$errors->get('acreditacion_4')" class="alert alert-danger" role="alert"/>
@@ -160,11 +160,6 @@
                     <label for="numeroContacto">Numero de Contacto</label>
                     <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="form-floating col-md-6">
-                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion del Servicio">
-                    <label for="descripcion">Descripcion del Servicio</label>
-                    <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert"/>
-                </div>
                 <div class="col-12">
                     <label for="logo" class="form-label text-white">Logo o Imagen del Servicio</label>
                     <input type="file" class="form-control" id="logo" name="logo">
@@ -184,31 +179,46 @@
                     <x-input-error :messages="$errors->get('rubro')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="form-floating col-12">
-                    <input type="text" class="form-control" id="servicio" name="servicio" placeholder="Servicio que Ofrece" aria-label="Last name">
-                    <label for="servicio">Servicio que Ofrece</label>
-                    <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert"/>
-                </div>
-                <div class="form-floating col-12">
                     <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion/Adomicilio" aria-label="Last name">
                     <label for="direccion">Direccion del Taller</label>
                     <x-input-error :messages="$errors->get('direccion')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="col-12">
+                <div class="form-floating col-12">
+                    <input type="text" class="form-control" id="servicio" name="servicio" placeholder="Servicio que Ofrece" aria-label="Last name">
+                    <label for="servicio">Servicio que Ofrece</label>
+                    <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert"/>
+                </div>
+                <div class="form-floating col-md-6">
+                    <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion del Servicio">
+                    <label for="descripcion">Descripcion del Servicio</label>
+                    <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert"/>
+                </div>
+                
+                <div class="form-floating col-12">
+                    <select id="tipoServicio" name="tipoServicio" class="form-select">
+                        <option selected>Tipo Servicio...</option>
+                        <option value="Adomicilio">Adomicilio</option>
+                        <option value="Cita/Reserva">Cita/Reserva</option>
+                    </select>
+                    <label for="rubro">Selecciona un Tipo de Servicio</label>
+                    <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert"/>
+                </div>
+                <div class="col-md-6">
                     <label for="acreditaciones" class="form-label text-white">Acreditacion 1</label>
                     <input type="file" class="form-control" id="acreditaciones"  name="acreditaciones" placeholder="Acreditaciones" aria-label="Last name">
                     <x-input-error :messages="$errors->get('acreditaciones')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="col-12">
+                <div class="col-md-6">
                     <label for="acreditaciones2" class="form-label text-white">Acreditacion 2</label>
                     <input type="file" class="form-control" id="acreditaciones2"  name="acreditaciones2" placeholder="Acreditaciones" aria-label="Last name">
                     <x-input-error :messages="$errors->get('acreditaciones2')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="col-12">
+                <div class="col-md-6">
                     <label for="acreditaciones3" class="form-label text-white">Acreditacion 3</label>
                     <input type="file" class="form-control" id="acreditaciones3"  name="acreditaciones3" placeholder="Acreditaciones" aria-label="Last name">
                     <x-input-error :messages="$errors->get('acreditaciones3')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="col-12">
+                <div class="col-md-6">
                     <label for="acreditaciones4" class="form-label text-white">Acreditacion 4</label>
                     <input type="file" class="form-control" id="acreditaciones4"  name="acreditaciones4" placeholder="Acreditaciones" aria-label="Last name">
                     <x-input-error :messages="$errors->get('acreditaciones4')" class="alert alert-danger" role="alert"/>
