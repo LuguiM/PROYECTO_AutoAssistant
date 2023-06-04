@@ -154,9 +154,16 @@ class ServicioMecanicoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ServicioMecanico $servicioMecanico)
+    public function show(ServicioMecanico $servicioMecanico, $id)
     {
-        //
+       
+        $servicioMecanico = ServicioMecanico::find($id);
+    
+        // Verificar si el servicio mecánico existe
+        if (!$servicioMecanico) {
+            return redirect()->route('servicios-mecanicos.show')->with('error', 'El servicio mecánico no existe.');
+        }
+        return view('serviciosMecanicos.show', compact('servicioMecanico'));
     }
 
     /**
