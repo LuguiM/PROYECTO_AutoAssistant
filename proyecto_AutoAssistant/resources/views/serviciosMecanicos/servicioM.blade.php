@@ -1,116 +1,86 @@
-
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  padding-top: 56px;
-  font-family: "Euclid Circular A";
-  background: #3f2d96;
-  color: #f9f9f9;
-}
-
-
-section {
-  display: flex;
-  background: #2b2a31;
-  padding: 20px 0;
-}
-
-header {
-  display: flex;
-  align-items: center;
-  height: 120px;
-  margin: 0;
-  padding: 0 20px;
-  background: #3f2d96;
-  font-weight: 400;
-  color: #f9f9f9;
-}
-
-.filters {
-  position: sticky;
-  z-index: 1;
-  top: 76px;
-  width: 160px;
-  height: 100%;
-  padding: 0 20px;
-}
-
-.filters h2 {
-  color: #7d7a7a;
-  font-size: 14px;
-  font-weight: 500;
-  margin: 0 0 10px;
-}
-
-.filters label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  height: 55px;
-  font-size: 14px;
-  color:white;
+  @import url('https://fonts.googleapis.com/css2?family=Inder&display=swap');
+  *{
+    box-sizing: border-box;
+  }
   
-}
-
-.filters input {
-  margin: 0;
-  accent-color: #6245e7;
-}
-
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding-right: 20px;
-  
-}
-
-.grid-item {
-  flex: 0 0 calc(23.33% - 10px); /* Ajustar el tamaño de las tarjetas */
-  min-width: 200px;
-  min-height: 200px;
-  margin-bottom: 20px; /* Agregar un margen inferior entre las tarjetas */
-  background: #3d3c46;
-  margin-right: 10px;
-  background-color:lightblue;
-  color:black;
-}
-
-
-.card {
-  font-size: 16px;
-  margin: 10px;
-  background-color: red;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.card-img-top {
-    max-width: 100%;
-  max-height: 160px; 
-  display: block;
-  margin: 0 auto; 
-  object-fit: contain; 
-}
-
-@media (max-width: 768px) {
-  .grid {
+  main{
+    display: flex;
+    padding: 10px 0;
+  }
+  .filters{
+    background: rgb(18, 121, 193);
+    background: linear-gradient(0deg, rgba(0,0,255,1) 0%, rgba(18, 121, 193, 1) 100%);
+    position: sticky;
+    z-index: 1;
+    top: 76px;
+    width: 160px;
+    height: 100%;
+    padding: 0 20px;
+  }
+  .filters h2{
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+  .filters label{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 55px;
+    font-size: 14px;
+    color:white;
+  }
+  .filters input{
+    margin: 0;
+    accent-color: #6245ef;
+  }
+  .grid{
+    display: flex;
     flex-wrap: wrap;
-    overflow: hidden;
-    height: auto;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 10px;
+    padding-bottom:10px;
   }
-
-  .grid-item {
-    flex-basis: 100%;
-    margin-right: 0;
+  .grid-item{
+    flex: 0 0  calc(23.33% - 10px);
+    min-width: 200px;
+    min-height: 100px;
+    margin-bottom: 20px;
+    background: #3d3c46;
+    margin-right: 10px;
+    background-color: lightblue;
+    color:black;
   }
-}
-
-
+  .card{
+    font-size: 16px;
+    margin: 10px;
+    background-color:red;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .card-img-top{
+    max-width: 100%;
+    max-height: 160px;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+    margin-bottom:10px;
+    margin-top:10px;
+  }
+  @media (max-width: 768px){
+    .grid{
+      flex-wrap: wrap;
+      overflow: hidden;
+      height: auto;
+    }
+    .grid-item{
+      flex-basis: 100%;
+      margin-right: 0;
+    }
+  }
 </style>
 
 <x-app-layout>
@@ -121,75 +91,110 @@ header {
     </x-slot>
     <br>
     
-    <body>    
-        <section>
-            <aside class="filters">
-                <h2>Rubros de talleres</h2>
+    <main>
+        <aside class="filters">
+            <h2>Rubros de talleres</h2>
+            <form id="buscarForm">
                 <label>
-                <input type="checkbox" />
-                Mecanico
+                    <input type="checkbox" name="rubro[]" value="Mecanico" onchange="buscarServicios()"> Mecanico
                 </label>
                 <label>
-                <input type="checkbox" />
-                Electrico
+                    <input type="checkbox" name="rubro[]" value="Electronico" onchange="buscarServicios()"> Electrico
                 </label>
                 <label>
-                <input type="checkbox" />
-                Enderezado y Pintura
+                    <input type="checkbox" name="rubro[]" value="Enderezado y Pintura" onchange="buscarServicios()"> Enderezado y Pintura
                 </label>
                 <label>
-                <input type="checkbox" />
-                General de caja
+                    <input type="checkbox" name="rubro[]" value="General de Caja" onchange="buscarServicios()"> General de Caja
                 </label>
                 <label>
-                <input type="checkbox" />
-                Lubricentro
+                    <input type="checkbox" name="rubro[]" value="Lubricentro" onchange="buscarServicios()"> Lubricentro
                 </label>
                 <label>
-                <input type="checkbox" />
-                Llanterias
+                    <input type="checkbox" name="rubro[]" value="Llanteria" onchange="buscarServicios()"> Llanterias
                 </label>
-            </aside>
-            <div class="grid">
-                <div class="grid-item">
-                    <img src="\imagenes\Logo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </form>
+        </aside>
+        <div class="grid">
+            @if($serviciosMecanicos && $serviciosMecanicos->count() > 0)
+                @forelse ($serviciosMecanicos as $index => $servicio)
+                    <div class="grid-item grid-item-{{ $index }}" data-rubro="{{ $servicio->rubro }}">
+                        <a href="{{ route('servicios-mecanicos.show', $servicio->id) }}">
+                            <img src="{{ $servicio->logo }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $servicio->servicios }}</h5>
+                            </div>
+                            <div class="card-footer text-body-secondary">
+                                {{ $servicio->representante }}
+                            </div>
+                        </a>
                     </div>
-                    <div class="card-footer text-body-secondary">
-                        2 days ago
+                @empty
+                    <div class="col-md-12 text-white">
+                        <p>No se encontraron resultados</p>
                     </div>
+                @endforelse
+            @else
+                <div class="col-md-12 text-white">
+                    <p>No se encontraron resultados</p>
                 </div>
-                <div class="grid-item">
-                    <img src="\imagenes\Logo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                    <div class="card-footer text-body-secondary">
-                        2 days ago
-                    </div>
-                </div>
-                <div class="grid-item">
-                    <img src="\imagenes\Logo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                    <div class="card-footer text-body-secondary">
-                        2 days ago
-                    </div>
-                </div>
-                <div class="grid-item">
-                    <img src="\imagenes\Logo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                    <div class="card-footer text-body-secondary">
-                        2 days ago
-                    </div>
-                </div>
-                
-            </div>
-        </section>
-    </body>
+            @endif
+        </div>
+    </main>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+  // Evento para capturar los cambios en los checkboxes de rubros
+  $('input[name="rubro[]"]').change(function() {
+    buscarServicios();
+  });
+
+  // Función para realizar la búsqueda y mostrar los resultados
+  function buscarServicios() {
+    var rubrosSeleccionados = $('input[name="rubro[]"]:checked').map(function() {
+      return $(this).val();
+    }).get();
+
+    // Ocultar todos los elementos de la cuadrícula
+    $('.grid-item').hide();
+
+    // Mostrar los elementos que coinciden con los rubros seleccionados
+    $('.grid-item').each(function() {
+      var rubro = $(this).attr('data-rubro');
+      if (rubrosSeleccionados.length === 0 || rubrosSeleccionados.includes(rubro)) {
+        $(this).show();
+      }
+    });
+
+    // Mostrar mensaje cuando no hay resultados
+    if ($('.grid-item:visible').length === 0) {
+      if ($('.no-results-message').length === 0) {
+        $('.grid').append('<p class="no-results-message text-white">No se encontraron resultados</p>');
+      }
+    } else {
+      $('.no-results-message').remove();
+    }
+
+    // Modificar la URL sin recargar la página
+    var state = {
+      rubros: rubrosSeleccionados
+    };
+    var url = window.location.href.split('?')[0] + '?rubros=' + rubrosSeleccionados.join(',');
+    history.pushState(state, '', url);
+  }
+
+  // Evento para controlar el retroceso del navegador
+  window.onpopstate = function(event) {
+    if (event.state && event.state.rubros) {
+      $('input[name="rubro[]"]').prop('checked', false);
+      var rubrosSeleccionados = event.state.rubros;
+      for (var i = 0; i < rubrosSeleccionados.length; i++) {
+        $('input[name="rubro[]"][value="' + rubrosSeleccionados[i] + '"]').prop('checked', true);
+      }
+      buscarServicios();
+    }
+  };
+</script>
+
+
 </x-app-layout>

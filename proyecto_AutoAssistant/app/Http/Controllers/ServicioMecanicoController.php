@@ -6,6 +6,8 @@ use App\Models\ServicioMecanico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Session;
 
 class ServicioMecanicoController extends Controller
 {
@@ -17,10 +19,23 @@ class ServicioMecanicoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $serviciosMecanicos = ServicioMecanico::all();
-        return view('serviciosMecanicos.requisitos', compact('serviciosMecanicos'));
+        
+        $user = auth()->user();
+        $rolesUsuario = $user->getRoleNames();
+
+        if($rolesUsuario->contains('taller_mecanico') || $rolesUsuario->contains('mecanico_independiente')){
+            $serviciosMecanicos = ServicioMecanico::all();
+            return view('serviciosMecanicos.requisitos', compact('serviciosMecanicos'));
+        }elseif($rolesUsuario->contains('conductor') || $rolesUsuario->contains('futuro_conductor')){
+            $serviciosMecanicos = ServicioMecanico::all();
+            
+            return view('serviciosMecanicos.servicioM', compact('serviciosMecanicos'));
+        }else{
+            return view('error');
+        }
+        
         
     }
 
@@ -111,7 +126,7 @@ class ServicioMecanicoController extends Controller
                 'numeroContacto' => $request->numeroContacto,
                 'logo' => $logo_path,
                 'rubro' => $request->rubro,
-                'servicio' => $request->servicios,
+                'servicio' => $request->servicio,
                 'descripcion' => $request->descripcion,
                 'direccion' => $request->direccion,
                 'tipoServicio' => $request->tipoServicio,
@@ -215,25 +230,25 @@ class ServicioMecanicoController extends Controller
             $acreditaciones = $request->file('acreditacion_1');
             // Guardar el archivo y obtener su ruta
             $rutaAcreditaciones = $acreditaciones->store('acreditacion_1');
-            $servicio->acreditaciones = $rutaAcreditaciones;
+            $servicio->acreditacion_1 = $rutaAcreditaciones;
         }
 
         if ($request->hasFile('acreditacion_2')) {
             $acreditaciones2 = $request->file('acreditacion_2');
             $rutaAcreditaciones2 = $acreditaciones2->store('acreditacion_2');
-            $servicio->acreditaciones2 = $rutaAcreditaciones2;
+            $servicio->acreditacion_2 = $rutaAcreditaciones2;
         }
 
         if ($request->hasFile('acreditacion_3')) {
             $acreditaciones3 = $request->file('acreditacion_3');
             $rutaAcreditaciones3 = $acreditaciones3->store('acreditacion_3');
-            $servicio->acreditaciones3 = $rutaAcreditaciones3;
+            $servicio->acreditacion_3 = $rutaAcreditaciones3;
         }
 
         if ($request->hasFile('acreditacion_4')) {
             $acreditaciones4 = $request->file('acreditacion_4');
             $rutaAcreditaciones4 = $acreditaciones4->store('acreditacion_');
-            $servicio->acreditaciones4 = $rutaAcreditaciones4;
+            $servicio->acreditacion_4 = $rutaAcreditaciones4;
         }
 
         // Guardar los cambios en el servicio
@@ -263,4 +278,18 @@ class ServicioMecanicoController extends Controller
         // Redirigir a la página de índice de servicios mecánicos con un mensaje de éxito
         return redirect()->route('servicios-mecanicos.index')->with('success', 'El servicio mecánico ha sido eliminado correctamente.');
     }
+
+    public function buscarServicio(Request $request)
+    {
+        // Obtén los rubros seleccionados del formulario de búsqueda
+        $rubros = $request->input('rubro');
+
+        // Consulta los servicios mecánicos que coincidan con los rubros seleccionados
+        $serviciosMecanicos = ServicioMecanico::whereIn('rubro', $rubros)->get();
+
+        // Retorna los resultados de la búsqueda en formato JSON
+        return response()->json($serviciosMecanicos);
+    }
+    
+
 }

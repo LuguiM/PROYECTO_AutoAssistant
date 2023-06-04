@@ -145,7 +145,7 @@
                     @if ($servicioMecanico->acreditacion_3)
                         <img id="acreditacion_3" src="{{ asset($servicioMecanico->acreditacion_3) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
                     @else
-                        <img id="acreditacion_3 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+                        <img id="acreditacion_3" src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
                     @endif
                     <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 3.</small>
                     @error('acreditacion_3')

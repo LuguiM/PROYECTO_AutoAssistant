@@ -204,24 +204,24 @@
                     <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="col-md-6">
-                    <label for="acreditaciones" class="form-label text-white">Acreditacion 1</label>
-                    <input type="file" class="form-control" id="acreditaciones"  name="acreditaciones" placeholder="Acreditaciones" aria-label="Last name">
-                    <x-input-error :messages="$errors->get('acreditaciones')" class="alert alert-danger" role="alert"/>
+                    <label for="acreditacion_1" class="form-label text-white">Acreditacion 1</label>
+                    <input type="file" class="form-control" id="acreditacion_1"  name="acreditacion_1" placeholder="Acreditaciones" aria-label="Last name">
+                    <x-input-error :messages="$errors->get('acreditacion_1')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="col-md-6">
-                    <label for="acreditaciones2" class="form-label text-white">Acreditacion 2</label>
-                    <input type="file" class="form-control" id="acreditaciones2"  name="acreditaciones2" placeholder="Acreditaciones" aria-label="Last name">
+                    <label for="acreditacion_2" class="form-label text-white">Acreditacion 2</label>
+                    <input type="file" class="form-control" id="acreditacion_2"  name="acreditacion_2" placeholder="Acreditaciones" aria-label="Last name">
                     <x-input-error :messages="$errors->get('acreditaciones2')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="col-md-6">
-                    <label for="acreditaciones3" class="form-label text-white">Acreditacion 3</label>
-                    <input type="file" class="form-control" id="acreditaciones3"  name="acreditaciones3" placeholder="Acreditaciones" aria-label="Last name">
-                    <x-input-error :messages="$errors->get('acreditaciones3')" class="alert alert-danger" role="alert"/>
+                    <label for="acreditacion_3" class="form-label text-white">Acreditacion 3</label>
+                    <input type="file" class="form-control" id="acreditacion_3"  name="acreditacion_3" placeholder="Acreditaciones" aria-label="Last name">
+                    <x-input-error :messages="$errors->get('acreditacion_3')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="col-md-6">
-                    <label for="acreditaciones4" class="form-label text-white">Acreditacion 4</label>
-                    <input type="file" class="form-control" id="acreditaciones4"  name="acreditaciones4" placeholder="Acreditaciones" aria-label="Last name">
-                    <x-input-error :messages="$errors->get('acreditaciones4')" class="alert alert-danger" role="alert"/>
+                    <label for="acreditacion_4" class="form-label text-white">Acreditacion 4</label>
+                    <input type="file" class="form-control" id="acreditacion_4"  name="acreditacion_4" placeholder="Acreditaciones" aria-label="Last name">
+                    <x-input-error :messages="$errors->get('acreditacion_4')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="col-12 d-flex justify-content-between">
                     <button type="submit" class="btn btn-primary">Inscribir Servicio</button>

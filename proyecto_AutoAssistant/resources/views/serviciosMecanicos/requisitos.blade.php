@@ -234,13 +234,14 @@
 
     @if(Auth::check())
         <div class="row">
-            @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+            
             <div class="container">
                 <h2 class="title text-white">Servicios Inscritos</h2>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <div class="d-flex flex-column">
                     @if($serviciosMecanicos->isEmpty())
                         <div class="col-md-12">
@@ -257,7 +258,7 @@
                                 @php
                                     $hasServices = true;
                                 @endphp
-                                <div class="card m-2">
+                                <div class="card mb-3" style="max-width: 540px;" >
                                     <img src="{{ $servicioMecanico->logo }}" class="card-img-top" alt="Imagen del servicio mecánico">
                                     <div class="card-body cardo">
                                         <h5 class="card-title">{{ $servicioMecanico->servicios }}</h5>

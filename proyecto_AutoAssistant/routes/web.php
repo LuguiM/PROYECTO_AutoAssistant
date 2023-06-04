@@ -122,7 +122,7 @@ Route::get('/publicaciones/{publicacion}', 'App\Http\Controllers\PublicacionCont
 Route::get('/servicios-mecanicos', [ServicioMecanicoController::class, 'index'])->name('servicios-mecanicos.index');
 Route::get('/servicios-mecanicos/create', [ServicioMecanicoController::class, 'create'])->name('servicios-mecanicos.create');
 Route::post('/servicios-mecanicos', [ServicioMecanicoController::class, 'store'])->name('servicios-mecanicos.store');
-Route::get('/servicios-mecanicos/buscar', [ServicioMecanicoController::class, 'buscar'])->name('servicios-mecanicos.buscar');
+Route::post('/servicios-mecanicos/buscar', [ServicioMecanicoController::class, 'buscarServicio'])->name('servicios-mecanicos.buscar');
 Route::get('/servicios-mecanicos/{servicio}', [ServicioMecanicoController::class, 'show'])->name('servicios-mecanicos.show');
 Route::get('/servicios-mecanicos/{servicio}/edit', [ServicioMecanicoController::class, 'edit'])->name('servicios-mecanicos.edit');
 Route::delete('/servicios-mecanicos/{servicio}', [ServicioMecanicoController::class, 'destroy'])->name('servicios-mecanicos.destroy');

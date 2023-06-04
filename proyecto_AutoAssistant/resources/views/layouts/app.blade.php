@@ -59,21 +59,21 @@
                                 <i class='bx bx-car nav_icon'></i>
                                 <span class="nav_name">{{ __('PILOTOS') }}</span>
                             </a>
-                            <a href="{{ url('/serviciosMecanicos') }}" class="nav_link">
+                            <a href="{{ route('servicios-mecanicos.index') }}" class="nav_link">
                                 <i class='bx bx-wrench nav_icon' ></i>
-                                <span class="nav_name">{{ __('ServiciosMecanicos') }}</span>
+                                <span class="nav_name">{{ __('Servicios Mecanicos') }}</span>
                             </a>
                         @endif
                         @if(auth()->user()->hasRole('admin'))
                         <a href="{{ route('publicaciones.create') }}" class="nav_link"> <i
-                                class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Crear Icono</span> </a>
+                                class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Crear Piloto</span> </a>
                         @endif
 
                         @if(auth()->user()->hasAnyRole('taller_mecanico', 'mecanico_independiente', 'admin'))
                         <a href="{{ route('servicios-mecanicos.index') }}" class="nav_link"> 
                             <i class='bx bx-folder-plus nav_icon'></i> <span class="nav_name">ServiciosMecanicos</span> </a>
                         @endif
-
+                        
                         @if (Route::has('register'))
 
                         @endif
