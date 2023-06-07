@@ -186,8 +186,7 @@
             <a class="btn btn-outline-primary btn-lg" @click="openForm">CONTRATAR SERVICIO</a>
           </div>
           <div id="sistemApp">
-            <contratar  ref="contratar"   :servicio-mecanico="{{ json_encode($servicioMecanico) }}"
-        :datos-formulario="{{ json_encode($datosFormulario) }}"></contratar>
+            <contratar  ref="contratar"   :servicio-mecanico="{{ $servicioMecanico }}" :datos-formulario="{{ json_encode($datosFormulario) }}"></contratar>
           </div>
           
         </div>

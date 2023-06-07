@@ -12,7 +12,7 @@
       <form class="form-content" v-if="servicioMecanico">
       <!-- Campos del formulario -->
       <div class="form-floating col-12 form-group">
-        <input type="text" class="text-bg-dark form-control" id="conductor" v-model="servicioMecanico.conductor" placeholder="Nombre del Conductor">
+        <input type="text" class="text-bg-dark form-control" id="conductor" v-model="servicio.conductor" disabled>
         <label for="conductor" class="text-white">Nombre del Conductor</label>
       </div>
       <div class="form-floating col-12 form-group">
@@ -45,6 +45,16 @@ import axios from 'axios';
 import alertify from 'alertifyjs';
 
 export default {
+   props: {
+    servicioMecanico: {
+      type: Object,
+      required: true
+    },
+    datosFormulario: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       servicioId: null,
@@ -58,19 +68,9 @@ export default {
     };
   },
   mounted() {
-  console.log(this.servicioMecanico);
+   this.obtenerDatosFormulario();
+   console.log(this.servicio.conductor)
 },
-
-  props: {
-    servicioMecanico: {
-      type: Object,
-      required: true
-    },
-    datosFormulario: {
-      type: Object,
-      required: true
-    }
-  },
   
   methods: {
     open() {
@@ -82,7 +82,11 @@ export default {
     contratarServicio() {
       // Lógica para enviar el formulario
     },
-    
+    obtenerDatosFormulario() {
+      this.servicio.conductor = this.datosFormulario.conductor;
+      this.servicio.servicios = this.datosFormulario.servicios;
+     
+    }
   
   }
   

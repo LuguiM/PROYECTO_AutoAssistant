@@ -164,9 +164,11 @@ class ServicioMecanicoController extends Controller
             return redirect()->back()->with('error', 'El servicio mecánico no existe.');
         }
 
+        $conductor = Auth::user()->name;
+
         $datosFormulario = [
             'servicios' => $servicioMecanico->servicios,
-            'email' => $servicioMecanico->email,
+            'conductor' => $conductor,
             // Agrega aquí más campos que desees cargar automáticamente
         ];
 
