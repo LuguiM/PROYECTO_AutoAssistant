@@ -154,16 +154,23 @@ class ServicioMecanicoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ServicioMecanico $servicioMecanico, $id)
+    public function show($id)
     {
        
         $servicioMecanico = ServicioMecanico::find($id);
     
         // Verificar si el servicio mecánico existe
         if (!$servicioMecanico) {
-            return redirect()->route('servicios-mecanicos.show')->with('error', 'El servicio mecánico no existe.');
+            return redirect()->back()->with('error', 'El servicio mecánico no existe.');
         }
-        return view('serviciosMecanicos.show', compact('servicioMecanico'));
+
+        $datosFormulario = [
+            'servicios' => $servicioMecanico->servicios,
+            'email' => $servicioMecanico->email,
+            // Agrega aquí más campos que desees cargar automáticamente
+        ];
+
+        return view('serviciosMecanicos.show', compact('servicioMecanico','datosFormulario'));
     }
 
     /**
@@ -182,6 +189,7 @@ class ServicioMecanicoController extends Controller
         if ($servicioMecanico->id_user != Auth::id()) {
             return redirect()->route('servicios-mecanicos.index')->with('error', 'No tienes permiso para editar este servicio mecánico.');
         }
+        
         
         return view('serviciosMecanicos.edit', compact('servicioMecanico'));
     }

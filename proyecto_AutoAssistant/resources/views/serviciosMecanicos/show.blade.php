@@ -44,7 +44,56 @@
   }
 
  }
+ .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
 
+.floating-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #32525C;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 10000;
+}
+.form-content {
+  width: 400px; /* Ancho del formulario */
+  max-width: 100%;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.form-title {
+  font-weight: bold;
+  color: white;
+}
+
+.form-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.form-button.close-button {
+  margin-left: auto;
+}
 </style>
 
 <x-app-layout>
@@ -131,10 +180,20 @@
           </div>
         </div>
 
-        <div class="d-grid gap-2">
-          <a class="btn btn-outline-primary btn-lg">CONTRATAR SERVICIO</a>
+        
+        <div id="App">
+          <div class="d-grid gap-2">
+            <a class="btn btn-outline-primary btn-lg" @click="openForm">CONTRATAR SERVICIO</a>
+          </div>
+          <div id="sistemApp">
+            <contratar  ref="contratar"   :servicio-mecanico="{{ json_encode($servicioMecanico) }}"
+        :datos-formulario="{{ json_encode($datosFormulario) }}"></contratar>
+          </div>
+          
         </div>
+        
       </div>
     </div>  
     <br>
+
 </x-app-layout>

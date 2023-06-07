@@ -44,3 +44,35 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
      // Your code to run since DOM is loaded and ready
     });
+
+
+import {createApp} from 'vue';
+import contratar from './components/ContratarComponent.vue';
+
+const app = createApp({
+
+    components:{
+        contratar,
+    },
+    data(){
+        return{
+            forms:{
+                contratar:{mostrar:false},
+            }
+        }
+    },  
+    methods:{
+        openForm() {
+            this.$refs.contratar.open();
+          },
+        abrirCerrarFormulario(form){
+            this.forms[form].mostrar = !this.forms[form].mostrar;
+            //this.$refs[form].listar();
+        },
+       
+    }, 
+    created(){
+
+    }
+});
+app.mount('#app');
