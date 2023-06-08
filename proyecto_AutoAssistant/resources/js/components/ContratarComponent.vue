@@ -9,22 +9,22 @@
           <button class="form-button btn btn-danger" @click="close">&times;</button>
         </div>
       </div>
-      <form class="form-content" v-if="servicioMecanico">
+      <form class="form-content" v-if="servicioMecanico" @submit.prevent="contratarServicio">
       <!-- Campos del formulario -->
       <div class="form-floating col-12 form-group">
         <input type="text" class="text-bg-dark form-control" id="conductor" v-model="servicio.conductor" disabled>
         <label for="conductor" class="text-white">Nombre del Conductor</label>
       </div>
       <div class="form-floating col-12 form-group">
-        <input type="text" class="form-control" id="servicios" v-model="servicioMecanico.servicios" disabled >
+        <input type="text" class="form-control" id="servicios" v-model="servicio.servicios" disabled >
         <label for="servicios">Servicio a Contratar</label>
       </div>
       <div class="form-floating col-12 form-group">
-        <input type="datetime-local" class="form-control" id="fecha" v-model="servicioMecanico.fecha" placeholder="Fecha y Hora">
+        <input type="datetime-local" class="form-control" id="fecha" v-model="servicio.fecha" placeholder="Fecha y Hora" required>
         <label for="fecha">Fecha y Hora</label>
       </div>
       <div class="form-floating col-12 form-group">
-        <select id="tipoServicio" v-model="servicioMecanico.tipoServicio" class="form-select">
+        <select id="tipoServicio" v-model="servicio.tipoServicio" class="form-select" required>
           <option disabled value="">Tipo Servicio...</option>
           <option value="Adomicilio">Adomicilio</option>
           <option value="Cita/Reserva">Cita/Reserva</option>
@@ -33,7 +33,7 @@
       </div>
       <div class="form-group">
         <!-- Botón para contratar el servicio -->
-        <button type="submit" class="btn btn-primary" @click.prevent="contratarServicio">Contratar</button>
+        <button type="submit" class="btn btn-primary">Contratar</button>
       </div>
     </form>
     </div>
@@ -58,6 +58,7 @@ export default {
   data() {
     return {
       servicioId: null,
+      accion: 'nuevo',
       servicio: {
         conductor: '',
         servicios: '',
@@ -69,7 +70,8 @@ export default {
   },
   mounted() {
    this.obtenerDatosFormulario();
-   console.log(this.servicio.conductor)
+   console.log(this.servicio.conductor);
+   console.log(this.contratarServicio())
 },
   
   methods: {
@@ -80,7 +82,37 @@ export default {
       this.isOpen = false;
     },
     contratarServicio() {
-      // Lógica para enviar el formulario
+      if(this.servicio.fecha == '' || this.servicio.tipoServicio == ''){
+        console.log('Por favor ingrese los datos correspondiente');
+        return;
+      }
+
+      this.servicio.servicio_id = this.servicioMecanico.id;  // Agrega servicio_id al objeto this.servicio
+      this.servicio.mecanico_id = this.servicioMecanico.id_user;  // Agrega mecanico_id al objeto this.servicio
+
+      let method = 'PUT';
+      if(this.accion === 'nuevo'){
+        method= 'POST';
+        
+      }
+      axios({
+        url: '/servicios-mecanicos/' + this.servicioMecanico.id + '/contrataciones',
+        method,
+        data: this.servicio
+      }).then(resp=>{
+        if(resp.data.msg!='ok'){
+            alertify.error('Error al intentar sincronizar registro con el servidor: '+resp.data.msg)
+        }else{
+            alertify.success('Registro almacenado exitosamente');
+            // Esperar 3 segundos antes de redireccionar
+            setTimeout(function() {
+                window.location.href = '/contrataciones';
+            }, 3000); // 3000 milisegundos = 3 segundos
+        }
+        console.log(resp);
+      }).catch(err=>{
+        console.error(err);
+      })
     },
     obtenerDatosFormulario() {
       this.servicio.conductor = this.datosFormulario.conductor;

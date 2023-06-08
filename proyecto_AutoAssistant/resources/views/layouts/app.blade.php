@@ -74,6 +74,10 @@
                                 <i class='bx bx-wrench nav_icon' ></i>
                                 <span class="nav_name">{{ __('Servicios Mecanicos') }}</span>
                             </a>
+                            <a href="{{ route('contrataciones.index') }}" class="nav_link">
+                                <i class='bx bx-shield-plus nav_icon'></i>
+                                <span class="nav_name">{{ __('Servicios Activos') }}</span>
+                            </a>
                         @endif
                         @if(auth()->user()->hasRole('admin'))
                         <a href="{{ route('publicaciones.create') }}" class="nav_link"> <i
@@ -82,7 +86,12 @@
 
                         @if(auth()->user()->hasAnyRole('taller_mecanico', 'mecanico_independiente', 'admin'))
                         <a href="{{ route('servicios-mecanicos.index') }}" class="nav_link"> 
-                            <i class='bx bx-folder-plus nav_icon'></i> <span class="nav_name">ServiciosMecanicos</span> </a>
+                            <i class='bx bx-folder-plus nav_icon'></i> <span class="nav_name">ServiciosMecanicos</span> 
+                        </a>
+                        <a href="{{ route('contrataciones.index') }}" class="nav_link">
+                            <i class='bx bx-shield-plus nav_icon'></i>
+                            <span class="nav_name">{{ __('Servicios Activos') }}</span>
+                        </a>    
                         @endif
                         
                         @if (Route::has('register'))

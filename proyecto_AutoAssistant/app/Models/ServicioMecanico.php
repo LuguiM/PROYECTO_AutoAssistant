@@ -28,4 +28,10 @@ class ServicioMecanico extends Model
         'id_user',
 
     ];
+
+    public function contrataciones()
+    {
+        return $this->hasMany(Contratacion::class);
+    }
+
 }

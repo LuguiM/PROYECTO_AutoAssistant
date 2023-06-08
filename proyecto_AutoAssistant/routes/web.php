@@ -6,6 +6,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\ServicioMecanicoController;
+use App\Http\Controllers\ContratacionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -128,6 +129,16 @@ Route::get('/servicios-mecanicos/{servicio}/edit', [ServicioMecanicoController::
 Route::delete('/servicios-mecanicos/{servicio}', [ServicioMecanicoController::class, 'destroy'])->name('servicios-mecanicos.destroy');
 Route::put('/servicios-mecanicos/{id}', [ServicioMecanicoController::class, 'update'])->name('servicios-mecanicos.update');
 
+
+//Rutas para contrataciones
+Route::get('/contrataciones', [ContratacionController::class, 'index'])->name('contrataciones.index');
+Route::get('/contrataciones/create', [ContratacionController::class, 'create'])->name('contrataciones.create');
+Route::post('/servicios-mecanicos/{id}/contrataciones', [ContratacionController::class, 'store'])->name('contrataciones.store');
+Route::post('/contrataciones/buscar', [ContratacionController::class, 'buscarServicio'])->name('contrataciones.buscar');
+Route::get('/contrataciones/{id}', [ContratacionController::class, 'show'])->name('contrataciones.show');
+Route::get('/contrataciones/{id}/edit', [ContratacionController::class, 'edit'])->name('contrataciones.edit');
+Route::delete('/contrataciones/{id}', [ContratacionController::class, 'destroy'])->name('contrataciones.destroy');
+Route::put('/contrataciones/{id}', [ContratacionController::class, 'update'])->name('contrataciones.update');
 
 
 
