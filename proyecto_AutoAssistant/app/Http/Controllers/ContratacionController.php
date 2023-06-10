@@ -86,25 +86,55 @@ class ContratacionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, $id)
     {
-        //
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $contratacion = Contratacion::find($id);
+
+        // Verificar si el servicio mecánico existe
+        if (!$contratacion) {
+            return redirect()->route('contrataciones.index')->with('error', 'El servicio mecánico no existe.');
+        }
+        
+        // Verificar si el servicio mecánico pertenece al usuario actual
+        if ($contratacion->conductor_id != Auth::id()) {
+            return redirect()->route('contrataciones.index')->with('error', 'No tienes permiso para editar este servicio mecánico.');
+        }
+        
+        
+        return view('contrataciones.edit', compact('contratacion'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Contratacion $contratacion ,$id)
     {
-        //
+        // Validar los datos del formulario
+        $validator = Validator::make($request->all(),[
+            'fecha' => 'required|date',
+            'tipoServicio' => 'required|in:Adomicilio,Cita/Reserva',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $servicio = $contratacion::findOrFail($id);
+
+        // Actualizar los campos de la contratación
+        $servicio->fecha = $request->input('fecha');
+        $servicio->tipoServicio = $request->input('tipoServicio');
+        $servicio->save();
+
+        //return redirect()->back()->with('success', 'Servicio actualizado correctamente.');
+        return redirect()->route('contrataciones.index')->with('success', 'Servicio actualizado correctamente.');
     }
 
     /**

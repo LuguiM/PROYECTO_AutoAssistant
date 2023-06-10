@@ -81,6 +81,10 @@ export default {
     close() {
       this.isOpen = false;
     },
+    modificarServicio(servicio){
+      this.accion = 'modificar';
+      this.servicio = servicio;
+    },
     contratarServicio() {
       if(this.servicio.fecha == '' || this.servicio.tipoServicio == ''){
         console.log('Por favor ingrese los datos correspondiente');
@@ -90,10 +94,9 @@ export default {
       this.servicio.servicio_id = this.servicioMecanico.id;  // Agrega servicio_id al objeto this.servicio
       this.servicio.mecanico_id = this.servicioMecanico.id_user;  // Agrega mecanico_id al objeto this.servicio
 
-      let method = 'PUT';
+      let method = 'PUT'; //Actualizar
       if(this.accion === 'nuevo'){
-        method= 'POST';
-        
+        method= 'POST';//Insertar
       }
       axios({
         url: '/servicios-mecanicos/' + this.servicioMecanico.id + '/contrataciones',
