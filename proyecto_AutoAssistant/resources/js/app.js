@@ -48,16 +48,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 import {createApp} from 'vue';
 import contratar from './components/ContratarComponent.vue';
+import chat from './components/ChatComponent.vue';
+window.db = '';
+window.socketio = io('http://127.0.0.1:3001');
+socketio.on('connect', socket=>{
+    console.log('conectado a nodejs en puerto 3001');
+});
+
+window.db = '';
 
 const app = createApp({
 
     components:{
         contratar,
+        chat,
     },
     data(){
         return{
             forms:{
                 contratar:{mostrar:false},
+                chat: {mostar:false}
             }
         }
     },  
