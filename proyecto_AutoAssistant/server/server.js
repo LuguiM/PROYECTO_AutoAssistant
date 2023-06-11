@@ -6,8 +6,8 @@ const io = require('socket.io')(http, {
   cors: {
     origin: 'http://autoassistant.com:8000',
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Access-Control-Allow-Methods'], // Agrega 'Access-Control-Allow-Methods' a los encabezados permitidos
-    credentials: true, // Habilitar el uso de cookies u otras credenciales
+    allowedHeaders: ['Content-Type', 'Access-Control-Allow-Methods'],
+    credentials: true,
   },
 });
 const { MongoClient } = require('mongodb');
@@ -24,8 +24,6 @@ async function conectarMongoDB() {
   return client.db(dbname);
 }
 
-const contratacionesNamespace = io.of('/contrataciones');
-
 io.on('connection', (socket) => {
   console.log('Chat Conectado..');
 
@@ -33,14 +31,18 @@ io.on('connection', (socket) => {
     let db = await conectarMongoDB();
     let collection = db.collection('chat');
     collection.insertOne(chat);
-    socket.broadcast.emit('chat', chat); // envía a todos excepto a mí... es decir, a los demás
+    socket.to(chat.room).emit('chat', chat);
   });
 
   socket.on('historial', async () => {
     let db = await conectarMongoDB();
     let collection = db.collection('chat');
     let chats = await collection.find().toArray();
-    socket.emit('historial', chats); // se envía solo a mí
+    socket.emit('historial', chats);
+  });
+
+  socket.on('joinRoom', (room) => {
+    socket.join(room);
   });
 });
 

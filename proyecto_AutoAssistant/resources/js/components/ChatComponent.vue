@@ -26,7 +26,7 @@
                     </p>
                   </div>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div  class="d-flex justify-content-between">
                   <p class="small mb-1 text-muted">{{ msg.fecha }}</p>
                   <p class="small mb-1">{{ msg.from }}</p>
                 </div>
@@ -59,17 +59,20 @@
 
 <script>
 import alertify from 'alertifyjs';
+import axios from 'axios';
 
 export default {
+   
   data() {
     return {
       chats: [],
       chat: {
         from: 'usuario',
-        to: 'todos',
+        to: 'todos', //Ajusta el destinatario segun las necesidades
         message: '',
         status: '',
         fecha: new Date(),
+        room: '', //variable para almacenar la sala actual
       },
       isOpen: false,
     };
@@ -77,6 +80,8 @@ export default {
   methods: {
     open() {
       this.isOpen = true;
+      this.chat.room = this.getRoomName(); //se obtiene el nombre de la sala 
+      socketio.emit('joinRoom', this.chat.room);
     },
     close() {
       this.isOpen = false;
@@ -85,15 +90,35 @@ export default {
       if (this.chat.message !== '') {
         this.chats.push({ ...this.chat });
         socketio.emit('chat', this.chat);
+        this.chat.message = '';
       } else {
         alertify.error('Por favor escriba un mensaje');
       }
     },
     obtenerHistorial() {
-      socketio.emit('historial');
-      socketio.on('historial', (chats) => {
+        axios.get('/contrataciones').then(response =>{
+            const contratacionesObj = response.data;
+            
+            // Convierte el objeto JSON en un array
+            const contrataciones = Object.values(contratacionesObj);
+            const conductorId = 1;
+            const mecanicoId = 2;
+
+            const contratacion = contrataciones.find(item =>{
+                return item.conductor_id === conductorId && item.mecanico_id ===mecanicoId;
+            });
+        }).catch(error =>{
+            console.error(error);
+        })
+        socketio.emit('historial');
+        socketio.on('historial', (chats) => {
         this.chats = chats;
       });
+    },
+    getRoomName() {
+      // Lógica para obtener el nombre de la sala según los usuarios involucrados
+      // Puedes utilizar los IDs de conductor y mecánico para generar un nombre único
+      return `room_${this.chat.from}_${this.chat.to}`;
     },
   },
   created() {
