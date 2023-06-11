@@ -28,6 +28,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>  
+    
+
 
     <!-- Scripts -->
     @vite(['resources/css/app.css'])
@@ -128,4 +131,5 @@
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>  
 </html>

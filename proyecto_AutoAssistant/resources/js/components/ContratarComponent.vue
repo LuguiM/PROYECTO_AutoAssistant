@@ -75,6 +75,7 @@ export default {
 },
   
   methods: {
+    
     open() {
       this.isOpen = true;
     },

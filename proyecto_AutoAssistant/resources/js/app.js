@@ -75,6 +75,9 @@ const app = createApp({
         openForm() {
             this.$refs.contratar.open();
           },
+          openFormm() {
+            this.$refs.chat.open();
+          },
         abrirCerrarFormulario(form){
             this.forms[form].mostrar = !this.forms[form].mostrar;
             //this.$refs[form].listar();

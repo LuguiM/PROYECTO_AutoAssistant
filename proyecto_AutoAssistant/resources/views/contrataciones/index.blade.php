@@ -7,6 +7,7 @@
     margin-bottom: 20px;
     margin-right: 20px; /* Espaciado entre las cards */
 }
+
 </style>
 @if(auth()->user()->hasAnyRole('conductor','futuro_conductor'))
 <x-app-layout>
@@ -27,6 +28,7 @@
                 {{ session('error') }}
             </div>
         @endif
+
 
             <div class="row">
             @if(Auth::check())
@@ -64,11 +66,16 @@
                                                 </div>
                                             </div>
                                             <div class="card-footer text-end">
-                                                <button class="btn btn-secondary btn-lg"><i class='bx bx-message-detail'></i> Chat</button>
+                                                <div id="App">
+                                                <button class="btn btn-secondary btn-lg" @click="openFormm"><i class='bx bx-message-detail'></i> Chat</button>
+                                                    <chat ref="chat"></chat>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                               
                             @endif
                         @endforeach
                         @if(!$hasServices)
@@ -105,6 +112,8 @@
             </div>
         @endif
 
+
+
             <div class="row">
             @if(Auth::check())
                 @if($contrataciones->isEmpty())
@@ -135,7 +144,10 @@
                                                 <p class="card-text"><small class="text-body-secondary text-white">Fecha de Contratacion: {{ $contratacion->fecha }}</small></p>
                                             </div>
                                             <div class="card-footer text-end">
-                                                <button class="btn btn-secondary btn-lg"><i class='bx bx-message-detail'></i> Chat</button>
+                                            <div id="App">
+                                                <button class="btn btn-secondary btn-lg" @click="openFormm"><i class='bx bx-message-detail'></i> Chat</button>
+                                                    <chat ref="chat"></chat>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -155,3 +167,4 @@
 
 </x-app-layout>
 @endif
+
