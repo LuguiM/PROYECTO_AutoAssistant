@@ -233,32 +233,32 @@
     
 
     @if(Auth::check())
-        <div class="row">
-            
-            <div class="container">
-                <h2 class="title text-white">Servicios Inscritos</h2>
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                <div class="d-flex flex-column">
-                    @if($serviciosMecanicos->isEmpty())
-                        <div class="col-md-12">
-                            <div class="alert alert-info" role="alert">
-                                No tienes ningún servicio mecánico inscrito.
-                            </div>
+    <div class="row">
+        <div class="container">
+            <h2 class="title text-white">Servicios Inscritos</h2>
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            <div class="row">
+                @if($serviciosMecanicos->isEmpty())
+                    <div class="col-12">
+                        <div class="alert alert-info" role="alert">
+                            No tienes ningún servicio mecánico inscrito.
                         </div>
-                    @else
-                        @php
-                            $hasServices = false;
-                        @endphp
-                        @foreach($serviciosMecanicos as $servicioMecanico)
-                            @if(Auth::id() == $servicioMecanico->id_user)
-                                @php
-                                    $hasServices = true;
-                                @endphp
-                                <div class="card mb-3" style="max-width: 540px;" >
+                    </div>
+                @else
+                    @php
+                        $hasServices = false;
+                    @endphp
+                    @foreach($serviciosMecanicos as $servicioMecanico)
+                        @if(Auth::id() == $servicioMecanico->id_user)
+                            @php
+                                $hasServices = true;
+                            @endphp
+                            <div class="col-md-6 col-lg-6">
+                                <div class="card mb-3" >
                                     <img src="{{ $servicioMecanico->logo }}" class="card-img-top" alt="Imagen del servicio mecánico">
                                     <div class="card-body cardo">
                                         <h5 class="card-title">{{ $servicioMecanico->servicios }}</h5>
@@ -273,20 +273,23 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endif
-                        @endforeach
-                        @if(!$hasServices)
-                            <div class="col-md-12">
-                                <div class="alert alert-info" role="alert">
-                                    No tienes ningún servicio mecánico inscrito.
-                                </div>
                             </div>
                         @endif
+                    @endforeach
+                    @if(!$hasServices)
+                        <div class="col-12">
+                            <div class="alert alert-info" role="alert">
+                                No tienes ningún servicio mecánico inscrito.
+                            </div>
+                        </div>
                     @endif
-                </div>
+                @endif
             </div>
         </div>
-    @endif
+    </div>
+@endif
+
+
 
 
     

@@ -107,12 +107,13 @@
                 </div>
                 <div class="col-md-6">
                     <label for="acreditacion_1" class="form-label text-white">Acreditaciones</label>
+                    <input type="file" class="form-control" id="acreditacion_1"  name="acreditacion_1" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
                     @if ($servicioMecanico->acreditacion_1)
                         <img id="acreditacion_1" src="{{ asset($servicioMecanico->acreditacion_1) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
                     @else
                         <img id="acreditacion_1 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
                     @endif
-                    <input type="file" class="form-control" id="acreditacion_1"  name="acreditacion_1" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
+                    
                     <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 1.</small>
                     @error('acreditacion_1')
                         <span class="invalid-feedback" role="alert">
@@ -263,12 +264,13 @@
 
             <div class="col-md-6">
                     <label for="acreditacion_1" class="form-label text-white">Acreditaciones</label>
+                    <input type="file" class="form-control" id="acreditacion_1"  name="acreditacion_1" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
                     @if ($servicioMecanico->acreditacion_1)
                         <img id="acreditacion_1" src="{{ asset($servicioMecanico->acreditacion_1) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
                     @else
                         <img id="acreditacion_1 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
                     @endif
-                    <input type="file" class="form-control" id="acreditacion_1"  name="acreditacion_1" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
+                    
                     <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 1.</small>
                     @error('acreditacion_1')
                         <span class="invalid-feedback" role="alert">

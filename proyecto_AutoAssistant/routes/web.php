@@ -132,7 +132,7 @@ Route::put('/servicios-mecanicos/{id}', [ServicioMecanicoController::class, 'upd
 
 //Rutas para contrataciones
 Route::get('/contrataciones', [ContratacionController::class, 'index'])->name('contrataciones.index');
-Route::get('/contrataciones/create', [ContratacionController::class, 'create'])->name('contrataciones.create');
+Route::get('/servicios-mecanicos/{id}/contrataciones', [ContratacionController::class, 'create'])->name('contrataciones.create');
 Route::post('/servicios-mecanicos/{id}/contrataciones', [ContratacionController::class, 'store'])->name('contrataciones.store');
 Route::post('/contrataciones/buscar', [ContratacionController::class, 'buscarServicio'])->name('contrataciones.buscar');
 Route::get('/contrataciones/{id}', [ContratacionController::class, 'show'])->name('contrataciones.show');

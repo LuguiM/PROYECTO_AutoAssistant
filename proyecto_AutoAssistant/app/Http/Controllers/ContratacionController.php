@@ -10,6 +10,12 @@ use App\Models\ServicioMecanico;
 
 class ContratacionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -22,17 +28,32 @@ class ContratacionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request, $id)
     {
-        return view('contrataciones.create');
+        
+        $conductor = Auth::user()->name;
+        // Obtener el objeto del servicio mecánico utilizando el ID
+        $servicioMecanico = ServicioMecanico::find($id);
+    
+        // Verificar si el servicio mecánico existe
+        if (!$servicioMecanico) {
+            dd('El servicio mecánico no existe.'); // Mensaje en la consola
+        }
+    
+        // Resto de la lógica del controlador
+    
+        return view('serviciosMecanicos.contratar', compact('servicioMecanico', 'conductor'));
     }
+    
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
+       
         $validator= Validator::make($request->all(),[
+            
             'fecha' => ['required', 'date'],
             'tipoServicio' => ['required', 'string', 'max:225'],
         ],[
@@ -40,9 +61,11 @@ class ContratacionController extends Controller
         ]);
 
         if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
+            return redirect()->back()->withErrors($validator)->withInput();
+            
+        }
+        $conductor = Auth::user()->name; 
         $conductor_id = Auth::id();
 
         $servicio_id = null;
@@ -50,11 +73,13 @@ class ContratacionController extends Controller
 
         $id =  intval($request->route('id'));
         $servicioMecanicoActivo = ServicioMecanico::find($id);
+       
 
         if ($servicioMecanicoActivo) {
             // Se encontró el servicio mecánico activo
             $servicio_id = $servicioMecanicoActivo->id;
             $mecanico_id = $servicioMecanicoActivo->id_user;
+            $servicio = $servicioMecanicoActivo->servicios;
         
             // Resto del código para guardar la Contratación
             // ...
@@ -62,16 +87,21 @@ class ContratacionController extends Controller
             // No se encontró el servicio mecánico activo
             // Puedes mostrar un mensaje de error o redirigir a otra página
         }
+      
+      
 
-        $contratacion = new Contratacion([
-            'conductorName' => $request['conductor'],
-            'servicioContratado' => $request['servicios'],
+        $contratacion = new Contratacion();
+        
+        $contratacion->fill([
+            'conductorName' => $conductor,
+            'servicioContratado' => $servicio,
             'fecha' => $request['fecha'],
             'tipoServicio' =>$request['tipoServicio'],
             'servicio_id' => $servicio_id,
             'conductor_id' => $conductor_id,
             'mecanico_id' => $mecanico_id
         ]);
+        //dd($contratacion);
 
         if ($contratacion->save()) {
             // El modelo se guardó correctamente

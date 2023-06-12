@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Session;
 
 class ServicioMecanicoController extends Controller
 {
+  
 
     public function __construct()
     {
-        $this->middleware('web');
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -162,17 +163,10 @@ class ServicioMecanicoController extends Controller
         // Verificar si el servicio mecánico existe
         if (!$servicioMecanico) {
             return redirect()->back()->with('error', 'El servicio mecánico no existe.');
+        }else{
+            return view('serviciosMecanicos.show', compact('servicioMecanico','id'));
         }
-
-        $conductor = Auth::user()->name;
-
-        $datosFormulario = [
-            'servicios' => $servicioMecanico->servicios,
-            'conductor' => $conductor,
-            // Agrega aquí más campos que desees cargar automáticamente
-        ];
-
-        return view('serviciosMecanicos.show', compact('servicioMecanico','datosFormulario'));
+        
     }
 
     /**
