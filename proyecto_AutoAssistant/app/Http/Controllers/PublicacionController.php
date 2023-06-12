@@ -17,19 +17,24 @@ class PublicacionController extends Controller
     public function index(Request $request)
     {
         $publicaciones = Publicacion::with('anios')->orderBy('created_at', 'desc')->get();
+        /*
         $marcas = Marca::all();
         $modelos = Modelo::all();
 
-        return view('publicaciones.index', compact('publicaciones', 'marcas', 'modelos'));
+        return view('publicaciones.index', compact('publicaciones', 'marcas', 'modelos'));*/
+        return view('publicacion.index', compact('publicacion'));
     }
 
     public function create()
     {
+        /*
         $marcas = Marca::all();
         $modelos = Modelo::all();
         $anios = Anio::all();
         
-        return view('publicaciones.create', compact('marcas', 'modelos', 'anios'));
+        return view('publicaciones.create', compact('marcas', 'modelos', 'anios'));*/
+
+        return view('publicacion.create');
     }
 
     public function store(Request $request)
