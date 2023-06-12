@@ -60,7 +60,7 @@
         <div class="row">
             <div class="container">
                 <details class="accordion" open>
-                    <summary class="accordion-header h2 text-white">Requisitos de Mecanicos</summary>
+                    <summary class="accordion-header h3 text-white">Requisitos de Mecanicos</summary>
                     <div class="accordion-content">
                         <ol class="list-group list-group-numbered requirements">
                             <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -145,7 +145,7 @@
                     </div>
                 </details>
                 <div class="row">
-                    <a href="{{ route('servicios-mecanicos.create') }}" class="btn btn-primary btn-lg">Inscribir servicio mecanico</a>
+                    <a href="{{ route('servicios-mecanicos.create') }}" class="btn btn-primary btn-lg"><i class='bx bx-plus-circle'></i>Inscribir servicio mecanico</a>
                 </div>
             </div>
         </div>
@@ -155,7 +155,7 @@
         <div class="row">
             <div class="container">
                 <details class="accordion" open>
-                    <summary class="accordion-header h2 text-white">Requisitos de Mecanicos</summary>
+                    <summary class="accordion-header h3 text-white">Requisitos de Mecanicos</summary>
                     <div class="accordion-content">
                         <ol class="list-group list-group-numbered requirements">
                             <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -225,7 +225,7 @@
                     </div>
                 </details>
                 <div class="row">
-                    <a href="{{ route('servicios-mecanicos.create') }}" class="btn btn-primary btn-lg">Inscribir servicio mecanico</a>
+                    <a href="{{ route('servicios-mecanicos.create') }}" class="btn btn-primary btn-lg"><i class='bx bx-plus-circle'></i> Inscribir servicio mecanico</a>
                 </div>
             </div>
         </div>       
@@ -264,11 +264,11 @@
                                         <h5 class="card-title">{{ $servicioMecanico->servicios }}</h5>
                                         <p class="card-text">Creado el: {{ $servicioMecanico->created_at->format('d/m/Y') }}</p>
                                         <div class="d-flex justify-content-between">
-                                            <a href="{{ route('servicios-mecanicos.edit', $servicioMecanico->id) }}" class="btn btn-primary">Modificar</a>
+                                            <a href="{{ route('servicios-mecanicos.edit', $servicioMecanico->id) }}" class="btn btn-primary"><i class='bx bx-edit' ></i> Modificar</a>
                                             <form action="{{ route('servicios-mecanicos.destroy', $servicioMecanico->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                <button type="submit" class="btn btn-danger"><i class='bx bx-trash-alt'></i> Eliminar</button>
                                             </form>
                                         </div>
                                     </div>

@@ -132,15 +132,48 @@
         </div>
 
         
-        <a class="btn btn-outline-primary btn-lg" href="{{ route('contrataciones.create',$servicioMecanico->id) }}">
-          <i class='bx bx-shield-quarter bx-tada' ></i> Contratar Servicio
-        </a>
-
-
 
         
       </div>
+
+      <div class="container px-4 text-center">
+          <div class="card text-bg-dark border-primary mb-3">
+            <div class="card-header bg-primary">ACREDITACIONES</div>
+            <div class="card-body">
+              @if ($servicioMecanico->acreditacion_1)
+                <img id="acreditacion_1" src="{{ asset($servicioMecanico->acreditacion_1) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
+              @else
+                <img id="acreditacion_1" src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+              @endif
+
+              @if ($servicioMecanico->acreditacion_2)
+                  <img id="acreditacion_2" src="{{ asset($servicioMecanico->acreditacion_2) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
+              @else
+                  <img id="acreditacion_2 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+              @endif
+
+              @if ($servicioMecanico->acreditacion_3)
+                  <img id="acreditacion_3" src="{{ asset($servicioMecanico->acreditacion_3) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
+              @else
+                  <img id="acreditacion_3 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+              @endif
+
+              @if ($servicioMecanico->acreditacion_4)
+                  <img id="acreditacion_4" src="{{ asset($servicioMecanico->acreditacion_4) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
+              @else
+                  <img id="acreditacion_4 src="#" alt="Logo Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+              @endif
+            </div>
+          </div>
+        </div>
+
+
     </div>  
+    <div class="container-fluid text-center">
+      <a class="btn btn-outline-primary btn-lg" href="{{ route('contrataciones.create',$servicioMecanico->id) }}" style="width: 100%;">
+        <i class='bx bx-shield-quarter bx-tada'></i> Contratar Servicio
+      </a>
+    </div>
     <br>
 
 </x-app-layout>

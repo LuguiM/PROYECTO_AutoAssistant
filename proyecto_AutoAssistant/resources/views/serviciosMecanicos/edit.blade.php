@@ -187,8 +187,8 @@
                 @endif
 
                 <div class="col-12 d-flex justify-content-between">
-                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    <a href="{{ route('servicios-mecanicos.index') }}" class="btn btn-danger">Cancelar</a>
+                    <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Guardar cambios</button>
+                    <a href="{{ route('servicios-mecanicos.index') }}" class="btn btn-danger"><i class='bx bx-x-circle'></i> Cancelar</a>
                 </div>
         </div>
             <br>
@@ -332,8 +332,8 @@
                 </div>
 
             <div class="col-12 d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Actualizar Servicio</button>
-                <a href="{{ route('servicios-mecanicos.index') }}" class="btn btn-danger">Cancelar</a>
+                    <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Guardar cambios</button>
+                    <a href="{{ route('servicios-mecanicos.index') }}" class="btn btn-danger"><i class='bx bx-x-circle'></i> Cancelar</a>
             </div>
         </div>
     </form>
