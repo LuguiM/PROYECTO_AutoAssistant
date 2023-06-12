@@ -9,16 +9,16 @@ class Publicacion extends Model
 {
     use HasFactory;
 
+    protected $table = 'publicacion';
+
     protected $fillable = [
         'titulo',
         'descripcion',
         'solucion',
         'imagen',
-        'marca_id',
-        'modelo_id',
         
     ];
-
+/*
     public function marca()
     {
         return $this->belongsTo(Marca::class);
@@ -37,6 +37,6 @@ class Publicacion extends Model
     public function publicacionAnios()
     {
         return $this->belongsToMany(Anio::class, 'publicacion_anio', 'publicacion_id', 'anio_id');
-    }
+    }*/
 
 }

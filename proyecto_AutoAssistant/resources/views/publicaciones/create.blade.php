@@ -12,9 +12,17 @@
                 <div class="card">
                     <div class="card-header">{{ __('Crear publicación') }}</div>
 
-                    @if(session('mensaje'))
-                                <div class="alert alert-success">{{ session('mensaje') }}</div>
-                            @endif
+                    @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('publicaciones.store') }}" enctype="multipart/form-data">
@@ -24,8 +32,8 @@
                                 <label for="titulo" class="col-md-4 col-form-label text-md-right">{{ __('Título') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="titulo" type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo" value="{{ old('titulo') }}" required autocomplete="titulo" autofocus>
-
+                                    <input id="titulo" type="text" class="form-control " name="titulo" value="{{ old('titulo') }}" required autocomplete="titulo" autofocus>
+                                    <x-input-error :messages="$errors->get('titulo')" class="alert alert-danger" role="alert"/>
                                     @error('titulo')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -38,8 +46,8 @@
                                 <label for="descripcion" class="col-md-4 col-form-label text-md-right">{{ __('Descripción') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="descripcion" class="form-control @error('descripcion') is-invalid @enderror" name="descripcion" required autocomplete="descripcion">{{ old('descripcion') }}</textarea>
-
+                                    <textarea id="descripcion" class="form-control" name="descripcion" required autocomplete="descripcion">{{ old('descripcion') }}</textarea>
+                                    <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert"/>
                                     @error('descripcion')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -52,8 +60,8 @@
                                 <label for="solucion" class="col-md-4 col-form-label text-md-right">{{ __('Solucion') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="solucion" class="form-control @error('solucion') is-invalid @enderror" name="solucion" required autocomplete="solucion">{{ old('solucion') }}</textarea>
-
+                                    <textarea id="solucion" class="form-control" name="solucion" required autocomplete="solucion">{{ old('solucion') }}</textarea>
+                                    <x-input-error :messages="$errors->get('solucion')" class="alert alert-danger" role="alert"/>
                                     @error('solucion')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -66,7 +74,8 @@
                                 <label for="imagen" class="col-md-4 col-form-label text-md-right">{{ __('Imagen') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="imagen" type="file" class="form-control-file @error('imagen') is-invalid @enderror" name="imagen" required>
+                                    <input id="imagen" type="file" class="form-control-file " name="imagen" required>
+                                    <x-input-error :messages="$errors->get('imagen')" class="alert alert-danger" role="alert"/>
 
                                     @error('imagen')
                                         <span class="invalid-feedback" role="alert">
@@ -76,34 +85,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-
-                                <label for="marca" class="col-md-4 col-form-label text-md-right">Marca</label>
-
-                                <select class="form-control" id="marca" name="marca_id">
-                                    <option value="">Seleccione una marca</option>
-                                    @foreach($marcas as $marca)
-                                        <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group row">
-                                <label for="modelo" class="col-md-4 col-form-label text-md-right">Modelo</label>
-                                <select class="form-control" id="modelo" name="modelo_id">
-                                    <option value="">Seleccione un modelo</option>
-                                    @foreach($modelos as $modelo)
-                                        <option value="{{ $modelo->id }}">{{ $modelo->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group row">
-                                <label for="anios" class="col-md-4 col-form-label text-md-right">Año</label>
-                                <select class="form-control" name="anios[]" multiple>
-                                    @foreach($anios as $anio)
-                                        <option value="{{ $anio->id }}">{{ $anio->anio }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             
                             @if ($errors->any())
                                 <div class="alert alert-danger">

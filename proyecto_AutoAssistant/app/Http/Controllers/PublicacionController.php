@@ -16,13 +16,13 @@ class PublicacionController extends Controller
 {
     public function index(Request $request)
     {
-        $publicaciones = Publicacion::with('anios')->orderBy('created_at', 'desc')->get();
+        $publicaciones = Publicacion::All();//->orderBy('created_at', 'desc')->get();
         /*
         $marcas = Marca::all();
         $modelos = Modelo::all();
 
         return view('publicaciones.index', compact('publicaciones', 'marcas', 'modelos'));*/
-        return view('publicacion.index', compact('publicacion'));
+        return view('publicaciones.index', compact('publicaciones'));
     }
 
     public function create()
@@ -34,7 +34,7 @@ class PublicacionController extends Controller
         
         return view('publicaciones.create', compact('marcas', 'modelos', 'anios'));*/
 
-        return view('publicacion.create');
+        return view('publicaciones.create');
     }
 
     public function store(Request $request)
@@ -44,10 +44,6 @@ class PublicacionController extends Controller
         'titulo' => 'required',
         'descripcion' => 'required',
         'solucion' => 'required',
-        'marca_id' => 'required',
-        'modelo_id' => 'required',
-        'anios' => 'required|array|min:1',
-        'anios.*' => 'exists:anios,id',
         'imagen' => 'required|image|max:2048'
     ]);
 
@@ -63,29 +59,26 @@ class PublicacionController extends Controller
     $publicacion->titulo = $request->input('titulo');
     $publicacion->descripcion = $request->input('descripcion');
     $publicacion->solucion = $request->input('solucion');
-    $publicacion->marca_id = $request->input('marca_id');
-    $publicacion->modelo_id = $request->input('modelo_id');
     $publicacion->imagen = $imagen_path;
    
 
     $publicacion->save();
 
-    $anios = $request->input('anios',[]);
-    $publicacion->anios()->attach($anios);
-
-    return redirect()->route('publicaciones.index')->with('success', 'Publicación creada correctamente.');
+    return redirect()->route('publicaciones.create')->with('success', 'Piloto creada correctamente.');
 }
 
 
 public function show($id)
 {
-    $publicacion = Publicacion::with('anios')->find($id);
+    //$publicacion = Publicacion::with('anios')->find($id);
+    $publicacion = Publicacion::All()->find($id);
+    /*
     $recomendaciones = Publicacion::whereHas('anios', function ($query) use ($publicacion) {
         $query->whereIn('anio_id', $publicacion->anios->pluck('id')->toArray());
     })->where('id', '!=', $publicacion->id)
         ->limit(4)
-        ->get();
-    return view('publicaciones.show', compact('publicacion', 'recomendaciones'));
+        ->get();*/
+    return view('publicaciones.show', compact('publicacion'));
 }
 
 
@@ -95,9 +88,6 @@ public function show($id)
     {
         $validator = Validator::make($request->all(), [
             'q' => 'nullable|string|max:255',
-            'marca' => 'nullable|exists:marcas,id',
-            'modelo' => 'nullable|exists:modelos,id',
-            'anio' => 'nullable|exists:anios,id',
         ]);
 
         if ($validator->fails()) {
@@ -106,7 +96,8 @@ public function show($id)
 
         $publicaciones = Publicacion::when($request->q, function ($query, $q) {
                 return $query->where('titulo', 'LIKE', '%'.$q.'%');
-            })
+            })->get();
+/*
             ->when($request->marca, function ($query, $marca) {
                 return $query->where('marca_id', $marca);
                 
@@ -119,18 +110,16 @@ public function show($id)
                     $query->where('anio', 'LIKE', '%' . $anio_texto . '%');
                 });
             })
-            
-            ->get();
         
         
 
         $marcas = Marca::all();
         $modelos = Modelo::all();
-        $anios = Anio::all();
+        $anios = Anio::all();*/
 
        
 
-        return view('publicaciones.index', compact('publicaciones', 'marcas', 'modelos', 'anios'));
+        return view('publicaciones.index', compact('publicaciones'));
     }
 
 
