@@ -16,17 +16,6 @@
             </div>
         </div>
     </div>-->
-    <div class="card text-bg-dark mb-3">
-        <div class="card-header">
-            <h1 class="text-center">AUTOASSISTANT</h1>
-        </div>
-        <div class="card-body">
-            <blockquote class="blockquote mb-0">
-            <h4>Has Iniciado Sesion <span class="badge bg-primary">{{ Auth::user()->name }}</span></h4>
-            <!--<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>-->
-            </blockquote>
-        </div>
-    </div>
 
 @role('admin')
     <div class="card text-bg-dark mb-3">

@@ -46,10 +46,14 @@
 
 
         {{ $header }}
+        
+
         @if (Route::has('login'))
-        {{ Auth::user()->name }}
+            {{ Auth::user()->name }}
         @endif
 
+
+         
     </header>
     @endif
     <div class="l-navbar" id="nav-bar">
@@ -58,20 +62,20 @@
             <div>
 
                 <a href="{{url('/welcome')}}" class="nav_logo"> <img src="\imagenes\Logo.png" atl="logo" width="30"
-                        height="40"></img> <span class="nav_logo-name">AutoAssistant</span> </a>
+                        height="40"></img> <span class="nav_logo-name">AUTOASSISTANT</span> </a>
                 @if (Route::has('login'))
                 <div class="nav_list">
 
                     @auth
-                        <a href="{{url('/welcome')}}" class="nav_link active"> <i class='bx bx-home nav_icon'></i> <span
-                                class="nav_name">INICIO</span> </a>
+                        <a href="{{url('/welcome')}}" class="nav_link "> <i class='bx bx-home nav_icon'></i> <span
+                                class="nav_name">Inicio</span> </a>
                         <a href="{{route('profile.edit')}}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
-                                class="nav_name">PERFIL</span> </a>
+                                class="nav_name">Perfil</span> </a>
 
                         @if(auth()->user()->hasAnyRole('conductor', 'futuro_conductor', 'admin'))  
                             <a href="{{ route('publicaciones.index') }}" class="nav_link">
                                 <i class='bx bx-car nav_icon'></i>
-                                <span class="nav_name">{{ __('PILOTOS') }}</span>
+                                <span class="nav_name">{{ __('Pilotos') }}</span>
                             </a>
                             <a href="{{ route('servicios-mecanicos.index') }}" class="nav_link">
                                 <i class='bx bx-wrench nav_icon' ></i>
@@ -106,9 +110,10 @@
             </div>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <a href="route('logout')" onclick="event.preventDefault();
-                                                this.closest('form').submit();" class="nav_link"> 
-                                                <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">{{ __('CERRAR SESION') }}</span> </a>
+                <a href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();" class="nav_link"> 
+                    <i class='bx bx-log-out nav_icon'></i> 
+                    <span class="nav_name">{{ __('CERRAR SESION') }}</span> 
+                </a>
             </form>
 
         </nav>

@@ -262,15 +262,39 @@ background-color: #32525C; /* Cambia el color aquí */
                                     </div>
                                 </li>
                             </ul>
-							<div class="d-flex justify-content-end">
-                            <div class="option-box mr-2">
-                            <a class="nav-link nav-user-img small" href="{{ route('login') }}"><span class="register">Iniciar Sesión</span></a>
-                        </div>
-                        <span class="vl"></span>
-                        <div class="option-box">
-                            <a class="nav-link nav-user-img small" href="mario"><span class="login">Registro</span></a>
-                        </div>
-                    </div>
+                            @if (Auth::check())
+                                <div class="d-flex justify-content-end">
+                                    <div class="option-box mr-2">
+                                        <a class="nav-link nav-user-img small" href="{{ route('welcome') }}">
+                                            <span class="register"><i class='bx bx-user' ></i>{{ Auth::user()->name }}</span>
+                                        </a>
+                                    </div>
+                                    <span class="vl"></span>
+                                    <div class="option-box">
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <a href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();" class="nav-link nav-user-img small" >
+                                                <span class="login">Cerrar Sesión<i class='bx bx-log-out' ></i></span>
+                                            </a>
+                                        </form>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="d-flex justify-content-end">
+                                    <div class="option-box mr-2">
+                                        <a class="nav-link nav-user-img small" href="{{ route('login') }}">
+                                            <span class="register">Iniciar Sesión</span>
+                                        </a>
+                                    </div>
+                                    <span class="vl"></span>
+                                    <div class="option-box">
+                                        <a class="nav-link nav-user-img small" href="{{ route('register') }}">
+                                            <span class="login">Registro</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endif
+
             </div>
         </div>
     </section>
