@@ -66,11 +66,7 @@
                                                 </div>
                                             </div>
                                             <div class="card-footer text-end">
-                                                <div id="App">
-                                                <button class="btn btn-secondary btn-lg" @click="openFormm"><i class='bx bx-message-detail'></i> Chat</button>
-                                                    <chat ref="chat"></chat>
-                                                </div>
-                                                
+                                                <a class="btn btn-secondary btn-lg" href="{{ route('mensajeria.index', $contratacion->id) }}"><i class='bx bx-message-detail'></i> Chat</a>
                                             </div>
                                         </div>
                                     </div>
@@ -144,10 +140,7 @@
                                                 <p class="card-text"><small class="text-body-secondary text-white">Fecha de Contratacion: {{ $contratacion->fecha }}</small></p>
                                             </div>
                                             <div class="card-footer text-end">
-                                            <div id="App">
-                                                <button class="btn btn-secondary btn-lg" @click="openFormm"><i class='bx bx-message-detail'></i> Chat</button>
-                                                    <chat ref="chat"></chat>
-                                                </div>
+                                                <a class="btn btn-secondary btn-lg" href="{{ route('mensajeria.index', $contratacion->id) }}"><i class='bx bx-message-detail'></i> Chat</a>
                                             </div>
                                         </div>
                                     </div>

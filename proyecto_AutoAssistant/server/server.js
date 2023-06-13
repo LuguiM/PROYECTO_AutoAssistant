@@ -1,3 +1,5 @@
+process.env.TZ = 'UTC'; // Establece la zona horaria a UTC
+
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
@@ -24,14 +26,35 @@ async function conectarMongoDB() {
   return client.db(dbname);
 }
 
+//funcion para dar formato a la fecha y hora
+function generateTimestamp() {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
 io.on('connection', (socket) => {
   console.log('Chat Conectado..');
 
   socket.on('chat', async (chat) => {
     let db = await conectarMongoDB();
     let collection = db.collection('chat');
-    collection.insertOne(chat);
-    socket.to(chat.room).emit('chat', chat);
+    const { sender, message } = chat;
+    const timestamp = generateTimestamp();
+    collection.insertOne({ sender, message, timestamp, read: false });
+
+    const updatedChat = {
+      ...chat,
+      timestamp: timestamp,
+      read: false,
+    };
+
+    socket.to(chat.room).emit('chat', updatedChat);
   });
 
   socket.on('historial', async () => {
@@ -43,6 +66,7 @@ io.on('connection', (socket) => {
 
   socket.on('joinRoom', (room) => {
     socket.join(room);
+    console.log(`El cliente se unió a la sala: ${room}`);
   });
 });
 

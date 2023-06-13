@@ -3,15 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Contratacion;
 
 class MensajeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($servicioId)
     {
-        //
+        $contratacion = Contratacion::where('id', $servicioId)->first();
+        
+        if($contratacion){
+            $conductorId = $contratacion->conductor_id;
+            $mecanicoId = $contratacion->mecanico_id;
+            $contratacionId = $contratacion->id;
+
+            return view('chats.mensajeria', compact('conductorId', 'mecanicoId', 'contratacionId'));
+        }else{
+            return redirect()->back()->with('error', 'No se encontro una contratacion');
+        }
+        
+        
     }
 
     /**

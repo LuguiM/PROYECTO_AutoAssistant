@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\ServicioMecanicoController;
 use App\Http\Controllers\ContratacionController;
+use App\Http\Controllers\MensajeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -140,7 +141,8 @@ Route::get('/contrataciones/{id}/edit', [ContratacionController::class, 'edit'])
 Route::delete('/contrataciones/{id}', [ContratacionController::class, 'destroy'])->name('contrataciones.destroy');
 Route::put('/contrataciones/{id}', [ContratacionController::class, 'update'])->name('contrataciones.update');
 
-
+//Rutas para mensajeria
+Route::get('/mensajeria/{servicioId}', [MensajeController::class, 'index'])->name('mensajeria.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
