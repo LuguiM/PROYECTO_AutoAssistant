@@ -16,7 +16,7 @@ const { MongoClient } = require('mongodb');
 
 const url = 'mongodb://127.0.0.1:27017';
 const client = new MongoClient(url);
-const dbname = 'ChatAutoAssistant';
+const dbname = 'AutoAssistant';
 const port = 3001;
 
 app.use(express.json());
@@ -40,6 +40,8 @@ function generateTimestamp() {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
+let currentRoom = '';
+
 io.on('connection', (socket) => {
   console.log('Chat Conectado..');
 
@@ -47,11 +49,11 @@ io.on('connection', (socket) => {
     console.log('chat:', chat);
     let db = await conectarMongoDB();
     let collection = db.collection('chat');
-    const { sender, recipient, message } = chat;
+    const { sender, recipient, message, sala } = chat;
     const timestamp = generateTimestamp();
     try {
       // Código para insertar en la base de datos
-      collection.insertOne({ sender, recipient, message, timestamp, read: false });
+      collection.insertOne({ sender, recipient, message, sala, timestamp, read: false });
       console.log('se insertaron los datos');
     } catch (error) {
       console.log('Error al insertar en la base de datos:', error);
@@ -64,24 +66,25 @@ io.on('connection', (socket) => {
       read: false,
     };
     console.log('Datos', updatedChat)
-    socket.to(chat.room).emit('chat', updatedChat);
+    socket.to(currentRoom).emit('chat', updatedChat);
   });
 
   socket.on('historial', async () => {
     let db = await conectarMongoDB();
     let collection = db.collection('chat');
-    let chats = await collection.find().toArray();
+    let chats = await collection.find({sala:currentRoom}).toArray();
     socket.emit('historial', chats);
   });
 
   socket.on('joinRoom', (room) => {
     console.log('joinRoom:', room);
+    currentRoom = room;
     socket.join(room);
     console.log(`El cliente se unió a la sala: ${room}`);
   });
 });
 
-app.get('/', (req, resp) => {
+app.get('/', (req, resp) => {  
   resp.sendFile(__dirname + '/index.html');
 });
 

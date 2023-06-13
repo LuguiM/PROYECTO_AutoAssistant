@@ -53,6 +53,7 @@
   // Obtener el ID del conductor y mecánico desde el backend
   const conductorId = '{{ $conductorId }}';
   const mecanicoId = '{{ $mecanicoId }}';
+  const userName = '{{ $userName }}';
  
 
   // Unirse a una sala de chat basada en los IDs del conductor y mecánico
@@ -64,14 +65,14 @@
   const chatMessagesContainer = document.getElementById('chat-messages-container');
   chatMessagesContainer.innerHTML = '';
   
-  const userId = chatMessagesContainer.getAttribute('data-user-id');
-  const userName = chatMessagesContainer.getAttribute('data-user-name');
+  //const userId = chatMessagesContainer.getAttribute('data-user-id');
+  //const userName = chatMessagesContainer.getAttribute('data-user-name');
 
   //unirse a una sala nueva
   socket.emit('joinRoom', room);
   
   console.log('contratacionId:', contratacionId);
-    console.log('userId:', userId);
+    //console.log('userId:', userId);
 
   // Escuchar eventos de chat para recibir mensajes del servidor
   socket.on('chat', (message) => {
@@ -104,7 +105,7 @@
 
       const senderElement = document.createElement('p');
       senderElement.classList.add('small', 'mb-1');
-      senderElement.innerText  = (message.sender === sender) ? senderName : userName;
+      senderElement.innerText  = (message.sender === sender) ? '{{ Auth::user()->name }}' : message.senderName;
 
       const timestampElement = document.createElement('p');
       timestampElement.classList.add('small', 'mb-1', 'text-muted');
@@ -149,7 +150,7 @@
   });
 
   // Obtener el historial de chat al cargar la página
-  socket.emit('historial');
+  socket.emit('historial'), room;
 
   socket.on('historial', (chats) => {
     // Lógica para procesar y mostrar el historial de chat en la interfaz de usuario
@@ -158,8 +159,8 @@
 
     chats.forEach((chat) => {
       // Verificar si el mensaje es para el usuario actual
-      //const userId = '{{ Auth::user()->id }}';
-      const userId = document.getElementById('chat-messages-container').getAttribute('data-user-id');
+      const userId = '{{ Auth::user()->id }}';
+      //const userId = document.getElementById('chat-messages-container').getAttribute('data-user-id');
         
       /*Determinar el remitente y el destinatario
         let sender = '';
@@ -216,7 +217,8 @@
   // Manejar el envío de mensajes desde el formulario
   const chatForm = document.getElementById('chat-form');
   const messageInput = document.getElementById('message-input');
-  const sender = '{{ Auth::user()->name }}'; // Nombre del remitente obtenido desde el backend
+  const userId = '{{ Auth::user()->id }}'; // ID del usuario actual obtenido desde el backend
+  const senderN = '{{ Auth::user()->name }}'; // Nombre del remitente obtenido desde el backend
   const timestamp = new Date().toISOString(); // Fecha actual en formato ISO
   const read = false; // Estado de lectura inicialmente establecido en false
 
@@ -232,18 +234,22 @@
 
         if (userId === conductorId) {
         // El usuario actual es el conductor
-        sender = 'conductor';
+        sender = senderN;
         recipient = mecanicoId;
         senderName = userName;
         } else if (userId === mecanicoId) {
         // El usuario actual es el mecánico
-        sender = 'mecanico';
+        sender = senderN;
         recipient = conductorId;
         senderName = userName;
         }
 
+         // Agregar la sala al objeto chat
+        const room = 'contratacion_' + contratacionId;
+        sala = room;
+
         // Enviar el mensaje al servidor
-        socket.emit('chat', { room, sender, recipient, message, timestamp, read });
+        socket.emit('chat', { room, sender, recipient, message, sala, timestamp, read });
 
         // Limpiar el campo de entrada de mensajes
         messageInput.value = '';

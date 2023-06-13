@@ -19,7 +19,10 @@ class MensajeController extends Controller
             $mecanicoId = $contratacion->mecanico_id;
             $contratacionId = $contratacion->id;
 
-            return view('chats.mensajeria', compact('conductorId', 'mecanicoId', 'contratacionId'));
+            // Obtener el userName del usuario autenticado
+            $userName = auth()->user()->name;
+
+            return view('chats.mensajeria', compact('conductorId', 'mecanicoId', 'contratacionId', 'userName'));
         }else{
             return redirect()->back()->with('error', 'No se encontro una contratacion');
         }
