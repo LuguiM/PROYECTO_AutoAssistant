@@ -58,12 +58,18 @@
   // Unirse a una sala de chat basada en los IDs del conductor y mecánico
   const contratacionId = document.getElementById('chat-messages-container').getAttribute('data-contratacion-id');
   const room = 'contratacion_' + contratacionId;
-  socket.emit('joinRoom', room);
+  
 
+  //limpia el contenedor de mensajes
   const chatMessagesContainer = document.getElementById('chat-messages-container');
+  chatMessagesContainer.innerHTML = '';
+  
   const userId = chatMessagesContainer.getAttribute('data-user-id');
   const userName = chatMessagesContainer.getAttribute('data-user-name');
 
+  //unirse a una sala nueva
+  socket.emit('joinRoom', room);
+  
   console.log('contratacionId:', contratacionId);
     console.log('userId:', userId);
 
