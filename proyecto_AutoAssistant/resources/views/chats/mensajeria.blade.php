@@ -1,11 +1,40 @@
 <style>
-    .message-sent {
-  justify-content: flex-end;
+/* Estilos para los mensajes enviados por el conductor */
+.message-sent {
+  flex-direction: column;
+  align-items: flex-end;
 }
 
-.message-received {
-  justify-content: flex-start;
+.message-sent p.small {
+  text-align: right;
 }
+
+/* Estilos para los mensajes recibidos por el mecánico */
+.message-received {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.message-received p.small {
+  text-align: left;
+}
+
+/* Estilos para el contenedor de mensajes */
+#chat-messages-container {
+  /* Estilos generales del contenedor */
+}
+
+/* Estilos para los mensajes individuales */
+#chat-messages-container .message-sent {
+  /* Estilos específicos para los mensajes enviados por el conductor */
+}
+
+#chat-messages-container .message-received {
+  /* Estilos específicos para los mensajes recibidos por el mecánico */
+}
+
+/* Otros estilos que desees aplicar */
+
 
 </style>
 <x-app-layout>
@@ -83,145 +112,111 @@
     //console.log('userId:', userId);
 
   // Escuchar eventos de chat para recibir mensajes del servidor
-  socket.on('chat', (message) => {
-    // Verificar si el mensaje es para el usuario actual
-    const userId = '{{ Auth::user()->id }}';
-    const room = 'contratacion_' + contratacionId;
+socket.on('chat', (message) => {
+  // Verificar si el mensaje es para el usuario actual
+  const userId = '{{ Auth::user()->id }}';
+  const room = 'contratacion_' + contratacionId;
 
-    // Determinar el remitente y el destinatario
-    let sender = '';
-    let recipient = '';
-    let rolSender = '';
-    /*
-    if (userId === conductorId) {
-        // El usuario actual es el conductor
-        sender = userName;
-        recipient = mecanicoId;
-        rolSender = 'conductor';
-    } else if (userId === mecanicoId) {
-        // El usuario actual es el mecánico
-        sender = userName;
-        recipient = conductorId;
-        rolSender = 'mecanico';
+  if (message.sala === room) {
+    // Mostrar el mensaje en el chat
+
+    const messageContainer = document.createElement('div');
+    messageContainer.classList.add('d-flex', 'justify-content-between');
+
+    const senderElement = document.createElement('p');
+    senderElement.classList.add('small', 'mb-1');
+    senderElement.innerText = message.senderName;
+
+    const timestampElement = document.createElement('p');
+    timestampElement.classList.add('small', 'mb-1', 'text-muted');
+    timestampElement.innerText = message.timestamp;
+
+    const avatarElement = document.createElement('img');
+    avatarElement.src = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp';
+    avatarElement.alt = 'avatar';
+    avatarElement.classList.add('rounded-circle', 'img-fluid');
+
+    const messageTextElement = document.createElement('div');
+    messageTextElement.classList.add('d-flex', 'flex-row', 'justify-content-start');
+
+    const messageContentElement = document.createElement('div');
+    messageContentElement.classList.add('p-2', 'ms-3', 'mb-3', 'rounded-3');
+    messageContentElement.style.backgroundColor = '#f5f6f7';
+    messageContentElement.innerText = message.message;
+
+    messageTextElement.appendChild(avatarElement);
+    messageTextElement.appendChild(messageContentElement);
+
+    messageContainer.appendChild(senderElement);
+    messageContainer.appendChild(timestampElement);
+    messageContainer.appendChild(messageTextElement);
+
+    // Agregar clase CSS adicional según el remitente
+    if (message.rolSender === 'conductor') {
+      messageContainer.classList.add('message-sent');
+    } else if (message.rolSender === 'mecanico') {
+      messageContainer.classList.add('message-received');
     }
-    console.log('Sender:', sender);
-  console.log('Recipient:', recipient);
-  console.log('Message:', message);*/
-   
-    if  (message.sala === room) {
-      // Mostrar el mensaje en el chat
-   
 
-      const messageContainer = document.createElement('div');
-      messageContainer.classList.add('d-flex', 'justify-content-between');
+    chatMessagesContainer.appendChild(messageContainer);
 
-      const senderElement = document.createElement('p');
-      senderElement.classList.add('small', 'mb-1');
-      senderElement.innerText  = message.senderName;
-
-
-      const timestampElement = document.createElement('p');
-      timestampElement.classList.add('small', 'mb-1', 'text-muted');
-      timestampElement.innerText = message.timestamp;
-
-      const avatarElement = document.createElement('img');
-      avatarElement.src = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp';
-      avatarElement.alt = 'avatar';
-      avatarElement.style.width = '45px';
-      avatarElement.style.height = '100%';
-
-      const messageTextElement = document.createElement('div');
-      messageTextElement.classList.add('d-flex', 'flex-row', 'justify-content-start');
-
-      const messageContentElement = document.createElement('div');
-      messageContentElement.classList.add('p-2', 'ms-3', 'mb-3', 'rounded-3');
-      messageContentElement.style.backgroundColor = '#f5f6f7';
-      messageContentElement.innerText = message.message;
-
-      messageTextElement.appendChild(avatarElement);
-      messageTextElement.appendChild(messageContentElement);
-
-      messageContainer.appendChild(senderElement);
-      messageContainer.appendChild(timestampElement);
-      messageContainer.appendChild(messageTextElement);
-
-      // Agregar clase CSS adicional según el remitente
-      if (message.sender === '{{ Auth::user()->name }}') {
-        messageContainer.classList.add('message-sent');
-      } else {
-        messageContainer.classList.add('message-received');
-      }
-
-      chatMessagesContainer.appendChild(messageContainer);
-
-      // Aquí puedes acceder a los campos adicionales y mostrar la información correspondiente
-      const sender = message.sender;
-      const timestamp = message.timestamp;
-      const read = message.read;
-      // ...
-    }
-  });
+    // Aquí puedes acceder a los campos adicionales y mostrar la información correspondiente
+    const sender = message.sender;
+    const timestamp = message.timestamp;
+    const read = message.read;
+    // ...
+  }
+});
 
   // Obtener el historial de chat al cargar la página
   socket.emit('historial', room);
 
   socket.on('historial', (chats) => {
+  // Lógica para procesar y mostrar el historial de chat en la interfaz de usuario
+  const chatMessagesContainer = document.getElementById('chat-messages-container');
+  chatMessagesContainer.innerHTML = ''; // Borra el contenido anterior
 
-    // Lógica para procesar y mostrar el historial de chat en la interfaz de usuario
-    const chatMessagesContainer = document.getElementById('chat-messages-container');
-    chatMessagesContainer.innerHTML = ''; // Borra el contenido anterior
+  chats.forEach((chat) => {
+    const messageContainer = document.createElement('div');
+    const messageTextElement = document.createElement('div');
+    const avatarElement = document.createElement('img');
 
-    chats.forEach((chat) => {
-      // Verificar si el mensaje es para el usuario actual
-      const userId = '{{ Auth::user()->id }}';
-      //const userId = document.getElementById('chat-messages-container').getAttribute('data-user-id');
+    if (chat.rolSender === 'conductor') {
+      // El remitente es el conductor, mostrar a la derecha
+      messageContainer.classList.add('d-flex', 'justify-content-between', 'message-sent');
+      messageTextElement.classList.add('d-flex', 'flex-row', 'justify-content-start');
+      avatarElement.src = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp';
+      avatarElement.classList.add('rounded-circle', 'img-fluid');
+    } else if (chat.rolSender === 'mecanico') {
+      // El remitente es el mecánico, mostrar a la izquierda
+      messageContainer.classList.add('d-flex', 'justify-content-between', 'message-received');
+      messageTextElement.classList.add('d-flex', 'flex-row', 'justify-content-end', 'mb-4', 'pt-1');
+      avatarElement.src = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp';
+    }
 
-      if (chat.sala === room) {
-        const messageContainer = document.createElement('div');
-        messageContainer.classList.add('d-flex', 'justify-content-between');
+    const senderElement = document.createElement('p');
+    senderElement.classList.add('small', 'mb-1');
+    senderElement.innerText = chat.sender;
 
-        const senderElement = document.createElement('p');
-        senderElement.classList.add('small', 'mb-1');
-        senderElement.innerText = chat.sender;
+    const timestampElement = document.createElement('p');
+    timestampElement.classList.add('small', 'mb-1', 'text-muted');
+    timestampElement.innerText = chat.timestamp;
 
-        const timestampElement = document.createElement('p');
-        timestampElement.classList.add('small', 'mb-1', 'text-muted');
-        timestampElement.innerText = chat.timestamp;
+    const messageContentElement = document.createElement('p');
+    messageContentElement.classList.add('small', 'p-2', 'ms-3', 'mb-3', 'rounded-3');
+    messageContentElement.style.backgroundColor = '#f5f6f7';
+    messageContentElement.innerText = chat.message;
 
-        const avatarElement = document.createElement('img');
-        avatarElement.src = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp';
-        avatarElement.alt = 'avatar';
-        avatarElement.style.width = '45px';
-        avatarElement.style.height = '100%';
+    messageTextElement.appendChild(avatarElement);
+    messageTextElement.appendChild(messageContentElement);
 
-        const messageTextElement = document.createElement('div');
-        messageTextElement.classList.add('d-flex', 'flex-row', 'justify-content-start');
+    messageContainer.appendChild(senderElement);
+    messageContainer.appendChild(timestampElement);
+    messageContainer.appendChild(messageTextElement);
 
-        const messageContentElement = document.createElement('div');
-        messageContentElement.classList.add('p-2', 'ms-3', 'mb-3', 'rounded-3');
-        messageContentElement.style.backgroundColor = '#f5f6f7';
-        messageContentElement.innerText = chat.message;
-
-        messageTextElement.appendChild(avatarElement);
-        messageTextElement.appendChild(messageContentElement);
-
-        messageContainer.appendChild(senderElement);
-        messageContainer.appendChild(timestampElement);
-        messageContainer.appendChild(messageTextElement);
-
-        // Determinar la dirección según el rol del remitente
-        if (chat.rolSender === 'conductor') {
-            // El remitente es el conductor, mostrar a la derecha
-            messageContainer.classList.add('message-sent');
-        } else if (chat.rolSender === 'mecanico') {
-            // El remitente es el mecánico, mostrar a la izquierda
-            messageContainer.classList.add('message-received');
-        }
-        
-        chatMessagesContainer.appendChild(messageContainer);
-      }
-    });
+    chatMessagesContainer.appendChild(messageContainer);
   });
+});
 
   // Manejar el envío de mensajes desde el formulario
   const chatForm = document.getElementById('chat-form');
