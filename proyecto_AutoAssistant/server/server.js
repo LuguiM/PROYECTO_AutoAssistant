@@ -24,6 +24,8 @@ app.use(express.json());
 async function conectarMongoDB() {
   await client.connect();
   return client.db(dbname);
+
+
 }
 
 //funcion para dar formato a la fecha y hora
@@ -42,18 +44,26 @@ io.on('connection', (socket) => {
   console.log('Chat Conectado..');
 
   socket.on('chat', async (chat) => {
+    console.log('chat:', chat);
     let db = await conectarMongoDB();
     let collection = db.collection('chat');
-    const { sender, message } = chat;
+    const { sender, recipient, message } = chat;
     const timestamp = generateTimestamp();
-    collection.insertOne({ sender, message, timestamp, read: false });
+    try {
+      // Código para insertar en la base de datos
+      collection.insertOne({ sender, recipient, message, timestamp, read: false });
+      console.log('se insertaron los datos');
+    } catch (error) {
+      console.log('Error al insertar en la base de datos:', error);
+    }
+    
 
     const updatedChat = {
       ...chat,
       timestamp: timestamp,
       read: false,
     };
-
+    console.log('Datos', updatedChat)
     socket.to(chat.room).emit('chat', updatedChat);
   });
 
@@ -65,6 +75,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('joinRoom', (room) => {
+    console.log('joinRoom:', room);
     socket.join(room);
     console.log(`El cliente se unió a la sala: ${room}`);
   });

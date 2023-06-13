@@ -19,42 +19,15 @@
                             <i class="fas fa-times text-muted fa-xs"></i>
                         </div>
                     </div>
-                    <div class="card-body" data-mdb-perfect-scrollbar="true"
+                    <div class="card-body" data-mdb-perfect-scrollbar="true" id="chat-messages-container" data-contratacion-id="{{ $contratacionId }}"  data-user-id="{{ Auth::user()->id }}"
+                        data-user-name="{{ Auth::user()->name }}"
                         style="position: relative; height: 400px; overflow-y: auto;">
-
-                        <div class="d-flex justify-content-between">
-                            <p class="small mb-1">Timona Siera</p>
-                            <p class="small mb-1 text-muted">23 Jan 2:00 pm</p>
-                        </div>
-                        <div class="d-flex flex-row justify-content-start">
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp"
-                                alt="avatar 1" style="width: 45px; height: 100%;">
-                            <div>
-                                <p class="small p-2 ms-3 mb-3 rounded-3"
-                                    style="background-color: #f5f6f7;">For what reason would it be advisable for
-                                    me to think about business content?</p>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="small mb-1 text-muted">23 Jan 2:05 pm</p>
-                            <p class="small mb-1">Johny Bullock</p>
-                        </div>
-                        <div class="d-flex flex-row justify-content-end mb-4 pt-1">
-                            <div>
-                                <p class="small p-2 me-3 mb-3 text-white rounded-3 bg-warning">Thank you for your
-                                    believe in our supports</p>
-                            </div>
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
-                                alt="avatar 1" style="width: 45px; height: 100%;">
-                        </div>
                     </div>
-                    <div id="chat-messages" data-contratacion-id="{{ $contratacionId }}">
-                    <p>Conductor ID: {{ $conductorId }}</p>
-                    <p>Mecánico ID: {{ $mecanicoId }}</p>
-                    <p>contratacion ID: {{ $contratacionId }}</p>
+                    <div data-contratacion-id="{{ $contratacionId }}">
+                        <p>Conductor ID: {{ $conductorId }}</p>
+                        <p>Mecánico ID: {{ $mecanicoId }}</p>
+                        <p>Contratación ID: {{ $contratacionId }}</p>
                     </div>
-
                     <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
                         <div class="input-group mb-0">
                             <form id="chat-form">
@@ -80,27 +53,93 @@
   // Obtener el ID del conductor y mecánico desde el backend
   const conductorId = '{{ $conductorId }}';
   const mecanicoId = '{{ $mecanicoId }}';
+ 
 
-    // Unirse a una sala de chat basada en los IDs del conductor y mecánico
-    const contratacionId = document.getElementById('chat-messages').getAttribute('data-contratacion-id');
-    console.log(contratacionId);
-    const room = 'contratacion_' + contratacionId;
-    socket.emit('joinRoom', room);
+  // Unirse a una sala de chat basada en los IDs del conductor y mecánico
+  const contratacionId = document.getElementById('chat-messages-container').getAttribute('data-contratacion-id');
+  const room = 'contratacion_' + contratacionId;
+  socket.emit('joinRoom', room);
 
+  const chatMessagesContainer = document.getElementById('chat-messages-container');
+  const userId = chatMessagesContainer.getAttribute('data-user-id');
+  const userName = chatMessagesContainer.getAttribute('data-user-name');
+
+  console.log('contratacionId:', contratacionId);
+    console.log('userId:', userId);
 
   // Escuchar eventos de chat para recibir mensajes del servidor
   socket.on('chat', (message) => {
-    // Mostrar el mensaje en el chat
-    const chatMessages = document.getElementById('chat-messages');
-    const messageElement = document.createElement('div');
-    messageElement.innerText = `${message.sender}: ${message.message}`;
-    chatMessages.appendChild(messageElement);
+    // Verificar si el mensaje es para el usuario actual
+    const userId = '{{ Auth::user()->id }}';
 
-    // Aquí puedes acceder a los campos adicionales y mostrar la información correspondiente
-    const sender = message.sender;
-    const timestamp = message.timestamp;
-    const read = message.read;
-    // ...
+    // Determinar el remitente y el destinatario
+    let sender = '';
+    let recipient = '';
+    let senderName = '';
+
+    if (userId === conductorId) {
+        // El usuario actual es el conductor
+        sender = 'conductor';
+        recipient = mecanicoId;
+        senderName = senderName;
+    } else if (userId === mecanicoId) {
+        // El usuario actual es el mecánico
+        sender = 'mecanico';
+        recipient = conductorId;
+        senderName = senderName;
+    }
+   
+    if ((message.recipient === recipient || message.sender === sender) && message.room ==room) {
+      // Mostrar el mensaje en el chat
+   
+
+      const messageContainer = document.createElement('div');
+      messageContainer.classList.add('d-flex', 'justify-content-between');
+
+      const senderElement = document.createElement('p');
+      senderElement.classList.add('small', 'mb-1');
+      senderElement.innerText  = (message.sender === sender) ? senderName : userName;
+
+      const timestampElement = document.createElement('p');
+      timestampElement.classList.add('small', 'mb-1', 'text-muted');
+      timestampElement.innerText = message.timestamp;
+
+      const avatarElement = document.createElement('img');
+      avatarElement.src = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp';
+      avatarElement.alt = 'avatar';
+      avatarElement.style.width = '45px';
+      avatarElement.style.height = '100%';
+
+      const messageTextElement = document.createElement('div');
+      messageTextElement.classList.add('d-flex', 'flex-row', 'justify-content-start');
+
+      const messageContentElement = document.createElement('div');
+      messageContentElement.classList.add('p-2', 'ms-3', 'mb-3', 'rounded-3');
+      messageContentElement.style.backgroundColor = '#f5f6f7';
+      messageContentElement.innerText = message.message;
+
+      messageTextElement.appendChild(avatarElement);
+      messageTextElement.appendChild(messageContentElement);
+
+      messageContainer.appendChild(senderElement);
+      messageContainer.appendChild(timestampElement);
+      messageContainer.appendChild(messageTextElement);
+
+      // Agregar clase CSS adicional según el remitente
+      if (message.sender === '{{ Auth::user()->name }}') {
+        messageContainer.classList.add('message-sent');
+      } else {
+        messageContainer.classList.add('message-received');
+      }
+
+      chatMessagesContainer.appendChild(messageContainer);
+
+      // Aquí puedes acceder a los campos adicionales y mostrar la información correspondiente
+      const sender = message.sender;
+      const timestamp = message.timestamp;
+      const read = message.read;
+      // ...
+    }
   });
 
   // Obtener el historial de chat al cargar la página
@@ -108,6 +147,64 @@
 
   socket.on('historial', (chats) => {
     // Lógica para procesar y mostrar el historial de chat en la interfaz de usuario
+    const chatMessagesContainer = document.getElementById('chat-messages-container');
+    chatMessagesContainer.innerHTML = ''; // Borra el contenido anterior
+
+    chats.forEach((chat) => {
+      // Verificar si el mensaje es para el usuario actual
+      //const userId = '{{ Auth::user()->id }}';
+      const userId = document.getElementById('chat-messages-container').getAttribute('data-user-id');
+        
+      /*Determinar el remitente y el destinatario
+        let sender = '';
+        let recipient = '';
+
+        if (userId === conductorId) {
+            // El usuario actual es el conductor
+            sender = 'conductor';
+            recipient = mecanicoId;
+        } else if (userId === mecanicoId) {
+            // El usuario actual es el mecánico
+            sender = 'mecanico';
+            recipient = conductorId;
+        }*/
+
+      if (chat.recipient === userId || chat.sender === userId) {
+        const messageContainer = document.createElement('div');
+        messageContainer.classList.add('d-flex', 'justify-content-between');
+
+        const senderElement = document.createElement('p');
+        senderElement.classList.add('small', 'mb-1');
+        senderElement.innerText = chat.sender;
+
+        const timestampElement = document.createElement('p');
+        timestampElement.classList.add('small', 'mb-1', 'text-muted');
+        timestampElement.innerText = chat.timestamp;
+
+        const avatarElement = document.createElement('img');
+        avatarElement.src = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp';
+        avatarElement.alt = 'avatar';
+        avatarElement.style.width = '45px';
+        avatarElement.style.height = '100%';
+
+        const messageTextElement = document.createElement('div');
+        messageTextElement.classList.add('d-flex', 'flex-row', 'justify-content-start');
+
+        const messageContentElement = document.createElement('div');
+        messageContentElement.classList.add('p-2', 'ms-3', 'mb-3', 'rounded-3');
+        messageContentElement.style.backgroundColor = '#f5f6f7';
+        messageContentElement.innerText = chat.message;
+
+        messageTextElement.appendChild(avatarElement);
+        messageTextElement.appendChild(messageContentElement);
+
+        messageContainer.appendChild(senderElement);
+        messageContainer.appendChild(timestampElement);
+        messageContainer.appendChild(messageTextElement);
+
+        chatMessagesContainer.appendChild(messageContainer);
+      }
+    });
   });
 
   // Manejar el envío de mensajes desde el formulario
@@ -122,11 +219,28 @@
     const message = messageInput.value.trim();
 
     if (message !== '') {
-      // Enviar el mensaje al servidor
-      socket.emit('chat', { room,sender, message, timestamp, read});
+        // Determinar el remitente y el destinatario
+        let sender = '';
+        let recipient = '';
+        let senderName = '';
 
-      // Limpiar el campo de entrada de mensajes
-      messageInput.value = '';
+        if (userId === conductorId) {
+        // El usuario actual es el conductor
+        sender = 'conductor';
+        recipient = mecanicoId;
+        senderName = userName;
+        } else if (userId === mecanicoId) {
+        // El usuario actual es el mecánico
+        sender = 'mecanico';
+        recipient = conductorId;
+        senderName = userName;
+        }
+
+        // Enviar el mensaje al servidor
+        socket.emit('chat', { room, sender, recipient, message, timestamp, read });
+
+        // Limpiar el campo de entrada de mensajes
+        messageInput.value = '';
     }
-});
+  });
 </script>
