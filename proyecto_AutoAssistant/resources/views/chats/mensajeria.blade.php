@@ -1,3 +1,13 @@
+<style>
+    .message-sent {
+  justify-content: flex-end;
+}
+
+.message-received {
+  justify-content: flex-start;
+}
+
+</style>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -22,11 +32,6 @@
                     <div class="card-body" data-mdb-perfect-scrollbar="true" id="chat-messages-container" data-contratacion-id="{{ $contratacionId }}"  data-user-id="{{ Auth::user()->id }}"
                         data-user-name="{{ Auth::user()->name }}"
                         style="position: relative; height: 400px; overflow-y: auto;">
-                    </div>
-                    <div data-contratacion-id="{{ $contratacionId }}">
-                        <p>Conductor ID: {{ $conductorId }}</p>
-                        <p>Mecánico ID: {{ $mecanicoId }}</p>
-                        <p>Contratación ID: {{ $contratacionId }}</p>
                     </div>
                     <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
                         <div class="input-group mb-0">
@@ -54,13 +59,16 @@
   const conductorId = '{{ $conductorId }}';
   const mecanicoId = '{{ $mecanicoId }}';
   const userName = '{{ $userName }}';
- 
+
+  console.log('conductorId:', conductorId);
+  console.log('mecanicoId:', mecanicoId);
+  console.log('username', userName);
 
   // Unirse a una sala de chat basada en los IDs del conductor y mecánico
   const contratacionId = document.getElementById('chat-messages-container').getAttribute('data-contratacion-id');
   const room = 'contratacion_' + contratacionId;
   
-
+  console.log('contratacionId:', contratacionId);
   //limpia el contenedor de mensajes
   const chatMessagesContainer = document.getElementById('chat-messages-container');
   chatMessagesContainer.innerHTML = '';
@@ -71,32 +79,36 @@
   //unirse a una sala nueva
   socket.emit('joinRoom', room);
   
-  console.log('contratacionId:', contratacionId);
+  
     //console.log('userId:', userId);
 
   // Escuchar eventos de chat para recibir mensajes del servidor
   socket.on('chat', (message) => {
     // Verificar si el mensaje es para el usuario actual
     const userId = '{{ Auth::user()->id }}';
+    const room = 'contratacion_' + contratacionId;
 
     // Determinar el remitente y el destinatario
     let sender = '';
     let recipient = '';
-    let senderName = '';
-
+    let rolSender = '';
+    /*
     if (userId === conductorId) {
         // El usuario actual es el conductor
-        sender = 'conductor';
+        sender = userName;
         recipient = mecanicoId;
-        senderName = senderName;
+        rolSender = 'conductor';
     } else if (userId === mecanicoId) {
         // El usuario actual es el mecánico
-        sender = 'mecanico';
+        sender = userName;
         recipient = conductorId;
-        senderName = senderName;
+        rolSender = 'mecanico';
     }
+    console.log('Sender:', sender);
+  console.log('Recipient:', recipient);
+  console.log('Message:', message);*/
    
-    if ((message.recipient === recipient || message.sender === sender) && message.room ==room) {
+    if  (message.sala === room) {
       // Mostrar el mensaje en el chat
    
 
@@ -105,7 +117,8 @@
 
       const senderElement = document.createElement('p');
       senderElement.classList.add('small', 'mb-1');
-      senderElement.innerText  = (message.sender === sender) ? '{{ Auth::user()->name }}' : message.senderName;
+      senderElement.innerText  = message.senderName;
+
 
       const timestampElement = document.createElement('p');
       timestampElement.classList.add('small', 'mb-1', 'text-muted');
@@ -150,9 +163,10 @@
   });
 
   // Obtener el historial de chat al cargar la página
-  socket.emit('historial'), room;
+  socket.emit('historial', room);
 
   socket.on('historial', (chats) => {
+
     // Lógica para procesar y mostrar el historial de chat en la interfaz de usuario
     const chatMessagesContainer = document.getElementById('chat-messages-container');
     chatMessagesContainer.innerHTML = ''; // Borra el contenido anterior
@@ -161,22 +175,8 @@
       // Verificar si el mensaje es para el usuario actual
       const userId = '{{ Auth::user()->id }}';
       //const userId = document.getElementById('chat-messages-container').getAttribute('data-user-id');
-        
-      /*Determinar el remitente y el destinatario
-        let sender = '';
-        let recipient = '';
 
-        if (userId === conductorId) {
-            // El usuario actual es el conductor
-            sender = 'conductor';
-            recipient = mecanicoId;
-        } else if (userId === mecanicoId) {
-            // El usuario actual es el mecánico
-            sender = 'mecanico';
-            recipient = conductorId;
-        }*/
-
-      if (chat.recipient === userId || chat.sender === userId) {
+      if (chat.sala === room) {
         const messageContainer = document.createElement('div');
         messageContainer.classList.add('d-flex', 'justify-content-between');
 
@@ -209,6 +209,15 @@
         messageContainer.appendChild(timestampElement);
         messageContainer.appendChild(messageTextElement);
 
+        // Determinar la dirección según el rol del remitente
+        if (chat.rolSender === 'conductor') {
+            // El remitente es el conductor, mostrar a la derecha
+            messageContainer.classList.add('message-sent');
+        } else if (chat.rolSender === 'mecanico') {
+            // El remitente es el mecánico, mostrar a la izquierda
+            messageContainer.classList.add('message-received');
+        }
+        
         chatMessagesContainer.appendChild(messageContainer);
       }
     });
@@ -228,20 +237,20 @@
 
     if (message !== '') {
         // Determinar el remitente y el destinatario
-        let sender = '';
+        //let sender = '';
         let recipient = '';
         let senderName = '';
         let rolSender = '';
 
         if (userId === conductorId) {
             // El usuario actual es el conductor
-            sender = senderN;
+            //sender = senderN;
             recipient = mecanicoId;
             senderName = userName;
             rolSender = 'conductor';
         } else if (userId === mecanicoId) {
             // El usuario actual es el mecánico
-            sender = senderN;
+            //sender = senderN;
             recipient = conductorId;
             senderName = userName;
             rolSender = 'mecanico';
@@ -252,7 +261,15 @@
         sala = room;
 
         // Enviar el mensaje al servidor
-        socket.emit('chat', { room, sender, recipient, message, sala, rolSender, timestamp, read });
+        socket.emit('chat', { 
+            sender: userName, 
+            recipient, 
+            message, 
+            sala, 
+            rolSender, 
+            timestamp, 
+            read 
+        });
 
         // Limpiar el campo de entrada de mensajes
         messageInput.value = '';

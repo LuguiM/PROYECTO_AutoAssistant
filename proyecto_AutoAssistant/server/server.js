@@ -16,7 +16,7 @@ const { MongoClient } = require('mongodb');
 
 const url = 'mongodb://127.0.0.1:27017';
 const client = new MongoClient(url);
-const dbname = 'AutoAssistant';
+const dbname = 'AutoAssistant2';
 const port = 3001;
 
 app.use(express.json());
@@ -49,12 +49,12 @@ io.on('connection', (socket) => {
     console.log('chat:', chat);
     let db = await conectarMongoDB();
     let collection = db.collection('chat');
-    const { sender, recipient, message, sala, rol } = chat;
+    const { sender, recipient, message, sala, rolSender } = chat;
     const timestamp = generateTimestamp();
     try {
       // Código para insertar en la base de datos
-      collection.insertOne({ sender, recipient, message, sala, rol, timestamp, read: false });
-      console.log('se insertaron los datos');
+      collection.insertOne({ sender, recipient, message, sala, rolSender, timestamp, read: false });
+      console.log('se insertaron los datos', chat);
     } catch (error) {
       console.log('Error al insertar en la base de datos:', error);
     }
