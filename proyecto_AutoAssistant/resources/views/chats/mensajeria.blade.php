@@ -231,17 +231,20 @@
         let sender = '';
         let recipient = '';
         let senderName = '';
+        let rolSender = '';
 
         if (userId === conductorId) {
-        // El usuario actual es el conductor
-        sender = senderN;
-        recipient = mecanicoId;
-        senderName = userName;
+            // El usuario actual es el conductor
+            sender = senderN;
+            recipient = mecanicoId;
+            senderName = userName;
+            rolSender = 'conductor';
         } else if (userId === mecanicoId) {
-        // El usuario actual es el mecánico
-        sender = senderN;
-        recipient = conductorId;
-        senderName = userName;
+            // El usuario actual es el mecánico
+            sender = senderN;
+            recipient = conductorId;
+            senderName = userName;
+            rolSender = 'mecanico';
         }
 
          // Agregar la sala al objeto chat
@@ -249,7 +252,7 @@
         sala = room;
 
         // Enviar el mensaje al servidor
-        socket.emit('chat', { room, sender, recipient, message, sala, timestamp, read });
+        socket.emit('chat', { room, sender, recipient, message, sala, rolSender, timestamp, read });
 
         // Limpiar el campo de entrada de mensajes
         messageInput.value = '';

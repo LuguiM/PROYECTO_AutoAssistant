@@ -49,11 +49,11 @@ io.on('connection', (socket) => {
     console.log('chat:', chat);
     let db = await conectarMongoDB();
     let collection = db.collection('chat');
-    const { sender, recipient, message, sala } = chat;
+    const { sender, recipient, message, sala, rol } = chat;
     const timestamp = generateTimestamp();
     try {
       // Código para insertar en la base de datos
-      collection.insertOne({ sender, recipient, message, sala, timestamp, read: false });
+      collection.insertOne({ sender, recipient, message, sala, rol, timestamp, read: false });
       console.log('se insertaron los datos');
     } catch (error) {
       console.log('Error al insertar en la base de datos:', error);
