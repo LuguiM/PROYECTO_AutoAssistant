@@ -209,6 +209,7 @@ a {
     cursor:default;
     background-color: #000000;
     color: #ffffff;
+    max-width: 250px; /* Ajusta el ancho máximo del cuadro */
     
   }
   .card_title_p{  

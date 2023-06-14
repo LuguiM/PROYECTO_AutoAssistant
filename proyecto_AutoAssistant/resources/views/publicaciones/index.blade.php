@@ -71,8 +71,8 @@
     <div class="row">
         @if($publicaciones && $publicaciones->count() > 0)
             @foreach ($publicaciones->take(40) as $publicacion)
-                <div class="col-md-2">
-                    <div class="card mb-4 shadow-sm card_p">
+            <div class="col-md-3">
+                    <div class="card mb-5 shadow-sm card_p">
                         <img class="card-img-top card_img" src="{{ asset($publicacion->imagen) }}" alt="{{ $publicacion->titulo }}" href="{{ route('publicaciones.show', $publicacion->id) }}">
                         <div class="card-body">
                             <h5 class="card-title card_title_p">{{ $publicacion->titulo }}</h5>
