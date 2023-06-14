@@ -150,7 +150,7 @@
                         @if(!$hasServices)
                             <div class="col-md-12">
                                 <div class="alert alert-info" role="alert">
-                                    No tienes ningún servicio mecánico contratado.
+                                    No tienes ningún servicio mecánico Activo.
                                 </div>
                             </div>
                         @endif

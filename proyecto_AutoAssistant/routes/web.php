@@ -8,6 +8,7 @@ use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\ServicioMecanicoController;
 use App\Http\Controllers\ContratacionController;
 use App\Http\Controllers\MensajeController;
+use App\Http\Controllers\RolController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +43,12 @@ Route::get('/google-auth/callback', function () {
         'email_verified_at' => now(), // establece la fecha de verificación del correo electrónico
     ]);
 
+    // Verificar si falta el campo 'rol' en la tabla 'users'
+    if (empty($user->rol)) {
+        return view('auth.rol', ['user' => $user]);
+    }
+
+
     Auth::login($user);
     if(Auth::check()){
         return redirect('/email/verify');
@@ -56,6 +63,8 @@ Route::get('/google-auth/callback', function () {
         return redirect('/email/verify');
     }*/
 });
+
+Route::post('/user/insert-rol', [RolController::class, 'insertRol'])->name('user.insert-rol');
 
 
 Route::get('/registro', function () {
