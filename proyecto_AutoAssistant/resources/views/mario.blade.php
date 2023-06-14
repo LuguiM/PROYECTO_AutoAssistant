@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ejemplo de cuadro con botones grandes</title>
+  <title>Opciones de Registro</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
   <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  <link rel="icon" type="image/png" href="/imagenes/Logo.png"/>
   <style>
     @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900|Rubik:300,400,500,700,900');
     html, body {
@@ -89,20 +89,14 @@
         <p class="card-text">Opciones de registro.</p>
 
         <div class="option-box">
-          <a class="nav-link nav-user-img small" href="#"><span class="register">Conductor</span></a>
+          <a class="nav-link nav-user-img small" href="{{ route('register') }}"><span class="register">Conductor y Fututuro Conductor</span></a>
         </div>
         <p></p>
         <div class="option-box1">
-          <a class="nav-link nav-user-img small" href="#"><span class="login">Futuro Conductor</span></a>
+          <a class="nav-link nav-user-img small" href="{{ route('registerMecanico') }}"><span class="login">Taller Mecanico y Mecanicos Independientes</span></a>
         </div>
         <p></p>
-        <div class="option-box1">
-          <a class="nav-link nav-user-img small" href="#"><span class="login">Taller Mecanico</span></a>
-        </div>
-        <p></p>
-        <div class="option-box1">
-          <a class="nav-link nav-user-img small" href="#"><span class="login">Mecanico independiente</span></a>
-        </div>
+       
       </div>
     </div>
   </div>

@@ -87,9 +87,9 @@ Route::get('/lol', function () {
 Route::get('/prueba', function () {
     return view('prueba');
 });
-Route::get('/mario', function () {
+Route::get('/opcionesRegistro', function () {
     return view('mario');
-});
+})->name('opcionesRegistro');
 
 /*Inscripcion de servicios mecanicos
 Route::get('/requisitos', function () {

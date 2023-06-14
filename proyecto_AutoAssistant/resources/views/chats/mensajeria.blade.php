@@ -27,6 +27,7 @@
 /* Estilos para los mensajes individuales */
 #chat-messages-container .message-sent {
   /* Estilos específicos para los mensajes enviados por el conductor */
+  
 }
 
 #chat-messages-container .message-received {
@@ -48,26 +49,27 @@
         <div class="row justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-6">
                 <div class="card" style="height: 600px;">
-                    <div class="card-header d-flex justify-content-between align-items-center p-3"
-                        style="border-top: 4px solid #ffa900;">
-                        <h5 class="mb-0">Chat messages</h5>
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center p-3">
+                        <div id="titulo">
+                          <h5 class="mb-0">Mensajeria de Servicio</h5>
+                        </div>
+                        
                         <div class="d-flex flex-row align-items-center">
-                            <span class="badge bg-warning me-3">20</span>
-                            <i class="fas fa-minus me-3 text-muted fa-xs"></i>
-                            <i class="fas fa-comments me-3 text-muted fa-xs"></i>
-                            <i class="fas fa-times text-muted fa-xs"></i>
+                          <a href="{{ route('contrataciones.index') }}" class=" btn btn-danger close">&times;</a>
                         </div>
                     </div>
                     <div class="card-body" data-mdb-perfect-scrollbar="true" id="chat-messages-container" data-contratacion-id="{{ $contratacionId }}"  data-user-id="{{ Auth::user()->id }}"
                         data-user-name="{{ Auth::user()->name }}"
                         style="position: relative; height: 400px; overflow-y: auto;">
+
+
                     </div>
-                    <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+                    <div class="card-footer bg-primary text-white text-muted d-flex justify-content-start align-items-center p-3">
                         <div class="input-group mb-0">
                             <form id="chat-form">
                                 <input type="text" id="message-input" class="form-control" placeholder="Escribe tu mensaje"
                                     aria-label="Recipient's username" aria-describedby="button-addon2" />
-                                <button class="btn btn-warning" type="submit" id="button-addon2"
+                                <button class="btn btn-success" type="submit" id="button-addon2"
                                     style="padding-top: .55rem;">
                                     Enviar
                                 </button>
@@ -101,6 +103,7 @@
   //limpia el contenedor de mensajes
   const chatMessagesContainer = document.getElementById('chat-messages-container');
   chatMessagesContainer.innerHTML = '';
+
   
   //const userId = chatMessagesContainer.getAttribute('data-user-id');
   //const userName = chatMessagesContainer.getAttribute('data-user-name');
@@ -120,6 +123,7 @@ socket.on('chat', (message) => {
   if (message.sala === room) {
     // Mostrar el mensaje en el chat
 
+
     const messageContainer = document.createElement('div');
     messageContainer.classList.add('d-flex', 'justify-content-between');
 
@@ -131,10 +135,10 @@ socket.on('chat', (message) => {
     timestampElement.classList.add('small', 'mb-1', 'text-muted');
     timestampElement.innerText = message.timestamp;
 
-    const avatarElement = document.createElement('img');
+    /*const avatarElement = document.createElement('img');
     avatarElement.src = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp';
     avatarElement.alt = 'avatar';
-    avatarElement.classList.add('rounded-circle', 'img-fluid');
+    avatarElement.classList.add('rounded-circle', 'img-fluid');*/
 
     const messageTextElement = document.createElement('div');
     messageTextElement.classList.add('d-flex', 'flex-row', 'justify-content-start');
@@ -144,7 +148,7 @@ socket.on('chat', (message) => {
     messageContentElement.style.backgroundColor = '#f5f6f7';
     messageContentElement.innerText = message.message;
 
-    messageTextElement.appendChild(avatarElement);
+    //messageTextElement.appendChild(avatarElement);
     messageTextElement.appendChild(messageContentElement);
 
     messageContainer.appendChild(senderElement);
@@ -154,9 +158,12 @@ socket.on('chat', (message) => {
     // Agregar clase CSS adicional según el remitente
     if (message.rolSender === 'conductor') {
       messageContainer.classList.add('message-sent');
+
     } else if (message.rolSender === 'mecanico') {
       messageContainer.classList.add('message-received');
+
     }
+
 
     chatMessagesContainer.appendChild(messageContainer);
 
@@ -176,22 +183,31 @@ socket.on('chat', (message) => {
   const chatMessagesContainer = document.getElementById('chat-messages-container');
   chatMessagesContainer.innerHTML = ''; // Borra el contenido anterior
 
+
   chats.forEach((chat) => {
     const messageContainer = document.createElement('div');
     const messageTextElement = document.createElement('div');
     const avatarElement = document.createElement('img');
+    const messageContentElement = document.createElement('p');
+
+    const tituloElement = document.createElement('h5');
 
     if (chat.rolSender === 'conductor') {
       // El remitente es el conductor, mostrar a la derecha
       messageContainer.classList.add('d-flex', 'justify-content-between', 'message-sent');
       messageTextElement.classList.add('d-flex', 'flex-row', 'justify-content-start');
-      avatarElement.src = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp';
-      avatarElement.classList.add('rounded-circle', 'img-fluid');
+      messageContentElement.classList.add('small', 'p-2', 'ms-3', 'mb-3', 'rounded-3','bg-primary', 'text-white');
+      /*avatarElement.src = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp';
+      avatarElement.classList.add('rounded-circle', 'img-fluid');*/
+
+
     } else if (chat.rolSender === 'mecanico') {
       // El remitente es el mecánico, mostrar a la izquierda
       messageContainer.classList.add('d-flex', 'justify-content-between', 'message-received');
       messageTextElement.classList.add('d-flex', 'flex-row', 'justify-content-end', 'mb-4', 'pt-1');
-      avatarElement.src = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp';
+      messageContentElement.classList.add('small', 'p-2', 'ms-3', 'mb-3', 'rounded-3','bg-dark', 'text-white');
+      /*avatarElement.src = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp';*/
+
     }
 
     const senderElement = document.createElement('p');
@@ -202,8 +218,8 @@ socket.on('chat', (message) => {
     timestampElement.classList.add('small', 'mb-1', 'text-muted');
     timestampElement.innerText = chat.timestamp;
 
-    const messageContentElement = document.createElement('p');
-    messageContentElement.classList.add('small', 'p-2', 'ms-3', 'mb-3', 'rounded-3');
+    
+    
     messageContentElement.style.backgroundColor = '#f5f6f7';
     messageContentElement.innerText = chat.message;
 
@@ -215,6 +231,7 @@ socket.on('chat', (message) => {
     messageContainer.appendChild(messageTextElement);
 
     chatMessagesContainer.appendChild(messageContainer);
+
   });
 });
 

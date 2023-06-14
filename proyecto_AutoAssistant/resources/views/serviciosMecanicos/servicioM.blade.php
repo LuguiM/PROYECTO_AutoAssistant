@@ -49,10 +49,11 @@
     min-width: 200px;
     min-height: 100px;
     margin-bottom: 20px;
-    background: #3d3c46;
     margin-right: 10px;
-    background-color: lightblue;
-    color:black;
+    border: solid blue;
+  }
+  .footer{
+    background-color:blue;
   }
  
   .card-img-top{
@@ -117,9 +118,11 @@
                             <img src="{{ $servicio->logo }}" class="card-img-top" alt="..." style="max-width: 200px; margin-top: 10px;">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $servicio->servicios }}</h5>
+                                <p class="card-text text-white">RUBRO: {{$servicio->rubro}}</p>
                             </div>
-                            <div class="card-footer text-body-secondary">
-                                {{ $servicio->representante }}
+                            <br>
+                            <div class="card-footer text-body-secondary text-white bg-primary">
+                                Ofrecido por: <span class="badge text-bg-dark">{{ $servicio->representante }}</span></p>
                             </div>
                         </a>
                     </div>

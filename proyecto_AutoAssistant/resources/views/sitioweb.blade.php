@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="{{ asset('build/assets/ani.css') }}">
 
-
+    <link rel="icon" type="image/png" href="/imagenes/Logo.png"/>
 <style>
   @charset "utf-8";
 /* CSS Document */
@@ -288,7 +288,7 @@ background-color: #32525C; /* Cambia el color aquí */
                                     </div>
                                     <span class="vl"></span>
                                     <div class="option-box">
-                                        <a class="nav-link nav-user-img small" href="{{ route('register') }}">
+                                        <a class="nav-link nav-user-img small" href="{{ route('opcionesRegistro') }}">
                                             <span class="login">Registro</span>
                                         </a>
                                     </div>
