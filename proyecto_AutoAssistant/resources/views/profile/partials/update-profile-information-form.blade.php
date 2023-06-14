@@ -52,22 +52,28 @@
         <x-input-error class="mt-2" :messages="$errors->get('edad')" />
         </div>
         
+
+        @if(auth()->user()->hasAnyRole('conductor','futuro_conductor')) 
         <p></p>
         <div>
-    <x-input-label for="license" :value="__('Licencia:')" />
-    <select style="margin-left: 85px;" id="licencia" name="licencia" class="mt-1 block w-full">
-        <option value="SI" {{ old('licencia') == 'SI' ? 'selected' : '' }}>Sí</option>
-        <option value="NO" {{ old('licencia') == 'NO' ? 'selected' : '' }}>No</option>
-    </select>
-    <x-input-error class="mt-2" :messages="$errors->get('licencia')" />
-</div>
-<p></p>
+            <x-input-label for="license" :value="__('Licencia:')" />
+            <select style="margin-left: 85px;" id="licencia" name="licencia" class="mt-1 block w-full">
+                <option value="SI" {{ old('licencia') == 'SI' ? 'selected' : '' }}>Sí</option>
+                <option value="NO" {{ old('licencia') == 'NO' ? 'selected' : '' }}>No</option>
+            </select>
+            <x-input-error class="mt-2" :messages="$errors->get('licencia')" />
+        </div>
+        <p></p>
         <div>
             <x-input-label for="license" :value="__('Numero de licencia:')" />
             <x-text-input id="numero_licencia" name="numero_licencia" type="text" class="mt-1 block w-full" :value="old('numero_licencia', $user->numero_licencia)" autocomplete="numero_licencia" />
             <x-input-error class="mt-2" :messages="$errors->get('numero_licencia')" />
         </div>
         <p></p>
+        @endif
+        
+
+<br>
         <div class="flex items-center gap-4">
             <x-primary-button class="btn_card_profile">{{ __('Guardar') }}</x-primary-button>
 

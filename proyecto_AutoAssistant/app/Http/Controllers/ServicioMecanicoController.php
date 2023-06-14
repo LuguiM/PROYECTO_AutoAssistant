@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ServicioMecanico;
+use App\Models\Contratacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -22,21 +23,24 @@ class ServicioMecanicoController extends Controller
      */
     public function index(Request $request)
     {
-        
-        $user = auth()->user();
-        $rolesUsuario = $user->getRoleNames();
+        try{
+            $user = auth()->user();
+            $rolesUsuario = $user->getRoleNames();
 
-        if($rolesUsuario->contains('taller_mecanico') || $rolesUsuario->contains('mecanico_independiente')){
-            $serviciosMecanicos = ServicioMecanico::all();
-            return view('serviciosMecanicos.requisitos', compact('serviciosMecanicos'));
-        }elseif($rolesUsuario->contains('conductor') || $rolesUsuario->contains('futuro_conductor')){
-            $serviciosMecanicos = ServicioMecanico::all();
-            
-            return view('serviciosMecanicos.servicioM', compact('serviciosMecanicos'));
-        }else{
-            return view('error');
-        }
-        
+            if($rolesUsuario->contains('taller_mecanico') || $rolesUsuario->contains('mecanico_independiente')){
+                $serviciosMecanicos = ServicioMecanico::all();
+                return view('serviciosMecanicos.requisitos', compact('serviciosMecanicos'));
+            }elseif($rolesUsuario->contains('conductor') || $rolesUsuario->contains('futuro_conductor')){
+                $serviciosMecanicos = ServicioMecanico::all();
+                
+                return view('serviciosMecanicos.servicioM', compact('serviciosMecanicos'));
+            }else{
+                return view('error');
+            }
+        }catch (\Exception $e) {
+            // Error en el servidor o problemas de conexión a Internet
+            return redirect()->back()->with('error', 'Ha ocurrido un error en el servidor. Por favor, inténtalo nuevamente más tarde.');
+        };
         
     }
 
@@ -54,7 +58,7 @@ class ServicioMecanicoController extends Controller
      */
     public function store(Request $request)
     {
-        /*try{*/
+        try{
             $validator = Validator::make($request->all(),[
                 'nombreTaller' => ['nullable', 'string', 'max:225'],
                 'representante' => ['required', 'string', 'max:225'],
@@ -138,6 +142,7 @@ class ServicioMecanicoController extends Controller
                 'id_user' => $id_user,
             ]);
 
+
             if ($servicio->save()) {
                 // El modelo se guardó correctamente
                 return redirect()->route('servicios-mecanicos.index')->with('success', 'Servicio Mecanico creado correctamente.');
@@ -145,10 +150,10 @@ class ServicioMecanicoController extends Controller
                 // Error al guardar el modelo
                 return redirect()->back()->with('error', 'Ha ocurrido un error al guardar el Servicio Mecanico. Por favor, inténtalo nuevamente.');
             }
-       /* }catch (\Exception $e) {
+        }catch (\Exception $e) {
             // Error en el servidor o problemas de conexión a Internet
             return redirect()->back()->with('error', 'Ha ocurrido un error en el servidor. Por favor, inténtalo nuevamente más tarde.');
-        }*/
+        };
     }
 
 
@@ -157,16 +162,19 @@ class ServicioMecanicoController extends Controller
      */
     public function show($id)
     {
-       
-        $servicioMecanico = ServicioMecanico::find($id);
-    
-        // Verificar si el servicio mecánico existe
-        if (!$servicioMecanico) {
-            return redirect()->back()->with('error', 'El servicio mecánico no existe.');
-        }else{
-            return view('serviciosMecanicos.show', compact('servicioMecanico','id'));
-        }
+        try{
+            $servicioMecanico = ServicioMecanico::find($id);
         
+            // Verificar si el servicio mecánico existe
+            if (!$servicioMecanico) {
+                return redirect()->back()->with('error', 'El servicio mecánico no existe.');
+            }else{
+                return view('serviciosMecanicos.show', compact('servicioMecanico','id'));
+            }
+        }catch (\Exception $e) {
+            // Error en el servidor o problemas de conexión a Internet
+            return redirect()->back()->with('error', 'Ha ocurrido un error en el servidor. Por favor, inténtalo nuevamente más tarde.');
+        };
     }
 
     /**
@@ -174,100 +182,126 @@ class ServicioMecanicoController extends Controller
      */
     public function edit($id)
     {
-        $servicioMecanico = ServicioMecanico::find($id);
-    
-        // Verificar si el servicio mecánico existe
-        if (!$servicioMecanico) {
-            return redirect()->route('servicios-mecanicos.index')->with('error', 'El servicio mecánico no existe.');
-        }
+        try{
+            $servicioMecanico = ServicioMecanico::find($id);
         
-        // Verificar si el servicio mecánico pertenece al usuario actual
-        if ($servicioMecanico->id_user != Auth::id()) {
-            return redirect()->route('servicios-mecanicos.index')->with('error', 'No tienes permiso para editar este servicio mecánico.');
-        }
-        
-        
-        return view('serviciosMecanicos.edit', compact('servicioMecanico'));
+            // Verificar si el servicio mecánico existe
+            if (!$servicioMecanico) {
+                return redirect()->route('servicios-mecanicos.index')->with('error', 'El servicio mecánico no existe.');
+            }
+            
+            // Verificar si el servicio mecánico pertenece al usuario actual
+            if ($servicioMecanico->id_user != Auth::id()) {
+                return redirect()->route('servicios-mecanicos.index')->with('error', 'No tienes permiso para editar este servicio mecánico.');
+            }
+            
+            
+            return view('serviciosMecanicos.edit', compact('servicioMecanico'));
+        }catch (\Exception $e) {
+            // Error en el servidor o problemas de conexión a Internet
+            return redirect()->back()->with('error', 'Ha ocurrido un error en el servidor. Por favor, inténtalo nuevamente más tarde.');
+        };
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ServicioMecanico $servicioMecanico, $id)
+    public function update(Request $request, $id)
     {
-       
-    // Validar los datos del formulario
-        $validator = Validator::make($request->all(), [
-            'representante' => 'required',
-            'horario' => 'required',
-            'numeroContacto' => 'required',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'descripcion' => 'required',
-            'rubro' => 'required',
-            'servicio' => 'required',
-            'direccion' => 'required',
-            'acreditacion_1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'acreditacion_2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'acreditacion_3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'acreditacion_4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        try{
+        // Validar los datos del formulario
+            $validator = Validator::make($request->all(), [
+                'nombreTaller' =>'nullable',
+                'representante' => 'required',
+                'horario' => 'required',
+                'numeroContacto' => 'required',
+                'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'descripcion' => 'required',
+                'rubro' => 'required',
+                'servicio' => 'required',
+                'direccion' => 'required',
+                'acreditacion_1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'acreditacion_2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'acreditacion_3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'acreditacion_4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+            $servicioMecanico = ServicioMecanico::All();
+            // Obtener el servicio a actualizar
+            $servicio = ServicioMecanico::find($id);
 
-        // Obtener el servicio a actualizar
-        $servicio = $servicioMecanico::findOrFail($id);
+            // Actualizar los campos del servicio con los datos del formulario
+            $servicio->nombreTaller = $request->input('nombreTaller');
+            $servicio->representante = $request->input('representante');
+            $servicio->horario = $request->input('horario');
+            $servicio->numeroContacto = $request->input('numeroContacto');
+            $servicio->descripcion = $request->input('descripcion');
+            $servicio->rubro = $request->input('rubro');
+            $servicio->servicios = $request->input('servicio');
+            $servicio->direccion = $request->input('direccion');
 
-        // Actualizar los campos del servicio con los datos del formulario
-        $servicio->representante = $request->input('representante');
-        $servicio->horario = $request->input('horario');
-        $servicio->numeroContacto = $request->input('numeroContacto');
-        $servicio->descripcion = $request->input('descripcion');
-        $servicio->rubro = $request->input('rubro');
-        $servicio->servicios = $request->input('servicio');
-        $servicio->direccion = $request->input('direccion');
+            // Subir las acreditaciones si se proporcionaron
+            $logo_path = null;
+            $acreditacion_1_path = null;
+            $acreditacion_2_path = null;
+            $acreditacion_3_path = null;
+            $acreditacion_4_path = null;
 
-        // Subir las acreditaciones si se proporcionaron
+            if ($request->hasFile('logo')) {
+                $logos = $request->file('logo');
+                $logo_path = 'imagenes/serviciosMecanicos/logo/' . time() . '.' . $logos->getClientOriginalExtension();
+                $logos->move(public_path('imagenes/serviciosMecanicos/logo'), $logo_path);
+                /*Guardar el archivo y obtener su ruta
+                $rutalogos = $logos->store('acreditaciones');*/
+                $servicio->logo = $logo_path;
+            }
 
-        if ($request->hasFile('logo')) {
-            $logos = $request->file('logo');
-            // Guardar el archivo y obtener su ruta
-            $rutalogos = $logos->store('acreditaciones');
-            $servicio->logo = $rutalogos;
-        }
+            if ($request->hasFile('acreditacion_1')) {
+                $acreditaciones = $request->file('acreditacion_1');
+                // Guardar el archivo y obtener su ruta
+                //$rutaAcreditaciones = $acreditaciones->store('acreditacion_1');
+                $acreditacion_1_path = 'imagenes/serviciosMecanicos/acreditacion_1/' . time() . '.' . $acreditaciones->getClientOriginalExtension();
+                $acreditaciones->move(public_path('imagenes/serviciosMecanicos/acreditacion_1'), $acreditacion_1_path);
+                $servicio->acreditacion_1 = $acreditacion_1_path;
+            }
 
-        if ($request->hasFile('acreditacion_1')) {
-            $acreditaciones = $request->file('acreditacion_1');
-            // Guardar el archivo y obtener su ruta
-            $rutaAcreditaciones = $acreditaciones->store('acreditacion_1');
-            $servicio->acreditacion_1 = $rutaAcreditaciones;
-        }
+            if ($request->hasFile('acreditacion_2')) {
+                $acreditaciones2 = $request->file('acreditacion_2');
+                //$rutaAcreditaciones2 = $acreditaciones2->store('acreditacion_2');
+                $acreditacion_2_path = 'imagenes/serviciosMecanicos/acreditacion_2/' . time() . '.' . $acreditaciones2->getClientOriginalExtension();
+                $acreditaciones2->move(public_path('imagenes/serviciosMecanicos/acreditacion_2'), $acreditacion_2_path);
+                $servicio->acreditacion_2 = $acreditacion_2_path;
+            }
 
-        if ($request->hasFile('acreditacion_2')) {
-            $acreditaciones2 = $request->file('acreditacion_2');
-            $rutaAcreditaciones2 = $acreditaciones2->store('acreditacion_2');
-            $servicio->acreditacion_2 = $rutaAcreditaciones2;
-        }
+            if ($request->hasFile('acreditacion_3')) {
+                $acreditaciones3 = $request->file('acreditacion_3');
+                //$rutaAcreditaciones3 = $acreditaciones3->store('acreditacion_3');
+                $acreditacion_3_path = 'imagenes/serviciosMecanicos/acreditacion_3/' . time() . '.' . $acreditaciones3->getClientOriginalExtension();
+                $acreditaciones3->move(public_path('imagenes/serviciosMecanicos/acreditacion_3'), $acreditacion_3_path);
+                $servicio->acreditacion_3 = $acreditacion_3_path;
+            }
 
-        if ($request->hasFile('acreditacion_3')) {
-            $acreditaciones3 = $request->file('acreditacion_3');
-            $rutaAcreditaciones3 = $acreditaciones3->store('acreditacion_3');
-            $servicio->acreditacion_3 = $rutaAcreditaciones3;
-        }
+            if ($request->hasFile('acreditacion_4')) {
+                $acreditaciones4 = $request->file('acreditacion_4');
+                //$rutaAcreditaciones4 = $acreditaciones4->store('acreditacion_');
+                $acreditacion_4_path = 'imagenes/serviciosMecanicos/acreditacion_4/' . time() . '.' . $acreditaciones4->getClientOriginalExtension();
+                $acreditaciones4->move(public_path('imagenes/serviciosMecanicos/acreditacion_4'), $acreditacion_4_path);
+                $servicio->acreditacion_4 = $acreditacion_4_path;
+            }
 
-        if ($request->hasFile('acreditacion_4')) {
-            $acreditaciones4 = $request->file('acreditacion_4');
-            $rutaAcreditaciones4 = $acreditaciones4->store('acreditacion_');
-            $servicio->acreditacion_4 = $rutaAcreditaciones4;
-        }
+            // Guardar los cambios en el servicio
+            $servicio->save();
 
-        // Guardar los cambios en el servicio
-        $servicio->save();
-
-        // Redireccionar a la página de visualización del servicio actualizado
-        return redirect()->route('servicios-mecanicos.index')->with('success', 'El servicio se ha actualizado correctamente.');
-
+            // Redireccionar a la página de visualización del servicio actualizado
+            return redirect()->route('servicios-mecanicos.index')->with('success', 'El servicio se ha actualizado correctamente.');
+        
+        }catch (\Exception $e) {
+            // Error en el servidor o problemas de conexión a Internet
+            return redirect()->back()->with('error', 'Ha ocurrido un error en el servidor. Por favor, inténtalo nuevamente más tarde.');
+        };
     }
 
     /**
@@ -275,31 +309,48 @@ class ServicioMecanicoController extends Controller
      */
     public function destroy(ServicioMecanico $servicioMecanico, $id)
     {
-        $servicioMecanico = ServicioMecanico::find($id);
+        try{
+            $servicioMecanico = ServicioMecanico::find($id);
 
-        if (!$servicioMecanico) {
-            // Si el servicio mecánico no existe, puedes mostrar un mensaje de error o redirigir a una página de error.
-            // Por ejemplo:
-            return redirect()->route('servicios-mecanicos.index')->with('error', 'El servicio mecánico no existe.');
-        }
-    
-        // Eliminar los campos relacionados con el servicio mecánico de la base de datos
-        $servicioMecanico->delete();
-    
-        // Redirigir a la página de índice de servicios mecánicos con un mensaje de éxito
-        return redirect()->route('servicios-mecanicos.index')->with('success', 'El servicio mecánico ha sido eliminado correctamente.');
+            if (!$servicioMecanico) {
+                // Si el servicio mecánico no existe, puedes mostrar un mensaje de error o redirigir a una página de error.
+                // Por ejemplo:
+                return redirect()->route('servicios-mecanicos.index')->with('error', 'El servicio mecánico no existe.');
+            }
+
+            // Verificar si existen registros relacionados en la tabla 'contrataciones'
+            if (Contratacion::where('servicio_id', $id)->exists()) {
+                // Si hay registros relacionados, mostrar una alerta o mensaje de error
+                return redirect()->route('servicios-mecanicos.index')->with('error', 'No puedes eliminar este servicio porque tiene contrataciones asociadas.');
+            }
+        
+            // Eliminar los campos relacionados con el servicio mecánico de la base de datos
+            $servicioMecanico->delete();
+        
+            // Redirigir a la página de índice de servicios mecánicos con un mensaje de éxito
+            return redirect()->route('servicios-mecanicos.index')->with('success', 'El servicio mecánico ha sido eliminado correctamente.');
+        
+        }catch (\Exception $e) {
+            // Error en el servidor o problemas de conexión a Internet
+            return redirect()->back()->with('error', 'Ha ocurrido un error en el servidor. Por favor, inténtalo nuevamente más tarde.');
+        };
     }
 
     public function buscarServicio(Request $request)
     {
-        // Obtén los rubros seleccionados del formulario de búsqueda
-        $rubros = $request->input('rubro');
+        try{
+            // Obtén los rubros seleccionados del formulario de búsqueda
+            $rubros = $request->input('rubro');
 
-        // Consulta los servicios mecánicos que coincidan con los rubros seleccionados
-        $serviciosMecanicos = ServicioMecanico::whereIn('rubro', $rubros)->get();
+            // Consulta los servicios mecánicos que coincidan con los rubros seleccionados
+            $serviciosMecanicos = ServicioMecanico::whereIn('rubro', $rubros)->get();
 
-        // Retorna los resultados de la búsqueda en formato JSON
-        return response()->json($serviciosMecanicos);
+            // Retorna los resultados de la búsqueda en formato JSON
+            return response()->json($serviciosMecanicos);
+        }catch (\Exception $e) {
+            // Error en el servidor o problemas de conexión a Internet
+            return redirect()->back()->with('error', 'Ha ocurrido un error en el servidor. Por favor, inténtalo nuevamente más tarde.');
+        };
     }
     
 

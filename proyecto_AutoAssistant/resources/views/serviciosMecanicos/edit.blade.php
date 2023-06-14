@@ -31,7 +31,7 @@
     <br>
     @if(auth()->user()->hasRole('taller_mecanico'))
 
-    <form action="{{ route('servicios-mecanicos.update', $servicioMecanico->id) }}" method="POST" enctype="multipart/form-data" class="container">
+    <form id="myForm" action="{{ route('servicios-mecanicos.update', $servicioMecanico->id) }}" method="POST" enctype="multipart/form-data" class="container">
         <div class="row g-3">
             <div class="col-12">
                 <h2 class="title text-white">Modificación de Servicio</h2>
@@ -197,7 +197,7 @@
     @endif
 
     @if(auth()->user()->hasRole('mecanico_independiente'))
-    <form action="{{ route('inscripcion-servicio.update', $servicioMecanico->id) }}" method="POST" enctype="multipart/form-data" class="container">
+    <form id="myForm" action="{{ route('inscripcion-servicio.update', $servicioMecanico->id) }}" method="POST" enctype="multipart/form-data" class="container">
         <div class="row g-3">
             <div class="col-12">
                 <h2 class="title text-white">Formulario de actualización de servicio</h2>
@@ -353,3 +353,16 @@
 
     
 </x-app-layout>
+<script>
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+        // Realiza cualquier validación adicional que necesites aquí
+
+        // Mostrar notificación de éxito después de 5 segundos
+        alertify.success('¡Servicio modificado con éxito!');
+        setTimeout(function() {
+            document.getElementById('myForm').submit();
+        }, 2000);
+    });
+</script>

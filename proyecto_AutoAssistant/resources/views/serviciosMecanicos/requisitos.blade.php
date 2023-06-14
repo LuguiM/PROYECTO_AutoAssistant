@@ -241,6 +241,11 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="row">
                 @if($serviciosMecanicos->isEmpty())
                     <div class="col-12">
@@ -265,10 +270,10 @@
                                         <p class="card-text">Creado el: {{ $servicioMecanico->created_at->format('d/m/Y') }}</p>
                                         <div class="d-flex justify-content-between">
                                             <a href="{{ route('servicios-mecanicos.edit', $servicioMecanico->id) }}" class="btn btn-primary"><i class='bx bx-edit' ></i> Modificar</a>
-                                            <form action="{{ route('servicios-mecanicos.destroy', $servicioMecanico->id) }}" method="POST" class="d-inline">
+                                            <form id="deleteForm" action="{{ route('servicios-mecanicos.destroy', $servicioMecanico->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"><i class='bx bx-trash-alt'></i> Eliminar</button>
+                                                <button type="submit" onclick="confirmDelete(event)" class="btn btn-danger"><i class='bx bx-trash-alt'></i> Eliminar</button>
                                             </form>
                                         </div>
                                     </div>
@@ -300,4 +305,23 @@
     const accordion = document.querySelector('.accordion');
     accordion.toggleAttribute('open');
   }
+
+  
+   function confirmDelete(event) {
+        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+        // Mostrar la alerta de confirmación con Alertify.js
+        alertify.confirm('Eliminar', '¿Estás seguro de que quieres eliminar este servicio?', 
+            function() {
+                // Si el usuario elige "Aceptar", envía el formulario
+                document.getElementById('deleteForm').submit();
+                alertify.success('¡Servicio eliminado con éxito!');
+            },
+            function() {
+                // Si el usuario elige "Cancelar", no se realiza ninguna acción
+            }
+        ).set('oncancel', function(closeEvent){
+                alertify.error('Cancelado')
+            });
+    }
 </script>

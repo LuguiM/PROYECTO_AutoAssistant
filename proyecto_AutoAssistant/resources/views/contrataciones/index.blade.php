@@ -58,15 +58,15 @@
                                                 <p class="card-text"><small class="text-body-secondary text-white">Fecha de Contratacion: {{ $contratacion->fecha }}</small></p>
                                                 <div class="d-flex justify-content-between">
                                                     <a class="btn btn-primary btn-lg" href="{{ route('contrataciones.edit', $contratacion->id) }}" ><i class='bx bxs-edit' ></i>Modificar</a>
-                                                    <form action="{{ route('contrataciones.destroy', $contratacion->id) }}" method="POST">
+                                                    <form id="deleteForm" action="{{ route('contrataciones.destroy', $contratacion->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-lg btn-block"><i class='bx bx-trash'></i>Cancelar</button>
+                                                        <button type="submit" onclick="confirmDelete(event)" class="btn btn-danger btn-lg btn-block"><i class='bx bx-trash'></i>Cancelar</button>
                                                     </form>
                                                 </div>
                                             </div>
                                             <div class="card-footer text-end">
-                                                <a class="btn btn-secondary btn-lg" href="{{ route('mensajeria.index', $contratacion->id) }}"><i class='bx bx-message-detail'></i> Chat</a>
+                                                <a class="btn btn-secondary btn-lg"  href="{{ route('mensajeria.index', $contratacion->id) }}"><i class='bx bx-message-detail'></i> Chat</a>
                                             </div>
                                         </div>
                                     </div>
@@ -86,6 +86,27 @@
             </div>
 
 </x-app-layout>
+
+<script>
+   function confirmDelete(event) {
+        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+        // Mostrar la alerta de confirmación con Alertify.js
+        alertify.confirm('Eliminar', '¿Estás seguro de que quieres eliminar este servicio?', 
+            function() {
+                // Si el usuario elige "Aceptar", envía el formulario
+                document.getElementById('deleteForm').submit();
+                alertify.success('¡Servicio eliminado con éxito!');
+            },
+            function() {
+                // Si el usuario elige "Cancelar", no se realiza ninguna acción
+            }
+        ).set('oncancel', function(closeEvent){
+                alertify.error('Cancelado')
+            });
+    }
+</script>
+
 @endif
 
 @if(auth()->user()->hasAnyRole('mecanico_independiente','taller_mecanico'))

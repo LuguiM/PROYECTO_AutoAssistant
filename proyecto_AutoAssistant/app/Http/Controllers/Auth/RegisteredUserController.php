@@ -63,7 +63,7 @@ class RegisteredUserController extends Controller
         } elseif ($request->edad < 18 && empty($request->licencia)) {
             $rol = 'futuro_conductor';
         } else {
-            $rol = 'rol_predeterminado';
+            $rol = 'conductor';
         }
 
         // Creación del nuevo usuario

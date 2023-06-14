@@ -64,7 +64,7 @@
                     <a href="{{ route('contrataciones.index') }}" class=" btn btn-danger close">&times;</a>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('contrataciones.update',$contratacion->id) }}" method="POST" enctype="multipart/form-data">
+                    <form id="myForm" action="{{ route('contrataciones.update',$contratacion->id) }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
                     @method('PUT')
@@ -99,3 +99,16 @@
             </div>
         </div>
 </x-app-layout>
+<script>
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+        // Realiza cualquier validación adicional que necesites aquí
+
+        // Mostrar notificación de éxito después de 5 segundos
+        alertify.success('¡Servicio modificado con éxito!');
+        setTimeout(function() {
+            document.getElementById('myForm').submit();
+        }, 2000);
+    });
+</script>
