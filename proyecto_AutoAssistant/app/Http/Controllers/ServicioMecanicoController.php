@@ -60,7 +60,7 @@ class ServicioMecanicoController extends Controller
     {
         try{
             $validator = Validator::make($request->all(),[
-                'nombreTaller' => ['nullable', 'string', 'max:225'],
+                'nombreTaller' => ['required', 'string', 'max:225'],
                 'representante' => ['required', 'string', 'max:225'],
                 'horario' => ['required', 'string', 'max:225'],
                 'numeroContacto' => ['required', 'numeric', 'digits_between:8,15'],

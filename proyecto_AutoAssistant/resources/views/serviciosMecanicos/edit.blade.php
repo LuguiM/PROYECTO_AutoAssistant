@@ -55,14 +55,14 @@
                     <x-input-error :messages="$errors->get('horario')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="form-floating col-md-6">
-                    <input type="text" class="form-control" id="numeroContacto" name="numeroContacto" placeholder="Numero de Contacto" value="{{ $servicioMecanico->numeroContacto }}">
+                    <input type="text" class="form-control" id="numeroContacto" name="numeroContacto" placeholder="Numero de Contacto"  inputmode="numeric" pattern="[0-9\s]*" title="Ingresa un formato telefonico valido" value="{{ $servicioMecanico->numeroContacto }}">
                     <label for="numeroContacto">Numero de Contacto</label>
                     <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert"/>
                 </div>
                 
                 <div class="col-12">
                     <label for="logo" class="text-white">Logo:</label>
-                    <input type="file" name="logo" id="logo" class="form-control" >
+                    <input type="file" name="logo" id="logo" class="form-control" accept=".png, .jpg, .jpeg" >
                     @if ($servicioMecanico->logo)
                         <img id="logo-preview" src="{{ asset($servicioMecanico->logo) }}" alt="Logo Preview" style="max-width: 200px; margin-top: 10px;">
                     @else
@@ -83,7 +83,7 @@
                 </div>
                 <div class="form-floating col-12">
                     <select id="rubro" name="rubro" class="form-select">
-                        <option selected>Rubro...</option>
+                        <option disable>Rubro...</option>
                         <option value="Mecanico" @if($servicioMecanico->rubro == 'Mecanico') selected @endif>Mecanico</option>
                         <option value="Lubricentro" @if($servicioMecanico->rubro == 'Lubricentro') selected @endif>Lubricentro</option>
                         <option value="Electronico" @if($servicioMecanico->rubro == 'Electronico') selected @endif>Electronico</option>
@@ -105,6 +105,17 @@
                     <label for="descripcion">Descripcion</label>
                     <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert"/>
                 </div>
+
+                <div class="form-floating col-12">
+                    <select id="tipoServicio" name="tipoServicio" class="form-select">
+                        <option disabled>Tipo Servicio...</option>
+                        <option value="Adomicilio"  @if($servicioMecanico->tipoServicio == 'Adomicilio') selected @endif>Adomicilio</option>
+                        <option value="Cita/Reserva"  @if($servicioMecanico->tipoServico == 'Cita/Reserva') selected @endif>Cita/Reserva</option>
+                    </select>
+                    <label for="rubro">Selecciona un Tipo de Servicio</label>
+                    <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert"/>
+                </div>
+
                 <div class="col-md-6">
                     <label for="acreditacion_1" class="form-label text-white">Acreditaciones</label>
                     <input type="file" class="form-control" id="acreditacion_1"  name="acreditacion_1" placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
@@ -218,14 +229,14 @@
             </div>
 
             <div class="form-floating col-md-6">
-                <input type="text" class="form-control" id="numeroContacto" name="numeroContacto" placeholder="Numero de Contacto" value="{{ $servicioMecanico->numeroContacto }}">
+                <input type="text" class="form-control" id="numeroContacto" name="numeroContacto" placeholder="Numero de Contacto"  inputmode="numeric" pattern="[0-9\s]*" title="Ingresa un formato telefonico valido" value="{{ $servicioMecanico->numeroContacto }}">
                 <label for="numeroContacto">Numero de Contacto</label>
                 <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert"/>
             </div>
 
             <div class="col-12">
                 <label for="logo" class="form-label text-white">Logo o Imagen del Servicio</label>
-                <input type="file" class="form-control" id="logo" name="logo">
+                <input type="file" class="form-control" id="logo" name="logo" accept=".png, .jpg, .jpeg">
                 <x-input-error :messages="$errors->get('logo')" class="alert alert-danger" role="alert"/>
             </div>
 
@@ -237,7 +248,7 @@
 
             <div class="form-floating col-12">
                 <select id="rubro" name="rubro" class="form-select">
-                    <option selected>Rubro...</option>
+                    <option disable>Rubro...</option>
                     <option value="Mecanico" @if($servicioMecanico->rubro == 'Mecanico') selected @endif>Mecanico</option>
                     <option value="Lubricentro" @if($servicioMecanico->rubro == 'Lubricentro') selected @endif>Lubricentro</option>
                     <option value="Electronico" @if($servicioMecanico->rubro == 'Electronico') selected @endif>Electronico</option>
@@ -261,6 +272,15 @@
                 <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert"/>
             </div>
 
+            <div class="form-floating col-12">
+                <select id="tipoServicio" name="tipoServicio" class="form-select">
+                    <option disabled>Tipo Servicio...</option>
+                    <option value="Adomicilio"  @if($servicioMecanico->tipoServicio == 'Adomicilio') selected @endif>Adomicilio</option>
+                    <option value="Cita/Reserva"  @if($servicioMecanico->tipoServico == 'Cita/Reserva') selected @endif>Cita/Reserva</option>
+                </select>
+                <label for="rubro">Selecciona un Tipo de Servicio</label>
+                <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert"/>
+            </div>
 
             <div class="col-md-6">
                     <label for="acreditacion_1" class="form-label text-white">Acreditaciones</label>

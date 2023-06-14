@@ -72,7 +72,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Contratar el servico</h4>
-                    <a href="{{ route('contrataciones.index') }}" class=" btn btn-danger close">&times;</a>
+                    <a href="{{ url()->previous() }}" class=" btn btn-danger close">&times;</a>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('contrataciones.store',$servicioMecanico->id) }}" method="POST" enctype="multipart/form-data" id="myForm">
@@ -98,8 +98,8 @@
                         <div class="form-floating col-12 form-group">
                             <select id="tipoServicio" name="tipoServicio" class="form-select">
                             <option disabled value="">Tipo Servicio...</option>
-                            <option value="Adomicilio">Adomicilio</option>
-                            <option value="Cita/Reserva" >Cita/Reserva</option>
+                            <option value="Adomicilio" disabled @if($servicioMecanico->tipoServicio == 'Adomicilio') selected @endif>Adomicilio</option>
+                            <option value="Cita/Reserva" disabled @if($servicioMecanico->tipoServicio == 'Cita/Reserva') selected @endif >Cita/Reserva</option>
                             </select>
                             <label for="tipoServicio">Selecciona un Tipo de Servicio</label>
                             <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert"/>

@@ -46,7 +46,7 @@
                     <x-input-error :messages="$errors->get('horario')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="form-floating col-md-6">
-                    <input type="text" class="form-control" id="numeroContacto" name="numeroContacto" placeholder="Numero de Contacto" aria-label="Last name">
+                    <input type="text" class="form-control" id="numeroContacto" name="numeroContacto" placeholder="Numero de Contacto" inputmode="numeric" pattern="[0-9\s]*" title="Ingresa un formato telefonico valido" aria-label="Last name">
                     <label for="numeroContacto">Numero de Contacto</label>
                     <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert"/>
                 </div>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="form-floating col-12">
                     <select id="rubro" name="rubro" class="form-select">
-                        <option selected>Rubro...</option>
+                        <option disabled selected>Rubro...</option>
                         <option value="Mecanico">Mecanico</option>
                         <option value="Lubricentro">Lubricentro</option>
                         <option value="Electronico">Electronico</option>
@@ -79,7 +79,7 @@
                     <x-input-error :messages="$errors->get('rubro')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="form-floating col-12">
-                    <input type="text" class="form-control" id="servicio" name="servicio" placeholder="Servicio que Ofrece" aria-label="Last name">
+                    <input type="text" class="form-control" id="servicio" name="servicio" placeholder="Servicio que Ofrece" required aria-label="Last name">
                     <label for="servicio">Servicio que Ofrece</label>
                     <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert"/>
                 </div>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="form-floating col-12">
                     <select id="tipoServicio" name="tipoServicio" class="form-select">
-                        <option selected>Tipo Servicio...</option>
+                        <option disabled selected>Tipo Servicio...</option>
                         <option value="Adomicilio">Adomicilio</option>
                         <option value="Cita/Reserva">Cita/Reserva</option>
                     </select>
@@ -167,7 +167,7 @@
                 </div>
                 <div class="form-floating col-12">
                     <select id="rubro" name="rubro" class="form-select">
-                        <option selected>Rubro...</option>
+                        <option disabled selected>Rubro...</option>
                         <option value="Mecanico">Mecanico</option>
                         <option value="Lubricentro">Lubricentro</option>
                         <option value="Electronico">Electronico</option>
@@ -184,7 +184,7 @@
                     <x-input-error :messages="$errors->get('direccion')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="form-floating col-12">
-                    <input type="text" class="form-control" id="servicio" name="servicio" placeholder="Servicio que Ofrece" aria-label="Last name">
+                    <input type="text" class="form-control" id="servicio" name="servicio" placeholder="Servicio que Ofrece" required aria-label="Last name">
                     <label for="servicio">Servicio que Ofrece</label>
                     <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert"/>
                 </div>
@@ -196,7 +196,7 @@
                 
                 <div class="form-floating col-12">
                     <select id="tipoServicio" name="tipoServicio" class="form-select">
-                        <option selected>Tipo Servicio...</option>
+                        <option disabled selected>Tipo Servicio...</option>
                         <option value="Adomicilio">Adomicilio</option>
                         <option value="Cita/Reserva">Cita/Reserva</option>
                     </select>

@@ -206,7 +206,7 @@ a {
   }
   .card_p{
     transition:0.5s;
-    cursor:pointer;
+    cursor:default;
     background-color: #000000;
     color: #ffffff;
     

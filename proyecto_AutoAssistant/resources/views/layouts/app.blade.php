@@ -40,7 +40,7 @@
 
 </head>
 
-<body id="body-pd">
+<body id="body-pd" style="background: url('/imagenes/fondo4.jpg') no-repeat center center fixed; background-size: cover;">
     @if (isset($header))
     <header class="header" id="header">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i>
@@ -122,7 +122,7 @@
 
     </div>
     <!-- Page Content -->
-    <main>
+    <main >
         {{ $slot }}
     </main>
 

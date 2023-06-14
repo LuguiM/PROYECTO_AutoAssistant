@@ -51,10 +51,9 @@
     margin-bottom: 20px;
     margin-right: 10px;
     border: solid blue;
+    background-color:#242424;
   }
-  .footer{
-    background-color:blue;
-  }
+ 
  
   .card-img-top{
     max-width: 100%;
@@ -113,6 +112,7 @@
         <div class="grid">
             @if($serviciosMecanicos && $serviciosMecanicos->count() > 0)
                 @forelse ($serviciosMecanicos as $index => $servicio)
+                  
                    <div class="grid-item grid-item-{{ $index }}" data-rubro="{{ $servicio->rubro }}">
                         <a href="{{ route('servicios-mecanicos.show', $servicio->id) }}">
                             <img src="{{ $servicio->logo }}" class="card-img-top" alt="..." style="max-width: 200px; margin-top: 10px;">
