@@ -106,7 +106,7 @@
                         </div>
                         <div class="form-group">
                             <!-- Botón para contratar el servicio -->
-                            <button type="submit" class="btn btn-primary">Modificar</button>
+                            <button type="submit" class="btn btn-primary">Contratar Servicio</button>
                         </div>
                     </form>
                 </div>

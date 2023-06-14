@@ -105,7 +105,7 @@ class ContratacionController extends Controller
 
         if ($contratacion->save()) {
             // El modelo se guardó correctamente
-            return response()->json(['msg' => 'ok'], 200);
+            return redirect()->route('contrataciones.index')->with('success', 'SERVICIO MECANICO CONTRATADO.');
         } else {
             // Error al guardar el modelo
             return redirect()->back()->with('error', 'Ha ocurrido un error al guardar el Servicio Mecanico. Por favor, inténtalo nuevamente.');
