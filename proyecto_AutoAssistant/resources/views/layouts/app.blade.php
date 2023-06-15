@@ -93,7 +93,7 @@
 
                         @if(auth()->user()->hasAnyRole('taller_mecanico', 'mecanico_independiente', 'admin'))
                         <a href="{{ route('servicios-mecanicos.index') }}" class="nav_link"> 
-                            <i class='bx bx-folder-plus nav_icon'></i> <span class="nav_name">ServiciosMecanicos</span> 
+                            <i class='bx bx-folder-plus nav_icon'></i> <span class="nav_name">InscripcionServicios</span> 
                         </a>
                         <a href="{{ route('contrataciones.index') }}" class="nav_link">
                             <i class='bx bx-shield-plus nav_icon'></i>

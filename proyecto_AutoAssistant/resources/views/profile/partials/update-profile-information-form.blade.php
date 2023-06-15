@@ -70,6 +70,13 @@
             <x-input-error class="mt-2" :messages="$errors->get('numero_licencia')" />
         </div>
         <p></p>
+
+        @if ($isGoogleUser && empty($user->edad) && empty($user->licencia) && empty($user->numero_lucencia))
+                <div class="alert alert-warning" role="alert">
+                {{ __('Debe completar su edad, licencia y número de licencia (Estos datos en caso de tenrlos sino hacer caso omiso).') }}
+                </div>
+                
+            @endif
         @endif
         
 
@@ -88,12 +95,7 @@
 
             @endif
 
-            @if ($isGoogleUser && empty($user->edad) && empty($user->licencia) && empty($user->numero_lucencia))
-                <div class="alert alert-warning" role="alert">
-                {{ __('Debe completar su edad, licencia y número de licencia (Estos datos en caso de tenrlos sino hacer caso omiso).') }}
-                </div>
-                
-            @endif
+           
         </div>
     </form>
 </section>

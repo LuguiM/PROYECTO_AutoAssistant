@@ -142,7 +142,7 @@
                 <h2 class="text-center text-white">INICIAR SESION</h2>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control item" id="email" placeholder="Correo" name="email" :value="old('email')" required autofocus autocomplete="username">
+                <input type="text" class="form-control item" id="email" placeholder="Correo" name="email" :value="old('email')" required autofocus autocomplete="email">
                 <x-input-error :messages="$errors->get('email')" class="alert alert-danger" role="alert"/>
             </div>
             <div class="form-group">

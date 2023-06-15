@@ -208,7 +208,7 @@
     @endif
 
     @if(auth()->user()->hasRole('mecanico_independiente'))
-    <form id="myForm" action="{{ route('inscripcion-servicio.update', $servicioMecanico->id) }}" method="POST" enctype="multipart/form-data" class="container">
+    <form id="myForm" action="{{ route('servicios-mecanicos.update', $servicioMecanico->id) }}" method="POST" enctype="multipart/form-data" class="container">
         <div class="row g-3">
             <div class="col-12">
                 <h2 class="title text-white">Formulario de actualización de servicio</h2>
@@ -216,8 +216,8 @@
             @csrf
             @method('PUT')
 
-            <div class="form-floating col-md-6">
-                <input type="text" class="form-control" id="representante" name="representante" placeholder="representante" value="{{ $servicioMecanicoMecanico->representante }}">
+            <div class="form-floating col-12">
+                <input type="text" class="form-control" id="representante" name="representante" placeholder="representante" value="{{ $servicioMecanico->representante }}">
                 <label for="representante">Nombre del Representante</label>
                 <x-input-error :messages="$errors->get('representante')" class="alert alert-danger" role="alert"/>
             </div>
@@ -356,6 +356,7 @@
                     <a href="{{ route('servicios-mecanicos.index') }}" class="btn btn-danger"><i class='bx bx-x-circle'></i> Cancelar</a>
             </div>
         </div>
+        <br>
     </form>
         
     @endif
@@ -383,6 +384,6 @@
         alertify.success('¡Servicio modificado con éxito!');
         setTimeout(function() {
             document.getElementById('myForm').submit();
-        }, 2000);
+        }, 1000);
     });
 </script>

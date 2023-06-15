@@ -124,6 +124,6 @@
             alertify.success('¡Servicio contratado con éxito!');
             setTimeout(function() {
                 document.getElementById('myForm').submit();
-            }, 2000);
+            }, 1000);
         });
     </script>

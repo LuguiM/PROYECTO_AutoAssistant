@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Database\QueryException;
 
 class ServicioMecanicoController extends Controller
 {
@@ -37,10 +38,14 @@ class ServicioMecanicoController extends Controller
             }else{
                 return view('error');
             }
-        }catch (\Exception $e) {
-            // Error en el servidor o problemas de conexión a Internet
-            return redirect()->back()->with('error', 'Ha ocurrido un error en el servidor. Por favor, inténtalo nuevamente más tarde.');
-        };
+
+        } catch (QueryException $e) {
+            Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Session::flash('error', 'No se pudo establecer una conexión con el servidor. Por favor, verifica tu conexión a internet y vuelve a intentarlo.');
+            return redirect()->back();
+        }
         
     }
 
@@ -60,7 +65,7 @@ class ServicioMecanicoController extends Controller
     {
         try{
             $validator = Validator::make($request->all(),[
-                'nombreTaller' => ['required', 'string', 'max:225'],
+                'nombreTaller' => ['nullable', 'string', 'max:225'],
                 'representante' => ['required', 'string', 'max:225'],
                 'horario' => ['required', 'string', 'max:225'],
                 'numeroContacto' => ['required', 'numeric', 'digits_between:8,15'],
@@ -131,7 +136,7 @@ class ServicioMecanicoController extends Controller
                 'numeroContacto' => $request->numeroContacto,
                 'logo' => $logo_path,
                 'rubro' => $request->rubro,
-                'servicio' => $request->servicio,
+                'servicios' => $request->servicio,
                 'descripcion' => $request->descripcion,
                 'direccion' => $request->direccion,
                 'tipoServicio' => $request->tipoServicio,
@@ -150,10 +155,14 @@ class ServicioMecanicoController extends Controller
                 // Error al guardar el modelo
                 return redirect()->back()->with('error', 'Ha ocurrido un error al guardar el Servicio Mecanico. Por favor, inténtalo nuevamente.');
             }
-        }catch (\Exception $e) {
-            // Error en el servidor o problemas de conexión a Internet
-            return redirect()->back()->with('error', 'Ha ocurrido un error en el servidor. Por favor, inténtalo nuevamente más tarde.');
-        };
+
+       } catch (QueryException $e) {
+            Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Session::flash('error', 'No se pudo establecer una conexión con el servidor. Por favor, verifica tu conexión a internet y vuelve a intentarlo.');
+            return redirect()->back();
+        }
     }
 
 
@@ -171,10 +180,13 @@ class ServicioMecanicoController extends Controller
             }else{
                 return view('serviciosMecanicos.show', compact('servicioMecanico','id'));
             }
-        }catch (\Exception $e) {
-            // Error en el servidor o problemas de conexión a Internet
-            return redirect()->back()->with('error', 'Ha ocurrido un error en el servidor. Por favor, inténtalo nuevamente más tarde.');
-        };
+        } catch (QueryException $e) {
+            Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Session::flash('error', 'No se pudo establecer una conexión con el servidor. Por favor, verifica tu conexión a internet y vuelve a intentarlo.');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -197,10 +209,13 @@ class ServicioMecanicoController extends Controller
             
             
             return view('serviciosMecanicos.edit', compact('servicioMecanico'));
-        }catch (\Exception $e) {
-            // Error en el servidor o problemas de conexión a Internet
-            return redirect()->back()->with('error', 'Ha ocurrido un error en el servidor. Por favor, inténtalo nuevamente más tarde.');
-        };
+        } catch (QueryException $e) {
+            Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Session::flash('error', 'No se pudo establecer una conexión con el servidor. Por favor, verifica tu conexión a internet y vuelve a intentarlo.');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -298,10 +313,20 @@ class ServicioMecanicoController extends Controller
             // Redireccionar a la página de visualización del servicio actualizado
             return redirect()->route('servicios-mecanicos.index')->with('success', 'El servicio se ha actualizado correctamente.');
         
-        }catch (\Exception $e) {
-            // Error en el servidor o problemas de conexión a Internet
-            return redirect()->back()->with('error', 'Ha ocurrido un error en el servidor. Por favor, inténtalo nuevamente más tarde.');
-        };
+        } catch (QueryException $e) {
+            Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
+            return redirect()->back();
+        } catch (\PDOException $e) {
+            if ($e->getCode() == 2002) {
+                Session::flash('error', 'No se pudo establecer una conexión con el servidor. Por favor, verifica tu conexión a internet y vuelve a intentarlo.');
+            } else {
+                Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
+            }
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
+            return redirect()->back();
+        }
     }
 
     /**
