@@ -55,9 +55,8 @@ class ContratacionController extends Controller
         $validator= Validator::make($request->all(),[
             
             'fecha' => ['required', 'date'],
-            'tipoServicio' => ['required', 'string', 'max:225'],
         ],[
-            'required' => 'El campo :atribute es obligatorio.'
+            'required' => 'El campo es obligatorio.'
         ]);
 
         if($validator->fails()){
@@ -80,6 +79,7 @@ class ContratacionController extends Controller
             $servicio_id = $servicioMecanicoActivo->id;
             $mecanico_id = $servicioMecanicoActivo->id_user;
             $servicio = $servicioMecanicoActivo->servicios;
+            $tipoServicio = $servicioMecanicoActivo->tipoServicio;
         
             // Resto del código para guardar la Contratación
             // ...
@@ -96,7 +96,7 @@ class ContratacionController extends Controller
             'conductorName' => $conductor,
             'servicioContratado' => $servicio,
             'fecha' => $request['fecha'],
-            'tipoServicio' =>$request['tipoServicio'],
+            'tipoServicio' =>$tipoServicio,
             'servicio_id' => $servicio_id,
             'conductor_id' => $conductor_id,
             'mecanico_id' => $mecanico_id

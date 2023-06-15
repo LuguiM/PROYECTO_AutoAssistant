@@ -167,7 +167,7 @@
                     @endif
                    
             </div>
-            <span class="ml-auto text-white">¿NO TIENES CUENTA? <a href="{{ route('register') }}" class="forgot-pass ">Crear Cuenta</a></span>
+            <span class="ml-auto text-white">¿NO TIENES CUENTA? <a href="{{ route('opcionesRegistro') }}" class="forgot-pass ">Crear Cuenta</a></span>
         </form>
         
         <div class="social-media">
