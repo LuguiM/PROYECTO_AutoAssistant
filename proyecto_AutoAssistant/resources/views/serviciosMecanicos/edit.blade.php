@@ -55,6 +55,11 @@
                     <x-input-error :messages="$errors->get('horario')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="form-floating col-md-6">
+                    <textarea class="form-control" id="horario2" name="horario2" placeholder="Horario de Atencion" value="">{{ $servicioMecanico->horario2 }}</textarea>
+                    <label for="horario">Horario de Atencion</label>
+                    <x-input-error :messages="$errors->get('horario2')" class="alert alert-danger" role="alert"/>
+                </div>
+                <div class="form-floating col-md-6">
                     <input type="text" class="form-control" id="numeroContacto" name="numeroContacto" placeholder="Numero de Contacto"  inputmode="numeric" pattern="[0-9\s]*" title="Ingresa un formato telefonico valido" value="{{ $servicioMecanico->numeroContacto }}">
                     <label for="numeroContacto">Numero de Contacto</label>
                     <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert"/>

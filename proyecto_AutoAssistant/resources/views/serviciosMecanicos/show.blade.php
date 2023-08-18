@@ -122,6 +122,13 @@
               <div class="card-body">
                 <h5 class="card-title">{{$servicioMecanico->horario}}</h5>
               </div>
+              <div class="col">
+          <div class="p-3">
+            <div class="card text-bg-dark border-primary mb-3">
+              <div class="card-header bg-primary">HORARIO</div>
+              <div class="card-body">
+                <h5 class="card-title">{{$servicioMecanico->horario2}}</h5>
+              </div>
 
               <div class="card-header bg-primary">CONTACTO</div>
               <div class="card-body">

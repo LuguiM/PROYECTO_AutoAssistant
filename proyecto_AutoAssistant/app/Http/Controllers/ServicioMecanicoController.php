@@ -64,10 +64,14 @@ class ServicioMecanicoController extends Controller
     public function store(Request $request)
     {
         try{
+            $horario_inicio = $request->input('horario_inicio');
+            $horario_fin = $request->input('horario_fin');
             $validator = Validator::make($request->all(),[
+
                 'nombreTaller' => ['nullable', 'string', 'max:225'],
                 'representante' => ['required', 'string', 'max:225'],
                 'horario' => ['required', 'string', 'max:225'],
+                'horario2' => ['required', 'string', 'max:225'],
                 'numeroContacto' => ['required', 'numeric', 'digits_between:8,15'],
                 'logo' => ['required', 'image', 'max:2048'],
                 'rubro' => ['required', 'string', 'max:255'],
@@ -133,6 +137,7 @@ class ServicioMecanicoController extends Controller
                 'nombreTaller' => $request->nombreTaller,
                 'representante' => $request->representante,
                 'horario' => $request->horario,
+                'horario2' => $request->horario2,
                 'numeroContacto' => $request->numeroContacto,
                 'logo' => $logo_path,
                 'rubro' => $request->rubro,
@@ -163,6 +168,7 @@ class ServicioMecanicoController extends Controller
             Session::flash('error', 'No se pudo establecer una conexión con el servidor. Por favor, verifica tu conexión a internet y vuelve a intentarlo.');
             return redirect()->back();
         }
+       
     }
 
 
@@ -229,6 +235,7 @@ class ServicioMecanicoController extends Controller
                 'nombreTaller' =>'nullable',
                 'representante' => 'required',
                 'horario' => 'required',
+                'horario2' => 'required',
                 'numeroContacto' => 'required',
                 'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'descripcion' => 'required',
@@ -252,6 +259,7 @@ class ServicioMecanicoController extends Controller
             $servicio->nombreTaller = $request->input('nombreTaller');
             $servicio->representante = $request->input('representante');
             $servicio->horario = $request->input('horario');
+            $servicio->horario2 = $request->input('horario2');
             $servicio->numeroContacto = $request->input('numeroContacto');
             $servicio->descripcion = $request->input('descripcion');
             $servicio->rubro = $request->input('rubro');

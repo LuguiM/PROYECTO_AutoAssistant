@@ -14,6 +14,7 @@ class ServicioMecanico extends Model
         'nombreTaller',
         'representante',
         'horario',
+        'horario2',
         'numeroContacto',
         'logo',
         'rubro',
