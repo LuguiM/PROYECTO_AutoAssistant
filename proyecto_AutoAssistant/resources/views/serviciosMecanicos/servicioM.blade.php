@@ -113,19 +113,15 @@
             @if($serviciosMecanicos && $serviciosMecanicos->count() > 0)
                 @forelse ($serviciosMecanicos as $index => $servicio)
                   
-                   <div class="grid-item grid-item-{{ $index }}" data-rubro="{{ $servicio->rubro }}">
-                        <a href="{{ route('servicios-mecanicos.show', $servicio->id) }}">
-                            <img src="{{ $servicio->logo }}" class="card-img-top" alt="..." style="max-width: 200px; margin-top: 10px;">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $servicio->servicios }}</h5>
-                                <p class="card-text text-white">RUBRO: {{$servicio->rubro}}</p>
-                            </div>
-                            <br>
-                            <div class="card-footer text-body-secondary text-white bg-primary">
-                                Ofrecido por: <span class="badge text-bg-dark">{{ $servicio->representante }}</span></p>
-                            </div>
-                        </a>
-                    </div>
+                <div class="grid-item grid-item-{{ $index }}" data-rubro="{{ $servicio->rubro }}" data-servicios="{{ json_encode($servicio->servicios) }}">
+    <a href="{{ route('servicios-mecanicos.show', $servicio->id) }}">
+        <img src="{{ $servicio->logo }}" class="card-img-top" alt="..." style="max-width: 200px; margin-top: 10px;">
+        <div class="card-body">
+            <h5 class="card-title">{{ $servicio->representante }}</h5>
+            <p class="card-text text-white">RUBRO: {{ $servicio->rubro }}</p>
+        </div>
+    </a>
+</div>
                 @empty
                     <div class="col-md-12 text-white">
                         <p>No se encontraron resultados</p>
