@@ -114,16 +114,25 @@
         </div>
 </x-app-layout>
 
-    <script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const fechaInput = document.getElementById('fecha'); // Obtén el campo de fecha y hora
+        const currentDate = new Date(); // Obtén la fecha actual
+        
+        const minDateFormatted = currentDate.toISOString().slice(0, 16); // Formato YYYY-MM-DDTHH:mm
+        fechaInput.setAttribute('min', minDateFormatted);
+        
+        // Restricción de submit
         document.getElementById('myForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-
+            
             // Realiza cualquier validación adicional que necesites aquí
-
+            
             // Mostrar notificación de éxito después de 5 segundos
             alertify.success('¡Servicio contratado con éxito!');
             setTimeout(function() {
                 document.getElementById('myForm').submit();
             }, 1000);
         });
-    </script>
+    });
+</script>

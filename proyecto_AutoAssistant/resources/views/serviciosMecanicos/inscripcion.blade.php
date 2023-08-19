@@ -133,20 +133,7 @@
                 <div class="form-floating col-12">
                     <select id="servicio" name="servicio" class="form-select">
                         <option disabled selected>Servicio que Ofrece...</option>
-                        <option value="ACambio de bujías.">Cambio de bujías.</option>
-                        <option value="Cambio de aceite y filtro.">Cambio de aceite y filtro.</option>
-                        <option value="Cambio del filtro de gasolina y aire.">Cambio del filtro de gasolina y aire.</option>
-                        <option value="Cambio del refrigerante.">Cambio del refrigerante.</option>
-                        <option value="Cambio de la faja del alternador.">Cambio de la faja del alternador.</option>
-                        <option value="Ajuste del tiempo de encendido.">Ajuste del tiempo de encendido.</option>
-                        <option value="Revisión de las luces y los faros.">Revisión de las luces y los faros.</option>
-                        <option value="Instalación de batería auxiliar.">Instalación de batería auxiliar.</option>
-                        <option value="Revisión de vehículos.">Revisión de vehículos.</option>
-                        <option value="Electrónica del automóvil.">Electrónica del automóvil.</option>
-                        <option value="Reprogramacions y configuracion de (UCES)">Reprogramacions y configuracion de (UCES)</option>
-                        <option value="Vehiculo de cortesia. ">Vehiculo de cortesia. </option>
-                        <option value="Antirradares - Detectores radar. ">Antirradares - Detectores radar. </option>
-                        <option value="Climatización de vehículos.">Climatización de vehículos.</option>
+                      
                     </select>
                     <label for="servicio">Servicio que Ofrece</label>
                     <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert"/>
@@ -194,17 +181,113 @@
             </div>
             <br>
         </form>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const horarioInputs = document.querySelectorAll('input[type="datetime-local"]');
-        const currentDate = new Date(); // Obtén la fecha actual
-        
-        horarioInputs.forEach(input => {
-            const minDateFormatted = currentDate.toISOString().slice(0, 16); // Formato YYYY-MM-DDTHH:mm
-            input.setAttribute('min', minDateFormatted);
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const horarioInputs = document.querySelectorAll('input[type="datetime-local"]');
+            const currentDate = new Date(); // Obtén la fecha actual
+
+            horarioInputs.forEach(input => {
+                const minDateFormatted = currentDate.toISOString().slice(0, 16); // Formato YYYY-MM-DDTHH:mm
+                input.setAttribute('min', minDateFormatted);
+            });
+
+            // Restricción de submit con notificación
+            document.getElementById('myForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+                // Realiza cualquier validación adicional que necesites aquí
+
+                // Mostrar notificación de éxito
+                alert('¡Servicio contratado con éxito!');
+
+                // Envío del formulario después de la notificación
+                setTimeout(function() {
+                    document.getElementById('myForm').submit();
+                }, 1000);
+            });
         });
-    });
-</script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const rubroSelect = document.getElementById('rubro');
+            const servicioSelect = document.getElementById('servicio');
+
+            const serviciosPorRubro = {
+                "Mecanico": [
+                    "Cambio de bujías.",
+                    "Cambio de aceite y filtro.",
+                    "Cambio de faja del alternador",
+                    "Cambio de frenos o regulacion",
+                    "Cambio o rectificación de discos de frenos",
+                    "Cambios de soporte de motor",
+                    "Cambio de amortiguadores",
+                    "Cambio de líquido de frenos",
+                    "Cambio de motor",
+                   "Cambio de bomba de frenos",
+                   "Reapriete de suspension",
+
+                ],
+                "Lubricentro": [
+                    "Cambio de aceite.",
+                    "Lavado y lubricación de chasis.",
+                    "Cambio de filtro de aire.",
+                    "Cambio de refrigerante",
+                    "Lubricacion de suspencion",
+                    "Cambio de aceite de trasmicion",
+                   
+                ],
+                "Electronico": [
+                   " Instalación de batería",
+                   " Reprogramacions y configuracion de control",
+                   " Revisión de cableado eléctrico ",
+                    "Cambio de computadora ",
+                   " Cambio de alternador ",
+                   " Cambio de luces ",
+                   " Cambio de tablero del vehículo",
+                    "Instalación de scaner ",
+
+                ],
+                "General de Caja": [
+                    "Cambio de convertidor ",
+                    "Cambio de sincronizados ",
+                    "Cambio de flechas de trasmisión" ,
+                    "Cambio de  filtro de aceite de caja",
+
+                ],
+                "Enderezado y Pintura": [
+                    "Enderezado de chasis ",
+                    "Cambio de bomper",
+                    "Cambio de parilla",
+                    "Enderezado de puertas",
+                    "Pintura general",
+                    "Pulido de espejos y faros",
+                    "Cambio de faldones",
+
+                ],
+                "Llanteria": [
+                    "Cambio de llanta" ,
+                    "Relación de fuga de llanta ",
+                    "Aliniado y balanceado",
+                    "Regulación de aire ",
+                ],
+              
+            };
+
+            rubroSelect.addEventListener('change', function () {
+                const selectedRubro = rubroSelect.value;
+                const servicios = serviciosPorRubro[selectedRubro];
+
+                servicioSelect.innerHTML = ''; // Limpia las opciones actuales
+
+                servicios.forEach(servicio => {
+                    const option = document.createElement('option');
+                    option.value = servicio;
+                    option.textContent = servicio;
+                    servicioSelect.appendChild(option);
+                });
+            });
+        });
+
+    </script>
 </head>
     @endif
 
