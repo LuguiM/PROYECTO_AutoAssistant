@@ -2,6 +2,9 @@
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Response;
+
 
 define('LARAVEL_START', microtime(true));
 
@@ -48,8 +51,19 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 
-$response = $kernel->handle(
-    $request = Request::capture()
-)->send();
+try {
+    $response = $kernel->handle(
+        $request = Request::capture()
+    )->send();
 
-$kernel->terminate($request, $response);
+    $kernel->terminate($request, $response);
+} catch (QueryException $e) {
+    if ($e->getCode() === 2002) {
+        $message = 'No se pudo establecer una conexión con el servidor. Por favor, verifica tu conexión a internet y vuelve a intentarlo.';
+        $response = new Response(view('error', ['message' => $message]), 200);
+        $response->send();
+        exit;
+    }
+
+    throw $e;
+}
