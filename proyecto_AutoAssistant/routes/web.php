@@ -132,7 +132,7 @@ Route::get('/publicacion', [PublicacionController::class, 'index'])->name('publi
 Route::get('/publicaciones/create', [PublicacionController::class, 'create'])->name('publicaciones.create');
 Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('publicaciones.store');
 Route::get('/publicaciones/buscar', [PublicacionController::class, 'buscar'])->name('publicaciones.buscar');
-Route::get('/publicaciones/{publicacion}', 'App\Http\Controllers\PublicacionController@show')->name('publicaciones.show');
+Route::get('/publicaciones/{publicacion}',[PublicacionController::class, 'show'])->name('publicaciones.show');
 
 //Rutas para servicios mecanicos
 Route::get('/servicios-mecanicos', [ServicioMecanicoController::class, 'index'])->name('servicios-mecanicos.index');
@@ -144,10 +144,13 @@ Route::get('/servicios-mecanicos/{servicio}/edit', [ServicioMecanicoController::
 Route::delete('/servicios-mecanicos/{servicio}', [ServicioMecanicoController::class, 'destroy'])->name('servicios-mecanicos.destroy');
 Route::put('/servicios-mecanicos/{id}', [ServicioMecanicoController::class, 'update'])->name('servicios-mecanicos.update');
 
-//hola 
+//rutas para pilotos 
 Route::get('/otra-vista', [PublicacionController::class, 'otraVista'])->name('publicaciones.otravista');
 Route::get('/otra-vista/buscar', [PublicacionController::class, 'buscar'])->name('publicaciones.busscar');
 
+//rutas para ver mas
+
+Route::get('/info/{publicacion}',[PublicacionController::class, 'info'])->name('publicaciones.show1');
 
 //Rutas para contrataciones
 Route::get('/contrataciones', [ContratacionController::class, 'index'])->name('contrataciones.index');
