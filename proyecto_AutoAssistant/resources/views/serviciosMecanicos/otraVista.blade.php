@@ -66,12 +66,12 @@
 @foreach ($publicaciones->take(40) as $publicacion)
                 <div class="col-md-3">
                     <div class="card mb-5 shadow-sm card_p">
-                        <img class="card-img-top card_img" src="{{ asset($publicacion->imagen) }}" alt="{{ $publicacion->titulo }}" href="{{ route('publicaciones.show', $publicacion->id) }}">
+                        <img class="card-img-top card_img" src="{{ asset($publicacion->imagen) }}" alt="{{ $publicacion->titulo }}" href="{{ route('publicaciones.show1', $publicacion->id) }}">
                         <div class="card-body">
                             <h5 class="card-title card_title_p">{{ $publicacion->titulo }}</h5>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="{{ route('publicaciones.show', $publicacion->id) }}" class="btn btn-sm btn-outline-primary">Ver detalles</a>
+                                    <a href="{{ route('publicaciones.show1', $publicacion->id) }}" class="btn btn-sm btn-outline-primary">Ver detalles</a>
                                 </div>
                             </div>
                         </div>

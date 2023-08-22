@@ -74,14 +74,20 @@ class PublicacionController extends Controller
 public function show($id)
 {
     //$publicacion = Publicacion::with('anios')->find($id);
-    $publicacion = Publicacion::All()->find($id);
-    /*
-    $recomendaciones = Publicacion::whereHas('anios', function ($query) use ($publicacion) {
-        $query->whereIn('anio_id', $publicacion->anios->pluck('id')->toArray());
-    })->where('id', '!=', $publicacion->id)
-        ->limit(4)
-        ->get();*/
-    return view('publicaciones.show', compact('publicacion'));
+    $publicacion = Publicacion::find($id);
+
+    // Obtener el nombre de la ruta actual
+    $currentRoute = Route::currentRouteName();
+
+    // Determinar qué vista está siendo accedida y retornar en consecuencia
+    if ($currentRoute === 'publicaciones.show') {
+        return view('publicaciones.show', compact('publicacion'));
+    } elseif ($currentRoute === 'publicaciones.show1') {
+        return view('publicaciones.info', compact('publicacion'));
+    }
+
+    // En caso de que la ruta no coincida con ninguna de las vistas esperadas
+    // podrías lanzar una excepción o manejarlo de acuerdo a tus necesidades.
 }
 
 
