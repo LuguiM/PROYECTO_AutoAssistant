@@ -23,6 +23,7 @@ class ContratacionController extends Controller
     {
         $contrataciones = Contratacion::all();
         return view('contrataciones.index', compact('contrataciones'));
+        
     }
 
     /**

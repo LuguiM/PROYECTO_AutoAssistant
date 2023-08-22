@@ -319,8 +319,8 @@ background-color: #32525C; /* Cambia el color aquí */
                             Servicios
                         </a>
                         <div class="dropdown-menu" aria-labelledby="functionsDropdown">
-                            <a class="dropdown-item" href="inicio">Pilotos</a>
-                            <a class="dropdown-item" href="#">Talleres mecánicos</a>
+                            <a class="dropdown-item"  href="{{route('publicaciones.otravista')}}">Pilotos<i class='bx bx-home-alt'></i></a>
+                            <a class="dropdown-item" href="pilotos1">Talleres mecánicos</a>
                             <a class="dropdown-item" href="#">Contratar servicios</a>
                         </div>
                     </li>

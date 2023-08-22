@@ -10,6 +10,8 @@ use App\Models\Marca;
 use App\Models\Modelo;
 use App\Models\Anio;
 use App\Models\PublicacionAnio;
+use Illuminate\Support\Facades\Route;
+
 
 
 class PublicacionController extends Controller
@@ -24,6 +26,7 @@ class PublicacionController extends Controller
         return view('publicaciones.index', compact('publicaciones', 'marcas', 'modelos'));*/
         return view('publicaciones.index', compact('publicaciones'));
     }
+
 
     public function create()
     {
@@ -84,44 +87,40 @@ public function show($id)
 
 
 
-    public function buscar(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'q' => 'nullable|string|max:255',
-        ]);
+public function buscar(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'q' => 'nullable|string|max:255',
+    ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $publicaciones = Publicacion::when($request->q, function ($query, $q) {
-                return $query->where('titulo', 'LIKE', '%'.$q.'%');
-            })->get();
-/*
-            ->when($request->marca, function ($query, $marca) {
-                return $query->where('marca_id', $marca);
-                
-            })
-            ->when($request->modelo, function ($query, $modelo) {
-                return $query->where('modelo_id', $modelo);
-            })
-            ->when($request->anio_texto, function ($query, $anio_texto) {
-                return $query->whereHas('publicacionAnios', function ($query) use ($anio_texto) {
-                    $query->where('anio', 'LIKE', '%' . $anio_texto . '%');
-                });
-            })
-        
-        
-
-        $marcas = Marca::all();
-        $modelos = Modelo::all();
-        $anios = Anio::all();*/
-
-       
-
-        return view('publicaciones.index', compact('publicaciones'));
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
     }
 
+    $publicaciones = Publicacion::when($request->q, function ($query, $q) {
+            return $query->where('titulo', 'LIKE', '%'.$q.'%');
+        })->get();
+
+    // Obtener el nombre de la ruta actual
+    $currentRoute = Route::currentRouteName();
+    //dd("Current Route: " . $currentRoute);
+
+    // Determinar qué vista está siendo accedida y retornar en consecuencia
+    if ($currentRoute === 'publicaciones.buscar') {
+        return view('publicaciones.index', compact('publicaciones'));
+    } elseif ($currentRoute === 'publicaciones.busscar') {
+        return view('serviciosMecanicos.otraVista', compact('publicaciones'));
+    }
+    
+    // En caso de que la ruta no coincida con ninguna de las vistas esperadas
+    // podrías lanzar una excepción o manejarlo de acuerdo a tus necesidades.
+}
+
+    public function otraVista(Request $request)
+    {
+        $publicaciones = Publicacion::All(); // Obtén las mismas publicaciones nuevamente
+        return view('serviciosMecanicos.otraVista', compact('publicaciones'));
+    }
 
     
 

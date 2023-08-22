@@ -93,12 +93,17 @@ Route::get('/funciones', function () {
 Route::get('/lol', function () {
     return view('lol');
 });
+Route::get('/otraVista', function () {
+    return view('serviciosMecanicos.otraVista');
+});
 Route::get('/prueba', function () {
     return view('prueba');
 });
 Route::get('/opcionesRegistro', function () {
     return view('mario');
 })->name('opcionesRegistro');
+
+
 
 /*Inscripcion de servicios mecanicos
 Route::get('/requisitos', function () {
@@ -138,6 +143,10 @@ Route::get('/servicios-mecanicos/{id}', [ServicioMecanicoController::class, 'sho
 Route::get('/servicios-mecanicos/{servicio}/edit', [ServicioMecanicoController::class, 'edit'])->name('servicios-mecanicos.edit');
 Route::delete('/servicios-mecanicos/{servicio}', [ServicioMecanicoController::class, 'destroy'])->name('servicios-mecanicos.destroy');
 Route::put('/servicios-mecanicos/{id}', [ServicioMecanicoController::class, 'update'])->name('servicios-mecanicos.update');
+
+//hola 
+Route::get('/otra-vista', [PublicacionController::class, 'otraVista'])->name('publicaciones.otravista');
+Route::get('/otra-vista/buscar', [PublicacionController::class, 'buscar'])->name('publicaciones.busscar');
 
 
 //Rutas para contrataciones
