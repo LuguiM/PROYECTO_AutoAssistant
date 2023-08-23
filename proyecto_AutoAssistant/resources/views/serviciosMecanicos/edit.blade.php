@@ -49,15 +49,16 @@
                     <label for="propietario">Nombre del propietario</label>
                     <x-input-error :messages="$errors->get('representante')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="form-floating col-md-6">
-                    <textarea class="form-control" id="horario" name="horario" placeholder="Horario de Atencion" value="">{{ $servicioMecanico->horario }}</textarea>
-                    <label for="horario">Horario de Atencion</label>
-                    <x-input-error :messages="$errors->get('horario')" class="alert alert-danger" role="alert"/>
+                <div class="form-floating col-md-12">
+                    <label for="horario_inicio">Horario de Inicio</label>
+                    <input type="datetime-local" class="form-control" id="horario" name="horario" value="{{ old('horario_inicio') }}">
+                    <x-input-error :messages="$errors->get('horario_inicio')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="form-floating col-md-6">
-                    <textarea class="form-control" id="horario2" name="horario2" placeholder="Horario de Atencion" value="">{{ $servicioMecanico->horario2 }}</textarea>
-                    <label for="horario">Horario de Atencion</label>
-                    <x-input-error :messages="$errors->get('horario2')" class="alert alert-danger" role="alert"/>
+                <br>
+                <div class="form-floating col-md-12">
+                    <label for="horario_fin">Horario de Fin</label>
+                    <input type="datetime-local" class="form-control" id="horario2" name="horario2" value="{{ old('horario_fin') }}">
+                    <x-input-error :messages="$errors->get('horario_fin')" class="alert alert-danger" role="alert"/>
                 </div>
                 <div class="form-floating col-md-6">
                     <input type="text" class="form-control" id="numeroContacto" name="numeroContacto" placeholder="Numero de Contacto"  inputmode="numeric" pattern="[0-9\s]*" title="Ingresa un formato telefonico valido" value="{{ $servicioMecanico->numeroContacto }}">
@@ -95,21 +96,17 @@
                         <option value="Enderezado y Pintura" @if($servicioMecanico->rubro == 'Enderezado y Pintura') selected @endif>Enderezado y Pintura</option>
                         <option value="General de Caja" @if($servicioMecanico->rubro == 'General de Caja') selected @endif>General de Caja</option>
                         <option value="Llanteria" @if($servicioMecanico->rubro == 'Llanteria') selected @endif>Llanteria</option>
-                    </select>
-                    <label for="rubro">Seleccione un Rubro</label>
-                    <x-input-error :messages="$errors->get('rubro')" class="alert alert-danger" role="alert"/>
-                </div>
-
-                <div class="form-floating col-12">
-                    <input type="text" class="form-control" id="servicio" name="servicio" placeholder="Servicio que Ofrece" aria-label="Last name" value="{{ $servicioMecanico->servicios }}">
-                    <label for="servicio">Servicio que Ofrece</label>
-                    <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert"/>
-                </div>
-                <div class="form-floating col-12">
-                    <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion">{{ $servicioMecanico->descripcion }}</textarea>
-                    <label for="descripcion">Descripcion</label>
-                    <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert"/>
-                </div>
+                        </select>
+        <label for="rubro">Selecciona un Rubro</label>
+    </div>
+    <br>
+    <div class="form-floating col-12">
+        <select id="servicio" name="servicio" class="form-select">
+            <option disabled selected>Servicio que Ofrece...</option>
+        </select>
+        <label for="servicio">Servicio que Ofrece</label>
+        <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert"/>
+    </div>
 
                 <div class="form-floating col-12">
                     <select id="tipoServicio" name="tipoServicio" class="form-select">
@@ -208,7 +205,113 @@
                 </div>
         </div>
             <br>
+            
     </form>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const horarioInputs = document.querySelectorAll('input[type="datetime-local"]');
+        const currentDate = new Date(); // Obtén la fecha actual
+
+        horarioInputs.forEach(input => {
+            const minDateFormatted = currentDate.toISOString().slice(0, 16); // Formato YYYY-MM-DDTHH:mm
+            input.setAttribute('min', minDateFormatted);
+        });
+
+        // Restricción de submit con notificación
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+            // Realiza cualquier validación adicional que necesites aquí
+
+            // Mostrar notificación de éxito
+            alert('¡Servicio contratado con éxito!');
+
+            // Envío del formulario después de la notificación
+            setTimeout(function() {
+                document.getElementById('myForm').submit();
+            }, 1000);
+        });
+    });
+
+    // Aquí faltaba una llave de cierre en tu código original
+    const rubroSelect = document.getElementById('rubro');
+    const servicioSelect = document.getElementById('servicio');
+
+    const serviciosPorRubro = {
+        "Mecanico": [
+                    "Cambio de bujías.",
+                    "Cambio de aceite y filtro.",
+                    "Cambio de faja del alternador",
+                    "Cambio de frenos o regulacion",
+                    "Cambio o rectificación de discos de frenos",
+                    "Cambios de soporte de motor",
+                    "Cambio de amortiguadores",
+                    "Cambio de líquido de frenos",
+                    "Cambio de motor",
+                   "Cambio de bomba de frenos",
+                   "Reapriete de suspension",
+
+                ],
+                "Lubricentro": [
+                    "Cambio de aceite.",
+                    "Lavado y lubricación de chasis.",
+                    "Cambio de filtro de aire.",
+                    "Cambio de refrigerante",
+                    "Lubricacion de suspencion",
+                    "Cambio de aceite de trasmicion",
+                   
+                ],
+                "Electronico": [
+                   " Instalación de batería",
+                   " Reprogramacions y configuracion de control",
+                   " Revisión de cableado eléctrico ",
+                    "Cambio de computadora ",
+                   " Cambio de alternador ",
+                   " Cambio de luces ",
+                   " Cambio de tablero del vehículo",
+                    "Instalación de scaner ",
+
+                ],
+                "General de Caja": [
+                    "Cambio de convertidor ",
+                    "Cambio de sincronizados ",
+                    "Cambio de flechas de trasmisión" ,
+                    "Cambio de  filtro de aceite de caja",
+
+                ],
+                "Enderezado y Pintura": [
+                    "Enderezado de chasis ",
+                    "Cambio de bomper",
+                    "Cambio de parilla",
+                    "Enderezado de puertas",
+                    "Pintura general",
+                    "Pulido de espejos y faros",
+                    "Cambio de faldones",
+
+                ],
+                "Llanteria": [
+                    "Cambio de llanta" ,
+                    "Relación de fuga de llanta ",
+                    "Aliniado y balanceado",
+                    "Regulación de aire ",
+                ],
+    };
+
+    rubroSelect.addEventListener('change', function () {
+        const selectedRubro = rubroSelect.value;
+        const servicios = serviciosPorRubro[selectedRubro];
+
+        servicioSelect.innerHTML = ''; // Limpia las opciones actuales
+
+        servicios.forEach(servicio => {
+            const option = document.createElement('option');
+            option.value = servicio;
+            option.textContent = servicio;
+            servicioSelect.appendChild(option);
+        });
+    });
+</script>
+
 
     @endif
 

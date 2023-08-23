@@ -298,27 +298,45 @@
                     <h2 class="title text-white">Formulario de inscripcion</h2>
                 </div>
                 @csrf
-                <div class="col-md-6">
-                    <!-- Campos de la izquierda -->
-                    <!-- ... -->
+                <div class="col-md-2">
+            <!-- Columna izquierda -->
+            <div class="form-floating col-md-12">
+                <input type="text" class="form-control" id="nombreTaller" name="nombreTaller" placeholder="Nombre del Taller" aria-label="First name" value="{{ old('nombreTaller') }}">
+                <label for="nombreTaller">Nombre del taller</label>
+                <x-input-error :messages="$errors->get('nombreTaller')" class="alert alert-danger" role="alert"/>
+            </div>
+            <br>
+            <div class="form-floating col-md-12">
+    <label for="horario_inicio">Horario de Inicio</label>
+    <input type="datetime-local" class="form-control" id="horario" name="horario" value="{{ old('horario_inicio') }}">
+    <x-input-error :messages="$errors->get('horario_inicio')" class="alert alert-danger" role="alert"/>
+</div>
+<br>
+<div class="form-floating col-md-12">
+    <label for="horario_fin">Horario de Fin</label>
+    <input type="datetime-local" class="form-control" id="horario2" name="horario2" value="{{ old('horario_fin') }}">
+    <x-input-error :messages="$errors->get('horario_fin')" class="alert alert-danger" role="alert"/>
+</div>
+
+                <br>
+                <div class="form-floating col-20">
+                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion/Adomicilio" aria-label="Last name" value="{{ old('direccion') }}">
+                    <label for="direccion">Direccion del Taller</label>
+                    <x-input-error :messages="$errors->get('direccion')" class="alert alert-danger" role="alert"/>
+                </div>
+        </div>
+        <div class="col-md-2">
+            <!-- Columna derecha -->
+            <div class=" form-floating col-md-12">
+                <input type="text" class="form-control" id="representante" name="representante" placeholder="Nombre del propietario" aria-label="Last name" value="{{ old('representante') }}">
+                <label for="representante">Nombre del propietario</label>
+                <x-input-error :messages="$errors->get('representante')" class="alert alert-danger" role="alert"/>
+            </div>
+            
+                <br>
                 <div class="form-floating col-12">
-                    <input type="text" class="form-control" id="representante" name="representante" placeholder="Nombre del propietario" aria-label="Last name" value="{{ old('representante') }}">
-                    <label for="propietario">Nombre del Representante</label>
-                    <x-input-error :messages="$errors->get('representante')" class="alert alert-danger" role="alert"/>
-                </div>
-                <div class="form-floating col-md-12">
-                    <textarea class="form-control" id="horario" name="horario" placeholder="Horario de Atencion" aria-label="Last name">{{ old('horario') }}</textarea>
-                    <label for="horario">Horario de Atencion</label>
-                    <x-input-error :messages="$errors->get('horario')" class="alert alert-danger" role="alert"/>
-                </div>
-                <div class="form-floating col-md-12">
-                    <input type="text" class="form-control" id="numeroContacto" name="numeroContacto" placeholder="Numero de Contacto" inputmode="numeric" pattern="[0-9\s]*" title="Ingresa un formato telefonico valido" aria-label="Last name" value="{{ old('numeroContacto') }}">
-                    <label for="numeroContacto">Numero de Contacto</label>
-                    <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert"/>
-                </div>
-                <div class="col-12">
-                    <label for="logo" class="form-label text-white">Logo</label>
                     <input type="file" class="form-control" id="logo" name="logo" accept=".png, .jpg, .jpeg">
+                    <label for="logo">Logo</label>
                     @error('logo')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -326,12 +344,15 @@
                     @enderror
                     <x-input-error :messages="$errors->get('logo')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="form-floating col-12">
-                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion/Adomicilio" aria-label="Last name" value="{{ old('direccion') }}">
-                    <label for="direccion">Direccion</label>
-                    <x-input-error :messages="$errors->get('direccion')" class="alert alert-danger" role="alert"/>
+                <br>
+                <div class="form-floating col-md-12">
+                    <input type="text" class="form-control" id="numeroContacto" name="numeroContacto" placeholder="Numero de Contacto" inputmode="numeric" pattern="[0-9\s]*" title="Ingresa un formato telefonico valido" aria-label="Last name" value="{{ old('numeroContacto') }}">
+                    <label for="numeroContacto">Numero de Contacto</label>
+                    <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert"/>
                 </div>
-                </div>
+        </div>
+  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div class="col-md-6">
                     <!-- Campos de la izquierda -->
                     <!-- ... -->
@@ -348,16 +369,22 @@
                     <label for="rubro">Selecciona un Rubro</label>
                     <x-input-error :messages="$errors->get('rubro')" class="alert alert-danger" role="alert"/>
                 </div>
+                <br>
                 <div class="form-floating col-12">
-                    <input type="text" class="form-control" id="servicio" name="servicio" placeholder="Servicio que Ofrece" required aria-label="Last name" value="{{ old('servicio') }}">
+                    <select id="servicio" name="servicio" class="form-select">
+                        <option disabled selected>Servicio que Ofrece...</option>
+                      
+                    </select>
                     <label for="servicio">Servicio que Ofrece</label>
                     <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert"/>
                 </div>
+                <br>
                 <div class="form-floating col-12">
                     <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" aria-label="Last name">{{ old('descripcion') }}</textarea>
                     <label for="descripcion">Descripcion del servicio</label>
                     <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert"/>
                 </div>
+                <br>
                 <div class="form-floating col-12">
                     <select id="tipoServicio" name="tipoServicio" class="form-select">
                         <option disabled selected>Tipo Servicio...</option>
@@ -367,27 +394,12 @@
                     <label for="rubro">Selecciona un Tipo de Servicio</label>
                     <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert"/>
                 </div>
+                <br>
                 <div class="col-md-12">
-                    <label for="acreditacion_1" class="form-label text-white">Acreditacion 1</label>
+                    <label for="acreditacion_1" class="form-label text-white">Imagen</label>
                     <input type="file" class="form-control" id="acreditacion_1"  name="acreditacion_1" accept=".png, .jpg, .jpeg">
                     <x-input-error :messages="$errors->get('acreditacion_1')" class="alert alert-danger" role="alert"/>
                 </div>
-                <div class="col-md-12">
-                    <label for="acreditacion_2" class="form-label text-white">Acreditacion 2</label>
-                    <input type="file" class="form-control" id="acreditacion_2"  name="acreditacion_2" accept=".png, .jpg, .jpeg">
-                    <x-input-error :messages="$errors->get('acreditacion_2')" class="alert alert-danger" role="alert"/>
-                </div>
-                <div class="col-md-12">
-                    <label for="acreditacion_3" class="form-label text-white">Acreditacion 3</label>
-                    <input type="file" class="form-control" id="acreditacion_3"  name="acreditacion_3" accept=".png, .jpg, .jpeg">
-                    <x-input-error :messages="$errors->get('acreditacion_3')" class="alert alert-danger" role="alert"/>
-                </div>
-                <div class="col-md-12">
-                    <label for="acreditacion_4" class="form-label text-white">Acreditacion 4</label>
-                    <input type="file" class="form-control" id="acreditacion_4"  name="acreditacion_4" accept=".png, .jpg, .jpeg">
-                    <x-input-error :messages="$errors->get('acreditacion_4')" class="alert alert-danger" role="alert"/>
-                </div>
-                 </div>
                 @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -407,6 +419,112 @@
             </div>
             <br>
         </form>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const horarioInputs = document.querySelectorAll('input[type="datetime-local"]');
+            const currentDate = new Date(); // Obtén la fecha actual
+
+            horarioInputs.forEach(input => {
+                const minDateFormatted = currentDate.toISOString().slice(0, 16); // Formato YYYY-MM-DDTHH:mm
+                input.setAttribute('min', minDateFormatted);
+            });
+
+            // Restricción de submit con notificación
+            document.getElementById('myForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+                // Realiza cualquier validación adicional que necesites aquí
+
+                // Mostrar notificación de éxito
+                alert('¡Servicio contratado con éxito!');
+
+                // Envío del formulario después de la notificación
+                setTimeout(function() {
+                    document.getElementById('myForm').submit();
+                }, 1000);
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const rubroSelect = document.getElementById('rubro');
+            const servicioSelect = document.getElementById('servicio');
+
+            const serviciosPorRubro = {
+                "Mecanico": [
+                    "Cambio de bujías.",
+                    "Cambio de aceite y filtro.",
+                    "Cambio de faja del alternador",
+                    "Cambio de frenos o regulacion",
+                    "Cambio o rectificación de discos de frenos",
+                    "Cambios de soporte de motor",
+                    "Cambio de amortiguadores",
+                    "Cambio de líquido de frenos",
+                    "Cambio de motor",
+                   "Cambio de bomba de frenos",
+                   "Reapriete de suspension",
+
+                ],
+                "Lubricentro": [
+                    "Cambio de aceite.",
+                    "Lavado y lubricación de chasis.",
+                    "Cambio de filtro de aire.",
+                    "Cambio de refrigerante",
+                    "Lubricacion de suspencion",
+                    "Cambio de aceite de trasmicion",
+                   
+                ],
+                "Electronico": [
+                   " Instalación de batería",
+                   " Reprogramacions y configuracion de control",
+                   " Revisión de cableado eléctrico ",
+                    "Cambio de computadora ",
+                   " Cambio de alternador ",
+                   " Cambio de luces ",
+                   " Cambio de tablero del vehículo",
+                    "Instalación de scaner ",
+
+                ],
+                "General de Caja": [
+                    "Cambio de convertidor ",
+                    "Cambio de sincronizados ",
+                    "Cambio de flechas de trasmisión" ,
+                    "Cambio de  filtro de aceite de caja",
+
+                ],
+                "Enderezado y Pintura": [
+                    "Enderezado de chasis ",
+                    "Cambio de bomper",
+                    "Cambio de parilla",
+                    "Enderezado de puertas",
+                    "Pintura general",
+                    "Pulido de espejos y faros",
+                    "Cambio de faldones",
+
+                ],
+                "Llanteria": [
+                    "Cambio de llanta" ,
+                    "Relación de fuga de llanta ",
+                    "Aliniado y balanceado",
+                    "Regulación de aire ",
+                ],
+              
+            };
+
+            rubroSelect.addEventListener('change', function () {
+                const selectedRubro = rubroSelect.value;
+                const servicios = serviciosPorRubro[selectedRubro];
+
+                servicioSelect.innerHTML = ''; // Limpia las opciones actuales
+
+                servicios.forEach(servicio => {
+                    const option = document.createElement('option');
+                    option.value = servicio;
+                    option.textContent = servicio;
+                    servicioSelect.appendChild(option);
+                });
+            });
+        });
+
+    </script>
     @endif
 
     <br>

@@ -96,12 +96,20 @@ Route::get('/lol', function () {
 Route::get('/otraVista', function () {
     return view('serviciosMecanicos.otraVista');
 });
+Route::get('/detalles-info', function () {
+    return view('publicaciones.info');
+});
 Route::get('/prueba', function () {
     return view('prueba');
+});
+Route::get('/infoServicioWeb', function () {
+    return view('serviciosMecanicos.infoServicioWeb');
 });
 Route::get('/opcionesRegistro', function () {
     return view('mario');
 })->name('opcionesRegistro');
+
+
 
 
 
@@ -150,7 +158,7 @@ Route::get('/otra-vista/buscar', [PublicacionController::class, 'buscar'])->name
 
 //rutas para ver mas
 
-Route::get('/info/{publicacion}',[PublicacionController::class, 'info'])->name('publicaciones.show1');
+Route::get('/info/{publicacion}',[PublicacionController::class, 'show'])->name('publicaciones.show1');
 
 //Rutas para contrataciones
 Route::get('/contrataciones', [ContratacionController::class, 'index'])->name('contrataciones.index');

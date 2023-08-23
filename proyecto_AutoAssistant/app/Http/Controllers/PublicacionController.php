@@ -11,6 +11,7 @@ use App\Models\Modelo;
 use App\Models\Anio;
 use App\Models\PublicacionAnio;
 use Illuminate\Support\Facades\Route;
+use App\Models\ServicioMecanico; 
 
 
 
@@ -128,7 +129,9 @@ public function buscar(Request $request)
         return view('serviciosMecanicos.otraVista', compact('publicaciones'));
     }
 
+   
     
-
 }
+
+
 

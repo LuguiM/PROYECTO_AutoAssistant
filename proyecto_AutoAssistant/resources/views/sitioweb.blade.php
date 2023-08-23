@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="{{ asset('build/assets/ani.css') }}">
-
+<link rel="stylesheet" href="ani.css">
     <link rel="icon" type="image/png" href="/imagenes/Logo.png"/>
 <style>
   @charset "utf-8";
@@ -25,9 +25,7 @@
 body {
     background-color: #eee
     padding-bottom: 200px;
-    height: 3000px;
-    
-
+   
 }
 
 .dropdown-menu .dropdown-item {
@@ -207,7 +205,7 @@ footer {
   color: #fff;
   padding: 20px;
   text-align: center;
-  margin-top: 600px;
+  margin-top: 0px;
 }
 
 footer p {
@@ -234,6 +232,7 @@ footer p {
 }
 .footer-content {
 background-color: #32525C; /* Cambia el color aquí */
+
 }
 .footer-contente {
     display: flex;
@@ -294,7 +293,6 @@ background-color: #32525C; /* Cambia el color aquí */
                                     </div>
                                 </div>
                             @endif
-
             </div>
         </div>
     </section>
@@ -306,7 +304,7 @@ background-color: #32525C; /* Cambia el color aquí */
 
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ ('inicio') }}">Inicio<i class='bx bx-home-alt'></i></a>
+                    <a class="nav-link" href="{{('inicio') }}">Inicio<i class='bx bx-home-alt'></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#nosotros">Nosotros<i class='bx bx-group'></i></a>
@@ -321,7 +319,7 @@ background-color: #32525C; /* Cambia el color aquí */
                         <div class="dropdown-menu" aria-labelledby="functionsDropdown">
                             <a class="dropdown-item"  href="{{route('publicaciones.otravista')}}">Pilotos<i class='bx bx-home-alt'></i></a>
                             <a class="dropdown-item" href="pilotos1">Talleres mecánicos</a>
-                            <a class="dropdown-item" href="#">Contratar servicios</a>
+                            <a class="dropdown-item" href="infoServicioWeb">Contratar servicios</a>
                         </div>
                     </li>
                 </ul>
