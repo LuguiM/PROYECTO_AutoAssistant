@@ -122,6 +122,24 @@
             
             line-height: 100px;
         }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 999; /* Asegura que esté encima del contenido */
+        }
+    .back-button-container {
+            position: relative; /* Asegura que el botón de atrás esté dentro de este contenedor */
+    }
+        .nav-link {
+      background-color: #00000;
+      display: block;
+      padding:  0.5rem;
+      color: #FFFFFF;
+      text-decoration: none;
+      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+      border-radius: 1rem; /* Redondear todos los lados */
+    }
     </style>
 </head>
 <body>
@@ -133,13 +151,19 @@
     @endif
     <div class="registration-form">
         <form method="POST" action="{{ route('login') }}">
-            @csrf   
+        @csrf   
+        <div class="back-button-container">
+                <!-- Botón de atrás -->
+                <div  style="margin: 10px; flex: 1 1 300px; max-width: 300px; margin-right: 290px; font-size: 20px; margin-bottom: 5px">
+          <a class="nav-link nav-user-img small" href="inicio"><span class="login">Atras</span></a>
+            </div>
+            </div>
             <div class="form-icon">
                 <img src="\imagenes\Logo.png" atl="logo" class="img_logo" ></img>
-             
             </div>
             <div class="form-group">
                 <h2 class="text-center text-white">INICIAR SESION</h2>
+                
             </div>
             <div class="form-group">
                 <input type="text" class="form-control item" id="email" placeholder="Correo" name="email" :value="old('email')" required autofocus autocomplete="email">
@@ -179,6 +203,17 @@
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+
+  $(".alert").delay(1500).slideUp(200, function() {
+     $(this).alert('close');
+  });
+
+});  
+</script>
     <script>
         $(document).ready(function(){
         $('#birth-date').mask('00/00/0000');

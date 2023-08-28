@@ -37,6 +37,7 @@ class RegisteredMController extends Controller
             'rol'  => ['required', 'string', 'max:255', Rule::in(['taller_mecanico', 'mecanico_independiente'])],
             'email'=> ['required', 'string', 'max:255', 'email', Rule::unique('users')],
             'password' =>['required', 'confirmed', Rules\Password::default()],
+            'edad' => ['required_if:rol,mecanico_independiente','numeric','min:18'],
         ],[
             'required' =>'El campo :attribute es obligatorio.',
             'numeric' => 'El campo :attribute debe ser un número.',
@@ -44,6 +45,7 @@ class RegisteredMController extends Controller
             'in' => 'El valor seleccionado para el campo :attribute es inválido.',
             'email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
             'unique' => 'El correo electrónico ya existe en nuestros datos. Por favor, seleccione otro.',
+            'required_if' => 'La edad es obligatoria para mecánicos independientes'
         ]);
 
         //Creacion del nuevo mecanico
@@ -81,6 +83,21 @@ class RegisteredMController extends Controller
         }else{
             return back()->with('error', 'Hubo un error al autentifical sus dato. Por favor, intentelo de nuevo.');
         }
+        
+        if($request->rol === 'taller_mecanico') {
+            $user = User::create([
+              // ...
+              'edad' => 0, // edad por defecto para taller
+              // ...
+            ]);
+          
+          } else {
+            $user = User::create([
+              // ...
+              'edad' => $request->edad,
+              // ...
+            ]);
+          }
 
     }
 

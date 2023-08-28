@@ -113,6 +113,19 @@
                 margin-bottom: 50px;
                 line-height: 100px;
             }
+            .back-button-container {
+            position: relative;
+        }
+
+        .nav-link {
+      background-color: ##242424;
+      display: block;
+      padding:  0.5rem;
+      color: #FFFFFF;
+      text-decoration: none;
+      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+      border-radius: 1rem; /* Redondear todos los lados */
+    }
         </style>
 
     </head>
@@ -120,6 +133,12 @@
         <div class="registration-form">
             <form method="POST" action="{{ route('registerMecanico') }}">
                 @csrf
+                <div class="back-button-container">
+                <!-- Botón de atrás -->
+                <div  style="margin: 10px; flex: 1 1 300px; max-width: 300px; margin-right: 290px; font-size: 20px; margin-bottom: 5px">
+          <a class="nav-link nav-user-img small" href="opcionesRegistro"><span class="login">Atras</span></a>
+            </div>
+            </div>
                 <div class="form-icon">
                     <img src="\imagenes\Logo.png" alt="logo" class="img_logo"></img>
                 </div>
@@ -136,7 +155,7 @@
                     <x-input-error :messages="$errors->get('name')" class="alert alert-danger" role="alert" />
                 </div>
                 <div class="form-group">
-                    <input id="edad" type="text" class="form-control item" placeholder="Edad" name="edad" :value="old('edad')" required autocomplete="edad">
+              <input  type="text" class="form-control item" id="inputEdad" placeholder="Edad" name="edad">
                     @error('edad')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -150,9 +169,9 @@
                             <label class="input-group-text" for="inputGroupSelect01">¿Como se identifica?</label>
                         </div>
                         <select class="custom-select" id="rol" name="rol" required>
-                            <option selected>Seleccione una Opcion</option>
-                            <option value="taller_mecanico">Taller Mecanico</option>
-                            <option value="mecanico_independiente">Mecanico Independiente</option>
+                            <option selected>Seleccione una opción</option>
+                            <option value="taller_mecanico">Taller Mecánico</option>
+                            <option value="mecanico_independiente">Mecánico Independiente</option>
                         </select>
                     </div>
                     @error('rol')
@@ -172,7 +191,7 @@
                     <x-input-error :messages="$errors->get('email')" class="alert alert-danger" role="alert" />
                 </div>
                 <div class="form-group">
-                <a class=" size: 8px; text-white">La contraseña debe tener al menos 8 digitos.</a>
+                <a class=" size: 8px; text-white">La contraseña debe tener al menos 8 digitos entre numeros y letras.</a>
                     <input id="password" type="password" class="form-control item" placeholder="Contraseña" name="password" title="La contraseña debe contener mas de 8 caracteres." required pattern="[A-Za-z0-9]{8,}" autocomplete="new-password">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -208,5 +227,29 @@
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+$('#rol').change(function() {
+  if ($(this).val() == 'taller_mecanico') {
+    $('#inputEdad').hide();  
+    $('#inputEdad').val('18');
+  } else {
+    $('#inputEdad').show();
+    $('#inputEdad').val(''); // limpiar valor
+  } 
+});
+</script>
+<script>
+$(document).ready(function() {
+
+  $(".alert").delay(1500).slideUp(200, function() {
+     $(this).alert('close');
+  });
+
+});  
+</script>
+
+
     </body>
 </html>

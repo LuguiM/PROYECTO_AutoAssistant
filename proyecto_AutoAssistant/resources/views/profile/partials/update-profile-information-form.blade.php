@@ -73,7 +73,7 @@
 
         @if ($isGoogleUser && empty($user->edad) && empty($user->licencia) && empty($user->numero_lucencia))
                 <div class="alert alert-warning" role="alert">
-                {{ __('Debe completar su edad, licencia y número de licencia (Estos datos en caso de tenrlos sino hacer caso omiso).') }}
+                {{ __('Debe completar su edad, licencia y número de licencia (Estos datos en caso de tenerlos sino hacer caso omiso).') }}
                 </div>
                 
             @endif

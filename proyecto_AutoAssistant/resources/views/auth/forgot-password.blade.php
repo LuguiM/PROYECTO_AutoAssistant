@@ -106,6 +106,25 @@
         font-size: 30px;
         line-height: 70px;
     }
+    .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 999; /* Asegura que esté encima del contenido */
+        }
+    .back-button-container {
+            position: relative; /* Asegura que el botón de atrás esté dentro de este contenedor */
+    }
+    .nav-link {
+      background-color: #0d6efd;
+      display: block;
+      padding:  0.5rem;
+      color: #FFFFFF;
+      text-decoration: none;
+      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+      border-radius: 1rem; /* Redondear todos los lados */
+    }
+        
 }
     </style>
 </head>
@@ -114,6 +133,11 @@
     <div class="registration-form">
         <form method="POST" action="{{ route('password.email') }}">
             @csrf   
+            <div class="back-button-container">
+                <!-- Botón de atrás -->
+                <div  style="margin: 10px; flex: 1 1 300px; max-width: 300px; margin-right: 290px; font-size: 20px; margin-bottom: 5px">
+          <a class="nav-link nav-user-img small" href="login"><span class="login">Atras</span></a>
+            </div>
             <div class="form-icon">
                 <span><i class="icon icon-user"></i></span>
              
@@ -128,7 +152,7 @@
             
             <div class="form-group">
                 <x-primary-button class="btn btn-block create-account">
-                    {{ __('Email Password Reset Link') }}
+                    {{ __('Enviar enlace de Restablecimiento.') }}
                 </x-primary-button>    
             
             </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ServicioMecanico;
+use Illuminate\Validation\Rule;
 
 
 class ContratacionController extends Controller
@@ -48,7 +49,7 @@ class ContratacionController extends Controller
     
 
     /**
-     * Store a newly created resource in storage.
+     *aquixs
      */
     public function store(Request $request, $id)
     {
@@ -89,7 +90,28 @@ class ContratacionController extends Controller
             // Puedes mostrar un mensaje de error o redirigir a otra página
         }
       
-      
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        
+    $user = Auth::user();
+    $conductorId = $user->id;
+
+    // Check if the logged-in user already has a contratación with the same name
+    $existingContratacion = Contratacion::where('conductor_id', $conductorId)
+                                        ->where('servicioContratado', $servicio)
+                                        ->exists();
+
+    if ($existingContratacion) {
+        return redirect()->back()->withInput()->with('error', 'Ya tienes una contratación con el mismo servicio.');
+    }
+        $existingContratacion = Contratacion::where('fecha', $request->fecha)
+        ->where('mecanico_id', $mecanico_id)
+        ->exists();
+
+if ($existingContratacion) {
+return redirect()->back()->withInput()->with('error', 'Ya existe una contratación en la misma fecha.');
+}
 
         $contratacion = new Contratacion();
         

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Route;
 use App\Models\ServicioMecanico;
 use App\Models\Contratacion;
 use Illuminate\Http\Request;
@@ -11,14 +12,12 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Database\QueryException;
 
+
 class ServicioMecanicoController extends Controller
 {
   
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    
     /**
      * Display a listing of the resource.
      */
@@ -180,11 +179,21 @@ class ServicioMecanicoController extends Controller
         try{
             $servicioMecanico = ServicioMecanico::find($id);
         
+            // Obtener el nombre de la ruta actual
+    $currentRoute = Route::currentRouteName();
+
+    
             // Verificar si el servicio mecánico existe
             if (!$servicioMecanico) {
                 return redirect()->back()->with('error', 'El servicio mecánico no existe.');
             }else{
-                return view('serviciosMecanicos.show', compact('servicioMecanico','id'));
+               
+                // Determinar qué vista está siendo accedida y retornar en consecuencia
+    if ($currentRoute === 'servicios-mecanicos.show') {
+        return view('serviciosMecanicos.show', compact('servicioMecanico','id'));
+    } elseif ($currentRoute === 'servicios-mecanicos.show1') {
+        return view('serviciosMecanicos.vistaServicios', compact('servicioMecanico','id'));
+    }
             }
         } catch (QueryException $e) {
             Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
@@ -385,6 +394,15 @@ class ServicioMecanicoController extends Controller
             return redirect()->back()->with('error', 'Ha ocurrido un error en el servidor. Por favor, inténtalo nuevamente más tarde.');
         };
     }
-    
+    public function indexInterno() 
+{
+  // Lógica interna
+  $serviciosMecanicos = ServicioMecanico::all();
+  
+  return view('serviciosMecanicos.ServiciosSitio', compact('serviciosMecanicos'));
+
+}
+
+
 
 }

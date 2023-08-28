@@ -247,7 +247,7 @@ background-color: #32525C; /* Cambia el color aquí */
     <section class="header-main border-bottom">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-lg-3 col-sm-4 col-md-4 col-5"> <a href="{{ ('inicio') }}" class="brand-wrap" data-abc="true">
+                <div class="col-lg-3 col-sm-4 col-md-4 col-5"> <a href="{{ route('inicio') }}" class="brand-wrap" data-abc="true">
                      <img src="\imagenes\Logo.png" atl="logo"  width="80" height="80" class="top_bar_icon"><span class="logo">AutoAssistant</span></img></a> </div>
                     
                 <div class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block">
@@ -304,13 +304,13 @@ background-color: #32525C; /* Cambia el color aquí */
 
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                    <a class="nav-link" href="{{('inicio') }}">Inicio<i class='bx bx-home-alt'></i></a>
+                    <a class="nav-link" href="{{ route('inicio') }}">Inicio<i class='bx bx-home-alt'></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#nosotros">Nosotros<i class='bx bx-group'></i></a>
+                        <a class="nav-link" href="#nosotros" onclick="window.location.href='{{ route('inicio') }}#nosotros';">Nosotros<i class='bx bx-group'></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#ofrece">Servicios que ofrece<i class='bx bx-loader'></i></a>
+                        <a class="nav-link" href="#ofrece"  onclick="window.location.href='{{ route('inicio') }}#ofrece';">Servicios que ofrece<i class='bx bx-loader'></i></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="functionsDropdown"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -318,7 +318,7 @@ background-color: #32525C; /* Cambia el color aquí */
                         </a>
                         <div class="dropdown-menu" aria-labelledby="functionsDropdown">
                             <a class="dropdown-item"  href="{{route('publicaciones.otravista')}}">Pilotos<i class='bx bx-home-alt'></i></a>
-                            <a class="dropdown-item" href="pilotos1">Talleres mecánicos</a>
+                            <a class="dropdown-item" href="{{route('servicios-mecanicos.indexinterno')}}">Talleres mecánicos</a>
                             <a class="dropdown-item" href="infoServicioWeb">Contratar servicios</a>
                         </div>
                     </li>

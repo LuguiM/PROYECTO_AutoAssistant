@@ -113,12 +113,39 @@
                 line-height: 70px;
             }
         }
+        .back-button-container {
+            position: relative;
+        }
+
+        /* Estilo para el botón de atrás */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 999;
+        }
+        .nav-link {
+      background-color: #000;
+      display: block;
+      padding:  0.5rem;
+      color: #FFFFFF;
+      text-decoration: none;
+      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+      border-radius: 1rem; /* Redondear todos los lados */
+    }
     </style>
 </head>
 <body>
     <div class="registration-form">
         <form  method="POST" action="{{ route('register') }}">
             @csrf
+            <div class="back-button-container">
+                <!-- Botón de atrás -->
+                <div  style="margin: 10px; flex: 1 1 300px; max-width: 300px; margin-right: 290px; font-size: 20px; margin-bottom: 5px">
+          <a class="nav-link nav-user-img small" href="opcionesRegistro"><span class="login">Atras</span></a>
+            </div>
+            </div>
+
             <div class="form-icon">
                 <span><i class="icon icon-user"></i></span>
              
@@ -167,7 +194,7 @@
                 <x-input-error :messages="$errors->get('email')" class="alert alert-danger" role="alert" />
             </div>
             <div class="form-group">
-            <a class=" size: 8px; text-white">La contraseña debe tener al menos 8 digitos.</a>
+            <a class=" size: 8px; text-white">La contraseña debe tener al menos 8 digitos entre numeros y letras.</a>
                 <input id="password" type="password" class="form-control item"  placeholder="Ingrese Contraseña" name="password" title="La contraseña debe contener 8 caracteres." required pattern="[A-Za-z0-9]{8,}" autocomplete="new-password">
                 @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -222,6 +249,14 @@
             }
         });
     </script>
+    <script>
+    $(document).ready(function() {
 
+        $(".alert").delay(1000).slideUp(200, function() {
+   $(this).alert('close');
+});
+
+});  
+</script>
 </body>
 </html>

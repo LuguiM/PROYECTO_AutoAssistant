@@ -39,6 +39,7 @@
 
 </style>
 <main class=" background-image">
+    <br>
 <div class="container">
     <div class="row justify-content-center background-image"> <!-- Agrega la clase justify-content-center aquí -->
         <div class="col-md-8">

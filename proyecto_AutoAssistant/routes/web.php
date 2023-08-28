@@ -109,8 +109,16 @@ Route::get('/opcionesRegistro', function () {
     return view('mario');
 })->name('opcionesRegistro');
 
+Route::get('/inicio', function() {
+    return view('inicio'); 
+  })->name('inicio');
 
-
+  Route::get('/ServiciosSitio', function () {
+    return view('serviciosMecanicos.ServiciosSitio');
+});
+Route::get('/servicios', function() {
+    return view('ServiciosSitio');
+  })->name('servicios');
 
 
 /*Inscripcion de servicios mecanicos
@@ -159,6 +167,11 @@ Route::get('/otra-vista/buscar', [PublicacionController::class, 'buscar'])->name
 //rutas para ver mas
 
 Route::get('/info/{publicacion}',[PublicacionController::class, 'show'])->name('publicaciones.show1');
+
+//ruta para servicioWeb
+Route::get('/servicios-internos', [ServicioMecanicoController::class, 'indexInterno'])->name('servicios-mecanicos.indexinterno');
+Route::get('/servicios-externos', 'ServicioMecanicoController@indexExterno');
+Route::get('/servicios-interno/{id}', [ServicioMecanicoController::class, 'show'])->name('servicios-mecanicos.show1');
 
 //Rutas para contrataciones
 Route::get('/contrataciones', [ContratacionController::class, 'index'])->name('contrataciones.index');

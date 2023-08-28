@@ -67,6 +67,15 @@
       transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
       border-radius: 1rem; /* Redondear todos los lados */
     }
+    .nav-link1 {
+      background-color: #000;
+      display: block;
+      padding:  0.5rem;
+      color: #FFFFFF;
+      text-decoration: none;
+      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+      border-radius: 1rem; /* Redondear todos los lados */
+    }
     .option-box:first-child {
       border-top-right-radius: 0; /* Eliminar redondeo en la esquina superior derecha */
       border-bottom-right-radius: 0; /* Eliminar redondeo en la esquina inferior derecha */
@@ -83,7 +92,7 @@
       <div class="card-body">
         
         <div  style="margin: 10px; flex: 1 1 300px; max-width: 300px; margin-right: 290px; font-size: 20px; margin-bottom: 5px">
-          <a class="nav-link nav-user-img small" href="inicio"><span class="login">Atras</span></a>
+          <a class="nav-link1 nav-user-img small" href="inicio"><span class="login">Atras</span></a>
         </div>
         <img src="/imagenes/Logo.png" alt="Logo" class="logo" width="250px" height="250px">
         <p class="card-text">Opciones de registro.</p>
