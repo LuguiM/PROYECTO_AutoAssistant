@@ -187,6 +187,7 @@
                 </div>
             </div>
             <div class="form-group">
+                <p class="text text-white">Ejemplo 9999-999999-999-9</p>
                 <input id="numero_licencia" type="text" class="form-control item licencia-input"
                     placeholder="Numero de Licencia. Ejemplo: 9999-999999-999-9" name="numero_licencia"
                     :value="old('numero_licencia')" pattern="\d{4}-\d{6}-\d{3}-\d{1}"

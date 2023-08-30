@@ -230,7 +230,7 @@
     <script>
     $(document).ready(function() {
 
-        $(".alert").delay(1500).slideUp(200, function() {
+        $(".alert").delay(3500).slideUp(200, function() {
             $(this).alert('close');
         });
 

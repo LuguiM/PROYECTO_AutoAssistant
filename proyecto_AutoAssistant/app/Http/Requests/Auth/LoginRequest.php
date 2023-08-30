@@ -35,7 +35,7 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
     return[
-    'email.email'=> 'El formato del correo electronico no es valido.',
+    'email.email'=> 'El formato del correo electrónico no es válido.',
 ];
 }
 
