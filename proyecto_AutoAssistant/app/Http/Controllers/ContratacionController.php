@@ -124,7 +124,7 @@ return redirect()->back()->withInput()->with('error', 'Ya existe una contrataciÃ
             'conductor_id' => $conductor_id,
             'mecanico_id' => $mecanico_id
         ]);
-        //dd($contratacion);
+     
 
         if ($contratacion->save()) {
             // El modelo se guardÃ³ correctamente

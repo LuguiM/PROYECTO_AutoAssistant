@@ -211,7 +211,11 @@
                     <input id="password" type="password" class="form-control item" placeholder="Contraseña"
                         name="password" title="La contraseña debe contener más de 8 caracteres." required
                         pattern="[A-Za-z0-9]{8,}" autocomplete="new-password">
-                    <!-- ... -->
+                    @error('password') <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                    <x-input-error :messages="$errors->get('password')" class="alert alert-danger" role="alert" />
                 </div>
                 <div class="form-group">
                     <input id="password_confirmation" type="password" class="form-control item"
@@ -225,13 +229,6 @@
                     @enderror
                     <x-input-error :messages="$errors->get('password_confirmation')" class="alert alert-danger"
                         role="alert" />
-
-                    <!-- Alerta de contraseñas no coincidentes -->
-                    @if($errors->has('password_confirmation') && !$errors->has('password'))
-                    <div class="alert alert-danger mt-2">
-                        Las contraseñas no coinciden.
-                    </div>
-                    @endif
                 </div>
             </div>
             <div class="form-group">

@@ -45,7 +45,8 @@ class RegisteredMController extends Controller
             'in' => 'El valor seleccionado para el campo :attribute es inválido.',
             'email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
             'unique' => 'El correo electrónico ya existe en nuestros datos. Por favor, seleccione otro.',
-            'required_if' => 'La edad es obligatoria para mecánicos independientes'
+            'required_if' => 'La edad es obligatoria para mecánicos independientes',
+            'confirmed' => 'Los campos de contraseña no coinciden',
         ]);
 
         //Creacion del nuevo mecanico

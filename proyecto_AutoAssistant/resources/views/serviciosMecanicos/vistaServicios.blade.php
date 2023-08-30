@@ -118,13 +118,13 @@ h5 {
                     <div class="card text-bg-dark border-primary mb-3">
                         <div class="card-header bg-primary">HORARIO</div>
                         <div class="card-body">
-                            <h5 class="card-title">{{$servicioMecanico->horario}}</h5>
+                            <h5 class="card-title">{{$servicioMecanico->fechaInicio}}</h5>
                         </div>
 
                         <div class="card-header bg-primary">HORARIO
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">{{$servicioMecanico->horario2}}</h5>
+                            <h5 class="card-title">{{$servicioMecanico->fechaFin}}</h5>
                         </div>
                         <div class="card-header bg-primary">CONTACTO</div>
                         <div class="card-body">
@@ -149,7 +149,8 @@ h5 {
     </div>
 
     <div class="container-fluid text-center">
-        <a class="btn btn-success btn-lg" href="{{ route('contrataciones.create') }}" style="width: 100%;">
+        <a class="btn btn-success btn-lg" href="{{ route('contrataciones.create',$servicioMecanico->id) }}"
+            style="width: 100%;">
             <i class='bx bx-arrow-back-quarter bx-tada'></i> Contratar Servicio
         </a>
     </div>
