@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Perfil extends Model
 {
     use HasFactory;
-    
+    protected $table = 'perfil';
     protected $fillable = [
         
-        'id_perfil',
+        
         'logo',
         'dirreccio',
         'rubro',

@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Contrataciones2 extends Model
 {
     use HasFactory;
-
+    protected $table = 'servicios_mecanicos_p';
     protected $fillable = [
-        'id_sercicios',
+        
         'horarioatencion',
         'logo',
         'rubro',
