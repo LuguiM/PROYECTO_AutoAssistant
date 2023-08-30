@@ -166,6 +166,7 @@ Route::get('/otra-vista/buscar', [PublicacionController::class, 'buscar'])->name
 
 //rutas para ver mas
 
+
 Route::get('/info/{publicacion}',[PublicacionController::class, 'show'])->name('publicaciones.show1');
 
 //ruta para servicioWeb

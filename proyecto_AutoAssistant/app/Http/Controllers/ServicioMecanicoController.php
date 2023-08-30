@@ -53,24 +53,26 @@ class ServicioMecanicoController extends Controller
      */
     public function create()
     {
-        //
         return view('serviciosMecanicos.inscripcion');
+        
+      
+        
     }
+   
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        try{
-            $horario_inicio = $request->input('horario_inicio');
-            $horario_fin = $request->input('horario_fin');
+       // try{
+           
             $validator = Validator::make($request->all(),[
 
                 'nombreTaller' => ['nullable', 'string', 'max:225'],
                 'representante' => ['required', 'string', 'max:225'],
-                'horario' => ['required', 'string', 'max:225'],
-                'horario2' => ['required', 'string', 'max:225'],
+                'fechaInicio' => ['required', 'string', 'max:225'],
+                'fechaFin' => ['required', 'string', 'max:225'],
                 'numeroContacto' => ['required', 'numeric', 'digits_between:8,15'],
                 'logo' => ['required', 'image', 'max:2048'],
                 'rubro' => ['required', 'string', 'max:255'],
@@ -131,12 +133,17 @@ class ServicioMecanicoController extends Controller
                 $acreditacion_4_path = 'imagenes/serviciosMecanicos/acreditacion_4/' . time() . '.' . $acreditacion_4->getClientOriginalExtension();
                 $acreditacion_4->move(public_path('imagenes/serviciosMecanicos/acreditacion_4'), $acreditacion_4_path);
             }
+            
+            $hora1 = $request->input('fechaInicio');
+             $hora2 = $request->input('fechaFin');
+             $dias1 = $request->input('dayCombinations');
+             $horario = $hora1.$hora2.$dias1; 
 
             $servicio = new ServicioMecanico([
                 'nombreTaller' => $request->nombreTaller,
                 'representante' => $request->representante,
-                'horario' => $request->horario,
-                'horario2' => $request->horario2,
+                'fechaInicio' => $request->fechaInicio,
+                'fechaFin' => $request->fechaFin,
                 'numeroContacto' => $request->numeroContacto,
                 'logo' => $logo_path,
                 'rubro' => $request->rubro,
@@ -160,13 +167,13 @@ class ServicioMecanicoController extends Controller
                 return redirect()->back()->with('error', 'Ha ocurrido un error al guardar el Servicio Mecanico. Por favor, inténtalo nuevamente.');
             }
 
-       } catch (QueryException $e) {
+     /*  } catch (QueryException $e) {
             Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
             return redirect()->back();
         } catch (\Exception $e) {
             Session::flash('error', 'No se pudo establecer una conexión con el servidor. Por favor, verifica tu conexión a internet y vuelve a intentarlo.');
             return redirect()->back();
-        }
+        }*/
        
     }
 

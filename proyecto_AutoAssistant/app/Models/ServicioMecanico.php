@@ -13,8 +13,8 @@ class ServicioMecanico extends Model
     protected $fillable = [
         'nombreTaller',
         'representante',
-        'horario',
-        'horario2',
+        'fechaInicio',
+        'fechaFin',
         'numeroContacto',
         'logo',
         'rubro',
