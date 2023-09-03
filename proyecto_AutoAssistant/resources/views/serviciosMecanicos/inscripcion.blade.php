@@ -77,17 +77,17 @@ label {
                 <br>
                 <div class="form-floating col-md-12">
                     <label for="horario_inicio">Horario de Inicio</label>
-                    <input type="datetime-local" class="form-control" id="fechaInicio" name="fechaInicio"
+                    <input type="text" class="form-control" id="fechaInicio" name="fechaInicio"
                         value="{{ old('fechaInicio') }}">
                     <x-input-error :messages="$errors->get('fechaInicio')" class="alert alert-danger" role="alert" />
                 </div>
                 <br>
                 <div class="form-floating col-md-12">
                     <label for="horario_fin">Horario de Fin</label>
-                    <input type="datetime-local" class="form-control" id="fechaFin" name="fechaFin"
-                        value="{{ old('fechaFin') }}">
+                    <input type="text" class="form-control" id="fechaFin" name="fechaFin" value="{{ old('fechaFin') }}">
                     <x-input-error :messages="$errors->get('fechaFin')" class="alert alert-danger" role="alert" />
                 </div>
+
 
                 <br>
                 <div class="form-floating col-20">
@@ -125,6 +125,14 @@ label {
                         value="{{ old('numeroContacto') }}">
                     <label for="numeroContacto">Numero de Contacto</label>
                     <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert" />
+                </div>
+                <br>
+                <div class="form-floating col-md-12">
+                    <input type="text" class="form-control" id="precio" name="precio" placeholder="precio"
+                        inputmode="numeric" pattern="[0-9\s]*" title="Ingresa un formato telefonico valido"
+                        aria-label="Last name" value="{{ old('precio') }}">
+                    <label for="precio">precio</label>
+                    <x-input-error :messages="$errors->get('precio')" class="alert alert-danger" role="alert" />
                 </div>
             </div>
 
@@ -166,7 +174,7 @@ label {
                     <select id="tipoServicio" name="tipoServicio" class="form-select">
                         <option disabled selected>Tipo Servicio...</option>
                         <option value="Adomicilio">Adomicilio</option>
-                        <option value="Cita/Reserva">Cita/Reserva</option>
+                        <option value="Cita/Reserva">Cita en Talle</option>
                     </select>
                     <label for="rubro">Selecciona un Tipo de Servicio</label>
                     <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert" />
@@ -396,6 +404,14 @@ label {
                     <label for="numeroContacto">Numero de Contacto</label>
                     <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert" />
                 </div>
+                <br>
+                <div class="form-floating col-md-12">
+                    <input type="text" class="form-control" id="precio" name="precio" placeholder="precio"
+                        inputmode="numeric" pattern="[0-9\s]*" title="Ingresa un formato telefonico valido"
+                        aria-label="Last name" value="{{ old('precio') }}">
+                    <label for="precio">precio</label>
+                    <x-input-error :messages="$errors->get('precio')" class="alert alert-danger" role="alert" />
+                </div>
             </div>
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -436,7 +452,7 @@ label {
                     <select id="tipoServicio" name="tipoServicio" class="form-select">
                         <option disabled selected>Tipo Servicio...</option>
                         <option value="Adomicilio">Adomicilio</option>
-                        <option value="Cita/Reserva">Cita/Reserva</option>
+                        <option value="Cita/Reserva">Cita en Talle</option>
                     </select>
                     <label for="rubro">Selecciona un Tipo de Servicio</label>
                     <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert" />

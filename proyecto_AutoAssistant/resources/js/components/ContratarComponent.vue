@@ -27,7 +27,7 @@
         <select id="tipoServicio" v-model="servicio.tipoServicio" class="form-select" required>
           <option disabled value="">Tipo Servicio...</option>
           <option value="Adomicilio">Adomicilio</option>
-          <option value="Cita/Reserva">Cita/Reserva</option>
+          <option value="Cita/Reserva">Cita en taller</option>
         </select>
         <label for="tipoServicio">Selecciona un Tipo de Servicio</label>
       </div>

@@ -74,6 +74,7 @@ class ServicioMecanicoController extends Controller
                 'fechaInicio' => ['required', 'string', 'max:225'],
                 'fechaFin' => ['required', 'string', 'max:225'],
                 'numeroContacto' => ['required', 'numeric', 'digits_between:8,15'],
+                'precio' => ['required', 'numeric'],
                 'logo' => ['required', 'image', 'max:2048'],
                 'rubro' => ['required', 'string', 'max:255'],
                 'servicio' => ['required', 'string', 'max:225'],
@@ -145,6 +146,7 @@ class ServicioMecanicoController extends Controller
                 'fechaInicio' => $request->fechaInicio,
                 'fechaFin' => $request->fechaFin,
                 'numeroContacto' => $request->numeroContacto,
+                'precio' => $request->precio,
                 'logo' => $logo_path,
                 'rubro' => $request->rubro,
                 'servicios' => $request->servicio,
@@ -253,6 +255,7 @@ class ServicioMecanicoController extends Controller
                 'horario' => 'required',
                 'horario2' => 'required',
                 'numeroContacto' => 'required',
+                'precio' => 'required',
                 'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'descripcion' => 'required',
                 'rubro' => 'required',
@@ -276,6 +279,7 @@ class ServicioMecanicoController extends Controller
             $servicio->representante = $request->input('representante');
             $servicio->horario = $request->input('horario');
             $servicio->horario2 = $request->input('horario2');
+            $servicio->precio = $request->input('precio');
             $servicio->numeroContacto = $request->input('numeroContacto');
             $servicio->descripcion = $request->input('descripcion');
             $servicio->rubro = $request->input('rubro');

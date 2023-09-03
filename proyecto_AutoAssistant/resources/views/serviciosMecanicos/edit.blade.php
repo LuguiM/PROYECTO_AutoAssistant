@@ -58,15 +58,14 @@ img {
             </div>
             <div class="form-floating col-md-12">
                 <label for="horario_inicio">Horario de Inicio</label>
-                <input type="datetime-local" class="form-control" id="fechaInicio" name="fechaInicio"
+                <input type="text" class="form-control" id="fechaInicio" name="fechaInicio"
                     value="{{ old('fechaInicio') }}">
                 <x-input-error :messages="$errors->get('fechaInicio')" class="alert alert-danger" role="alert" />
             </div>
             <br>
             <div class="form-floating col-md-12">
                 <label for="horario_fin">Horario de Fin</label>
-                <input type="datetime-local" class="form-control" id="fechaFin" name="fechaFin"
-                    value="{{ old('fechaFin') }}">
+                <input type="text" class="form-control" id="fechaFin" name="fechaFin" value="{{ old('fechaFin') }}">
                 <x-input-error :messages="$errors->get('fechaFin')" class="alert alert-danger" role="alert" />
             </div>
             <div class="form-floating col-md-6">
@@ -75,6 +74,13 @@ img {
                     title="Ingresa un formato telefonico valido" value="{{ $servicioMecanico->numeroContacto }}">
                 <label for="numeroContacto">Numero de Contacto</label>
                 <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert" />
+            </div>
+            <div class="form-floating col-md-6">
+                <input type="text" class="form-control" id="precio" name="precio" placeholder="precio"
+                    inputmode="numeric" pattern="[0-3\s]*" title="Ingresa un formato telefonico valido"
+                    value="{{ $servicioMecanico->precio }}">
+                <label for="precio">Precio</label>
+                <x-input-error :messages="$errors->get('precio')" class="alert alert-danger" role="alert" />
             </div>
 
             <div class="col-12">
@@ -136,7 +142,7 @@ img {
                     <option value="Adomicilio" @if($servicioMecanico->tipoServicio == 'Adomicilio') selected
                         @endif>Adomicilio</option>
                     <option value="Cita/Reserva" @if($servicioMecanico->tipoServico == 'Cita/Reserva') selected
-                        @endif>Cita/Reserva</option>
+                        @endif>Cita en Talle</option>
                 </select>
                 <label for="rubro">Selecciona un Tipo de Servicio</label>
                 <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert" />
@@ -371,15 +377,14 @@ img {
 
             <div class="form-floating col-md-12">
                 <label for="horario_inicio">Horario de Inicio</label>
-                <input type="datetime-local" class="form-control" id="fechaInicio" name="fechaInicio"
+                <input type="text" class="form-control" id="fechaInicio" name="fechaInicio"
                     value="{{ old('fechaInicio') }}">
                 <x-input-error :messages="$errors->get('fechaInicio')" class="alert alert-danger" role="alert" />
             </div>
             <br>
             <div class="form-floating col-md-12">
                 <label for="horario_fin">Horario de Fin</label>
-                <input type="datetime-local" class="form-control" id="fechaFin" name="fechaFin"
-                    value="{{ old('fechaFin') }}">
+                <input type="text" class="form-control" id="fechaFin" name="fechaFin" value="{{ old('fechaFin') }}">
                 <x-input-error :messages="$errors->get('fechaFin')" class="alert alert-danger" role="alert" />
             </div>
 
@@ -390,7 +395,13 @@ img {
                 <label for="numeroContacto">Numero de Contacto</label>
                 <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert" />
             </div>
-
+            <div class="form-floating col-md-6">
+                <input type="text" class="form-control" id="precio" name="precio" placeholder="precio"
+                    inputmode="numeric" pattern="[0-3\s]*" title="Ingresa un formato telefonico valido"
+                    value="{{ $servicioMecanico->precio }}">
+                <label for="precio">Precio</label>
+                <x-input-error :messages="$errors->get('precio')" class="alert alert-danger" role="alert" />
+            </div>
             <div class="col-12">
                 <label for="logo" class="form-label text-white">Logo o Imagen del Servicio</label>
                 <input type="file" class="form-control" id="logo" name="logo" accept=".png, .jpg, .jpeg">
@@ -438,7 +449,7 @@ img {
                     <option value="Adomicilio" @if($servicioMecanico->tipoServicio == 'Adomicilio') selected
                         @endif>Adomicilio</option>
                     <option value="Cita/Reserva" @if($servicioMecanico->tipoServico == 'Cita/Reserva') selected
-                        @endif>Cita/Reserva</option>
+                        @endif>Cita en Talle</option>
                 </select>
                 <label for="rubro">Selecciona un Tipo de Servicio</label>
                 <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert" />
@@ -457,7 +468,7 @@ img {
                     <option value="Adomicilio" @if($servicioMecanico->tipoServicio == 'Adomicilio') selected
                         @endif>Adomicilio</option>
                     <option value="Cita/Reserva" @if($servicioMecanico->tipoServico == 'Cita/Reserva') selected
-                        @endif>Cita/Reserva</option>
+                        @endif>Cita en Talle</option>
                 </select>
                 <label for="rubro">Selecciona un Tipo de Servicio</label>
                 <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert" />

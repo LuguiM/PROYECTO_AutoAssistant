@@ -360,7 +360,6 @@
 
 
     <main>
-
         @yield('content')
     </main>
 
