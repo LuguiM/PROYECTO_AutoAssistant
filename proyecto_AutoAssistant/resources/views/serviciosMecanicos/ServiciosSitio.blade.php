@@ -151,7 +151,7 @@ main {
                     <p class="card-text text-white">Rubro: {{ $servicio->rubro }}</p>
                     <p class="card-text text-white">Servicio: {{ $servicio->servicios }}</p>
                     <p class="card-text text-white">Tipo de servicio: {{ $servicio->tipoServicio }}</p>
-                    <p class="card-text text-white">Precio: ${{ $servicio->precio }}</p>
+                    <p class="card-text text-white">Costo estimado: ${{ $servicio->precio }}</p>
                 </div>
             </a>
         </div>

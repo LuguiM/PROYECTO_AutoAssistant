@@ -129,6 +129,21 @@
         z-index: 999;
     }
 
+    .background-image {
+        background-image: url('/imagenes/fondo4.jpg');
+
+
+        background-size: 100% 100%;
+        /* Cambiamos el tamaño para que cubra todo el espacio */
+
+
+        background-position: 0 0;
+        /* Cambiamos la posición a la esquina superior izquierda */
+        width: 170vh;
+        height: sticky;
+        background-attachment: fixed;
+    }
+
     .nav-link {
         background-color: #000;
         display: block;
@@ -142,7 +157,7 @@
     </style>
 </head>
 
-<body>
+<body class="background-image">
     <div class="registration-form">
         <form method="POST" action="{{ route('register') }}">
             @csrf
@@ -243,7 +258,8 @@
                 </x-primary-button>
             </div>
             <span class="ml-auto text-white">¿YA TIENES CUENTA? <a href="{{ route('login') }}"
-                    class="forgot-pass ">INICIA SESION</a></span>
+                    class="forgot-pass ">INICIA
+                    SESION</a></span>
         </form>
 
 

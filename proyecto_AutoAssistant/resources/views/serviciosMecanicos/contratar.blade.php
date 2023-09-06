@@ -105,7 +105,7 @@
                             <option value="Adomicilio" disabled @if($servicioMecanico->tipoServicio == 'Adomicilio')
                                 selected @endif>Adomicilio</option>
                             <option value="Cita/Reserva" disabled @if($servicioMecanico->tipoServicio == 'Cita/Reserva')
-                                selected @endif >Cita en Talle</option>
+                                selected @endif >Cita en Taller</option>
                         </select>
                         <label for="tipoServicio">Selecciona un Tipo de Servicio</label>
                         <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger"

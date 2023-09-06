@@ -149,10 +149,25 @@
         border-radius: 1rem;
         /* Redondear todos los lados */
     }
+
+    .background-image {
+        background-image: url('/imagenes/fondo4.jpg');
+
+
+        background-size: 100% 100%;
+        /* Cambiamos el tamaño para que cubra todo el espacio */
+
+
+        background-position: 0 0;
+        /* Cambiamos la posición a la esquina superior izquierda */
+        width: 170vh;
+        height: sticky;
+        background-attachment: fixed;
+    }
     </style>
 </head>
 
-<body>
+<body class="background-image">
     <x-auth-session-status class="alert alert-primary" role="alert" :status="session('status')" />
     @if(Session::has('error'))
     <div class="alert alert-danger">

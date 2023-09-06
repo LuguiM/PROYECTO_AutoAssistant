@@ -272,16 +272,21 @@ img {
                         <div class="card-body cardo">
                             <h5 class="card-title">{{ $servicioMecanico->servicios }}</h5>
                             <p class="card-text">Creado el: {{ $servicioMecanico->created_at->format('d/m/Y') }}</p>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between align-items-center">
                                 <a href="{{ route('servicios-mecanicos.edit', $servicioMecanico->id) }}"
-                                    class="btn btn-primary"><i class='bx bx-edit'></i> Modificar</a>
+                                    class="btn btn-primary btn-sm">
+                                    <i class='bx bx-edit'></i> Modificar
+                                </a>
                                 <form id="deleteForm"
                                     action="{{ route('servicios-mecanicos.destroy', $servicioMecanico->id) }}"
                                     method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" onclick="confirmDelete(event)" class="btn btn-danger"><i
-                                            class='bx bx-trash-alt'></i> Eliminar</button>
+                                    <button type="submit" onclick="confirmDelete(event)"
+                                        class="btn btn-danger btn-sm mt-3">
+                                        <!-- Agregado mt-1 -->
+                                        <i class='bx bx-trash-alt'></i> Eliminar
+                                    </button>
                                 </form>
                             </div>
                         </div>

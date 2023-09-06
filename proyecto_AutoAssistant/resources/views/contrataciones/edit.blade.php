@@ -87,7 +87,7 @@
                         <label for="fecha">Fecha y Hora</label>
                     </div>
                     <div class="form-floating col-12 form-group">
-                        <select id="tipoServicio" name="tipoServicio" class="form-select">
+                        <select id="tipoServicio" name="tipoServicio" class="form-select" disabled>
                             <option disabled value="">Tipo Servicio...</option>
                             <option value="Adomicilio" @if($contratacion->tipoServicio == 'Adomicilio') selected
                                 @endif>Adomicilio</option>

@@ -247,13 +247,13 @@ class ServicioMecanicoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
-        // Validar los datos del formulario
+        try {
+            // Validar los datos del formulario
             $validator = Validator::make($request->all(), [
                 'nombreTaller' =>'nullable',
                 'representante' => 'required',
-                'horario' => 'required',
-                'horario2' => 'required',
+                'fechaInicio' => 'required',
+                'fechaFin' => 'required',
                 'numeroContacto' => 'required',
                 'precio' => 'required',
                 'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -261,6 +261,7 @@ class ServicioMecanicoController extends Controller
                 'rubro' => 'required',
                 'servicio' => 'required',
                 'direccion' => 'required',
+                'tipoServicio' => 'required',
                 'acreditacion_1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'acreditacion_2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'acreditacion_3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -273,17 +274,19 @@ class ServicioMecanicoController extends Controller
             $servicioMecanico = ServicioMecanico::All();
             // Obtener el servicio a actualizar
             $servicio = ServicioMecanico::find($id);
+            
+          
 
             // Actualizar los campos del servicio con los datos del formulario
             $servicio->nombreTaller = $request->input('nombreTaller');
             $servicio->representante = $request->input('representante');
-            $servicio->horario = $request->input('horario');
-            $servicio->horario2 = $request->input('horario2');
+            $servicio->fechaFin = $request->input('fechaFin');
+            $servicio->fechaInicio = $request->input('fechaInicio');
             $servicio->precio = $request->input('precio');
             $servicio->numeroContacto = $request->input('numeroContacto');
             $servicio->descripcion = $request->input('descripcion');
             $servicio->rubro = $request->input('rubro');
-            $servicio->servicios = $request->input('servicio');
+            $servicio->servicio = $request->input('servicio');
             $servicio->direccion = $request->input('direccion');
 
             // Subir las acreditaciones si se proporcionaron
@@ -292,13 +295,10 @@ class ServicioMecanicoController extends Controller
             $acreditacion_2_path = null;
             $acreditacion_3_path = null;
             $acreditacion_4_path = null;
-
             if ($request->hasFile('logo')) {
-                $logos = $request->file('logo');
-                $logo_path = 'imagenes/serviciosMecanicos/logo/' . time() . '.' . $logos->getClientOriginalExtension();
-                $logos->move(public_path('imagenes/serviciosMecanicos/logo'), $logo_path);
-                /*Guardar el archivo y obtener su ruta
-                $rutalogos = $logos->store('acreditaciones');*/
+                $logo = $request->file('logo');
+                $logo_path = 'imagenes/serviciosMecanicos/logo/' . time() . '.' . $logo->getClientOriginalExtension();
+                $logo->move(public_path('imagenes/serviciosMecanicos/logo'), $logo_path);
                 $servicio->logo = $logo_path;
             }
 
@@ -335,12 +335,11 @@ class ServicioMecanicoController extends Controller
                 $servicio->acreditacion_4 = $acreditacion_4_path;
             }
 
-            // Guardar los cambios en el servicio
             $servicio->save();
-
-            // Redireccionar a la página de visualización del servicio actualizado
+            
             return redirect()->route('servicios-mecanicos.index')->with('success', 'El servicio se ha actualizado correctamente.');
-        
+       
+   
         } catch (QueryException $e) {
             Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
             return redirect()->back();
@@ -354,7 +353,7 @@ class ServicioMecanicoController extends Controller
         } catch (\Exception $e) {
             Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
             return redirect()->back();
-        }
+        } 
     }
 
     /**

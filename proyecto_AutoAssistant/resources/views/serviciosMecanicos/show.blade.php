@@ -142,7 +142,7 @@ h5 {
                                 <h5 class="card-title">{{$servicioMecanico->numeroContacto}}</h5>
                             </div>
 
-                            <div class="card-header bg-primary">PRECIO</div>
+                            <div class="card-header bg-primary">Costo estimado</div>
                             <div class="card-body">
                                 <h5 class="card-title">${{$servicioMecanico->precio}}</h5>
                             </div>
