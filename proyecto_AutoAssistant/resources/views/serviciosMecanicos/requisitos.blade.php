@@ -147,7 +147,7 @@ img {
             </details>
             <div class="row">
                 <a href="{{ route('servicios-mecanicos.create') }}" class="btn btn-primary btn-lg"><i
-                        class='bx bx-plus-circle'></i>Inscribir servicio mecanico</a>
+                        class='bx bx-plus-circle'></i>Inscribir Servicio Mecánico</a>
             </div>
         </div>
     </div>
@@ -228,7 +228,7 @@ img {
             </details>
             <div class="row">
                 <a href="{{ route('servicios-mecanicos.create') }}" class="btn btn-primary btn-lg"><i
-                        class='bx bx-plus-circle'></i> Inscribir servicio mecanico</a>
+                        class='bx bx-plus-circle'></i> Inscribir Servicio Mecánico</a>
             </div>
         </div>
     </div>

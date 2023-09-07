@@ -67,7 +67,7 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{ $contratacion->servicioContratado }}</h5>
-                            <p class="card-text"><small class="text-body-secondary text-white">Fecha de Contratacion:
+                            <p class="card-text"><small class="text-body-secondary text-white">Fecha de Contratación:
                                     {{ $contratacion->fecha }}</small></p>
                             <div class="d-flex justify-content-between">
                                 <a class="btn btn-primary btn-lg btn-custom-size"
@@ -179,7 +179,7 @@ function confirmDelete(event) {
                             <h5 class="card-title text-primary">{{ $contratacion->servicioContratado }}</h5>
                             <p class="card-text">Contratado Por: <span
                                     class="badge text-bg-success">{{ $conductor->name }}</span></p>
-                            <p class="card-text"><small class="text-body-secondary text-white">Fecha de Contratacion:
+                            <p class="card-text"><small class="text-body-secondary text-white">Fecha de Contratación:
                                     {{ $contratacion->fecha }}</small></p>
                         </div>
                         <div class="card-footer text-end">

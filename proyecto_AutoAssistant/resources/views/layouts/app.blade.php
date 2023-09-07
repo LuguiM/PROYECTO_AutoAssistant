@@ -83,7 +83,7 @@
                     </a>
                     <a href="{{ route('servicios-mecanicos.index') }}" class="nav_link">
                         <i class='bx bx-wrench nav_icon'></i>
-                        <span class="nav_name">{{ __('Servicios Mecanicos') }}</span>
+                        <span class="nav_name">{{ __('Servicios Mecánicos') }}</span>
                     </a>
                     <a href="{{ route('contrataciones.index') }}" class="nav_link">
                         <i class='bx bx-shield-plus nav_icon'></i>
@@ -114,7 +114,7 @@
                 <a href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();"
                     class="nav_link">
                     <i class='bx bx-log-out nav_icon'></i>
-                    <span class="nav_name">{{ __('CERRAR SESION') }}</span>
+                    <span class="nav_name">{{ __('CERRAR SESIÓN') }}</span>
                 </a>
             </form>
 

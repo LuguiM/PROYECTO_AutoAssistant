@@ -36,7 +36,7 @@ img {
     <br>
     @if(auth()->user()->hasRole('taller_mecanico'))
 
-    <form id="myForm" action="{{ route('servicios-mecanicos.update', $servicioMecanico->id) }}" method="POST"
+    <form action="{{ route('servicios-mecanicos.update', $servicioMecanico->id) }}" method="POST"
         enctype="multipart/form-data" class="container">
         <div class="row g-3">
             <div class="col-12">
@@ -58,18 +58,47 @@ img {
                 <label for="propietario">Nombre del propietario</label>
                 <x-input-error :messages="$errors->get('representante')" class="alert alert-danger" role="alert" />
             </div>
-            <div class="form-floating col-md-12">
-                <label for="fechaInicio">Fecha de Inicio</label>
-                <input type="text" class="form-control" id="fechaInicio" name="fechaInicio"
-                    value="{{ old('fechaInicio', \Carbon\Carbon::now()->format('D h:i K')) }}">
+            <div class="form-floating col-md-6">
+                <label for="fechaInicio">Horario de Inicio</label>
+                <select id="fechaInicio" name="fechaInicio" placeholder="fechaInicio" class=" form-control select2">
+                    <option value="{{ $servicioMecanico->fechaInicio }}" selected>{{ $servicioMecanico->fechaInicio }}
+                    </option>
+                    <option value="Lunes">Lunes</option>
+                    <option value="Martes">Martes</option>
+                    <option value="Miércoles">Miércoles</option>
+                    <option value="Jueves">Jueves</option>
+                    <option value="Viernes">Viernes</option>
+                </select>
+
                 <x-input-error :messages="$errors->get('fechaInicio')" class="alert alert-danger" role="alert" />
             </div>
             <br>
-            <div class="form-floating col-md-12">
-                <label for="fechaFin">Fecha de Fin</label>
-                <input type="text" class="form-control" id="fechaFin" name="fechaFin"
-                    value="{{ old('fechaFin', \Carbon\Carbon::now()->addDay()->format('D h:i K')) }}">
+            <div class="form-floating col-md-6">
+                <label for="fechaFin">Horario de Fin</label>
+                <select id="fechaFin" name="fechaFin" class="form-control select2">
+                    <option value="{{ $servicioMecanico->fechaFin }}" selected>{{ $servicioMecanico->fechaFin }}
+                    </option>
+                    <option value="Lunes">Lunes</option>
+                    <option value="Martes">Martes</option>
+                    <option value="Miércoles">Miércoles</option>
+                    <option value="Jueves">Jueves</option>
+                    <option value="Viernes">Viernes</option>
+                </select>
+
                 <x-input-error :messages="$errors->get('fechaFin')" class="alert alert-danger" role="alert" />
+            </div>
+            <div class="form-floating col-6">
+                <input type="text" class="form-control timepicker" id="hora1" name="hora1" placeholder="Hora 1"
+                    aria-label="Hora 1" value="{{ $servicioMecanico->hora1 }}">
+                <label for="hora1">Hora de Abrir</label>
+                <x-input-error :messages="$errors->get('hora1')" class="alert alert-danger" role="alert" />
+            </div>
+            <br>
+            <div class="form-floating col-6">
+                <input type="text" class="form-control timepicker" id="hora2" name="hora2" placeholder="Hora 2"
+                    aria-label="Hora 2" value="{{ $servicioMecanico->hora2 }}">
+                <label for="hora2">Hora de Cierre</label>
+                <x-input-error :messages="$errors->get('hora2')" class="alert alert-danger" role="alert" />
             </div>
             <div class="form-floating col-md-6">
                 <input type="text" class="form-control" id="numeroContacto" name="numeroContacto"
@@ -192,46 +221,15 @@ img {
     <script src="https://cdn.jsdelivr.net/npm/datepicker@3.2.0/dist/datepicker.min.js"></script>
 
     <script>
-    flatpickr("#fechaInicio", {
-        enableTime: true,
-        noCalendar: false,
-        dateFormat: "D h:i K", // "D" para el día, "h" para la hora (formato de 12 horas), "i" para los minutos, "K" para AM/PM
-        locale: {
-            weekdays: {
-                shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
-                longhand: [
-                    "Domingo",
-                    "Lunes",
-                    "Martes",
-                    "Miércoles",
-                    "Jueves",
-                    "Viernes",
-                    "Sábado",
-                ],
-            },
-        },
-    });
-
-    flatpickr("#fechaFin", {
-        enableTime: true,
-        noCalendar: false,
-        dateFormat: "D h:i K", // "D" para el día, "h" para la hora (formato de 12 horas), "i" para los minutos, "K" para AM/PM
-        locale: {
-            weekdays: {
-                shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
-                longhand: [
-                    "Domingo",
-                    "Lunes",
-                    "Martes",
-                    "Miércoles",
-                    "Jueves",
-                    "Viernes",
-                    "Sábado",
-                ],
-            },
-        },
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr('.timepicker', {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: 'H:i K', // Formato de hora (24 horas)
+        });
     });
     </script>
+
     <script>
     // Aquí faltaba una llave de cierre en tu código original
     const rubroSelect = document.getElementById('rubro');
@@ -313,10 +311,11 @@ img {
     </script>
 
 
+
     @endif
 
     @if(auth()->user()->hasRole('mecanico_independiente'))
-    <form id="myForm" action="{{ route('servicios-mecanicos.update', $servicioMecanico->id) }}" method="POST"
+    <form id="myForm" action="{{ route('servicios-mecanicos.update', $servicioMecanico->id) }}" method="PUT"
         enctype="multipart/form-data" class="container">
         <div class="row g-3">
             <div class="col-12">
@@ -332,18 +331,47 @@ img {
                 <x-input-error :messages="$errors->get('representante')" class="alert alert-danger" role="alert" />
             </div>
 
-            <div class="form-floating col-md-12">
-                <label for="fechaInicio">Fecha de Inicio</label>
-                <input type="text" class="form-control" id="fechaInicio" name="fechaInicio"
-                    value="{{ old('fechaInicio', \Carbon\Carbon::now()->format('D h:i K')) }}">
+            <div class="form-floating col-md-6">
+                <label for="fechaInicio">Horario de Inicio</label>
+                <select id="fechaInicio" name="fechaInicio" placeholder="fechaInicio" class=" form-control select2">
+                    <option value="{{ $servicioMecanico->fechaInicio }}" selected>{{ $servicioMecanico->fechaInicio }}
+                    </option>
+                    <option value="Lunes">Lunes</option>
+                    <option value="Martes">Martes</option>
+                    <option value="Miércoles">Miércoles</option>
+                    <option value="Jueves">Jueves</option>
+                    <option value="Viernes">Viernes</option>
+                </select>
+
                 <x-input-error :messages="$errors->get('fechaInicio')" class="alert alert-danger" role="alert" />
             </div>
             <br>
-            <div class="form-floating col-md-12">
-                <label for="fechaFin">Fecha de Fin</label>
-                <input type="text" class="form-control" id="fechaFin" name="fechaFin"
-                    value="{{ old('fechaFin', \Carbon\Carbon::now()->addDay()->format('D h:i K')) }}">
+            <div class="form-floating col-md-6">
+                <label for="fechaFin">Horario de Fin</label>
+                <select id="fechaFin" name="fechaFin" class="form-control select2">
+                    <option value="{{ $servicioMecanico->fechaFin }}" selected>{{ $servicioMecanico->fechaFin }}
+                    </option>
+                    <option value="Lunes">Lunes</option>
+                    <option value="Martes">Martes</option>
+                    <option value="Miércoles">Miércoles</option>
+                    <option value="Jueves">Jueves</option>
+                    <option value="Viernes">Viernes</option>
+                </select>
+
                 <x-input-error :messages="$errors->get('fechaFin')" class="alert alert-danger" role="alert" />
+            </div>
+            <div class="form-floating col-6">
+                <input type="text" class="form-control timepicker" id="hora1" name="hora1" placeholder="Hora 1"
+                    aria-label="Hora 1" value="{{ $servicioMecanico->hora1 }}">
+                <label for="hora1">Hora de Abrir</label>
+                <x-input-error :messages="$errors->get('hora1')" class="alert alert-danger" role="alert" />
+            </div>
+            <br>
+            <div class="form-floating col-6">
+                <input type="text" class="form-control timepicker" id="hora2" name="hora2" placeholder="Hora 2"
+                    aria-label="Hora 2" value="{{ $servicioMecanico->hora2 }}">
+                <label for="hora2">Hora de Cierre</label>
+                <x-input-error :messages="$errors->get('hora2')" class="alert alert-danger" role="alert" />
             </div>
 
             <div class="form-floating col-md-6">
@@ -355,8 +383,7 @@ img {
             </div>
             <div class="form-floating col-md-6">
                 <input type="text" class="form-control" id="precio" name="precio" placeholder="precio"
-                    inputmode="numeric" pattern="[0-3\s]*" title="Ingresa un formato telefonico valido"
-                    value="{{ $servicioMecanico->precio }}">
+                    inputmode="numeric" pattern="[0-3\s]*" value="{{ $servicioMecanico->precio }}">
                 <label for="precio">Costo estimadoo</label>
                 <x-input-error :messages="$errors->get('precio')" class="alert alert-danger" role="alert" />
             </div>
@@ -396,6 +423,10 @@ img {
             <div class="form-floating col-12">
                 <select id="servicio" name="servicio" class="form-select">
                     <option disabled selected>Servicio que Ofrece...</option>
+                    @if($servicioMecanico->servicios)
+                    <option value="{{ $servicioMecanico->servicio }}" selected>{{ $servicioMecanico->servicios }}
+                    </option>
+                    @endif
                 </select>
                 <label for="servicio">Servicio que Ofrece</label>
                 <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert" />
@@ -469,49 +500,17 @@ img {
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/datepicker@3.2.0/dist/datepicker.min.js"></script>
 
-    <script>
-    flatpickr("#fechaInicio", {
-        enableTime: true,
-        noCalendar: false,
-        dateFormat: "D h:i K", // "D" para el día, "h" para la hora (formato de 12 horas), "i" para los minutos, "K" para AM/PM
-        locale: {
-            weekdays: {
-                shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
-                longhand: [
-                    "Domingo",
-                    "Lunes",
-                    "Martes",
-                    "Miércoles",
-                    "Jueves",
-                    "Viernes",
-                    "Sábado",
-                ],
-            },
-        },
-    });
 
-    flatpickr("#fechaFin", {
-        enableTime: true,
-        noCalendar: false,
-        dateFormat: "D h:i K", // "D" para el día, "h" para la hora (formato de 12 horas), "i" para los minutos, "K" para AM/PM
-        locale: {
-            weekdays: {
-                shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
-                longhand: [
-                    "Domingo",
-                    "Lunes",
-                    "Martes",
-                    "Miércoles",
-                    "Jueves",
-                    "Viernes",
-                    "Sábado",
-                ],
-            },
-        },
-    });
-    </script>
+
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr('.timepicker', {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: 'H:i K', // Formato de hora (24 horas)
+        });
+    });
     // Restricción de submit con notificación
     document.getElementById('myForm').addEventListener('submit', function(event) {
         event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
@@ -525,6 +524,7 @@ img {
         setTimeout(function() {
             document.getElementById('myForm').submit();
         }, 1000);
+
     });
     </script>
     <script>
@@ -606,4 +606,9 @@ img {
         });
     });
     </script>
+
+
+
+
+
 </x-app-layout>

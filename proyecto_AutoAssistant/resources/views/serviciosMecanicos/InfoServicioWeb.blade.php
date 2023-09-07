@@ -180,7 +180,7 @@
 
                 <a href="{{ route('registerMecanico') }}" class="btn btn-primary btn-lg"><i
                         class='bx bx-plus-circle'></i>
-                    Inscribir servicio mecanico</a>
+                    Inscribir Servicio Mecánico</a>
 
             </div>
 

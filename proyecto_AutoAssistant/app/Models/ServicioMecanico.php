@@ -17,6 +17,8 @@ class ServicioMecanico extends Model
         'fechaFin',
         'numeroContacto',
         'precio',
+        'hora1',
+        'hora2',
         'logo',
         'rubro',
         'servicios',

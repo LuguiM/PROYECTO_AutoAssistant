@@ -65,7 +65,7 @@ class ServicioMecanicoController extends Controller
      */
     public function store(Request $request)
     {
-       // try{
+       try{
            
             $validator = Validator::make($request->all(),[
 
@@ -75,6 +75,8 @@ class ServicioMecanicoController extends Controller
                 'fechaFin' => ['required', 'string', 'max:225'],
                 'numeroContacto' => ['required', 'numeric', 'digits_between:8,15'],
                 'precio' => ['required', 'numeric'],
+                'hora1' => ['nullable', 'string', 'max:25'],
+                'hora2' => ['nullable', 'string', 'max:25'],
                 'logo' => ['required', 'image', 'max:2048'],
                 'rubro' => ['required', 'string', 'max:255'],
                 'servicio' => ['required', 'string', 'max:225'],
@@ -147,6 +149,8 @@ class ServicioMecanicoController extends Controller
                 'fechaFin' => $request->fechaFin,
                 'numeroContacto' => $request->numeroContacto,
                 'precio' => $request->precio,
+                'hora1' => $request->hora1,
+                'hora2' => $request->hora2,
                 'logo' => $logo_path,
                 'rubro' => $request->rubro,
                 'servicios' => $request->servicio,
@@ -169,13 +173,13 @@ class ServicioMecanicoController extends Controller
                 return redirect()->back()->with('error', 'Ha ocurrido un error al guardar el Servicio Mecanico. Por favor, inténtalo nuevamente.');
             }
 
-     /*  } catch (QueryException $e) {
+       } catch (QueryException $e) {
             Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
             return redirect()->back();
         } catch (\Exception $e) {
             Session::flash('error', 'No se pudo establecer una conexión con el servidor. Por favor, verifica tu conexión a internet y vuelve a intentarlo.');
             return redirect()->back();
-        }*/
+        }
        
     }
 
@@ -247,25 +251,25 @@ class ServicioMecanicoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
+      //  try {
             // Validar los datos del formulario
             $validator = Validator::make($request->all(), [
                 'nombreTaller' =>'nullable',
-                'representante' => 'required',
-                'fechaInicio' => 'required',
-                'fechaFin' => 'required',
-                'numeroContacto' => 'required',
-                'precio' => 'required',
+                'representante' => 'nullable',
+                'fechaInicio' => 'nullable',
+                'fechaFin' => 'nullable',
+                'numeroContacto' => 'nullable',
+                'precio' => 'nullable',
+                'hora1' => 'nullable',
+                'hora2' => 'nullable',
                 'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'descripcion' => 'required',
-                'rubro' => 'required',
-                'servicio' => 'required',
-                'direccion' => 'required',
-                'tipoServicio' => 'required',
+                'descripcion' => 'nullable',
+                'rubro' => 'nullable',
+                'servicio' => 'nullable',
+                'direccion' => 'nullable',
+                'tipoServicio' => 'nullable',
                 'acreditacion_1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'acreditacion_2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'acreditacion_3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'acreditacion_4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                
             ]);
 
             if ($validator->fails()) {
@@ -283,6 +287,8 @@ class ServicioMecanicoController extends Controller
             $servicio->fechaFin = $request->input('fechaFin');
             $servicio->fechaInicio = $request->input('fechaInicio');
             $servicio->precio = $request->input('precio');
+            $servicio->hora1 = $request->input('hora1');
+            $servicio->hora2 = $request->input('hora2');
             $servicio->numeroContacto = $request->input('numeroContacto');
             $servicio->descripcion = $request->input('descripcion');
             $servicio->rubro = $request->input('rubro');
@@ -311,49 +317,14 @@ class ServicioMecanicoController extends Controller
                 $servicio->acreditacion_1 = $acreditacion_1_path;
             }
 
-            if ($request->hasFile('acreditacion_2')) {
-                $acreditaciones2 = $request->file('acreditacion_2');
-                //$rutaAcreditaciones2 = $acreditaciones2->store('acreditacion_2');
-                $acreditacion_2_path = 'imagenes/serviciosMecanicos/acreditacion_2/' . time() . '.' . $acreditaciones2->getClientOriginalExtension();
-                $acreditaciones2->move(public_path('imagenes/serviciosMecanicos/acreditacion_2'), $acreditacion_2_path);
-                $servicio->acreditacion_2 = $acreditacion_2_path;
-            }
-
-            if ($request->hasFile('acreditacion_3')) {
-                $acreditaciones3 = $request->file('acreditacion_3');
-                //$rutaAcreditaciones3 = $acreditaciones3->store('acreditacion_3');
-                $acreditacion_3_path = 'imagenes/serviciosMecanicos/acreditacion_3/' . time() . '.' . $acreditaciones3->getClientOriginalExtension();
-                $acreditaciones3->move(public_path('imagenes/serviciosMecanicos/acreditacion_3'), $acreditacion_3_path);
-                $servicio->acreditacion_3 = $acreditacion_3_path;
-            }
-
-            if ($request->hasFile('acreditacion_4')) {
-                $acreditaciones4 = $request->file('acreditacion_4');
-                //$rutaAcreditaciones4 = $acreditaciones4->store('acreditacion_');
-                $acreditacion_4_path = 'imagenes/serviciosMecanicos/acreditacion_4/' . time() . '.' . $acreditaciones4->getClientOriginalExtension();
-                $acreditaciones4->move(public_path('imagenes/serviciosMecanicos/acreditacion_4'), $acreditacion_4_path);
-                $servicio->acreditacion_4 = $acreditacion_4_path;
-            }
-
+         
+$dd($servicio);
             $servicio->save();
             
             return redirect()->route('servicios-mecanicos.index')->with('success', 'El servicio se ha actualizado correctamente.');
        
-   
-        } catch (QueryException $e) {
-            Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
-            return redirect()->back();
-        } catch (\PDOException $e) {
-            if ($e->getCode() == 2002) {
-                Session::flash('error', 'No se pudo establecer una conexión con el servidor. Por favor, verifica tu conexión a internet y vuelve a intentarlo.');
-            } else {
-                Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
-            }
-            return redirect()->back();
-        } catch (\Exception $e) {
-            Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
-            return redirect()->back();
-        } 
+
+    
     }
 
     /**

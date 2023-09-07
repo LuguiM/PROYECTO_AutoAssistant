@@ -387,15 +387,15 @@
                         <p class="text-left mail-option">AutoAssitant@gmail.com</p>
                     </div>
                     <div class="col-md-6">
-                        <p class="text-left mail-option">Taller Mecanico</p>
+                        <p class="text-left mail-option">Taller Mecánico</p>
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-md-6">
-                        <p class="text-left">Sevicio al Cliente</p>
+                        <p class="text-left">Servicio al Cliente</p>
                     </div>
                     <div class="col-md-6">
-                        <p class="text-left mail-option">Mecanico Independiente</p>
+                        <p class="text-left mail-option">Mecánico Independiente</p>
                     </div>
                 </div>
                 <div class="row mb-4">

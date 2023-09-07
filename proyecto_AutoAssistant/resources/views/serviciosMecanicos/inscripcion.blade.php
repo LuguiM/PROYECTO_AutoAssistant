@@ -58,9 +58,10 @@ label {
     @if(auth()->user()->hasRole('taller_mecanico'))
 
     <form action="{{ route('servicios-mecanicos.store') }}" method="POST" enctype="multipart/form-data"
-        class="container">
+        class="container" id="myForm">
         <div class="row g-3">
             <div class="col-12">
+
                 <h2 class="title text-white">Formulario de inscripción</h2>
             </div>
             @csrf
@@ -68,43 +69,82 @@ label {
                 <!-- Columna izquierda -->
                 <div class="form-floating col-md-12">
                     <input type="text" class="form-control" id="nombreTaller" name="nombreTaller"
-                        placeholder="Nombre del Taller" aria-label="First name" value="{{ old('nombreTaller') }}">
+                        placeholder="Nombre del Taller" aria-label="Nombre del Taller"
+                        value="{{ old('nombreTaller') }}">
                     <label for="nombreTaller">Nombre del taller</label>
                     <x-input-error :messages="$errors->get('nombreTaller')" class="alert alert-danger" role="alert" />
                 </div>
                 <br>
                 <div class="form-floating col-md-12">
-                    <label for="fechaInicio">Fecha de Inicio</label>
-                    <input type="text" class="form-control" id="fechaInicio" name="fechaInicio"
-                        value="{{ old('fechaInicio', \Carbon\Carbon::now()->format('D h:i K')) }}">
-                    <x-input-error :messages="$errors->get('fechaInicio')" class="alert alert-danger" role="alert" />
+                    <label for="fechaInicio">Horario de Inicio</label>
+                    <select id="fechaInicio" name="fechaInicio" class="form-control select2">
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miércoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                    </select>
+
+                    <x-input-error :messages="$errors->get('horarioInicio')" class="alert alert-danger" role="alert" />
                 </div>
                 <br>
-                <div class="form-floating col-md-12">
-                    <label for="fechaFin">Fecha de Fin</label>
-                    <input type="text" class="form-control" id="fechaFin" name="fechaFin"
-                        value="{{ old('fechaFin', \Carbon\Carbon::now()->addDay()->format('D h:i K')) }}">
-                    <x-input-error :messages="$errors->get('fechaFin')" class="alert alert-danger" role="alert" />
+
+
+                <div class="form-floating col-20">
+                    <input type="text" class="form-control timepicker" id="hora1" name="hora1" placeholder="Hora 1"
+                        aria-label="Hora 1" value="{{ old('hora1') }}">
+                    <label for="hora1">Hora de Abrir</label>
+                    <x-input-error :messages="$errors->get('hora1')" class="alert alert-danger" role="alert" />
                 </div>
 
 
                 <br>
                 <div class="form-floating col-20">
                     <input type="text" class="form-control" id="direccion" name="direccion"
-                        placeholder="Direccion/Adomicilio" aria-label="Last name" value="{{ old('direccion') }}">
+                        placeholder="Direccion/Adomicilio" aria-label="Direccion/Adomicilio"
+                        value="{{ old('direccion') }}">
                     <label for="direccion">Direccion del Taller</label>
                     <x-input-error :messages="$errors->get('direccion')" class="alert alert-danger" role="alert" />
+                </div>
+                <br>
+                <div class="form-floating col-md-12">
+                    <input type="text" class="form-control" id="numeroContacto" name="numeroContacto"
+                        placeholder="Numero de Contacto" inputmode="numeric" pattern="[0-9\s]*"
+                        title="Ingresa un formato telefonico valido" aria-label="Numero de Contacto"
+                        value="{{ old('numeroContacto') }}">
+                    <label for="numeroContacto">Numero de Contacto</label>
+                    <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert" />
                 </div>
             </div>
             <div class="col-md-2">
                 <!-- Columna derecha -->
                 <div class=" form-floating col-md-12">
                     <input type="text" class="form-control" id="representante" name="representante"
-                        placeholder="Nombre del propietario" aria-label="Last name" value="{{ old('representante') }}">
+                        placeholder="Nombre del propietario" aria-label="Nombre del propietario"
+                        value="{{ old('representante') }}">
                     <label for="representante">Nombre del propietario</label>
                     <x-input-error :messages="$errors->get('representante')" class="alert alert-danger" role="alert" />
                 </div>
+                <br>
+                <div class="form-floating col-md-12">
+                    <label for="fechaFin">Horario de Fin</label>
+                    <select id="fechaFin" name="fechaFin" class="form-control select2">
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miércoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                    </select>
 
+                    <x-input-error :messages="$errors->get('horarioFin')" class="alert alert-danger" role="alert" />
+                </div>
+                <br>
+                <div class="form-floating col-20">
+                    <input type="text" class="form-control timepicker" id="hora2" name="hora2" placeholder="Hora 2"
+                        aria-label="Hora 2" value="{{ old('hora2') }}">
+                    <label for="hora2">Hora de Cierre</label>
+                    <x-input-error :messages="$errors->get('hora2')" class="alert alert-danger" role="alert" />
+                </div>
                 <br>
                 <div class="form-floating col-12">
                     <input type="file" class="form-control" id="logo" name="logo" accept=".png, .jpg, .jpeg">
@@ -116,29 +156,19 @@ label {
                     @enderror
                     <x-input-error :messages="$errors->get('logo')" class="alert alert-danger" role="alert" />
                 </div>
-                <br>
-                <div class="form-floating col-md-12">
-                    <input type="text" class="form-control" id="numeroContacto" name="numeroContacto"
-                        placeholder="Numero de Contacto" inputmode="numeric" pattern="[0-9\s]*"
-                        title="Ingresa un formato telefonico valido" aria-label="Last name"
-                        value="{{ old('numeroContacto') }}">
-                    <label for="numeroContacto">Numero de Contacto</label>
-                    <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert" />
-                </div>
+
                 <br>
                 <div class="form-floating col-md-12">
                     <input type="text" class="form-control" id="precio" name="precio" placeholder="precio"
                         inputmode="numeric" pattern="[0-9\s]*" title="Ingresa un formato telefonico valido"
-                        aria-label="Last name" value="{{ old('precio') }}">
+                        aria-label="precio" value="{{ old('precio') }}">
                     <label for="precio">Costo estimado</label>
                     <x-input-error :messages="$errors->get('precio')" class="alert alert-danger" role="alert" />
                 </div>
             </div>
-
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div class="col-md-6">
                 <!-- Campos de la izquierda -->
-                <!-- ... -->
                 <div class="form-floating col-12">
                     <select id="rubro" name="rubro" class="form-select">
                         <option disabled selected>Rubro...</option>
@@ -156,7 +186,6 @@ label {
                 <div class="form-floating col-12">
                     <select id="servicio" name="servicio" class="form-select">
                         <option disabled selected>Servicio que Ofrece...</option>
-
                     </select>
                     <label for="servicio">Servicio que Ofrece</label>
                     <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert" />
@@ -164,7 +193,7 @@ label {
                 <br>
                 <div class="form-floating col-12">
                     <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion"
-                        aria-label="Last name">{{ old('descripcion') }}</textarea>
+                        aria-label="Descripcion">{{ old('descripcion') }}</textarea>
                     <label for="descripcion">Descripcion del servicio</label>
                     <x-input-error :messages="$errors->get('descripcion')" class="alert alert-danger" role="alert" />
                 </div>
@@ -175,7 +204,7 @@ label {
                         <option value="Adomicilio">Adomicilio</option>
                         <option value="Cita/Reserva">Cita en Taller</option>
                     </select>
-                    <label for="rubro">Selecciona un Tipo de Servicio</label>
+                    <label for="tipoServicio">Selecciona un Tipo de Servicio</label>
                     <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert" />
                 </div>
                 <br>
@@ -209,79 +238,33 @@ label {
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-
-
     <script>
     $(document).ready(function() {
-
         $(".alert").delay(3500).slideUp(200, function() {
             $(this).alert('close');
         });
-
     });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/datepicker@3.2.0/dist/datepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-    flatpickr("#fechaInicio", {
-        enableTime: true,
-        noCalendar: false,
-        dateFormat: "D h:i K", // "D" para el día, "h" para la hora (formato de 12 horas), "i" para los minutos, "K" para AM/PM
-        locale: {
-            weekdays: {
-                shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
-                longhand: [
-                    "Domingo",
-                    "Lunes",
-                    "Martes",
-                    "Miércoles",
-                    "Jueves",
-                    "Viernes",
-                    "Sábado",
-                ],
-            },
-        },
-    });
-
-    flatpickr("#fechaFin", {
-        enableTime: true,
-        noCalendar: false,
-        dateFormat: "D h:i K", // "D" para el día, "h" para la hora (formato de 12 horas), "i" para los minutos, "K" para AM/PM
-        locale: {
-            weekdays: {
-                shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
-                longhand: [
-                    "Domingo",
-                    "Lunes",
-                    "Martes",
-                    "Miércoles",
-                    "Jueves",
-                    "Viernes",
-                    "Sábado",
-                ],
-            },
-        },
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr('.timepicker', {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: 'H:i K',
+        });
     });
     </script>
     <script>
-    // Restricción de submit con notificación
     document.getElementById('myForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-
-        // Realiza cualquier validación adicional que necesites aquí
-
-        // Mostrar notificación de éxito
+        event.preventDefault();
         alert('¡Servicio contratado con éxito!');
-
-        // Envío del formulario después de la notificación
         setTimeout(function() {
             document.getElementById('myForm').submit();
         }, 1000);
     });
-
-    <
-    script >
     </script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -301,7 +284,6 @@ label {
                 "Cambio de motor",
                 "Cambio de bomba de frenos",
                 "Reapriete de suspension",
-
             ],
             "Lubricentro": [
                 "Cambio de aceite.",
@@ -310,7 +292,6 @@ label {
                 "Cambio de refrigerante",
                 "Lubricacion de suspencion",
                 "Cambio de aceite de trasmicion",
-
             ],
             "Electronico": [
                 " Instalación de batería",
@@ -320,15 +301,13 @@ label {
                 " Cambio de alternador ",
                 " Cambio de luces ",
                 " Cambio de tablero del vehículo",
-                "Instalación de scaner ",
-
+                "Instalación de scanner ",
             ],
             "General de Caja": [
                 "Cambio de convertidor ",
                 "Cambio de sincronizados ",
                 "Cambio de flechas de trasmisión",
                 "Cambio de filtro de aceite de caja",
-
             ],
             "Enderezado y Pintura": [
                 "Enderezado de chasis ",
@@ -338,7 +317,6 @@ label {
                 "Pintura general",
                 "Pulido de espejos y faros",
                 "Cambio de faldones",
-
             ],
             "Llanteria": [
                 "Cambio de llanta",
@@ -346,14 +324,13 @@ label {
                 "Aliniado y balanceado",
                 "Regulación de aire ",
             ],
-
         };
 
         rubroSelect.addEventListener('change', function() {
             const selectedRubro = rubroSelect.value;
             const servicios = serviciosPorRubro[selectedRubro];
 
-            servicioSelect.innerHTML = ''; // Limpia las opciones actuales
+            servicioSelect.innerHTML = '';
 
             servicios.forEach(servicio => {
                 const option = document.createElement('option');
@@ -364,13 +341,12 @@ label {
         });
     });
     </script>
-
-
     @endif
 
     @if(auth()->user()->hasRole('mecanico_independiente'))
     <form action="{{ route('servicios-mecanicos.store') }}" method="POST" enctype="multipart/form-data"
-        class="container">
+        class="container" id="myForm">
+        <!-- Agregamos un ID al formulario -->
         <div class="row g-3">
             <div class="col-12">
                 <h2 class="title text-white">Formulario de inscripción</h2>
@@ -386,19 +362,42 @@ label {
                 </div>
                 <br>
                 <div class="form-floating col-md-12">
-                    <label for="fechaInicio">Fecha de Inicio</label>
-                    <input type="text" class="form-control" id="fechaInicio" name="fechaInicio"
-                        value="{{ old('fechaInicio', \Carbon\Carbon::now()->format('D h:i K')) }}">
+                    <label for="fechaInicio">Horario de Inicio</label>
+                    <select id="fechaInicio" name="fechaInicio" class="form-control select2">
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miércoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                    </select>
                     <x-input-error :messages="$errors->get('fechaInicio')" class="alert alert-danger" role="alert" />
                 </div>
                 <br>
                 <div class="form-floating col-md-12">
-                    <label for="fechaFin">Fecha de Fin</label>
-                    <input type="text" class="form-control" id="fechaFin" name="fechaFin"
-                        value="{{ old('fechaFin', \Carbon\Carbon::now()->addDay()->format('D h:i K')) }}">
+                    <label for="fechaFin">Horario de Fin</label>
+                    <select id="fechaFin" name="fechaFin" class="form-control select2">
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miércoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                    </select>
                     <x-input-error :messages="$errors->get('fechaFin')" class="alert alert-danger" role="alert" />
                 </div>
-
+                <br>
+                <div class="form-floating col-12">
+                    <input type="text" class="form-control timepicker" id="hora1" name="hora1" placeholder="Hora 1"
+                        aria-label="Hora 1" value="{{ old('hora1') }}">
+                    <label for="hora1">Hora de Abrir</label>
+                    <x-input-error :messages="$errors->get('hora1')" class="alert alert-danger" role="alert" />
+                </div>
+                <br>
+                <div class="form-floating col-12">
+                    <input type="text" class="form-control timepicker" id="hora2" name="hora2" placeholder="Hora 2"
+                        aria-label="Hora 2" value="{{ old('hora2') }}">
+                    <label for="hora2">Hora de Cierre</label>
+                    <x-input-error :messages="$errors->get('hora2')" class="alert alert-danger" role="alert" />
+                </div>
                 <br>
                 <div class="form-floating col-20">
                     <input type="text" class="form-control" id="direccion" name="direccion"
@@ -409,13 +408,12 @@ label {
             </div>
             <div class="col-md-2">
                 <!-- Columna derecha -->
-                <div class=" form-floating col-md-12">
+                <div class="form-floating col-md-12">
                     <input type="text" class="form-control" id="representante" name="representante"
                         placeholder="Nombre del propietario" aria-label="Last name" value="{{ old('representante') }}">
                     <label for="representante">Nombre del propietario</label>
                     <x-input-error :messages="$errors->get('representante')" class="alert alert-danger" role="alert" />
                 </div>
-
                 <br>
                 <div class="form-floating col-12">
                     <input type="file" class="form-control" id="logo" name="logo" accept=".png, .jpg, .jpeg">
@@ -467,10 +465,13 @@ label {
                 <div class="form-floating col-12">
                     <select id="servicio" name="servicio" class="form-select">
                         <option disabled selected>Servicio que Ofrece...</option>
-
                     </select>
                     <label for="servicio">Servicio que Ofrece</label>
-                    <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert" />
+                    @if($errors->has('servicio'))
+                    <div class="alert alert-danger">
+                        {{ $errors->first('servicio') }}
+                    </div>
+                    @endif
                 </div>
                 <br>
                 <div class="form-floating col-12">
@@ -496,53 +497,39 @@ label {
                         accept=".png, .jpg, .jpeg">
                     <x-input-error :messages="$errors->get('acreditacion_1')" class="alert alert-danger" role="alert" />
                 </div>
-                @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-                @endif
-
-                @if(session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-                @endif
             </div>
 
             <div class="col-12 d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary">Inscribir servicio</button>
                 <a href="{{ route('servicios-mecanicos.index') }}" class="btn btn-danger">Cancelar</a>
             </div>
-
         </div>
         <br>
     </form>
-    <script>
-    $(document).ready(function() {
 
-        $(".alert").delay(3500).slideUp(200, function() {
-            $(this).alert('close');
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datepicker@3.2.0/dist/datepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr('.timepicker', {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: 'H:i K', // Formato de hora (24 horas)
         });
 
     });
     </script>
-
     <script>
-    // Restricción de submit con notificación
-    document.getElementById('myForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-
-        // Realiza cualquier validación adicional que necesites aquí
-
-        // Mostrar notificación de éxito
-        alert('¡Servicio contratado con éxito!');
-
-        // Envío del formulario después de la notificación
-        setTimeout(function() {
-            document.getElementById('myForm').submit();
-        }, 1000);
+    $(document).ready(function() {
+        $(".alert").delay(3500).slideUp(200, function() {
+            $(this).alert('close');
+        });
     });
     </script>
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const rubroSelect = document.getElementById('rubro');
@@ -624,8 +611,6 @@ label {
         });
     });
     </script>
-
     @endif
-
     <br>
 </x-app-layout>
