@@ -46,9 +46,7 @@ label {
 
 
 <!-- ... Otros enlaces y estilos ... -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datepicker/dist/datepicker.min.css">
-<script src="https://cdn.jsdelivr.net/npm/datepicker@1.0.10/dist/datepicker.min.js"></script>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 <x-app-layout>
     <x-slot name="header">
@@ -76,18 +74,19 @@ label {
                 </div>
                 <br>
                 <div class="form-floating col-md-12">
-                    <label for="horario_inicio">Horario de Inicio</label>
-                    <input type="datetime-local" class="form-control" id="fechaInicio" name="fechaInicio"
-                        value="{{ old('fechaInicio') }}">
+                    <label for="fechaInicio">Fecha de Inicio</label>
+                    <input type="text" class="form-control" id="fechaInicio" name="fechaInicio"
+                        value="{{ old('fechaInicio', \Carbon\Carbon::now()->format('D h:i K')) }}">
                     <x-input-error :messages="$errors->get('fechaInicio')" class="alert alert-danger" role="alert" />
                 </div>
                 <br>
                 <div class="form-floating col-md-12">
-                    <label for="horario_fin">Horario de Fin</label>
-                    <input type="datetime-local" class="form-control" id="fechaFin" name="fechaFin"
-                        value="{{ old('fechaFin') }}">
+                    <label for="fechaFin">Fecha de Fin</label>
+                    <input type="text" class="form-control" id="fechaFin" name="fechaFin"
+                        value="{{ old('fechaFin', \Carbon\Carbon::now()->addDay()->format('D h:i K')) }}">
                     <x-input-error :messages="$errors->get('fechaFin')" class="alert alert-danger" role="alert" />
                 </div>
+
 
                 <br>
                 <div class="form-floating col-20">
@@ -125,6 +124,14 @@ label {
                         value="{{ old('numeroContacto') }}">
                     <label for="numeroContacto">Numero de Contacto</label>
                     <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert" />
+                </div>
+                <br>
+                <div class="form-floating col-md-12">
+                    <input type="text" class="form-control" id="precio" name="precio" placeholder="precio"
+                        inputmode="numeric" pattern="[0-9\s]*" title="Ingresa un formato telefonico valido"
+                        aria-label="Last name" value="{{ old('precio') }}">
+                    <label for="precio">Costo estimado</label>
+                    <x-input-error :messages="$errors->get('precio')" class="alert alert-danger" role="alert" />
                 </div>
             </div>
 
@@ -166,7 +173,7 @@ label {
                     <select id="tipoServicio" name="tipoServicio" class="form-select">
                         <option disabled selected>Tipo Servicio...</option>
                         <option value="Adomicilio">Adomicilio</option>
-                        <option value="Cita/Reserva">Cita/Reserva</option>
+                        <option value="Cita/Reserva">Cita en Taller</option>
                     </select>
                     <label for="rubro">Selecciona un Tipo de Servicio</label>
                     <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert" />
@@ -199,6 +206,12 @@ label {
         </div>
         <br>
     </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+
     <script>
     $(document).ready(function() {
 
@@ -208,23 +221,47 @@ label {
 
     });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/datepicker@3.2.0/dist/datepicker.min.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const currentDate = new Date();
-        const startOfWeek = new Date(currentDate);
-        startOfWeek.setDate(currentDate.getDate() - currentDate.getDay()); // Primer día de la semana
-        const endOfWeek = new Date(currentDate);
-        endOfWeek.setDate(currentDate.getDate() - currentDate.getDay() + 6); // Último día de la semana
+    flatpickr("#fechaInicio", {
+        enableTime: true,
+        noCalendar: false,
+        dateFormat: "D h:i K", // "D" para el día, "h" para la hora (formato de 12 horas), "i" para los minutos, "K" para AM/PM
+        locale: {
+            weekdays: {
+                shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+                longhand: [
+                    "Domingo",
+                    "Lunes",
+                    "Martes",
+                    "Miércoles",
+                    "Jueves",
+                    "Viernes",
+                    "Sábado",
+                ],
+            },
+        },
+    });
 
-        const startDateFormatted = startOfWeek.toISOString().slice(0, 16); // Formato YYYY-MM-DDTHH:mm
-        const endDateFormatted = endOfWeek.toISOString().slice(0, 16);
-
-        const horarioInputs = document.querySelectorAll('input[type="datetime-local"]');
-
-        horarioInputs.forEach(input => {
-            input.setAttribute('min', startDateFormatted);
-            input.setAttribute('max', endDateFormatted);
-        });
+    flatpickr("#fechaFin", {
+        enableTime: true,
+        noCalendar: false,
+        dateFormat: "D h:i K", // "D" para el día, "h" para la hora (formato de 12 horas), "i" para los minutos, "K" para AM/PM
+        locale: {
+            weekdays: {
+                shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+                longhand: [
+                    "Domingo",
+                    "Lunes",
+                    "Martes",
+                    "Miércoles",
+                    "Jueves",
+                    "Viernes",
+                    "Sábado",
+                ],
+            },
+        },
     });
     </script>
     <script>
@@ -242,6 +279,9 @@ label {
             document.getElementById('myForm').submit();
         }, 1000);
     });
+
+    <
+    script >
     </script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -346,16 +386,16 @@ label {
                 </div>
                 <br>
                 <div class="form-floating col-md-12">
-                    <label for="horario_inicio">Horario de Inicio</label>
-                    <input type="datetime-local" class="form-control" id="fechaInicio" name="fechaInicio"
-                        value="{{ old('fechaInicio') }}">
+                    <label for="fechaInicio">Fecha de Inicio</label>
+                    <input type="text" class="form-control" id="fechaInicio" name="fechaInicio"
+                        value="{{ old('fechaInicio', \Carbon\Carbon::now()->format('D h:i K')) }}">
                     <x-input-error :messages="$errors->get('fechaInicio')" class="alert alert-danger" role="alert" />
                 </div>
                 <br>
                 <div class="form-floating col-md-12">
-                    <label for="horario_fin">Horario de Fin</label>
-                    <input type="datetime-local" class="form-control" id="fechaFin" name="fechaFin"
-                        value="{{ old('fechaFin') }}">
+                    <label for="fechaFin">Fecha de Fin</label>
+                    <input type="text" class="form-control" id="fechaFin" name="fechaFin"
+                        value="{{ old('fechaFin', \Carbon\Carbon::now()->addDay()->format('D h:i K')) }}">
                     <x-input-error :messages="$errors->get('fechaFin')" class="alert alert-danger" role="alert" />
                 </div>
 
@@ -395,6 +435,14 @@ label {
                         value="{{ old('numeroContacto') }}">
                     <label for="numeroContacto">Numero de Contacto</label>
                     <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert" />
+                </div>
+                <br>
+                <div class="form-floating col-md-12">
+                    <input type="text" class="form-control" id="precio" name="precio" placeholder="precio"
+                        inputmode="numeric" pattern="[0-9\s]*" title="Ingresa un formato telefonico valido"
+                        aria-label="Last name" value="{{ old('precio') }}">
+                    <label for="precio">Costo estimado</label>
+                    <x-input-error :messages="$errors->get('precio')" class="alert alert-danger" role="alert" />
                 </div>
             </div>
 
@@ -436,7 +484,7 @@ label {
                     <select id="tipoServicio" name="tipoServicio" class="form-select">
                         <option disabled selected>Tipo Servicio...</option>
                         <option value="Adomicilio">Adomicilio</option>
-                        <option value="Cita/Reserva">Cita/Reserva</option>
+                        <option value="Cita/Reserva">Cita en Taller</option>
                     </select>
                     <label for="rubro">Selecciona un Tipo de Servicio</label>
                     <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert" />
@@ -478,7 +526,7 @@ label {
 
     });
     </script>
-    </script>
+
     <script>
     // Restricción de submit con notificación
     document.getElementById('myForm').addEventListener('submit', function(event) {

@@ -18,7 +18,7 @@ h5 {
     font-size: 36px;
     color: black !important;
     text-shadow: 0 0 10px white;
-    animation: glow 1s ease-in-out infinite alternate;
+
     text-transform: uppercase;
 }
 
@@ -141,7 +141,13 @@ h5 {
                             <div class="card-body">
                                 <h5 class="card-title">{{$servicioMecanico->numeroContacto}}</h5>
                             </div>
+
+                            <div class="card-header bg-primary">Costo estimado</div>
+                            <div class="card-body">
+                                <h5 class="card-title">${{$servicioMecanico->precio}}</h5>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -194,6 +200,8 @@ h5 {
                     <i class='bx bx-shield-quarter bx-tada'></i> Contratar Servicio
                 </a>
             </div>
+            <br>
+            <br>
             <br>
 
 </x-app-layout>

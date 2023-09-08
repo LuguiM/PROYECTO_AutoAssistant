@@ -25,6 +25,8 @@ img {
 }
 </style>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -52,21 +54,21 @@ img {
             </div>
             <div class="form-floating col-md-6">
                 <input type="text" class="form-control" id="representante" name="representante"
-                    placeholder="Nombre del propietario" value="{{ $servicioMecanico->representante }}">
+                    placeholder="Nombre del propietario" value="{{ $servicioMecanico->representante}}">
                 <label for="propietario">Nombre del propietario</label>
                 <x-input-error :messages="$errors->get('representante')" class="alert alert-danger" role="alert" />
             </div>
             <div class="form-floating col-md-12">
-                <label for="horario_inicio">Horario de Inicio</label>
-                <input type="datetime-local" class="form-control" id="fechaInicio" name="fechaInicio"
-                    value="{{ old('fechaInicio') }}">
+                <label for="fechaInicio">Fecha de Inicio</label>
+                <input type="text" class="form-control" id="fechaInicio" name="fechaInicio"
+                    value="{{ old('fechaInicio', \Carbon\Carbon::now()->format('D h:i K')) }}">
                 <x-input-error :messages="$errors->get('fechaInicio')" class="alert alert-danger" role="alert" />
             </div>
             <br>
             <div class="form-floating col-md-12">
-                <label for="horario_fin">Horario de Fin</label>
-                <input type="datetime-local" class="form-control" id="fechaFin" name="fechaFin"
-                    value="{{ old('fechaFin') }}">
+                <label for="fechaFin">Fecha de Fin</label>
+                <input type="text" class="form-control" id="fechaFin" name="fechaFin"
+                    value="{{ old('fechaFin', \Carbon\Carbon::now()->addDay()->format('D h:i K')) }}">
                 <x-input-error :messages="$errors->get('fechaFin')" class="alert alert-danger" role="alert" />
             </div>
             <div class="form-floating col-md-6">
@@ -75,6 +77,13 @@ img {
                     title="Ingresa un formato telefonico valido" value="{{ $servicioMecanico->numeroContacto }}">
                 <label for="numeroContacto">Numero de Contacto</label>
                 <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert" />
+            </div>
+            <div class="form-floating col-md-6">
+                <input type="text" class="form-control" id="precio" name="precio" placeholder="precio"
+                    inputmode="numeric" pattern="[0-3\s]*" title="Ingresa un formato telefonico valido"
+                    value="{{ $servicioMecanico->precio }}">
+                <label for="precio">Costo estimado</label>
+                <x-input-error :messages="$errors->get('precio')" class="alert alert-danger" role="alert" />
             </div>
 
             <div class="col-12">
@@ -122,24 +131,18 @@ img {
                 <label for="rubro">Selecciona un Rubro</label>
             </div>
             <br>
-            <div class="form-floating col-12">
-                <select id="servicio" name="servicio" class="form-select">
-                    <option disabled selected>Servicio que Ofrece...</option>
-                </select>
-                <label for="servicio">Servicio que Ofrece</label>
-                <x-input-error :messages="$errors->get('servicio')" class="alert alert-danger" role="alert" />
-            </div>
+
 
             <div class="form-floating col-12">
-                <select id="tipoServicio" name="tipoServicio" class="form-select">
-                    <option disabled>Tipo Servicio...</option>
-                    <option value="Adomicilio" @if($servicioMecanico->tipoServicio == 'Adomicilio') selected
-                        @endif>Adomicilio</option>
-                    <option value="Cita/Reserva" @if($servicioMecanico->tipoServico == 'Cita/Reserva') selected
-                        @endif>Cita/Reserva</option>
+                <select id="servicios" name="servicios" class="form-select">
+                    <option disabled selected>Servicio que Ofrece...</option>
+                    @if($servicioMecanico->servicios)
+                    <option value="{{ $servicioMecanico->servicios }}" selected>{{ $servicioMecanico->servicios }}
+                    </option>
+                    @endif
                 </select>
-                <label for="rubro">Selecciona un Tipo de Servicio</label>
-                <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert" />
+                <label for="servicios">Servicio que Ofrece</label>
+                <x-input-error :messages="$errors->get('servicios')" class="alert alert-danger" role="alert" />
             </div>
 
             <div class="col-md-6">
@@ -154,73 +157,13 @@ img {
                     style="max-width: 200px; margin-top: 10px; display: none;">
                 @endif
 
-                <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 1.</small>
+
                 @error('acreditacion_1')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
                 <x-input-error :messages="$errors->get('acreditacion_1')" class="alert alert-danger" role="alert" />
-            </div>
-
-            <div class="col-md-6">
-                <label for="acreditacion_2" class="form-label text-white">Acreditación 2</label>
-                <input type="file" class="form-control" id="acreditacion_2" name="acreditacion_2"
-                    placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
-                @if ($servicioMecanico->acreditacion_2)
-                <img id="acreditacion_2" src="{{ asset($servicioMecanico->acreditacion_2) }}" alt="Logo Preview"
-                    style="max-width: 200px; margin-top: 10px;">
-                @else
-                <img id="acreditacion_2 src=" #" alt="Logo Preview"
-                    style="max-width: 200px; margin-top: 10px; display: none;">
-                @endif
-                <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 2.</small>
-                @error('acreditacion_2')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-                <x-input-error :messages="$errors->get('acreditacion_2')" class="alert alert-danger" role="alert" />
-            </div>
-
-            <div class="col-md-6">
-                <label for="acreditacion_3" class="form-label text-white">Acreditación 3</label>
-                <input type="file" class="form-control" id="acreditacion_3" name="acreditacion_3"
-                    placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
-                @if ($servicioMecanico->acreditacion_3)
-                <img id="acreditacion_3" src="{{ asset($servicioMecanico->acreditacion_3) }}" alt="Logo Preview"
-                    style="max-width: 200px; margin-top: 10px;">
-                @else
-                <img id="acreditacion_3" src="#" alt="Logo Preview"
-                    style="max-width: 200px; margin-top: 10px; display: none;">
-                @endif
-                <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 3.</small>
-                @error('acreditacion_3')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-                <x-input-error :messages="$errors->get('acreditacion_3')" class="alert alert-danger" role="alert" />
-            </div>
-
-            <div class="col-md-6">
-                <label for="acreditacion_4" class="form-label text-white">Acreditación 4</label>
-                <input type="file" class="form-control" id="acreditacion_4" name="acreditacion_4"
-                    placeholder="Acreditaciones" accept=".png, .jpg, .jpeg">
-                @if ($servicioMecanico->acreditacion_4)
-                <img id="acreditacion_4" src="{{ asset($servicioMecanico->acreditacion_4) }}" alt="Logo Preview"
-                    style="max-width: 200px; margin-top: 10px;">
-                @else
-                <img id="acreditacion_4 src=" #" alt="Logo Preview"
-                    style="max-width: 200px; margin-top: 10px; display: none;">
-                @endif
-                <small class="form-text text-muted">Selecciona una nueva imagen para la acreditación 4.</small>
-                @error('acreditacion_4')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-                <x-input-error :messages="$errors->get('acreditacion_4')" class="alert alert-danger" role="alert" />
             </div>
 
             @if(session('success'))
@@ -244,35 +187,55 @@ img {
         <br>
 
     </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datepicker@3.2.0/dist/datepicker.min.js"></script>
+
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const horarioInputs = document.querySelectorAll('input[type="datetime-local"]');
-        const currentDate = new Date(); // Obtén la fecha actual
-
-        horarioInputs.forEach(input => {
-            const minDateFormatted = currentDate.toISOString().slice(0, 16); // Formato YYYY-MM-DDTHH:mm
-            input.setAttribute('min', minDateFormatted);
-        });
-
-        // Restricción de submit con notificación
-        document.getElementById('myForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-
-            // Realiza cualquier validación adicional que necesites aquí
-
-            // Mostrar notificación de éxito
-            alert('¡Servicio contratado con éxito!');
-
-            // Envío del formulario después de la notificación
-            setTimeout(function() {
-                document.getElementById('myForm').submit();
-            }, 1000);
-        });
+    flatpickr("#fechaInicio", {
+        enableTime: true,
+        noCalendar: false,
+        dateFormat: "D h:i K", // "D" para el día, "h" para la hora (formato de 12 horas), "i" para los minutos, "K" para AM/PM
+        locale: {
+            weekdays: {
+                shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+                longhand: [
+                    "Domingo",
+                    "Lunes",
+                    "Martes",
+                    "Miércoles",
+                    "Jueves",
+                    "Viernes",
+                    "Sábado",
+                ],
+            },
+        },
     });
 
+    flatpickr("#fechaFin", {
+        enableTime: true,
+        noCalendar: false,
+        dateFormat: "D h:i K", // "D" para el día, "h" para la hora (formato de 12 horas), "i" para los minutos, "K" para AM/PM
+        locale: {
+            weekdays: {
+                shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+                longhand: [
+                    "Domingo",
+                    "Lunes",
+                    "Martes",
+                    "Miércoles",
+                    "Jueves",
+                    "Viernes",
+                    "Sábado",
+                ],
+            },
+        },
+    });
+    </script>
+    <script>
     // Aquí faltaba una llave de cierre en tu código original
     const rubroSelect = document.getElementById('rubro');
-    const servicioSelect = document.getElementById('servicio');
+    const servicioSelect = document.getElementById('servicios');
 
     const serviciosPorRubro = {
         "Mecanico": [
@@ -370,16 +333,16 @@ img {
             </div>
 
             <div class="form-floating col-md-12">
-                <label for="horario_inicio">Horario de Inicio</label>
-                <input type="datetime-local" class="form-control" id="fechaInicio" name="fechaInicio"
-                    value="{{ old('fechaInicio') }}">
+                <label for="fechaInicio">Fecha de Inicio</label>
+                <input type="text" class="form-control" id="fechaInicio" name="fechaInicio"
+                    value="{{ old('fechaInicio', \Carbon\Carbon::now()->format('D h:i K')) }}">
                 <x-input-error :messages="$errors->get('fechaInicio')" class="alert alert-danger" role="alert" />
             </div>
             <br>
             <div class="form-floating col-md-12">
-                <label for="horario_fin">Horario de Fin</label>
-                <input type="datetime-local" class="form-control" id="fechaFin" name="fechaFin"
-                    value="{{ old('fechaFin') }}">
+                <label for="fechaFin">Fecha de Fin</label>
+                <input type="text" class="form-control" id="fechaFin" name="fechaFin"
+                    value="{{ old('fechaFin', \Carbon\Carbon::now()->addDay()->format('D h:i K')) }}">
                 <x-input-error :messages="$errors->get('fechaFin')" class="alert alert-danger" role="alert" />
             </div>
 
@@ -390,7 +353,13 @@ img {
                 <label for="numeroContacto">Numero de Contacto</label>
                 <x-input-error :messages="$errors->get('numeroContacto')" class="alert alert-danger" role="alert" />
             </div>
-
+            <div class="form-floating col-md-6">
+                <input type="text" class="form-control" id="precio" name="precio" placeholder="precio"
+                    inputmode="numeric" pattern="[0-3\s]*" title="Ingresa un formato telefonico valido"
+                    value="{{ $servicioMecanico->precio }}">
+                <label for="precio">Costo estimadoo</label>
+                <x-input-error :messages="$errors->get('precio')" class="alert alert-danger" role="alert" />
+            </div>
             <div class="col-12">
                 <label for="logo" class="form-label text-white">Logo o Imagen del Servicio</label>
                 <input type="file" class="form-control" id="logo" name="logo" accept=".png, .jpg, .jpeg">
@@ -438,7 +407,7 @@ img {
                     <option value="Adomicilio" @if($servicioMecanico->tipoServicio == 'Adomicilio') selected
                         @endif>Adomicilio</option>
                     <option value="Cita/Reserva" @if($servicioMecanico->tipoServico == 'Cita/Reserva') selected
-                        @endif>Cita/Reserva</option>
+                        @endif>Cita en Taller</option>
                 </select>
                 <label for="rubro">Selecciona un Tipo de Servicio</label>
                 <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert" />
@@ -457,7 +426,7 @@ img {
                     <option value="Adomicilio" @if($servicioMecanico->tipoServicio == 'Adomicilio') selected
                         @endif>Adomicilio</option>
                     <option value="Cita/Reserva" @if($servicioMecanico->tipoServico == 'Cita/Reserva') selected
-                        @endif>Cita/Reserva</option>
+                        @endif>Cita en Taller</option>
                 </select>
                 <label for="rubro">Selecciona un Tipo de Servicio</label>
                 <x-input-error :messages="$errors->get('tipoServicio')" class="alert alert-danger" role="alert" />
@@ -496,46 +465,72 @@ img {
 
 
 
-
-
-
-
-
-
-
-    <br>
-
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datepicker@3.2.0/dist/datepicker.min.js"></script>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const horarioInputs = document.querySelectorAll('input[type="datetime-local"]');
-        const currentDate = new Date(); // Obtén la fecha actual
-
-        horarioInputs.forEach(input => {
-            const minDateFormatted = currentDate.toISOString().slice(0, 16); // Formato YYYY-MM-DDTHH:mm
-            input.setAttribute('min', minDateFormatted);
-        });
-
-        // Restricción de submit con notificación
-        document.getElementById('myForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-
-            // Realiza cualquier validación adicional que necesites aquí
-
-            // Mostrar notificación de éxito
-            alert('¡Servicio contratado con éxito!');
-
-            // Envío del formulario después de la notificación
-            setTimeout(function() {
-                document.getElementById('myForm').submit();
-            }, 1000);
-        });
+    flatpickr("#fechaInicio", {
+        enableTime: true,
+        noCalendar: false,
+        dateFormat: "D h:i K", // "D" para el día, "h" para la hora (formato de 12 horas), "i" para los minutos, "K" para AM/PM
+        locale: {
+            weekdays: {
+                shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+                longhand: [
+                    "Domingo",
+                    "Lunes",
+                    "Martes",
+                    "Miércoles",
+                    "Jueves",
+                    "Viernes",
+                    "Sábado",
+                ],
+            },
+        },
     });
 
+    flatpickr("#fechaFin", {
+        enableTime: true,
+        noCalendar: false,
+        dateFormat: "D h:i K", // "D" para el día, "h" para la hora (formato de 12 horas), "i" para los minutos, "K" para AM/PM
+        locale: {
+            weekdays: {
+                shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+                longhand: [
+                    "Domingo",
+                    "Lunes",
+                    "Martes",
+                    "Miércoles",
+                    "Jueves",
+                    "Viernes",
+                    "Sábado",
+                ],
+            },
+        },
+    });
+    </script>
+
+    <script>
+    // Restricción de submit con notificación
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+        // Realiza cualquier validación adicional que necesites aquí
+
+        // Mostrar notificación de éxito
+        alert('¡Servicio contratado con éxito!');
+
+        // Envío del formulario después de la notificación
+        setTimeout(function() {
+            document.getElementById('myForm').submit();
+        }, 1000);
+    });
+    </script>
+    <script>
     // Aquí faltaba una llave de cierre en tu código original
     const rubroSelect = document.getElementById('rubro');
-    const servicioSelect = document.getElementById('servicio');
+    const servicioSelect = document.getElementById('servicios');
 
     const serviciosPorRubro = {
         "Mecanico": [
@@ -576,7 +571,7 @@ img {
             "Cambio de convertidor ",
             "Cambio de sincronizados ",
             "Cambio de flechas de trasmisión",
-            "Cambio de  filtro de aceite de caja",
+            "Cambio de filtro de aceite de caja",
 
         ],
         "Enderezado y Pintura": [

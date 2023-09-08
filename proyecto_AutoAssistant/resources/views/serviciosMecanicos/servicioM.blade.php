@@ -128,12 +128,15 @@ main {
                 data-servicios="{{ json_encode($servicio->servicios) }}">
                 <a href="{{ route('servicios-mecanicos.show', $servicio->id) }}">
                     <img src="{{ $servicio->logo }}" class="card-img-top" alt="..."
-                        style="max-width: 200px; margin-top: 10px;">
+                        style="max-width: 200px; margin-top: 1px;">
                     <div class="card-body">
                         <h5 class="card-title">{{ $servicio->representante }}</h5>
-                        <p class="card-text text-white">RUBRO: {{ $servicio->rubro }}</p>
+                        <p class="card-text text-white">Rubro: {{ $servicio->rubro }}</p>
+                        <p class="card-text text-white">Servicio: {{ $servicio->servicios }}</p>
+                        <p class="card-text text-white">Tipo de servicio: {{ $servicio->tipoServicio }}</p>
+                        <p class="card-text text-white">Costo estimado: ${{ $servicio->precio }}</p>
                     </div>
-                </a>
+                    </b>
             </div>
             @empty
             <div class="col-md-12 text-white">

@@ -36,7 +36,7 @@
         position: relative;
         padding-top: 7px;
         padding-bottom: 7px;
-        background-color: #32525C
+        background-color: #1279C1
     }
 
     .logo {
@@ -69,7 +69,7 @@
     }
 
     .navbar-nav .nav-link {
-        color: #000000;
+        color: #FFF;
     }
 
     .notify {
@@ -114,7 +114,7 @@
     }
 
     .navbar-main {
-        background-color: #D9D9D9
+        background-color: #242424
     }
 
     .navbar-toggler {
@@ -360,7 +360,6 @@
 
 
     <main>
-
         @yield('content')
     </main>
 

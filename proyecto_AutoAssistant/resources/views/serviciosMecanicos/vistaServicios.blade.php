@@ -130,6 +130,10 @@ h5 {
                         <div class="card-body">
                             <h5 class="card-title">{{$servicioMecanico->numeroContacto}}</h5>
                         </div>
+                        <div class="card-header bg-primary">Costo estimado</div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{$servicioMecanico->precio}}</h5>
+                        </div>
                     </div>
                     <div class="card text-bg-dark border-primary mb-3">
                         <div class="card-header bg-primary">Imagen</div>

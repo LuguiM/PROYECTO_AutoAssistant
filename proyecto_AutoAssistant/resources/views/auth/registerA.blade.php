@@ -132,6 +132,21 @@
         position: relative;
     }
 
+    .background-image {
+        background-image: url('/imagenes/fondo4.jpg');
+
+
+        background-size: 100% 100%;
+        /* Cambiamos el tamaño para que cubra todo el espacio */
+
+
+        background-position: 0 0;
+        /* Cambiamos la posición a la esquina superior izquierda */
+        width: 170vh;
+        height: sticky;
+        background-attachment: fixed;
+    }
+
     .nav-link {
         background-color: ##242424;
         display: block;
@@ -146,7 +161,7 @@
 
 </head>
 
-<body>
+<body class="background-image">
     <div class="registration-form">
         <form method="POST" action="{{ route('registerMecanico') }}">
             @csrf

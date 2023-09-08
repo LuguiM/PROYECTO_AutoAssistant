@@ -2,7 +2,10 @@
 
 @section('content')
 
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+</head>
 <style>
 body {
     background-repeat: no-repeat;
@@ -47,6 +50,71 @@ body {
     border-radius: 10px;
     border: 2px solid #000;
 }
+
+.custom-box {
+    background-color: #1279C1;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 400px;
+    /* Ajusta el ancho máximo según tus preferencias */
+    border-radius: 10px;
+    overflow: hidden;
+    /* Para ocultar contenido que supere las dimensiones */
+}
+
+/* Estilos para la estructura interna del cuadro */
+.custom-box-content {
+    display: flex;
+    align-items: center;
+}
+
+.custom-box-image {
+    margin-right: 20px;
+}
+
+.custom-box-text {
+    flex: 1;
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Estilos para el carrusel */
+.carousel-images {
+    display: none;
+    /* Oculta todas las imágenes inicialmente */
+}
+
+.hidden {
+    display: none;
+}
+
+.animated-button {
+    animation: slideInLeft 0.5s forwards;
+}
+
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
 </style>
 
 <body style="background: url('/imagenes/fondo4.jpg') no-repeat center center fixed; background-size: cover;">
@@ -62,7 +130,8 @@ body {
             <div class="box1" style="background-color: transparent;margin-top: 300px">
                 <p style="text-align: center; font-size: 40px; font-weight: 300; line-height: 1.2; color: #FFF">|
                     Descripción de la aplicación Autoassistant |</p>
-                <h2 style="font-size: 30px; color: #1279C1;">Autoassistant tu mecánico virtual, con las funciones que te
+                <h2 style="font-size: 30px; color: #1279C1;">Autoassistant tu mecánico virtual, con las funciones
+                    que te
                     ayudaran a solucionar las problemáticas de tu vehículo, brindándote funciones en las que puedas
                     acceder a la información que brinda para los conductores y el registro o ingreso para talleres
                     mecánicos o mecánicos independientes para que puedan inscribirse y poder ofrecer servicios a los
@@ -78,13 +147,16 @@ body {
                 NOSOTROS |</p>
             <div class="box1 animated fadeIn" style="margin-bottom: 200px; background-color:  transparent;">
                 <h2 style="font-size: 30px; color: #1279C1;">Somos Dragón Devs desarrolladores de la aplicación
-                    AutoAssistant, como equipo multifuncional con conocimientos en las diferentes áreas para la creación
-                    de esta aplicación, usando estos conocimientos para el mejor desempeño de la aplicación, utilizando
+                    AutoAssistant, como equipo multifuncional con conocimientos en las diferentes áreas para la
+                    creación
+                    de esta aplicación, usando estos conocimientos para el mejor desempeño de la aplicación,
+                    utilizando
                     todas nuestras destrezas y fortalezas para hacer su experiencia agradable.</h2>
             </div>
         </div>
         <div style="text-align: center; margin-top: 300px;">
-            <p id="ofrece" style="font-size: 40px; font-weight: 300; line-height: 1.2; color: #FFF">| FUNCIONES |</p>
+            <p id="ofrece" style="font-size: 40px; font-weight: 300; line-height: 1.2; color: #FFF">| FUNCIONES |
+            </p>
             <div class="box-container2"
                 style="margin-top: 100px; display: flex; flex-wrap: wrap; justify-content: center;">
                 <div class="box2" style="margin: 10px; flex: 1 1 300px; max-width: 300px;">
@@ -108,17 +180,21 @@ body {
                 <div class="box3" style="margin: 10px; flex: 1 1 300px; max-width: 300px;">
                     <img src="\imagenes\serviciosme.png" width="80" height="80"></img></p>
                     <span style="font-size: 40px; color: #1279C1">Servicios mecánicos </span>
-                    <p style="color: #000">Descripción: Esta función le servirá al conductor a ver todos los servicios
+                    <p style="color: #000">Descripción: Esta función le servirá al conductor a ver todos los
+                        servicios
                         mecánicos que la aplicación ofrece.</p>
                 </div>
                 <div class="box3" style="margin: 10px; flex: 1 1 300px; max-width: 300px;">
                     <img src="\imagenes\inscripcion1.png" width="80" height="80"></img></p>
                     <span style="font-size: 40px; color: #1279C1">Inscripción de servicios </span>
-                    <p style="color: #000">Descripción: Esta función es para que los talleres mecánicos y los mecánicos
+                    <p style="color: #000">Descripción: Esta función es para que los talleres mecánicos y los
+                        mecánicos
                         independientes puedan inscribir sus servicios dentro de la aplicación.</p>
                 </div>
             </div>
         </div>
+
+
 </body>
 
 @endsection
