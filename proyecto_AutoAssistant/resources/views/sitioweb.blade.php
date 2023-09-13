@@ -69,7 +69,7 @@
     }
 
     .navbar-nav .nav-link {
-        color: #FFF;
+        color: white;
     }
 
     .notify {
@@ -114,7 +114,7 @@
     }
 
     .navbar-main {
-        background-color: #242424
+        background-color: #000
     }
 
     .navbar-toggler {
@@ -341,15 +341,20 @@
                                 class='bx bx-loader'></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('publicaciones.otravista') }}">Pilotos</i></a>
+                        <a class="nav-link" href="{{ route('publicaciones.otravista') }}">Pilotos<i 
+                        class='bx bxs-car-mechanic'></i></a>
+                        
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('servicios-mecanicos.indexinterno')}}">Talleres
-                            mecánicos</i></a>
+                        <a class="nav-link" href="{{route('servicios-mecanicos.indexinterno')}}">Búsqueda de servicios<i
+                         class='bx bx-search-alt'></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="infoServicioWeb">Requisitos</i></a>
+                        <a class="nav-link" href="infoServicioWeb">Requisitos<i
+                         class='bx bx-list-check'></i>
+                        </a>
                     </li>
+                    
 
                     </li>
                 </ul>
@@ -360,6 +365,7 @@
 
 
     <main>
+
         @yield('content')
     </main>
 
@@ -387,15 +393,15 @@
                         <p class="text-left mail-option">AutoAssitant@gmail.com</p>
                     </div>
                     <div class="col-md-6">
-                        <p class="text-left mail-option">Taller Mecánico</p>
+                        <p class="text-left mail-option">Taller Mecanico</p>
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-md-6">
-                        <p class="text-left">Servicio al Cliente</p>
+                        <p class="text-left">Sevicio al Cliente</p>
                     </div>
                     <div class="col-md-6">
-                        <p class="text-left mail-option">Mecánico Independiente</p>
+                        <p class="text-left mail-option">Mecanico Independiente</p>
                     </div>
                 </div>
                 <div class="row mb-4">

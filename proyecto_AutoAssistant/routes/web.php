@@ -120,6 +120,11 @@ Route::get('/servicios', function() {
     return view('ServiciosSitio');
   })->name('servicios');
 
+  Route::get('/asesoria', function () {
+    return view('serviciosMecanicos.asesoria');
+});
+
+
 
 /*Inscripcion de servicios mecanicos
 Route::get('/requisitos', function () {

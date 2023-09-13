@@ -62,7 +62,10 @@ label {
         <div class="row g-3">
             <div class="col-12">
 
-                <h2 class="title text-white">Formulario de inscripción</h2>
+            <div class="mb-3">
+            <a href="{{ route('servicios-mecanicos.store') }}" class="btn btn-secondary">Regresar</a>
+        </div> 
+        <h2 class="title text-white">Formulario de inscripción</h2>
             </div>
             @csrf
             <div class="col-md-2">
@@ -257,15 +260,7 @@ label {
         });
     });
     </script>
-    <script>
-    document.getElementById('myForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        alert('¡Servicio contratado con éxito!');
-        setTimeout(function() {
-            document.getElementById('myForm').submit();
-        }, 1000);
-    });
-    </script>
+   
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const rubroSelect = document.getElementById('rubro');
@@ -341,6 +336,105 @@ label {
         });
     });
     </script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Define las opciones deshabilitadas para Tipo de Servicio para cada rubro
+        const opcionesDeshabilitadas = {
+            "Mecanico": {
+        "Cambio de bujías.": [""],
+        "Cambio de faja del alternador": [""],
+        "Cambio de frenos o regulacion": [""],
+        "Cambio o rectificación de discos de frenos": ["Adomicilio"],
+        "Cambios de soporte de motor": ["Adomicilio"],
+        "Cambio de amortiguadores": ["Adomicilio"],
+        "Cambio de líquido de frenos": [""],
+        "Cambio de motor": ["Adomicilio"],
+        "Cambio de bomba de frenos": [""],
+        "Reapriete de suspension": ["Adomicilio"],
+    },
+    "Lubricentro": {
+        "Cambio de filtro de aceite.": ["Adomicilio"],
+        "Cambio de aceite.": ["Adomicilio"],
+        "Lavado y lubricación de chasis.": ["Adomicilio"],
+        "Cambio de filtro de aire.": ["Adomicilio"],
+        "Cambio de refrigerante": ["Adomicilio"],
+        "Lubricacion de suspencion": ["Adomicilio"],
+        "Cambio de aceite de trasmicion": ["Adomicilio"],
+    },
+    "Electronico": {
+        "Instalación de batería": [""],
+        "Reprogramacions y configuracion de control": [""],
+        "Revisión de cableado eléctrico ": ["Adomicilio"],
+        "Cambio de computadora ": ["Adomicilio"],
+        "Cambio de alternador ": ["Adomicilio"],
+        "Cambio de luces ": [""],
+        "Cambio de tablero del vehículo": ["Adomicilio"],
+        "Instalación de scanner ": [""],
+    },
+    "General de Caja": {
+        "Cambio de convertidor ": ["Adomicilio"],
+        "Cambio de sincronizados ": ["Adomicilio"],
+        "Cambio de flechas de trasmisión": ["Adomicilio"],
+        "Cambio de filtro de aceite de caja": ["Adomicilio"],
+    },
+    "Enderezado y Pintura": {
+        "Enderezado de chasis ": ["Adomicilio"],
+        "Cambio de bomper": ["Adomicilio"],
+        "Cambio de parilla": ["Adomicilio"],
+        "Enderezado de puertas": ["Adomicilio"],
+        "Pintura general": ["Adomicilio"],
+        "Pulido de espejos y faros": ["Adomicilio"],
+        "Cambio de faldones": ["Adomicilio"],
+    },
+    "Llanteria": {
+        "Cambio de llanta": [""],
+        "Relación de fuga de llanta ": [""],
+        "Aliniado y balanceado": ["Adomicilio"],
+        "Regulación de aire ": [""]
+    },
+            // Agrega más rubros y opciones aquí
+        };
+
+        // Captura los elementos select
+        const rubroSelect = $('#rubro');
+        const servicioSelect = $('#servicio');
+        const tipoServicioSelect = $('#tipoServicio');
+
+        // Maneja el cambio en el campo "Rubro"
+        rubroSelect.on('change', function () {
+            const rubroSeleccionado = rubroSelect.val();
+            const serviciosPorRubro = opcionesDeshabilitadas[rubroSeleccionado];
+
+            servicioSelect.html('<option disabled selected>Servicio que Ofrece...</option>');
+
+            if (serviciosPorRubro) {
+                // Agrega opciones para el servicio basado en el rubro seleccionado
+                $.each(serviciosPorRubro, function (servicio, tipos) {
+                    const option = $('<option>').val(servicio).text(servicio);
+                    servicioSelect.append(option);
+                });
+            }
+        });
+
+        // Maneja el cambio en el campo "Servicio que Ofrece"
+        servicioSelect.on('change', function () {
+            const servicioSeleccionado = servicioSelect.val();
+            const tiposDeshabilitar = opcionesDeshabilitadas[rubroSelect.val()][servicioSeleccionado];
+
+            // Habilita todas las opciones primero
+            tipoServicioSelect.find('option').removeAttr('disabled');
+
+            if (tiposDeshabilitar) {
+                // Deshabilita las opciones especificadas
+                tiposDeshabilitar.forEach(function (tipo) {
+                    tipoServicioSelect.find(`option[value='${tipo}']`).attr('disabled', 'disabled');
+                });
+            }
+        });
+    });
+</script>
+
     @endif
 
     @if(auth()->user()->hasRole('mecanico_independiente'))

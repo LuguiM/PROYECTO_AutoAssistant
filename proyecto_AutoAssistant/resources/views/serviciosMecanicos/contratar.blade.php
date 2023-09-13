@@ -72,15 +72,17 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Contratar el servico</h4>
-                <a href="{{ url()->previous() }}" class=" btn btn-danger close">&times;</a>
-            </div>
+                <div class="">
+            <a href="{{ route('servicios-mecanicos.store',$servicioMecanico->id) }}" class="btn btn-secondary">Regresar</a>
+        </div> 
+            </div> 
             <div class="modal-body">
                 <form action="{{ route('contrataciones.store',$servicioMecanico->id) }}" method="POST"
                     enctype="multipart/form-data" id="myForm">
 
                     @csrf
                     <!-- Campos del formulario -->
-
+                    
                     <div class="form-floating col-12 form-group">
                         <input type="text" class="text-bg-dark form-control" id="conductor" name="conductor"
                             value="{{ auth()->user()->name }}" disabled>
