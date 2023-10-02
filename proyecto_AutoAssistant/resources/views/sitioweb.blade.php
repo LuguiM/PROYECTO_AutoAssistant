@@ -341,20 +341,21 @@
                                 class='bx bx-loader'></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('publicaciones.otravista') }}">Pilotos<i 
-                        class='bx bxs-car-mechanic'></i></a>
-                        
+                        <a class="nav-link" href="{{ route('publicaciones.otravista') }}">Pilotos<i
+                                class='bx bxs-car-mechanic'></i></a>
+
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('servicios-mecanicos.indexinterno')}}">Búsqueda de servicios<i
-                         class='bx bx-search-alt'></i></a>
+                                class='bx bx-search-alt'></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="infoServicioWeb">Requisitos<i
-                         class='bx bx-list-check'></i>
+                        <a class="nav-link" href="infoServicioWeb">Requisitos<i class='bx bx-list-check'></i>
                         </a>
                     </li>
-                    
+
+
+
 
                     </li>
                 </ul>

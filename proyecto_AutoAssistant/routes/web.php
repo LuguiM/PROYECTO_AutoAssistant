@@ -9,6 +9,7 @@ use App\Http\Controllers\ServicioMecanicoController;
 use App\Http\Controllers\ContratacionController;
 use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\CulturaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -169,9 +170,10 @@ Route::put('/servicios-mecanicos/{id}', [ServicioMecanicoController::class, 'upd
 Route::get('/otra-vista', [PublicacionController::class, 'otraVista'])->name('publicaciones.otravista');
 Route::get('/otra-vista/buscar', [PublicacionController::class, 'buscar'])->name('publicaciones.busscar');
 
+//rutas para cultura
+Route::get('/cultura-s/create', [CulturaController::class, 'create'])->name('cultura.index1');
+Route::get('/cultura.store', [CulturaController::class, ' store'])->name('cultura.index1');
 //rutas para ver mas
-
-
 Route::get('/info/{publicacion}',[PublicacionController::class, 'show'])->name('publicaciones.show1');
 
 //ruta para servicioWeb

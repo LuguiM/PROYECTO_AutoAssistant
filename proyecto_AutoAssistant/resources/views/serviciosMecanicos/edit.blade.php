@@ -437,7 +437,7 @@ img {
                     <option disabled>Tipo Servicio...</option>
                     <option value="Adomicilio" @if($servicioMecanico->tipoServicio == 'Adomicilio') selected
                         @endif>Adomicilio</option>
-                    <option value="Cita/Reserva" @if($servicioMecanico->tipoServico == 'Cita/Reserva') selected
+                    <option value="Cita/Reserva" @if($servicioMecanico->tipoServico == 'Cita en Taller') selected
                         @endif>Cita en Taller</option>
                 </select>
                 <label for="rubro">Selecciona un Tipo de Servicio</label>
@@ -456,7 +456,7 @@ img {
                     <option disabled>Tipo Servicio...</option>
                     <option value="Adomicilio" @if($servicioMecanico->tipoServicio == 'Adomicilio') selected
                         @endif>Adomicilio</option>
-                    <option value="Cita/Reserva" @if($servicioMecanico->tipoServico == 'Cita/Reserva') selected
+                    <option value="Cita/Reserva" @if($servicioMecanico->tipoServico == 'Cita en taller') selected
                         @endif>Cita en Taller</option>
                 </select>
                 <label for="rubro">Selecciona un Tipo de Servicio</label>

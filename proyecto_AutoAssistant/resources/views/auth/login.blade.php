@@ -188,7 +188,7 @@
                 <img src="\imagenes\Logo.png" atl="logo" class="img_logo"></img>
             </div>
             <div class="form-group">
-                <h2 class="text-center text-white">INICIAR SESION</h2>
+                <h2 class="text-center text-white">INICIAR SESIÓN</h2>
 
             </div>
             <div class="form-group">
