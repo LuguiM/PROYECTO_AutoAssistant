@@ -26,11 +26,11 @@ Route::get('/', function () {
 });
 
 
- 
+
 Route::get('/google-auth/redirect', function () {
     return Socialite::driver('google')->redirect();
 });
- 
+
 Route::get('/google-auth/callback', function () {
     $user_google = Socialite::driver('google')->stateless()->user();
 
@@ -87,6 +87,9 @@ Route::get('/opciones', function () {
 Route::get('/inicio', function () {
     return view('inicio');
 });
+Route::get('/perfilusu', function () {
+    return view('perfilusu');
+});
 
 Route::get('/funciones', function () {
     return view('funciones');
@@ -111,7 +114,7 @@ Route::get('/opcionesRegistro', function () {
 })->name('opcionesRegistro');
 
 Route::get('/inicio', function() {
-    return view('inicio'); 
+    return view('inicio');
   })->name('inicio');
 
   Route::get('/ServiciosSitio', function () {
@@ -166,7 +169,7 @@ Route::get('/servicios-mecanicos/{servicio}/edit', [ServicioMecanicoController::
 Route::delete('/servicios-mecanicos/{servicio}', [ServicioMecanicoController::class, 'destroy'])->name('servicios-mecanicos.destroy');
 Route::put('/servicios-mecanicos/{id}', [ServicioMecanicoController::class, 'update'])->name('servicios-mecanicos.update');
 
-//rutas para pilotos 
+//rutas para pilotos
 Route::get('/otra-vista', [PublicacionController::class, 'otraVista'])->name('publicaciones.otravista');
 Route::get('/otra-vista/buscar', [PublicacionController::class, 'buscar'])->name('publicaciones.busscar');
 
@@ -193,6 +196,12 @@ Route::put('/contrataciones/{id}', [ContratacionController::class, 'update'])->n
 
 //Rutas para mensajeria
 Route::get('/mensajeria/{servicioId}', [MensajeController::class, 'index'])->name('mensajeria.index');
+//Rutas prueba
+
+Route::get('/perfilusu', 'TuControlador@mostrarFormulario')->name('mostrarFormulario');
+Route::get('/perfilusu', [TuController::class, 'show'])->name('perfilusu1');
+Route::post('/guardar-datos', 'TuControlador@guardarDatos')->name('guardarDatos');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
