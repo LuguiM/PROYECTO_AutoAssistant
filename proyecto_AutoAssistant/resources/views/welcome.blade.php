@@ -5,7 +5,6 @@
         </h2>
     </x-slot>
     <br>
-    <!--<div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -15,8 +14,6 @@
                 </div>
             </div>
         </div>
-    </div>-->
-
 @role('admin')
 
     <div class="card text-bg-dark mb-3">
@@ -26,7 +23,6 @@
         <div class="card-body">
             <blockquote class="blockquote mb-0">
             <h4>ERES UN ADMIN &#128526;<span class="badge bg-primary">{{ Auth::user()->name }}</span></h4>
-            <!--<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>-->
             </blockquote>
         </div>
     </div>
@@ -91,7 +87,6 @@ body {
         <div class="card-body">
             <blockquote class="blockquote mb-0">
             <h4>ERES UN CONDUCTOR &#128526;<span class="badge bg-primary">{{ Auth::user()->name }}</span></h4>
-            <!--<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>-->
             </blockquote>
         </div>
     </div>
@@ -155,7 +150,6 @@ body {
         <div class="card-body">
             <blockquote class="blockquote mb-0">
             <h4>ERES UN FUTURO CONDUCTOR &#128526;<span class="badge bg-primary">{{ Auth::user()->name }}</span></h4>
-            <!--<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>-->
             </blockquote>
             </div>
             </div>
@@ -479,7 +473,6 @@ body {
         <div class="card-body">
             <blockquote class="blockquote mb-0">
             <h4>ERES UN TALLER MECANICO &#128526;<span class="badge bg-primary">{{ Auth::user()->name }}</span></h4>
-            <!--<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>-->
             </blockquote>
         </div>
     </div>
@@ -493,7 +486,6 @@ body {
         <div class="card-body">
             <blockquote class="blockquote mb-0">
             <h4>ERES UN MECANICO INDEPENDIENTE &#128526;<span class="badge bg-primary">{{ Auth::user()->name }}</span></h4>
-            <!--<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>-->
             </blockquote>
         </div>
     </div>

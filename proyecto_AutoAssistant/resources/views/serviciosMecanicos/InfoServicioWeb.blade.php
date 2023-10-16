@@ -1,7 +1,6 @@
 @extends('sitioweb')
 
 @section('content')
-<html lang="en">
 <style>
 .container {
     max-width: 1200px;

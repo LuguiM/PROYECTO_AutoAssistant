@@ -1,5 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+    <head>
+          <title>A page written in english</title>
+          <meta content="text/html; charset=utf-8" />
+    </head>
+
+
+    <body>
+    ...
+    </body>
+</html>
 <head>
   <title>Términos y condiciones</title>
 </head>
