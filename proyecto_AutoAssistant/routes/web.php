@@ -10,6 +10,8 @@ use App\Http\Controllers\ContratacionController;
 use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\CulturaController;
+use App\Models\Thesis;
+use App\Http\Controllers\ThesisController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -127,7 +129,10 @@ Route::get('/servicios', function() {
   Route::get('/asesoria', function () {
     return view('serviciosMecanicos.asesoria');
 });
-
+Route::get('/thesis', function () {
+    $theses = Thesis::all();
+    return view('serviciosMecanicos.thesis')->with('theses',$theses);
+});
 
 
 /*Inscripcion de servicios mecanicos
@@ -201,6 +206,16 @@ Route::get('/mensajeria/{servicioId}', [MensajeController::class, 'index'])->nam
 Route::get('/perfilusu', 'TuControlador@mostrarFormulario')->name('mostrarFormulario');
 Route::get('/perfilusu', [TuController::class, 'show'])->name('perfilusu1');
 Route::post('/guardar-datos', 'TuControlador@guardarDatos')->name('guardarDatos');
+
+//ss d
+
+
+Route::get('/manuales', [ThesisController::class, 'index'])->name('manuales.index');
+Route::post('/thesis/register', [ThesisController::class, 'store'])->name('thesis_register');
+Route::get('/thesis/file/{id}', [ThesisController::class, 'urlfile'])->name('thesis_file');
+Route::post('/thesis/update', [ThesisController::class, 'update'])->name('thesis_update');
+Route::get('/thesis/delete/{id}', [ThesisController::class, 'destroy'])->name('thesis_delete');
+//ss d
 
 
 Route::middleware('auth')->group(function () {

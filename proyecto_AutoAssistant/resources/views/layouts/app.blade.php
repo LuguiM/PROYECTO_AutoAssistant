@@ -43,70 +43,74 @@
 <body id="body-pd"
     style="background: url('/imagenes/fondo4.jpg') no-repeat center center fixed; background-size: cover;">
     @if (isset($header))
-    <header class="header" id="header">
-        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i>
+        <header class="header" id="header">
+            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i>
 
-        </div>
-
-
-        {{ $header }}
+            </div>
 
 
-        @if (Route::has('login'))
-        {{ Auth::user()->name }}
-        @endif
+            {{ $header }}
+
+
+            @if (Route::has('login'))
+                {{ Auth::user()->name }}
+            @endif
 
 
 
-    </header>
+        </header>
     @endif
     <div class="l-navbar" id="nav-bar">
 
         <nav class="nav">
             <div>
 
-                <a href="{{url('/welcome')}}" class="nav_logo"> <img src="\imagenes\Logo.png" atl="logo" width="30"
-                        height="40"></img> <span class="nav_logo-name">AUTOASSISTANT</span> </a>
+                <a href="{{ url('/welcome') }}" class="nav_logo"> <img src="\imagenes\Logo.png" atl="logo"
+                        width="30" height="40"></img> <span class="nav_logo-name">AUTOASSISTANT</span> </a>
                 @if (Route::has('login'))
-                <div class="nav_list">
+                    <div class="nav_list">
 
-                    @auth
-                    <a href="{{url('/welcome')}}" class="nav_link "> <i class='bx bx-home nav_icon'></i> <span
-                            class="nav_name">Inicio</span> </a>
-                    <a href="{{route('profile.edit')}}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
-                            class="nav_name">Perfil</span> </a>
+                        @auth
+                            <a href="{{ url('/welcome') }}" class="nav_link "> <i class='bx bx-home nav_icon'></i> <span
+                                    class="nav_name">Inicio</span> </a>
+                            <a href="{{ route('profile.edit') }}" class="nav_link"> <i class='bx bx-user nav_icon'></i>
+                                <span class="nav_name">Perfil</span> </a>
 
-                    @if(auth()->user()->hasAnyRole('conductor', 'futuro_conductor', 'admin'))
-                    <a href="{{ route('publicaciones.index') }}" class="nav_link">
-                        <i class='bx bx-car nav_icon'></i>
-                        <span class="nav_name">{{ __('Pilotos') }}</span>
-                    </a>
-                    <a href="{{ route('servicios-mecanicos.index') }}" class="nav_link">
-                        <i class='bx bx-wrench nav_icon'></i>
-                        <span class="nav_name">{{ __('Servicios Mecánicos') }}</span>
-                    </a>
-                    <a href="{{ route('contrataciones.index') }}" class="nav_link">
-                        <i class='bx bx-shield-plus nav_icon'></i>
-                        <span class="nav_name">{{ __('Servicios Activos') }}</span>
-                    </a>
-                    @endif
+                            @if (auth()->user()->hasAnyRole('conductor', 'futuro_conductor', 'admin'))
+                                <a href="{{ route('publicaciones.index') }}" class="nav_link">
+                                    <i class='bx bx-car nav_icon'></i>
+                                    <span class="nav_name">{{ __('Pilotos') }}</span>
+                                </a>
+                                <a href="{{ route('servicios-mecanicos.index') }}" class="nav_link">
+                                    <i class='bx bx-wrench nav_icon'></i>
+                                    <span class="nav_name">{{ __('Servicios Mecánicos') }}</span>
+                                </a>
+                                <a href="{{ route('contrataciones.index') }}" class="nav_link">
+                                    <i class='bx bx-shield-plus nav_icon'></i>
+                                    <span class="nav_name">{{ __('Servicios Activos') }}</span>
+                                </a>
+                            @endif
 
 
-                    @if(auth()->user()->hasAnyRole('taller_mecanico', 'mecanico_independiente', 'admin'))
-                    <a href="{{ route('servicios-mecanicos.index') }}" class="nav_link">
-                        <i class='bx bx-folder-plus nav_icon'></i> <span class="nav_name">InscripcionServicios</span>
-                    </a>
-                    <a href="{{ route('contrataciones.index') }}" class="nav_link">
-                        <i class='bx bx-shield-plus nav_icon'></i>
-                        <span class="nav_name">{{ __('Servicios Activos') }}</span>
-                    </a>
-                    @endif
+                            @if (auth()->user()->hasAnyRole('taller_mecanico', 'mecanico_independiente', 'admin'))
+                                <a href="{{ route('servicios-mecanicos.index') }}" class="nav_link">
+                                    <i class='bx bx-folder-plus nav_icon'></i> <span
+                                        class="nav_name">InscripcionServicios</span>
+                                </a>
+                                <a href="{{ route('contrataciones.index') }}" class="nav_link">
+                                    <i class='bx bx-shield-plus nav_icon'></i>
+                                    <span class="nav_name">{{ __('Servicios Activos') }}</span>
+                                </a>
+                                <a href="{{ route('manuales.index') }}" class="nav_link">
+                                    <i class='bx bx-shield-plus nav_icon'></i>
+                                    <span class="nav_name">{{ __('Manuales') }}</span>
+                                </a>
+                            @endif
 
-                    @if (Route::has('register'))
-
-                    @endif
-                    @endauth
-                </div>
+                            @if (Route::has('register'))
+                            @endif
+                        @endauth
+                    </div>
                 @endif
             </div>
             <form method="POST" action="{{ route('logout') }}">
@@ -127,7 +131,7 @@
     </main>
 
 </body>
-@vite([ 'resources/js/app.js'])
+@vite(['resources/js/app.js'])
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
     integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous">
 </script>

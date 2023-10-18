@@ -14,248 +14,248 @@
     <link rel="stylesheet" href="ani.css">
     <link rel="icon" type="image/png" href="/imagenes/Logo.png" />
     <style>
-    @charset "utf-8";
-    /* CSS Document */
+        @charset "utf-8";
+        /* CSS Document */
 
-    @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900|Rubik:300,400,500,700,900');
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900|Rubik:300,400,500,700,900');
 
-    /*********************************
+        /*********************************
 2. Body and some general stuff
 *********************************/
 
-    body {
-        background-color: #eee padding-bottom: 200px;
+        body {
+            background-color: #eee padding-bottom: 200px;
 
-    }
+        }
 
-    .dropdown-menu .dropdown-item {
-        color: black;
-    }
+        .dropdown-menu .dropdown-item {
+            color: black;
+        }
 
-    .header-main {
-        position: relative;
-        padding-top: 7px;
-        padding-bottom: 7px;
-        background-color: #1279C1
-    }
+        .header-main {
+            position: relative;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            background-color: #1279C1
+        }
 
-    .logo {
-        color: #fff;
-        font-size: 25px;
-        font-weight: 600
-    }
+        .logo {
+            color: #fff;
+            font-size: 25px;
+            font-weight: 600
+        }
 
-    .brand-wrap {
-        text-decoration: none !important
-    }
+        .brand-wrap {
+            text-decoration: none !important
+        }
 
-    .icon-sm {
-        width: 48px;
-        height: 48px;
-        line-height: 48px !important;
-        font-size: 20px
-    }
+        .icon-sm {
+            width: 48px;
+            height: 48px;
+            line-height: 48px !important;
+            font-size: 20px
+        }
 
-    .widget-header {
-        display: inline-block;
-        vertical-align: middle;
-        position: relative
-    }
+        .widget-header {
+            display: inline-block;
+            vertical-align: middle;
+            position: relative
+        }
 
-    .widget-header .notify {
-        position: absolute;
-        top: -3px;
-        right: -10px
-    }
+        .widget-header .notify {
+            position: absolute;
+            top: -3px;
+            right: -10px
+        }
 
-    .navbar-nav .nav-link {
-        color: white;
-    }
+        .navbar-nav .nav-link {
+            color: white;
+        }
 
-    .notify {
-        position: absolute;
-        top: -4px;
-        right: -10px;
-        display: inline-block;
-        padding: .25em .6em;
-        font-size: 12px;
-        line-height: 1;
-        text-align: center;
-        border-radius: 3rem;
-        color: #fff;
-        background-color: #fa3434
-    }
+        .notify {
+            position: absolute;
+            top: -4px;
+            right: -10px;
+            display: inline-block;
+            padding: .25em .6em;
+            font-size: 12px;
+            line-height: 1;
+            text-align: center;
+            border-radius: 3rem;
+            color: #fff;
+            background-color: #fa3434
+        }
 
-    span.register {
-        color: black;
-    }
+        span.register {
+            color: black;
+        }
 
-    span.login {
-        color: black;
-    }
+        span.login {
+            color: black;
+        }
 
-    ul.hassubs a {
-        color: black;
-    }
+        ul.hassubs a {
+            color: black;
+        }
 
-    .mr-3,
-    .mx-3 {
-        margin-right: 1rem !important
-    }
+        .mr-3,
+        .mx-3 {
+            margin-right: 1rem !important
+        }
 
-    .search-form {
-        border: 1px solid #ffffff !important
-    }
+        .search-form {
+            border: 1px solid #ffffff !important
+        }
 
-    .search-button {
-        color: #007bff;
-        background-color: #ffffff;
-        border-color: #ffffff
-    }
+        .search-button {
+            color: #007bff;
+            background-color: #ffffff;
+            border-color: #ffffff
+        }
 
-    .navbar-main {
-        background-color: #000
-    }
+        .navbar-main {
+            background-color: #000
+        }
 
-    .navbar-toggler {
-        color: rgba(0, 0, 0, 0.5);
-        color: rgba(0, 0, 0, 0.5);
-        border-color: rgba(0, 0, 0, 0.1) !important
-    }
+        .navbar-toggler {
+            color: rgba(0, 0, 0, 0.5);
+            color: rgba(0, 0, 0, 0.5);
+            border-color: rgba(0, 0, 0, 0.1) !important
+        }
 
-    .navbar-toggler {
-        padding: 4px;
-        font-size: 1.25rem;
-        line-height: 1;
-        background-color: transparent;
-        border: 1px solid transparent;
-        border-radius: 0.37rem
-    }
+        .navbar-toggler {
+            padding: 4px;
+            font-size: 1.25rem;
+            line-height: 1;
+            background-color: transparent;
+            border: 1px solid transparent;
+            border-radius: 0.37rem
+        }
 
-    .dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 1000;
-        display: none;
-        float: left;
-        min-width: 10rem;
-        padding: .5rem 0;
-        margin: .5rem 7px 0px;
-        font-size: 1rem;
-        color: #212529;
-        text-align: left;
-        list-style: none;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid rgba(0, 0, 0, .15);
-        border-radius: .25rem
-    }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            display: none;
+            float: left;
+            min-width: 10rem;
+            padding: .5rem 0;
+            margin: .5rem 7px 0px;
+            font-size: 1rem;
+            color: #212529;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .15);
+            border-radius: .25rem
+        }
 
-    .dropdown-item {
-        display: block;
-        width: 100%;
-        padding: .45rem 1.5rem;
-        clear: both;
-        font-weight: 400;
-        color: #212529;
-        text-align: inherit;
-        white-space: nowrap;
-        background-color: transparent;
-        border: 0
-    }
+        .dropdown-item {
+            display: block;
+            width: 100%;
+            padding: .45rem 1.5rem;
+            clear: both;
+            font-weight: 400;
+            color: #212529;
+            text-align: inherit;
+            white-space: nowrap;
+            background-color: transparent;
+            border: 0
+        }
 
-    .navbar-toggler-icon {
-        background-image: url(https://img.icons8.com/ios/50/000000/menu.png)
-    }
+        .navbar-toggler-icon {
+            background-image: url(https://img.icons8.com/ios/50/000000/menu.png)
+        }
 
-    .nav-link {
-        text-transform: uppercase;
-        font-weight: 400
-    }
+        .nav-link {
+            text-transform: uppercase;
+            font-weight: 400
+        }
 
-    .vl {
-        border-left: 1px solid #fff;
-        height: 100%
-    }
+        .vl {
+            border-left: 1px solid #fff;
+            height: 100%
+        }
 
-    .fas {
-        color: #fff
-    }
+        .fas {
+            color: #fff
+        }
 
-    .login {
-        color: white
-    }
+        .login {
+            color: white
+        }
 
-    .option-box {
-        padding: 0.1px;
-        background-color: #f8f9fa;
-        border: 1px solid #ccc;
-        border-radius: 1px;
-    }
+        .option-box {
+            padding: 0.1px;
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            border-radius: 1px;
+        }
 
-    .logo {
-        color: #fff;
-        font-size: 25px;
-        font-weight: 600;
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 10px;
-    }
+        .logo {
+            color: #fff;
+            font-size: 25px;
+            font-weight: 600;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
 
-    .small {
-        font-size: 14px;
-        padding: 4px 8px;
-    }
+        .small {
+            font-size: 14px;
+            padding: 4px 8px;
+        }
 
-    footer {
-        background-color: #32525C;
-        color: #fff;
-        padding: 20px;
-        text-align: center;
-        margin-top: 0px;
-    }
+        footer {
+            background-color: #32525C;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 0px;
+        }
 
-    footer p {
-        margin: 0;
-    }
+        footer p {
+            margin: 0;
+        }
 
-    .footer-logo {
-        width: 120px;
-        /* Ajusta el ancho del logo según tus necesidades */
-        height: 120px;
-        /* Ajusta la altura del logo según tus necesidades */
-        margin-right: 0px;
-    }
+        .footer-logo {
+            width: 120px;
+            /* Ajusta el ancho del logo según tus necesidades */
+            height: 120px;
+            /* Ajusta la altura del logo según tus necesidades */
+            margin-right: 0px;
+        }
 
-    .logo-text {
-        font-size: 40px;
-        /* Cambia el tamaño del texto del logo según tus necesidades */
-        color: #fff;
-        margin-left: 0px;
-        /* Espacio entre el logo y el texto */
-    }
+        .logo-text {
+            font-size: 40px;
+            /* Cambia el tamaño del texto del logo según tus necesidades */
+            color: #fff;
+            margin-left: 0px;
+            /* Espacio entre el logo y el texto */
+        }
 
-    .logo-container {
-        display: flex;
-        align-items: center;
-    }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
 
-    .mail-option {
-        color: #D9D9D9;
-        /* Cambia el color aquí */
-    }
+        .mail-option {
+            color: #D9D9D9;
+            /* Cambia el color aquí */
+        }
 
-    .footer-content {
-        background-color: #32525C;
-        /* Cambia el color aquí */
+        .footer-content {
+            background-color: #32525C;
+            /* Cambia el color aquí */
 
-    }
+        }
 
-    .footer-contente {
-        display: flex;
-        align-items: center;
-    }
+        .footer-contente {
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -267,8 +267,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-sm-4 col-md-4 col-5"> <a href="{{ route('inicio') }}" class="brand-wrap"
                             data-abc="true">
-                            <img src="\imagenes\Logo.png" atl="logo" width="80" height="80" class="top_bar_icon"><span
-                                class="logo">AutoAssistant</span></img></a> </div>
+                            <img src="\imagenes\Logo.png" atl="logo" width="80" height="80"
+                                class="top_bar_icon"><span class="logo">AutoAssistant</span></img></a> </div>
 
                     <div class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block">
 
@@ -283,38 +283,39 @@
                             </li>
                             </ul>
                             @if (Auth::check())
-                            <div class="d-flex justify-content-end">
-                                <div class="option-box mr-2">
-                                    <a class="nav-link nav-user-img small" href="{{ route('welcome') }}">
-                                        <span class="register"><i class='bx bx-user'></i>{{ Auth::user()->name }}</span>
-                                    </a>
-                                </div>
-                                <span class="vl"></span>
-                                <div class="option-box">
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <a href="route('logout')"
-                                            onclick="event.preventDefault(); this.closest('form').submit();"
-                                            class="nav-link nav-user-img small">
-                                            <span class="login">Cerrar Sesión<i class='bx bx-log-out'></i></span>
+                                <div class="d-flex justify-content-end">
+                                    <div class="option-box mr-2">
+                                        <a class="nav-link nav-user-img small" href="{{ route('welcome') }}">
+                                            <span class="register"><i
+                                                    class='bx bx-user'></i>{{ Auth::user()->name }}</span>
                                         </a>
-                                    </form>
+                                    </div>
+                                    <span class="vl"></span>
+                                    <div class="option-box">
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <a href="route('logout')"
+                                                onclick="event.preventDefault(); this.closest('form').submit();"
+                                                class="nav-link nav-user-img small">
+                                                <span class="login">Cerrar Sesión<i class='bx bx-log-out'></i></span>
+                                            </a>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
                             @else
-                            <div class="d-flex justify-content-end">
-                                <div class="option-box mr-2">
-                                    <a class="nav-link nav-user-img small" href="{{ route('login') }}">
-                                        <span class="register">Iniciar Sesión</span>
-                                    </a>
+                                <div class="d-flex justify-content-end">
+                                    <div class="option-box mr-2">
+                                        <a class="nav-link nav-user-img small" href="{{ route('login') }}">
+                                            <span class="register">Iniciar Sesión</span>
+                                        </a>
+                                    </div>
+                                    <span class="vl"></span>
+                                    <div class="option-box">
+                                        <a class="nav-link nav-user-img small" href="{{ route('opcionesRegistro') }}">
+                                            <span class="login">Registro</span>
+                                        </a>
+                                    </div>
                                 </div>
-                                <span class="vl"></span>
-                                <div class="option-box">
-                                    <a class="nav-link nav-user-img small" href="{{ route('opcionesRegistro') }}">
-                                        <span class="login">Registro</span>
-                                    </a>
-                                </div>
-                            </div>
                             @endif
                         </div>
                     </div>
@@ -346,11 +347,15 @@
 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('servicios-mecanicos.indexinterno')}}">Búsqueda de servicios<i
-                                class='bx bx-search-alt'></i></a>
+                        <a class="nav-link" href="{{ route('servicios-mecanicos.indexinterno') }}">Búsqueda de
+                            servicios<i class='bx bx-search-alt'></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="infoServicioWeb">Requisitos<i class='bx bx-list-check'></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="thesis">Manuales<i class='bx bx-list-check'></i>
                         </a>
                     </li>
 
@@ -429,35 +434,35 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-    $(document).ready(function() {
-        $('.navbar-toggler').click(function() {
-            var target = $(this).data('target');
-            $(target).toggleClass('show');
+        $(document).ready(function() {
+            $('.navbar-toggler').click(function() {
+                var target = $(this).data('target');
+                $(target).toggleClass('show');
+            });
         });
-    });
-    $(document).ready(function() {
-        $('.dropdown-toggle').dropdown();
-    });
-
-
-    $(document).ready(function() {
-        $('.navbar-toggler').click(function() {
-            var target = $(this).data('target');
-            $(target).toggleClass('show');
+        $(document).ready(function() {
+            $('.dropdown-toggle').dropdown();
         });
 
-        $('#pepe').on('click', function(e) {
-            var target = $(this).attr('href');
-            if (target === '#') {
-                e.preventDefault();
-                $(this).on('dblclick', function(e) {
+
+        $(document).ready(function() {
+            $('.navbar-toggler').click(function() {
+                var target = $(this).data('target');
+                $(target).toggleClass('show');
+            });
+
+            $('#pepe').on('click', function(e) {
+                var target = $(this).attr('href');
+                if (target === '#') {
                     e.preventDefault();
-                    // Aquí puedes poner la función que se ejecutará en el doble clic
-                    console.log('id="functionsDropdown"');
-                });
-            }
+                    $(this).on('dblclick', function(e) {
+                        e.preventDefault();
+                        // Aquí puedes poner la función que se ejecutará en el doble clic
+                        console.log('id="functionsDropdown"');
+                    });
+                }
+            });
         });
-    });
     </script>
 </body>
 
