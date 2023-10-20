@@ -51,6 +51,7 @@
                         <th scope="col">#</th>
                         <th scope="col">ARCHIVO</th>
                         <th scope="col">MARCA</th>
+                        <th scope="col">MODELO</th>
                         <th scope="col">ESTADO</th>
                     </tr>
                 </thead>
@@ -68,6 +69,7 @@
                                     onclick="deleteThesis('{{ $item->id }}')">Eliminar</button>
                             </td>
                             <td>{{ $item->title }}</td>
+                            <td>{{ $item->title2 }}</td>
                             <td>
                                 @if ($item->state == 1)
                                     Disponible
@@ -77,6 +79,7 @@
                                     {{ $item->state }}
                                 @endif
                             </td>
+
                         </tr>
                     @endforeach
 
@@ -96,8 +99,13 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="title">Titulo</label>
+                                <label for="title">MARCA</label>
                                 <input type="text" class="form-control" id="title" name="title">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="title2">MODELO</label>
+                                <input type="text" class="form-control" id="title2" name="title2">
 
                             </div>
                             <div class="form-group">
@@ -160,6 +168,7 @@
         <script>
             function modalEdit(id, tit, est, cod) {
                 $('#title-edit').val(tit);
+                $('#title2-edit').val(tit);
                 $('#state-edit').val(est);
                 $('#thesis_id').val(id);
                 $('#thesis_code').val(cod);

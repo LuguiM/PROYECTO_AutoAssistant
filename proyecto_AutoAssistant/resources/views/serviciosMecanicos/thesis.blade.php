@@ -88,7 +88,9 @@
                         <th>#</th>
                         <th>PDF</th>
                         <th>MARCA</th>
+                        <th>MODELO</th>
                         <th>DISPONIBLE</th>
+
                     </tr>
                 </thead>
                 <tbody>

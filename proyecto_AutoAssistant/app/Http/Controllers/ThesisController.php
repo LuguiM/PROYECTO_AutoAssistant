@@ -33,6 +33,7 @@ class ThesisController extends Controller
         $thesis = Thesis::create([
             'thesis_code' => $code,
             'title' => $request->input('title'),
+            'title2' => $request->input('title2'),
             'state' => ($request->input('state')?$request->input('state'):0)
         ]);
 
@@ -76,6 +77,7 @@ class ThesisController extends Controller
         $code = $request->input('thesis_code');
         Thesis::where('id',$id)->update([
             'title' => $request->input('title'),
+            'title2' => $request->input('title2'),
             'state' => ($request->input('state')?$request->input('state'):0)
         ]);
 
