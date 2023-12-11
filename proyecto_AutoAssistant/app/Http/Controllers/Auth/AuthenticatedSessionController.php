@@ -12,6 +12,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Database\QueryException;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Validation\ValidationException;
 
 
 class AuthenticatedSessionController extends Controller
@@ -31,10 +32,19 @@ class AuthenticatedSessionController extends Controller
     {
         try {
             $credentials = $request->validated();
+    
+            // Validar email format
+            if (!filter_var($credentials['email'], FILTER_VALIDATE_EMAIL)) {
+                return back()->withErrors([
+                    'email' => 'El formato del correo electrónico no es válido.',
+                ])->withInput();
+            }
 
+      
+    
             if (Auth::attempt($credentials, $request->boolean('remember'))) {
                 $user = Auth::user();
-
+    
                 if ($user->hasVerifiedEmail()) {
                     $request->session()->regenerate();
                     return redirect()->intended(RouteServiceProvider::HOME);
@@ -43,10 +53,13 @@ class AuthenticatedSessionController extends Controller
                     return redirect()->route('verification.notice');
                 }
             }
-
+    
             return back()->withErrors([
                 'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
             ]);
+    
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (QueryException $e) {
             Session::flash('error', 'Se produjo un error en el servidor. Por favor, inténtalo de nuevo más tarde.');
             return redirect()->back();

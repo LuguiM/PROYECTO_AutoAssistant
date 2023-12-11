@@ -31,6 +31,13 @@ class LoginRequest extends FormRequest
             'password' => ['required', 'string'],
         ];
     }
+    
+    public function messages(): array
+    {
+    return[
+    'email.email'=> 'El formato del correo electrónico no es válido.',
+];
+}
 
     /**
      * Attempt to authenticate the request's credentials.
